@@ -33,3 +33,14 @@ CreateUnionButn.addEventListener("click", () => {
 backButton.addEventListener("click", () => {
         newUnionSet.classList.toggle("translate-x-full");
 })
+
+const editUnionButn = document.querySelector("button.edit");
+const editUnionSet = document.querySelector(".editUnion");
+const backEditButton = document.querySelector("button.backEditButton");
+editUnionButn.addEventListener("click", () => {
+        editUnionSet.classList.toggle("translate-x-full");
+})
+backEditButton.addEventListener("click", () => {
+        editUnionSet.classList.toggle("translate-x-full");
+})
+

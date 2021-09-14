@@ -133,7 +133,7 @@
 			</div>
 		</div>
 		<div class="flex space-x-10 mr-4">
-			<button class="newUnion font-bold rounded mr-10" id="createTask">+ Add Linkage</button>
+			<button class="newUnion border-x border-black font-bold rounded mr-10" id="createTask">+ Add Linkage</button>
 		</div>
 		
 	</div>
@@ -159,7 +159,7 @@
 		<div class="LastInTouch h-5 ml-4 py-6 px-6">07/07/2077</div>
 		<div class="flex space-x-5 px-10 py-6  h-5">
 			
-			<button class="edit h-5">
+			<button class="editButton h-5">
 				<svg  width="15" height="13" viewBox="0 0 30 27" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M18.4058 5.03062L24.4256 10.4054L9.18767 24.0107L3.17122 18.6359L18.4058 5.03062ZM28.9935 3.73433L26.3089 1.33734C25.2714 0.41099 23.5867 0.41099 22.5456 1.33734L19.974 3.63342L25.9939 9.00829L28.9935 6.33005C29.7982 5.61152 29.7982 4.45281 28.9935 3.73433ZM0.0209023 26.1907C-0.0886516 26.6309 0.356502 27.0253 0.849606 26.9183L7.55774 25.4661L1.54128 20.0913L0.0209023 26.1907Z" fill="black"/>
 				</svg>
@@ -183,7 +183,7 @@
 				
 		</div>
 	</div>
-	<div class="newCreateUnion border-l-2 border-t-2 border-b-2 border-black absolute inset-y-0 right-0 h-full w-50 ml-4 rounded transition ease-in-out duration-1000 transform translate-x-full bg-gray-300 flex flex-col space-y-10">
+	<div class="newCreateUnion border-l-2 border-t-2 border-b-2 border-black absolute inset-y-0 right-0 h-full w-30 ml-4 rounded transition ease-in-out duration-1000 transform translate-x-full bg-gray-300 flex flex-col space-y-10">
 		<div class="flex justify-between">
 			<button class="backButton">
 				<svg class="h-20 w-20" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
@@ -221,17 +221,56 @@
 					
 					<label class="font-bold ml-20 text-xl" for="Image">Change Profile:</label>
 					<input class="mt-40 ml-20" type="file" id="Image" name="filename">
-					<input class="submit mt-40  font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-40" type="submit" value="SAVE">
+					<input class="submit border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-40" type="submit" value="SAVE">
 				</form>
 				
 			</div>
 		</div>
-		<div class="save rounded absolute bottom-20 right-40 bg-gray-100">
-			<button class="font-bold text-3xl">SAVE</button>
-			
+	</div>
+	<div class="editLinkage border-l-2 border-t-2 border-b-2 border-black absolute right-0 h-full w-30 ml-4 rounded transition ease-in-out duration-1000 transform translate-x-full bg-gray-300 flex flex-col space-y-10">
+		<div class="flex justify-between">
+			<button class="backButtonEdit">
+				<svg class="h-20 w-20" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+				<path d="M0 0h24v24H0V0z" fill="none"/>
+				<path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+				</svg>
+			</button>
+
+			<div class="font-bold text-4xl mt-8 mr-8">
+				New Linkage
+			</div>
 		</div>
 		
-
+		<div class="editPage flex flex-col space-y-4 h-100">
+			<div class="grid justify-items-center mt-4">
+				<img class="h-20 w-20" src="Linkage.png">
+			</div>
+			<div class=" h-100">
+				
+				<form class="flex flex-col space-y-2" action="#"> <!-- everything input here will be submited to this php file, change it's name after we build database -->
+					<label class="font-bold ml-20 text-xl" for="Name">Contact Information:</label>
+					<div class="flex space-x-4">
+						<input class="w-40 ml-20 h-8 rounded-full text-l" type="text" id="FirstName" name="FirstName">
+						<input class="w-40 ml-20 h-8 rounded-full text-l" type="text" id="MiddleName" name="MiddleName">
+						<input class="w-40 ml-20 h-8 rounded-full text-l" type="text" id="LasttName" name="LastName">
+					</div>
+					<label class="font-bold ml-20 text-xl" for="Name">Email:</label>
+					<input class="w-80 ml-20 h-8 rounded-full text-l" type="text" id="email" name="email">
+					<label class="font-bold ml-20 text-xl" for="Name">Phone Number:</label>
+					<input class="w-80 ml-20 h-8 rounded-full text-l" type="text" id="phoneNumber" name="phoneNumber">
+					<label class="font-bold ml-20 text-xl" for="Name">Events:</label>
+					<input class="w-80 ml-20 h-8 rounded-full text-l" type="text" id="Event" name="Event">
+					<label class="font-bold ml-20 text-xl" for="Name">Notes:</label>
+					<input class="w-80 ml-20 h-20 rounded-lg text-l" type="text" id="Note" name="Note">
+					
+					<label class="font-bold ml-20 text-xl" for="Image">Change Profile:</label>
+					<input class="mt-40 ml-20" type="file" id="Image" name="filename">
+					<input class="submit border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-80" type="submit" value="SAVE">
+				</form>
+				<button class="deleteB border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-40">DELETE</button>
+				
+			</div>
+		</div>
 	</div> 
 	
 	<script src="Linkage.js"></script>
