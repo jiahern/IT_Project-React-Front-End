@@ -237,6 +237,33 @@
 
 	</div> 
 	
+	<div class="editLinkage border-l-2 border-t-2 border-b-2 border-black absolute right-0 h-full w-30 ml-4 rounded transition ease-in-out duration-1000 transform translate-x-full bg-gray-300 flex flex-col space-y-10">
+                <div class="flex justify-between">
+                        <button class="backButtonEdit">
+                                <svg class="h-20 w-20" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+                                <path d="M0 0h24v24H0V0z" fill="none"/>
+                                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                                </svg>
+                        </button>
+
+                        <div class="font-bold text-4xl mt-8 mr-8">
+                                Edit Linkage
+                        </div>
+                </div>
+                
+                <div class="editPage flex flex-col space-y-4 h-100">
+                        <div class="grid justify-items-center mt-4">
+                                <img class="h-20 w-20" src="Linkage.png">
+                        </div>
+                        <div class=" h-100">
+                                
+                                <form class="flex flex-col space-y-2" action="#"> <!-- everything input here will be submited to this php file, change it's name after we build database -->
+                                        <label class="font-bold ml-20 text-xl" for="Name">Contact Information:</label>
+                                        <div class="flex space-x-4">
+                                                <input class="w-40 ml-20 h-8 rounded-full text-l" type="text" id="FirstName" name="FirstName">
+                                                <input class="w-40 ml-20 h-8 rounded-full text-l" type="text" id="MiddleName" name="MiddleName">
+                                                <input class="w-40 ml-20 h-8 rounded-full text-l" type="text" id="LasttName" name="LastName">
+           
 	<script src="Linkage.js"></script>
 </body>
 

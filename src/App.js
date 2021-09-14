@@ -3,12 +3,18 @@ import NavBar from "./Components/Header/navbar";
 import "./App.css";
 import Counters from "./Components/counters";
 import Header from "./Components/Header/header";
+import Linkage from "./Components/Linkage/linkage";
+
+// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
+        <body class="flex flex-col overflow-hidden items-center w-screen h-screen space-x-6 bg-gray-300">
+          <Header />
+          <Linkage />
+        </body>
       </React.Fragment>
     );
   }
