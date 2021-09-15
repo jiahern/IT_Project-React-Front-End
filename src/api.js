@@ -29,6 +29,8 @@ axios.interceptors.request.use(
 export async function loginUser(user) {
   // unpack user details, email and password
   const { email, password } = user;
+  console.log("email = " + email);
+  console.log("password = " + password);
 
   // if the user did not enter an email or password
   if (!email || !password) {
@@ -38,7 +40,7 @@ export async function loginUser(user) {
 
   // define the route which the FoodBuddy API is handling
   // login/authentication
-  const endpoint = BASE_URL + "/user/login";
+  const endpoint = BASE_URL + `/user/login`;
 
   // POST the email and password to FoodBuddy API to
   // authenticate user and receive the token explicitly
