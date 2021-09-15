@@ -19,7 +19,7 @@
 		<div class = "taskBar flex w-100">
 			<div class = "flex items-center w-18 px-2.5 rounded hover:bg-gray-300">
 				<button class="name_button ">
-					<svg class="w-6 h-6 stroke-current strok-1" stroke="currentColor" viewBox="0 0 50 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<svg class="w-6 h-6 stroke-current" stroke="currentColor" viewBox="0 0 50 45" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.25 33.75H43.75V30H6.25V33.75ZM6.25 24.375H43.75V20.625H6.25V24.375ZM6.25 11.25V15H43.75V11.25H6.25Z" fill="black"/>
 					</svg>
 				</button>
@@ -72,7 +72,7 @@
 		
 	<div class=" flex flex-col h-full absolute top-14 -left-8 text-gray-700 bg-gray-100">
 		<div class=" ml-1 mr-1 flex flex-col items-center w-18 transition duration-400">
-			<a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300" href="#">
+			<a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300">
 				<svg class="w-6 h-6 stroke-current" viewBox="0 0 40 35" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M39.3286 15.8167L33.2664 10.1203V3.53996C33.2664 2.35015 32.2403 1.3859 30.9722 1.3859C29.7071 1.3859 28.681 2.35015 28.681 3.53996V5.81163L24.1672 1.57004C21.9355 -0.525835 18.0554 -0.522118 15.8289 1.57383L0.671097 15.8167C-0.223699 16.6592 -0.223699 18.0224 0.671097 18.8636C1.5663 19.7058 3.01984 19.7058 3.91471 18.8636L19.071 4.6203C19.5648 4.15877 20.435 4.15877 20.9262 4.61893L36.0851 18.8636C36.5346 19.2847 37.1206 19.4942 37.7065 19.4942C38.2935 19.4942 38.8805 19.2845 39.3287 18.8636C40.2238 18.0225 40.2238 16.6593 39.3286 15.8167Z" fill="black"/>
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.7961 8.7096C20.3558 8.29602 19.6427 8.29602 19.2036 8.7096L5.87085 21.2342C5.66035 21.4319 5.54102 21.7019 5.54102 21.9836V31.1186C5.54102 33.2622 7.39068 35.0002 9.67184 35.0002H16.2729V25.3941H23.7254V35.0002H30.3266C32.6077 35.0002 34.4573 33.2622 34.4573 31.1187V21.9836C34.4573 21.7019 34.339 21.4319 34.1275 21.2342L20.7961 8.7096Z" fill="black"/>
@@ -234,7 +234,40 @@
 			
 		</div>
 		
+<<<<<<< Updated upstream:src/Components/Linkage/Linkage.html
 
+=======
+		<div class="editPage relative flex flex-col space-y-4 h-100">
+			<div class="grid justify-items-center mt-4">
+				<img class="h-20 w-20" src="Linkage.png">
+			</div>
+			<div class="  h-100">
+				
+				<form class=" flex flex-col space-y-2" action="#"> <!-- everything input here will be submited to this php file, change it's name after we build database -->
+					<label class="font-bold ml-20 text-xl" for="Name">Contact Information:</label>
+					<div class="flex space-x-4">
+						<input class="w-40 ml-20 h-8 rounded-full text-l" type="text" id="FirstName" name="FirstName">
+						<input class="w-40 ml-20 h-8 rounded-full text-l" type="text" id="MiddleName" name="MiddleName">
+						<input class="w-40 ml-20 h-8 rounded-full text-l" type="text" id="LasttName" name="LastName">
+					</div>
+					<label class="font-bold ml-20 text-xl" for="Name">Email:</label>
+					<input class="w-80 ml-20 h-8 rounded-full text-l" type="text" id="email" name="email">
+					<label class="font-bold ml-20 text-xl" for="Name">Phone Number:</label>
+					<input class="w-80 ml-20 h-8 rounded-full text-l" type="text" id="phoneNumber" name="phoneNumber">
+					<label class="font-bold ml-20 text-xl" for="Name">Events:</label>
+					<input class="w-80 ml-20 h-8 rounded-full text-l" type="text" id="Event" name="Event">
+					<label class="font-bold ml-20 text-xl" for="Name">Notes:</label>
+					<input class="w-80 ml-20 h-20 rounded-lg text-l" type="text" id="Note" name="Note">
+					
+					<label class="font-bold ml-20 text-xl" for="Image">Change Profile:</label>
+					<input class="mt-40 ml-20" type="file" id="Image" name="filename">
+					<input class="submit border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-80" type="submit" value="SAVE">
+				</form>
+				<button class="deleteB flex flex-grow border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-40">DELETE</button>
+				
+			</div>
+		</div>
+>>>>>>> Stashed changes:src/Linkage/Linkage.html
 	</div> 
 	
 	<div class="editLinkage border-l-2 border-t-2 border-b-2 border-black absolute right-0 h-full w-30 ml-4 rounded transition ease-in-out duration-1000 transform translate-x-full bg-gray-300 flex flex-col space-y-10">
