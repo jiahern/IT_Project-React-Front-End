@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import linkage from "./Linkage.png";
-import "./Linkage.css"
+import "./Linkage.css";
 
 const Linkage = () => {
   return (

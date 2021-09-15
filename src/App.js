@@ -1,25 +1,38 @@
-import React, { Component } from "react";
 import "./App.css";
 import "./tailwind.min.css";
+import Navbar from "./Components/Navbar/Navbar";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Components/Header/header";
 import Linkage from "./Components/Linkage/Linkage";
 
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-class App extends Component {
-  render() {
-    return (
-      <React.Fragment key="app">
-        <div className="flex flex-col overflow-x-hidden w-screen h-screen space-x-6 bg-gray-300">
-          <Header />
-          <Linkage />
-        </div>
-      </React.Fragment>
-    );
-  }
+function App() {
+  return (
+    <>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/" />
+        </Switch>
+      </Router>
+    </>
+  );
 }
 
 export default App;
+// class App extends Component {
+//   render() {
+//     return <Navbar />;
+//   }
+// }
+
+// export default App;
+
+//  <React.Fragment key="app">
+//       <div className="flex flex-col overflow-x-hidden w-screen h-screen space-x-6 bg-gray-300">
+//         <Header />
+//         <Linkage />
+//       </div>
+//     </React.Fragment>
 
 //   state = {
 //     counters: [
