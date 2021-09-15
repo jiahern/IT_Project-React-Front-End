@@ -1,28 +1,26 @@
-
 import { useState, useEffect } from "react";
 
 // get are using Axios to communicate with the Server API for authentication only
 // for other purposes, this app using Fetch API -- you should switch others to Axios
 // if you want to try as an exercise
-import axios from 'axios';
+import axios from "axios";
 const BASE_URL = "http://localhost:5000";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
-
 
 // Axios interceptors are functions that Axios calls for every request
 // We are simply adding out token to every request that we send to the
 // FoodBuddy Server (REST API)
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     const { origin } = new URL(config.url);
     const allowedOrigins = [BASE_URL];
-    const token = localStorage.getItem('token'); // get the token
+    const token = localStorage.getItem("token"); // get the token
     if (allowedOrigins.includes(origin)) {
       config.headers.authorization = `Bearer ${token}`; // we put our token in the header
     }
     return config;
   },
-  error => {
+  (error) => {
     return Promise.reject(error);
   }
 );
