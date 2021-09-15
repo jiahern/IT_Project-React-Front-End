@@ -1,20 +1,19 @@
 import React, { Component } from "react";
-import NavBar from "./Components/Header/navbar";
 import "./App.css";
-import Counters from "./Components/counters";
+import "./tailwind.min.css";
 import Header from "./Components/Header/header";
-import Linkage from "./Components/Linkage/linkage";
+import Linkage from "./Components/Linkage/Linkage";
 
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
-      <React.Fragment>
-        <body class="flex flex-col overflow-hidden items-center w-screen h-screen space-x-6 bg-gray-300">
+      <React.Fragment key="app">
+        <div className="flex flex-col overflow-x-hidden w-screen h-screen space-x-6 bg-gray-300">
           <Header />
           <Linkage />
-        </body>
+        </div>
       </React.Fragment>
     );
   }

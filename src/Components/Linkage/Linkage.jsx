@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import linkage from "./Linkage.png";
+import "./Linkage.css"
 
 const Linkage = () => {
   return (
-    <React.Fragment>
-      <div class="flex justify-between w-full h-16 mr-4 bg-gray-100 py-3">
-        <div class="font-bold text-4xl italic ml-20">Linkage</div>
-        <div class="flex space-x-4">
+    <React.Fragment children>
+      <div className="flex justify-between w-full h-16 mr-4 bg-gray-100 py-3">
+        <div className="font-bold text-4xl italic ml-20">Linkage</div>
+        <div className="flex space-x-4">
           <div>
             <input
-              class="w-80 h-10 rounded text-2xl bg-blue-100"
+              className="w-80 h-10 rounded text-2xl bg-blue-100"
               type="text"
               id="Name"
               name="Name"
             />
           </div>
           <div>
-            <button class="searchLinkage">
+            <button className="searchLinkage">
               <svg
                 width="40"
                 height="34"
@@ -32,9 +33,9 @@ const Linkage = () => {
             </button>
           </div>
         </div>
-        <div class="flex space-x-10 mr-4">
+        <div className="flex space-x-10 mr-4">
           <button
-            class="newUnion border-x border-black font-bold rounded mr-10"
+            className="newUnion border-x border-black font-bold rounded mr-10"
             id="createTask"
           >
             + Add Linkage
@@ -42,24 +43,24 @@ const Linkage = () => {
         </div>
       </div>
 
-      <div class="LinkageTitle w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-5 grid-rows-1 gap-x-24">
-        <div class="font-bold grid grid-cols-2 gap-x-4">
-          <div class="TaskTitle">Name</div>
+      <div className="LinkageTitle w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-5 grid-rows-1 gap-x-24">
+        <div className="font-bold grid grid-cols-2 gap-x-4">
+          <div className="TaskTitle">Name</div>
         </div>
-        <div class="StatusTitle"></div>
-        <div class="CreateTitle font-bold">Friend Since</div>
-        <div class="ActionTitle font-bold">Last In Touch</div>
-        <div class=""></div>
+        <div className="StatusTitle"></div>
+        <div className="CreateTitle font-bold">Friend Since</div>
+        <div className="ActionTitle font-bold">Last In Touch</div>
+        <div className=""></div>
       </div>
 
-      <div class="Linkage w-full h-full mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-5 gap-x-4 gap-y-4">
-        <img class="w-20 h-20" src={linkage} />
-        <span class="py-6">Name</span>
+      <div className="Linkage w-full h-full mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-5 gap-x-4 gap-y-4">
+        <img className="w-20 h-20" src={linkage} />
+        <span className="py-6">Name</span>
 
-        <div class="FrindSince h-5 ml-2 py-6 px-6">07/07/2077</div>
-        <div class="LastInTouch h-5 ml-4 py-6 px-6">07/07/2077</div>
-        <div class="flex space-x-5 px-10 py-6  h-5">
-          <button class="editButton h-5">
+        <div className="FrindSince h-5 ml-2 py-6 px-6">07/07/2077</div>
+        <div className="LastInTouch h-5 ml-4 py-6 px-6">07/07/2077</div>
+        <div className="flex space-x-5 px-10 py-6  h-5">
+          <button className="editButton h-5">
             <svg
               width="15"
               height="13"
@@ -73,7 +74,7 @@ const Linkage = () => {
               />
             </svg>
           </button>
-          <button class="email h-5">
+          <button className="email h-5">
             <svg
               width="20"
               height="20"
@@ -92,7 +93,7 @@ const Linkage = () => {
               />
             </svg>
           </button>
-          <button class="bin h-5">
+          <button className="bin h-5">
             <svg
               width="15"
               height="15"
@@ -113,11 +114,11 @@ const Linkage = () => {
         </div>
       </div>
 
-      <div class="newCreateUnion border-l-2 border-t-2 border-b-2 border-black absolute inset-y-0 right-0 h-full w-30 ml-4 rounded transition ease-in-out duration-1000 transform translate-x-full bg-gray-300 flex flex-col space-y-10">
-        <div class="flex justify-between">
-          <button class="backButton">
+      <div className="newCreateUnion border-l-2 border-t-2 border-b-2 border-black absolute inset-y-0 right-0 h-full w-30 ml-4 rounded transition ease-in-out duration-1000 transform translate-x-full bg-gray-300 flex flex-col space-y-10">
+        <div className="flex justify-between">
+          <button className="backButton">
             <svg
-              class="h-20 w-20"
+              className="h-20 w-20"
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
               viewBox="0 0 24 24"
@@ -129,86 +130,86 @@ const Linkage = () => {
             </svg>
           </button>
 
-          <div class="font-bold text-4xl mt-8 mr-8">New Linkage</div>
+          <div className="font-bold text-4xl mt-8 mr-8">New Linkage</div>
         </div>
 
-        <div class="inputPage flex flex-col space-y-4 h-100">
-          <div class="grid justify-items-center mt-4">
-            <img class="h-20 w-20" src={linkage} />
+        <div className="inputPage flex flex-col space-y-4 h-100">
+          <div className="grid justify-items-center mt-4">
+            <img className="h-20 w-20" src={linkage} />
           </div>
-          <div class="inputPage h-100">
-            <form class="flex flex-col space-y-2" action="#">
-              <label class="font-bold ml-20 text-xl" for="Name">
+          <div className="inputPage h-100">
+            <form className="flex flex-col space-y-2" action="#">
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Contact Information:
               </label>
-              <div class="flex space-x-4">
+              <div className="flex space-x-4">
                 <input
-                  class="w-40 ml-20 h-8 rounded-full text-l"
+                  className="w-40 ml-20 h-8 rounded-full text-l"
                   type="text"
                   id="FirstName"
                   name="FirstName"
                 />
                 <input
-                  class="w-40 ml-20 h-8 rounded-full text-l"
+                  className="w-40 ml-20 h-8 rounded-full text-l"
                   type="text"
                   id="MiddleName"
                   name="MiddleName"
                 />
                 <input
-                  class="w-40 ml-20 h-8 rounded-full text-l"
+                  className="w-40 ml-20 h-8 rounded-full text-l"
                   type="text"
                   id="LasttName"
                   name="LastName"
                 />
               </div>
-              <label class="font-bold ml-20 text-xl" for="Name">
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Email:
               </label>
               <input
-                class="w-80 ml-20 h-8 rounded-full text-l"
+                className="w-80 ml-20 h-8 rounded-full text-l"
                 type="text"
                 id="email"
                 name="email"
               />
-              <label class="font-bold ml-20 text-xl" for="Name">
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Phone Number:
               </label>
               <input
-                class="w-80 ml-20 h-8 rounded-full text-l"
+                className="w-80 ml-20 h-8 rounded-full text-l"
                 type="text"
                 id="phoneNumber"
                 name="phoneNumber"
               />
-              <label class="font-bold ml-20 text-xl" for="Name">
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Events:
               </label>
               <input
-                class="w-80 ml-20 h-8 rounded-full text-l"
+                className="w-80 ml-20 h-8 rounded-full text-l"
                 type="text"
                 id="Event"
                 name="Event"
               />
-              <label class="font-bold ml-20 text-xl" for="Name">
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Notes:
               </label>
               <input
-                class="w-80 ml-20 h-20 rounded-lg text-l"
+                className="w-80 ml-20 h-20 rounded-lg text-l"
                 type="text"
                 id="Note"
                 name="Note"
               />
 
-              <label class="font-bold ml-20 text-xl" for="Image">
+              <label className="font-bold ml-20 text-xl" htmlFor="Image">
                 Change Profile:
               </label>
               <input
-                class="mt-40 ml-20"
+                className="mt-40 ml-20"
                 type="file"
                 id="Image"
                 name="filename"
               />
               <input
-                class="submit border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-40"
+                className="submit border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-40"
                 type="submit"
                 value="SAVE"
               />
@@ -216,11 +217,11 @@ const Linkage = () => {
           </div>
         </div>
       </div>
-      <div class="editLinkage border-l-2 border-t-2 border-b-2 border-black absolute right-0 h-full w-30 ml-4 rounded transition ease-in-out duration-1000 transform translate-x-full bg-gray-300 flex flex-col space-y-10">
-        <div class="flex justify-between">
-          <button class="backButtonEdit">
+      <div className="editLinkage border-l-2 border-t-2 border-b-2 border-black absolute right-0 h-full w-30 ml-4 rounded transition ease-in-out duration-1000 transform translate-x-full bg-gray-300 flex flex-col space-y-10">
+        <div className="flex justify-between">
+          <button className="backButtonEdit">
             <svg
-              class="h-20 w-20"
+              className="h-20 w-20"
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
               viewBox="0 0 24 24"
@@ -232,91 +233,91 @@ const Linkage = () => {
             </svg>
           </button>
 
-          <div class="font-bold text-4xl mt-8 mr-8">Edit Linkage</div>
+          <div className="font-bold text-4xl mt-8 mr-8">Edit Linkage</div>
         </div>
 
-        <div class="editPage flex flex-col space-y-4 h-100">
-          <div class="grid justify-items-center mt-4">
-            <img class="h-20 w-20" src={linkage} />
+        <div className="editPage flex flex-col space-y-4 h-100">
+          <div className="grid justify-items-center mt-4">
+            <img className="h-20 w-20" src={linkage} />
           </div>
-          <div class=" h-100">
-            <form class="flex flex-col space-y-2" action="#">
-              <label class="font-bold ml-20 text-xl" for="Name">
+          <div className=" h-100">
+            <form className="flex flex-col space-y-2" action="#">
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Contact Information:
               </label>
-              <div class="flex space-x-4">
+              <div className="flex space-x-4">
                 <input
-                  class="w-40 ml-20 h-8 rounded-full text-l"
+                  className="w-40 ml-20 h-8 rounded-full text-l"
                   type="text"
                   id="FirstName"
                   name="FirstName"
                 />
                 <input
-                  class="w-40 ml-20 h-8 rounded-full text-l"
+                  className="w-40 ml-20 h-8 rounded-full text-l"
                   type="text"
                   id="MiddleName"
                   name="MiddleName"
                 />
                 <input
-                  class="w-40 ml-20 h-8 rounded-full text-l"
+                  className="w-40 ml-20 h-8 rounded-full text-l"
                   type="text"
                   id="LasttName"
                   name="LastName"
                 />
               </div>
-              <label class="font-bold ml-20 text-xl" for="Name">
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Email:
               </label>
               <input
-                class="w-80 ml-20 h-8 rounded-full text-l"
+                className="w-80 ml-20 h-8 rounded-full text-l"
                 type="text"
                 id="email"
                 name="email"
               />
-              <label class="font-bold ml-20 text-xl" for="Name">
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Phone Number:
               </label>
               <input
-                class="w-80 ml-20 h-8 rounded-full text-l"
+                className="w-80 ml-20 h-8 rounded-full text-l"
                 type="text"
                 id="phoneNumber"
                 name="phoneNumber"
               />
-              <label class="font-bold ml-20 text-xl" for="Name">
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Events:
               </label>
               <input
-                class="w-80 ml-20 h-8 rounded-full text-l"
+                className="w-80 ml-20 h-8 rounded-full text-l"
                 type="text"
                 id="Event"
                 name="Event"
               />
-              <label class="font-bold ml-20 text-xl" for="Name">
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Notes:
               </label>
               <input
-                class="w-80 ml-20 h-20 rounded-lg text-l"
+                className="w-80 ml-20 h-20 rounded-lg text-l"
                 type="text"
                 id="Note"
                 name="Note"
               />
 
-              <label class="font-bold ml-20 text-xl" for="Image">
+              <label className="font-bold ml-20 text-xl" htmlFor="Image">
                 Change Profile:
               </label>
               <input
-                class="mt-40 ml-20"
+                className="mt-40 ml-20"
                 type="file"
                 id="Image"
                 name="filename"
               />
               <input
-                class="submit border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-80"
+                className="submit border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-80"
                 type="submit"
                 value="SAVE"
               />
             </form>
-            <button class="deleteB border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-40">
+            <button className="deleteB border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-40">
               DELETE
             </button>
           </div>
