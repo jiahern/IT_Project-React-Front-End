@@ -47,7 +47,8 @@ export async function loginUser(user) {
     // POST the email and password to FoodBuddy API to 
     // authenticate user and receive the token explicitly
     // i.e. data = token
-    let data = await axios({
+    try{
+      let data = await axios({
       url:endpoint,
       method: "POST",
       headers: {
@@ -68,4 +69,10 @@ export async function loginUser(user) {
   
     // redirect to homepage -- another way to redirect
     window.location.href = "/";
+  }
+  catch (error){
+    alert("Invalid Password or Email");
+  
+    // console.log("Error")
+  }
   }
