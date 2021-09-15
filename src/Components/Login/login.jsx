@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { loginUser } from "../../api";
+import { loginUser, tests } from "../../api";
 import { Redirect } from "react-router-dom";
 
 
@@ -67,4 +67,10 @@ export function Logout() {
         </div>
         
     );
+  }
+
+  export function test() {
+  
+    tests();
+    
   }
