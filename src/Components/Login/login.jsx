@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { loginUser } from "../../api";
 import { Redirect } from "react-router-dom";
-import GestioLogo from "./../Header/Logo.svg";
-
+import GestioLogo from "./Logo.svg";
+import "./login.css"
 
 
 // component to Logout user
@@ -40,18 +40,18 @@ export function Logout() {
         return <Redirect to={state.redirect} />
     }
     return (
-        <div class="flex items-center justify-center -mt-16 flex-col space-y-4 overflow-hidden h-screen w-screen bg-grey-100">
+        <div class="loginPage overflow-hidden flex items-center justify-center -mt-16 flex-col space-y-4 overflow-hidden h-screen w-screen bg-grey-100">
                 <div className="flex justify-center border-b-2 border-grey w-full">
                         <img className="w-150 h-75" href="#" src={GestioLogo}/>
                 </div>
                 
             <form className="flex flex-col space-y-20 items-center w-1/2 rounded-3xl bg-blue-100">
                 <div>
-                        <p className="text-5xl font-extrabold ">Log In</p>
+                        <p className="subpixel-antialiased text-5xl mt-10 font-extrabold ">Log In</p>
                 </div>
                 <div className="flex space-x-4 ml-8 bg-blue-100 rounded">
                        <label className="mt-2 font-bold text-xl">Email:</label>
-                        <input className="rounded"
+                        <input className="rounded w-80 text-xl"
                         type="text"
                         name="email"
                         id="email"                
@@ -64,7 +64,7 @@ export function Logout() {
                 </div>
                 <div className="flex space-x-4 bg-blue-100 rounded">
                         <label className="font-bold text-xl">Password:</label>
-                        <input className="rounded"
+                        <input className="rounded w-80 text-xl"
                         type="password"
                         name="password"
                         id="password"                
@@ -80,7 +80,7 @@ export function Logout() {
                        <input className="rounded font-bold h-8 bg-gray-800 text-white w-20" type="button" value="Log In" onClick={onSubmit}/>
                         
                 </div>
-                <div><button className="text-left text-xs hover:text-blue-400  hover:border-blue" href="#">Don't have a account? Register Here.</button></div>
+                <div><button className="text-left text-sm mb-4 hover:text-blue-400  hover:border-blue" href="#">Don't have a account? Register Here.</button></div>
                     
                 
             </form>
