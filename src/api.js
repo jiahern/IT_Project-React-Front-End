@@ -27,41 +27,45 @@ axios.interceptors.request.use(
 
 // component for handling user login
 export async function loginUser(user) {
-  // unpack user details, email and password
-  const { email, password } = user;
 
-  // if the user did not enter an email or password
-  if (!email || !password) {
-    alert("must provide an email and a password");
-    return;
-  }
+    // unpack user details, email and password
+    const { email, password } = user;
+    console.log("email = "+ email)
+    console.log("password = "+ password)
 
-  // define the route which the FoodBuddy API is handling
-  // login/authentication
-  const endpoint = BASE_URL + `/user/login`;
-
-  // POST the email and password to FoodBuddy API to
-  // authenticate user and receive the token explicitly
-  // i.e. data = token
-  let data = await axios({
-    url: endpoint,
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(
-      {
-        email: email,
-        password: password,
+    
+    // if the user did not enter an email or password
+    if (!email || !password) {
+      alert("must provide an email and a password");
+      return;
+    }
+  
+    // define the route which the FoodBuddy API is handling 
+    // login/authentication
+    const endpoint = BASE_URL + `/user/login`;
+    
+    // POST the email and password to FoodBuddy API to 
+    // authenticate user and receive the token explicitly
+    // i.e. data = token
+    let data = await axios({
+      url:endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
       },
-      { withCredentials: true } // IMPORTANT
-    ),
-  }).then((res) => res.data);
-
-  // put token ourselves in the local storage, we will
-  // send the token in the request header to the API server
-  localStorage.setItem("token", data);
-
-  // redirect to homepage -- another way to redirect
-  window.location.href = "/";
-}
+      data: JSON.stringify({
+        email: email,
+        password: password
+      },
+      {withCredentials: true} // IMPORTANT
+      )    
+    })
+      .then(res => res.data);
+  
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server 
+    localStorage.setItem('token',data);
+  
+    // redirect to homepage -- another way to redirect
+    window.location.href = "/";
+  }
