@@ -32,6 +32,9 @@ export async function loginUser(user) {
 
     // unpack user details, email and password
     const { email, password } = user;
+    console.log("email = "+ email)
+    console.log("password = "+ password)
+
     
     // if the user did not enter an email or password
     if (!email || !password) {
