@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import linkage from "./Linkage.png";
 
 const Linkage = () => {
   return (
@@ -53,7 +52,7 @@ const Linkage = () => {
       </div>
 
       <div class="Linkage w-full h-full mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-5 gap-x-4 gap-y-4">
-        <img class="w-20 h-20" src={linkage} />
+        <img class="w-20 h-20" src="Linkage.png" />
         <span class="py-6">Name</span>
 
         <div class="FrindSince h-5 ml-2 py-6 px-6">07/07/2077</div>
@@ -134,7 +133,7 @@ const Linkage = () => {
 
         <div class="inputPage flex flex-col space-y-4 h-100">
           <div class="grid justify-items-center mt-4">
-            <img class="h-20 w-20" src={linkage} />
+            <img class="h-20 w-20" src="Linkage.png" />
           </div>
           <div class="inputPage h-100">
             <form class="flex flex-col space-y-2" action="#">
@@ -237,7 +236,7 @@ const Linkage = () => {
 
         <div class="editPage flex flex-col space-y-4 h-100">
           <div class="grid justify-items-center mt-4">
-            <img class="h-20 w-20" src={linkage} />
+            <img class="h-20 w-20" src="Linkage.png" />
           </div>
           <div class=" h-100">
             <form class="flex flex-col space-y-2" action="#">

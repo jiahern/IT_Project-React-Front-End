@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.png";
 
 const Header = () => {
   return (
@@ -25,6 +24,8 @@ const Header = () => {
               </svg>
             </button>
           </div>
+
+          {/* Logo SVG Start */}
 
           <div class="px-2 mt-2">
             <svg
@@ -285,6 +286,8 @@ const Header = () => {
               />
             </svg>
           </div>
+
+          {/* Logo SVG End */}
         </div>
 
         <div class="flex space-x-4">
