@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { loginUser } from "../api";
+import { loginUser } from "../../api";
 import { Redirect } from "react-router-dom";
 
 
@@ -19,7 +19,7 @@ export function Logout() {
   /*
     Generate a login form
   */
-  export function LoginForm() {
+  export default function LoginForm() {
     
     // state hook functions   
     const [email, setEmail] = useState("");
@@ -38,7 +38,7 @@ export function Logout() {
         return <Redirect to={state.redirect} />
     }
     return (
-        <div>
+        <div class="flex justify-center z-20">
             <form>
                 <input
                     type="text"

@@ -13,6 +13,12 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
+    title: "Login",
+    path: "/login",
+    icon: <FaIcons.FaHome />,
+    cName: "nav-text",
+  },
+  {
     title: "Union",
     path: "/union",
     icon: (
