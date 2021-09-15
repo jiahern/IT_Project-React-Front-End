@@ -4,7 +4,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Components/Header/header";
 import Linkage from "./Components/Linkage/Linkage";
-import LoginForm,{Logout } from "./Components/Login/login";
+import LoginForm, { Logout } from "./Components/Login/login";
 
 function App() {
   return (
@@ -14,7 +14,6 @@ function App() {
         <Switch>
           <Route exact path="/" />
           <Route exact path="/login" component={LoginForm} />
-
         </Switch>
       </Router>
     </div>
