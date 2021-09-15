@@ -67,3 +67,33 @@ export async function loginUser(user) {
   // redirect to homepage -- another way to redirect
   window.location.href = "/";
 }
+
+function getFoods() {
+  const endpoint = BASE_URL + "/linkage";
+  return fetch(endpoint).then((res) => res.json());
+}
+
+export function useFoods() {
+  const [loading, setLoading] = useState(true);
+  const [foods, setFoods] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getFoods()
+      .then((foods) => {
+        setFoods(foods);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
+
+  return {
+    loading,
+    foods,
+    error,
+  };
+}
