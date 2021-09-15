@@ -3,8 +3,13 @@ import "./tailwind.min.css";
 import Navbar from "./Components/Navbar/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Components/Header/header";
-import Linkage from "./Components/Linkage/Linkage";
+// import Linkage from "./Components/Linkage/Linkage";
 import LoginForm, { Logout } from "./Components/Login/login";
+import HomePage from "./Pages/HomePage";
+import Union from "./Pages/Union";
+import Linkage from "./Pages/Linkage";
+import Task from "./Pages/Task";
+import Calendar from "./Pages/Calendar";
 
 function App() {
   return (
@@ -12,8 +17,13 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route exact path="/" />
-          <Route exact path="/login" component={LoginForm} />
+          <Route path="/" exact />
+          <Route path="/homepage" exact component={HomePage} />
+          <Route path="/union" exact component={Union} />
+          <Route path="/linkage" exact component={Linkage} />
+          <Route path="/task" exact component={Task} />
+          <Route path="/calendar" exact component={Calendar} />
+          <Route path="/login" exact component={LoginForm} />
         </Switch>
       </Router>
     </div>

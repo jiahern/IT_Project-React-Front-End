@@ -5,4 +5,3 @@ function Linkage() {
 }
 
 export default Linkage;
-Linkage;

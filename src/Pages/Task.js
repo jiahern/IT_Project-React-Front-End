@@ -5,4 +5,3 @@ function Task() {
 }
 
 export default Task;
-Task;

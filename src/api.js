@@ -38,7 +38,7 @@ export async function loginUser(user) {
 
   // define the route which the FoodBuddy API is handling
   // login/authentication
-  const endpoint = BASE_URL + `/user/login`;
+  const endpoint = BASE_URL + "/user/login";
 
   // POST the email and password to FoodBuddy API to
   // authenticate user and receive the token explicitly
