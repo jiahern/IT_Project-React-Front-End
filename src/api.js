@@ -70,7 +70,7 @@ export async function loginUser(user) {
 
 function getFoods() {
   const endpoint = BASE_URL + "/linkage";
-  return fetch(endpoint).then((res) => res.json());
+  return axios.get(endpoint, {withCredentials:true}).then(res => res.data)
 }
 
 export function useFoods() {
