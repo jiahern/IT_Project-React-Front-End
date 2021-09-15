@@ -25,6 +25,15 @@ axios.interceptors.request.use(
   }
 );
 
+// function getFood(id) {
+//   const endpoint = BASE_URL + `/foods/` + id;
+//   return axios.get(endpoint, {withCredentials:true}).then(res => res.data);
+// }
+
+export function tests(){
+  const endpoint = BASE_URL ;
+  return axios.get(endpoint, {withCredentials:true})
+}
 // component for handling user login
 export async function loginUser(user) {
 
