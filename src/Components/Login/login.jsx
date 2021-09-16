@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { loginUser } from "../../api";
-import { Redirect } from "react-router-dom";
+import {Link, Redirect } from "react-router-dom";
 import GestioLogo from "./Logo.svg";
 import "./login.css"
 
@@ -27,9 +27,6 @@ export function Logout() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
   
-    //move to register page
-    const [register, setRegister] = useState(false);
-    const showRegister = () => setRegister(!register);
     // submit form
     function onSubmit() {
         // using API function to submit data to FoodBuddy API
@@ -49,7 +46,7 @@ export function Logout() {
                 </div>
                 
                 
-            <form className={register ? "loginSection" : "loginSection active"}>
+            <form className="loginSection">
                 <div>
                         <p className="subpixel-antialiased text-5xl mt-10 font-extrabold ">Log In</p>
                 </div>
@@ -81,54 +78,18 @@ export function Logout() {
                 </div>
                 
                 <div className="flex space-x-4  ">
-                       <input className="rounded font-bold h-8 bg-gray-800 text-white w-20" type="button" value="Log In" onClick={onSubmit}/>
+                       <input className="rounded font-bold h-8 bg-gray-800 text-white w-40 h-15" type="button" value="Log In" onClick={onSubmit}/>
                         
                 </div>
-                <div><button onClick={showRegister} className="registerButton text-left text-sm mb-4 hover:text-blue-400  hover:border-blue" href="#">Don't have a account? Register Here.</button></div>
-                    
-                
-            </form>
-
-            <form className={register ? "registerSection active" : "registerSection"}>
                 <div>
-                        <p className="subpixel-antialiased text-5xl mt-10 font-extrabold ">Register</p>
+                  <Link to="/register">
+                  <button  className="registerButton text-left text-sm mb-4 hover:text-blue-400  hover:border-blue">Don't have a account? Register Here.</button>
+                  </Link>
                 </div>
-                <div className="flex space-x-4 ml-8 bg-blue-100 rounded">
-                       <label className="mt-2 font-bold text-xl">Email:</label>
-                        <input className="rounded w-80 text-xl"
-                        type="text"
-                        name="email"
-                        id="email"                
-                        value={email}
-                        placeholder="email"  
-                        onChange={event => {
-                        setEmail(event.target.value);
-                        }}                  
-                        /> 
-                </div>
-                <div className="flex space-x-4 bg-blue-100 rounded">
-                        <label className="font-bold text-xl">Password:</label>
-                        <input className="rounded w-80 text-xl"
-                        type="password"
-                        name="password"
-                        id="password"                
-                        value={password}
-                        placeholder="************"
-                        onChange={event => {
-                        setPassword(event.target.value);
-                        }}                      
-                        />
-                </div>
-                
-                <div className="flex space-x-4  ">
-                       <input className="rounded font-bold h-8 bg-gray-800 text-white w-20" type="button" value="Log In" onClick={onSubmit}/>
-                        
-                </div>
-                <div><button className="text-left text-sm mb-4 hover:text-blue-400  hover:border-blue" href="#">Don't have a account? Register Here.</button></div>
                     
                 
             </form>
-        </div>
+            </div>
         
     );
   }
