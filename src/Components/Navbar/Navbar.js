@@ -9,6 +9,9 @@ import { IconContext } from "react-icons";
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+
+  const [sidebarItem, setSidebarItem] = useState(false);
+  const showSidebarItem = () => setSidebarItem(!sidebar);
   return (
     <IconContext.Provider value={{ color: "#fff" }}>
       <div className="navbar">
@@ -20,7 +23,7 @@ function Navbar() {
         <ul className="nav-menu-items" onClick={showSidebar}>
           <li className="navbar-toggle">
             <Link to="#" className="menu-bars">
-              <AiIcons.AiOutlineClose />
+              {/* <AiIcons.AiOutlineClose /> */}
             </Link>
           </li>
           {SidebarData.map((item, index) => {
@@ -28,7 +31,9 @@ function Navbar() {
               <li key={index} className={item.cName}>
                 <Link to={item.path}>
                   {item.icon}
-                  <span>{item.title}</span>
+                  <span className={sidebar ? "title-active" : "title-inactive"}>
+                    {item.title}
+                  </span>
                 </Link>
               </li>
             );

@@ -10,15 +10,18 @@ export default function Foods() {
     return <p>Something went wrong: {error.message}</p>;
   }
 
+
   return (
     <section id="foodList">
       <h1>Food List</h1>
-      <div>{foods}</div>
-      {/* <ul>
-        {foods.map((food) => (
-          <Food key={food._id} {...food} />
-        ))}
-      </ul> */}
+      {foods.map((item, index) => {
+        return (
+          <li key={index} email={item.email}>
+            {item.email}
+            {item.firstName}
+          </li>
+        );
+      })}
     </section>
   );
 }

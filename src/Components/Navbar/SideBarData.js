@@ -25,9 +25,9 @@ export const SidebarData = [
       <svg
         id="Capa_1"
         enable-background="new 0 0 512 512"
-        height="16"
+        height="29"
         viewBox="0 0 512 512"
-        width="16"
+        width="29"
         xmlns="http://www.w3.org/2000/svg"
       >
         <g id="Connect_1_">

@@ -44,33 +44,37 @@ export async function loginUser(user) {
 
   // POST the email and password to FoodBuddy API to
   // authenticate user and receive the token explicitly
-  // i.e. data = token
-  let data = await axios({
-    url: endpoint,
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(
-      {
-        email: email,
-        password: password,
+  try {
+    // i.e. data = token
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      { withCredentials: true } // IMPORTANT
-    ),
-  }).then((res) => res.data);
+      data: JSON.stringify(
+        {
+          email: email,
+          password: password,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
 
-  // put token ourselves in the local storage, we will
-  // send the token in the request header to the API server
-  localStorage.setItem("token", data);
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    localStorage.setItem("token", data);
 
-  // redirect to homepage -- another way to redirect
-  window.location.href = "/";
+    // redirect to homepage -- another way to redirect
+    window.location.href = "/";
+  } catch (error) {
+    alert("must provide valid email or password");
+  }
 }
 
 function getFoods() {
   const endpoint = BASE_URL + "/linkage";
-  return axios.get(endpoint, {withCredentials:true}).then(res => res.data)
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
 }
 
 export function useFoods() {
