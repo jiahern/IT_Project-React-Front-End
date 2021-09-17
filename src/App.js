@@ -1,9 +1,8 @@
 import "./App.css";
 import "./tailwind.min.css";
-import Navbar from "./Components/Navbar/Navbar";
+import Sidebar from "./Components/Sidebar/Sidebar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "./Components/Header/header";
-// import Linkage from "./Components/Linkage/Linkage";
+import React, { useEffect, useState } from "react";
 import LoginForm, { Logout } from "./Components/Login/login";
 import HomePage from "./Pages/HomePage";
 import Union from "./Pages/Union";
@@ -12,19 +11,27 @@ import Task from "./Pages/Task";
 import Calendar from "./Pages/Calendar";
 
 function App() {
+  const [inactive, setInactive] = useState(false);
   return (
     <div>
       <Router>
-        <Navbar />
-        <Switch>
-          <Route path="/" exact />
-          <Route path="/homepage" exact component={HomePage} />
-          <Route path="/union" exact component={Union} />
-          <Route path="/linkage" exact component={Linkage} />
-          <Route path="/task" exact component={Task} />
-          <Route path="/calendar" exact component={Calendar} />
-          <Route path="/login" exact component={LoginForm} />
-        </Switch>
+        <Sidebar
+          onCollapse={(inactive) => {
+            // console.log(inactive);
+            setInactive(inactive);
+          }}
+        />
+        <div className={inactive ? "contain inactive" : "contain"}>
+          <Switch>
+            <Route path="/" exact />
+            <Route path="/homepage" exact component={HomePage} />
+            <Route path="/union" exact component={Union} />
+            <Route path="/linkage" exact component={Linkage} />
+            <Route path="/task" exact component={Task} />
+            <Route path="/calendar" exact component={Calendar} />
+            <Route path="/login" exact component={LoginForm} />
+          </Switch>
+        </div>
       </Router>
     </div>
   );
