@@ -41,61 +41,42 @@ export default function LoginForm() {
         <img className="w-150 h-75" href="#" src={GestioLogo} />
       </div>
 
-      <form className="loginSection">
-        <div>
-          <p className="subpixel-antialiased text-5xl mt-10 font-extrabold ">
-            Log In
-          </p>
-        </div>
-        <div className="flex space-x-4 ml-8 bg-gray-800 rounded-xl">
-          <label className="mt-2 font-bold text-l w-40 text-white flex justify-center">
-            Email:
-          </label>
-          <input
-            className="rounded-xl w-full h-full text-2xl"
-            type="text"
-            name="email"
-            id="email"
-            value={email}
-            placeholder="email"
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-          />
-        </div>
-        <div className="flex space-x-4 bg-gray-800 rounded-xl">
-          <label className="mt-2 font-bold text-l w-40 text-white flex justify-center">
-            Password:
-          </label>
-          <input
-            className="rounded-xl w-full h-full text-2xl"
-            type="password"
-            name="password"
-            id="password"
-            value={password}
-            placeholder="************"
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-          />
-        </div>
+      <div className="signInPage py-20 mt-20 bg-gray-100 rounded-2xl">
+          <form className="inputPage">
+                  <h3>Sign In</h3>
 
-        <div className="flex space-x-4  ">
-          <input
-            className="rounded font-bold h-8 bg-gray-800 text-white w-40 h-15"
-            type="button"
-            value="Log In"
-            onClick={onSubmit}
-          />
+                  <div className="form-group">
+                  <label>Email address</label>
+                  <input className="form-control" type="email"
+                          name="email"
+                          id="email"
+                          value={email}
+                          placeholder="qsj@email.com"
+                          onChange={(event) => {
+                                  setEmail(event.target.value);
+                          }} />
+                  </div>
+
+                  <div className="form-group">
+                  <label>Password</label>
+                  <input className="form-control" type="text"
+                          name="password"
+                          id="password"
+                          value={password}
+                          placeholder="************"
+                          onChange={(event) => {
+                                  setPassword(event.target.value);
+                          }} />
+                  </div>
+
+                  <input type="submit" className="btn btn-primary " value="Log In" onClick={onSubmit}/>
+                  <Link to="/register">
+                  <p className="forgot-password text-right">
+                  Don't have a account? sign up?
+                  </p>
+                  </Link>
+          </form>
         </div>
-        <div>
-          <Link to="/register">
-            <button className="registerButton text-left text-sm mb-4 hover:text-blue-400  hover:border-blue">
-              Don't have a account? Register Here.
-            </button>
-          </Link>
-        </div>
-      </form>
     </div>
   );
 }
