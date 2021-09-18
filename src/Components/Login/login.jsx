@@ -36,7 +36,7 @@ export default function LoginForm() {
     return <Redirect to={state.redirect} />;
   }
   return (
-    <div class="loginPage overflow-hidden flex items-center justify-center -mt-16  flex-col space-y-4 h-screen w-screen bg-grey-100">
+    <div class="loginPage overflow-hidden flex items-center justify-center  flex-col space-y-4 h-screen w-screen bg-grey-100">
       <div className="flex justify-center border-b-2 border-grey w-full">
         <img className="w-150 h-75" href="#" src={GestioLogo} />
       </div>
