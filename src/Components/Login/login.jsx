@@ -69,7 +69,7 @@ export default function LoginForm() {
                           }} />
                   </div>
 
-                  <input type="submit" className="btn btn-primary " value="Log In" onClick={onSubmit}/>
+                  <input type="button" className="btn btn-primary " value="Log In" onClick={onSubmit}/>
                   <Link to="/register">
                   <p className="forgot-password text-right">
                   Don't have a account? sign up?

@@ -104,7 +104,7 @@ export default function RegisterForm() {
                                         }} />
                                 </div>
 
-                                <input type="submit" className="btn btn-primary" vlue="Sign Up" onClick={onRegister}/>
+                                <input type="button" className="btn btn-primary" value="Sign Up" onClick={onRegister}/>
                                 <Link to="/login">
                                         <p className="forgot-password text-right">
                                         Already registered <a href="#">sign in?</a>
