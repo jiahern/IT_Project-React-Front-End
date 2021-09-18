@@ -75,10 +75,10 @@ export async function loginUser(user) {
 
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
-    Cookies.set("token", data);
+    Cookies.set("token", data, { expires: 0.5 });
 
     // redirect to homepage -- another way to redirect
-    // window.location.href = "/";
+    window.location.href = "/";
   } catch (error) {
     alert("must provide valid email or password");
   }
@@ -101,31 +101,34 @@ export async function registerUser(newUser) {
   // POST the email and password to FoodBuddy API to
   // authenticate user and receive the token explicitly
   // i.e. data = token
-
-  let data = await axios({
-    url: endpoint,
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(
-      {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-        phoneNo: phoneNo,
+  try{
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      { withCredentials: true } // IMPORTANT
-    ),
-  }).then((res) => res.data);
+      data: JSON.stringify(
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          phoneNo: phoneNo,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
 
-  // put token ourselves in the local storage, we will
-  // send the token in the request header to the API server
-  Cookies.set("token", data);
-  // console.log(data);
-  // redirect to homepage -- another way to redirect
-  window.location.href = "/";
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    Cookies.set("token", data, { expires: 0.5 });
+    // console.log(data);
+    // redirect to homepage -- another way to redirect
+    window.location.href = "/";
+  } catch (error) {
+    alert("Invalid Information");
+  }
 }
 
 function getFoods() {

@@ -3,16 +3,17 @@ import { loginUser } from "../../api";
 import { Link, Redirect } from "react-router-dom";
 import GestioLogo from "./Logo.svg";
 import "./login.css";
+import Cookies from "js-cookie";
 
 // component to Logout user
 export function Logout() {
   // remove token from the local storage
-  localStorage.removeItem("token");
+  Cookies.remove("token");
 
   // open the homepage --- example of how to redirect
   // another example
   const state = { redirect: "/" };
-  return <Redirect to={state.redirect} />;
+  return <Redirect to={state.redirect} />; 
 }
 
 /*
@@ -43,10 +44,10 @@ export default function LoginForm() {
 
       <div className="signInPage py-20 mt-20 bg-gray-100 rounded-2xl">
           <form className="inputPage">
-                  <h3>Sign In</h3>
+                  <h3 className="words">Sign In</h3>
 
                   <div className="form-group">
-                  <label>Email address</label>
+                  <label className="words">Email address</label>
                   <input className="form-control" type="email"
                           name="email"
                           id="email"
@@ -58,8 +59,8 @@ export default function LoginForm() {
                   </div>
 
                   <div className="form-group">
-                  <label>Password</label>
-                  <input className="form-control" type="text"
+                  <label className="words">Password</label>
+                  <input className="form-control" type="password"
                           name="password"
                           id="password"
                           value={password}
@@ -69,7 +70,7 @@ export default function LoginForm() {
                           }} />
                   </div>
 
-                  <input type="submit" className="btn btn-primary " value="Log In" onClick={onSubmit}/>
+                  <input type="button" className="btn btn-primary " value="Log In" onClick={onSubmit}/>
                   <Link to="/register">
                   <p className="forgot-password text-right">
                   Don't have a account? sign up?
@@ -80,7 +81,3 @@ export default function LoginForm() {
     </div>
   );
 }
-
-// export function test() {
-//   tests();
-// }
