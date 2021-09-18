@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 // for other purposes, this app using Fetch API -- you should switch others to Axios
 // if you want to try as an exercise
 import axios from "axios";
+import Cookies from "js-cookie";
 const BASE_URL = "http://localhost:5000";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
@@ -13,7 +14,8 @@ axios.interceptors.request.use(
   (config) => {
     const { origin } = new URL(config.url);
     const allowedOrigins = [BASE_URL];
-    const token = localStorage.getItem("token"); // get the token
+    // const token = localStorage.getItem("token"); // get the token
+    const token = Cookies.get("token")
     if (allowedOrigins.includes(origin)) {
       config.headers.authorization = `Bearer ${token}`; // we put our token in the header
     }
@@ -37,8 +39,8 @@ export function tests() {
 export async function loginUser(user) {
   // unpack user details, email and password
   const { email, password } = user;
-  console.log("email = " + email);
-  console.log("password = " + password);
+  // console.log("email = " + email);
+  // console.log("password = " + password);
 
   // if the user did not enter an email or password
   if (!email || !password) {
@@ -67,14 +69,16 @@ export async function loginUser(user) {
         },
         { withCredentials: true } // IMPORTANT
       ),
-    }).then((res) => res.data);
+    }).then((res) => {
+      // console.log(res)
+      return res.data});
 
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
-    localStorage.setItem("token", data);
+    Cookies.set("token", data);
 
     // redirect to homepage -- another way to redirect
-    window.location.href = "/";
+    // window.location.href = "/";
   } catch (error) {
     alert("must provide valid email or password");
   }
@@ -118,8 +122,8 @@ export async function registerUser(newUser) {
 
   // put token ourselves in the local storage, we will
   // send the token in the request header to the API server
-  localStorage.setItem("token", data);
-  console.log(data);
+  Cookies.set("token", data);
+  // console.log(data);
   // redirect to homepage -- another way to redirect
   window.location.href = "/";
 }
