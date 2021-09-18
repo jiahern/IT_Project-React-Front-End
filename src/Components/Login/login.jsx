@@ -43,10 +43,10 @@ export default function LoginForm() {
 
       <div className="signInPage py-20 mt-20 bg-gray-100 rounded-2xl">
           <form className="inputPage">
-                  <h3>Sign In</h3>
+                  <h3 className="words">Sign In</h3>
 
                   <div className="form-group">
-                  <label>Email address</label>
+                  <label className="words">Email address</label>
                   <input className="form-control" type="email"
                           name="email"
                           id="email"
@@ -58,7 +58,7 @@ export default function LoginForm() {
                   </div>
 
                   <div className="form-group">
-                  <label>Password</label>
+                  <label className="words">Password</label>
                   <input className="form-control" type="text"
                           name="password"
                           id="password"

@@ -42,10 +42,10 @@ export default function RegisterForm() {
                 </div>
                 <div className="signUpPage py-20 mt-20 bg-gray-100 rounded-2xl">
                         <form className="inputPage">
-                                <h3>Sign Up</h3>
+                                <h3 className="words">Sign Up</h3>
 
                                 <div className="form-group">
-                                <label>First name</label>
+                                <label className="words">First name</label>
                                 <input className="form-control" type="text"
                                         name="firstName"
                                         id="firstName"
@@ -69,7 +69,7 @@ export default function RegisterForm() {
                                 </div>
 
                                 <div className="form-group">
-                                <label>Email address</label>
+                                <label className="words">Email address</label>
                                 <input className="form-control" type="email"
                                         name="email"
                                         id="email"
