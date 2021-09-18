@@ -14,7 +14,7 @@ import RegisterForm, { Registerout } from "./Components/Register/register";
 function App() {
   const [inactive, setInactive] = useState(false);
   return (
-    <div>
+    <div className="allpage">
       <Router>
         <Switch>
           <Route exact path="/login" component={LoginForm} />
@@ -24,7 +24,6 @@ function App() {
           <div>
             <Sidebar
               onCollapse={(inactive) => {
-                // console.log(inactive);
                 setInactive(inactive);
               }}
             />
@@ -37,7 +36,6 @@ function App() {
                 <Route path="/task" exact component={Task} />
                 <Route path="/calendar" exact component={Calendar} />
                 <Route exact path="/" />
-                {/* <Route exact path="/test" component={test} /> */}
               </Switch>
             </div>
           </div>
