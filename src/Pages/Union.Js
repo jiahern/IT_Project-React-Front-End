@@ -5,4 +5,3 @@ function Union() {
 }
 
 export default Union;
-Union;

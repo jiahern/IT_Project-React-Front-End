@@ -40,7 +40,7 @@ export function Logout() {
         return <Redirect to={state.redirect} />
     }
     return (
-        <div class="loginPage overflow-hidden flex items-center justify-center -mt-16  flex-col space-y-4 overflow-hidden h-screen w-screen bg-grey-100">
+        <div class="loginPage overflow-hidden flex items-center justify-center -mt-16  flex-col space-y-4 h-screen w-screen bg-grey-100">
                 <div className="flex justify-center border-b-2 border-grey w-full">
                         <img className="w-150 h-75" href="#" src={GestioLogo}/>
                 </div>
@@ -50,9 +50,9 @@ export function Logout() {
                 <div>
                         <p className="subpixel-antialiased text-5xl mt-10 font-extrabold ">Log In</p>
                 </div>
-                <div className="flex space-x-4 ml-8 bg-blue-100 rounded">
-                       <label className="mt-2 font-bold text-xl">Email:</label>
-                        <input className="rounded w-80 text-xl"
+                <div className="flex space-x-4 ml-8 bg-gray-800 rounded-xl">
+                       <label className="mt-2 font-bold text-l w-40 text-white flex justify-center">Email:</label>
+                        <input className="rounded-xl w-full h-full text-2xl"
                         type="text"
                         name="email"
                         id="email"                
@@ -63,9 +63,9 @@ export function Logout() {
                         }}                  
                         /> 
                 </div>
-                <div className="flex space-x-4 bg-blue-100 rounded">
-                        <label className="font-bold text-xl">Password:</label>
-                        <input className="rounded w-80 text-xl"
+                <div className="flex space-x-4 bg-gray-800 rounded-xl">
+                        <label className="mt-2 font-bold text-l w-40 text-white flex justify-center">Password:</label>
+                        <input className="rounded-xl w-full h-full text-2xl"
                         type="password"
                         name="password"
                         id="password"                
