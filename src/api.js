@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 // for other purposes, this app using Fetch API -- you should switch others to Axios
 // if you want to try as an exercise
 import axios from "axios";
+import Cookies from "js-cookie";
 const BASE_URL = "http://localhost:5000";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
@@ -13,7 +14,8 @@ axios.interceptors.request.use(
   (config) => {
     const { origin } = new URL(config.url);
     const allowedOrigins = [BASE_URL];
-    const token = localStorage.getItem("token"); // get the token
+    // const token = localStorage.getItem("token"); // get the token
+    const token = Cookies.get("token")
     if (allowedOrigins.includes(origin)) {
       config.headers.authorization = `Bearer ${token}`; // we put our token in the header
     }
@@ -37,8 +39,8 @@ export function tests() {
 export async function loginUser(user) {
   // unpack user details, email and password
   const { email, password } = user;
-  console.log("email = " + email);
-  console.log("password = " + password);
+  // console.log("email = " + email);
+  // console.log("password = " + password);
 
   // if the user did not enter an email or password
   if (!email || !password) {
@@ -67,21 +69,21 @@ export async function loginUser(user) {
         },
         { withCredentials: true } // IMPORTANT
       ),
-    }).then((res) => res.data);
+    }).then((res) => {
+      // console.log(res)
+      return res.data});
 
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
-    localStorage.setItem("token", data);
+    Cookies.set("token", data, { expires: 0.5 });
 
     // redirect to homepage -- another way to redirect
-    
     window.location.href = "/";
-
   } catch (error) {
     alert("must provide valid email or password");
   }
 }
- 
+
 export async function registerUser(newUser) {
   // unpack user details, email and password
   const { firstName, lastName, email, password, phoneNo } = newUser;
@@ -99,33 +101,33 @@ export async function registerUser(newUser) {
   // POST the email and password to FoodBuddy API to
   // authenticate user and receive the token explicitly
   // i.e. data = token
-
   try{
     let data = await axios({
-    url: endpoint,
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(
-      {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-        phoneNo: phoneNo,
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      { withCredentials: true } // IMPORTANT
-    ),
-  }).then((res) => res.data);
+      data: JSON.stringify(
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          phoneNo: phoneNo,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
 
-  // put token ourselves in the local storage, we will
-  // send the token in the request header to the API server
-  localStorage.setItem("token", data);
-  // redirect to homepage -- another way to redirect
-  window.location.href = "/";
-  }catch(error){
-    alert("The infomation is not complete");
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    Cookies.set("token", data, { expires: 0.5 });
+    // console.log(data);
+    // redirect to homepage -- another way to redirect
+    window.location.href = "/";
+  } catch (error) {
+    alert("Invalid Information");
   }
 }
 

@@ -3,16 +3,17 @@ import { loginUser } from "../../api";
 import { Link, Redirect } from "react-router-dom";
 import GestioLogo from "./Logo.svg";
 import "./login.css";
+import Cookies from "js-cookie";
 
 // component to Logout user
 export function Logout() {
   // remove token from the local storage
-  localStorage.removeItem("token");
+  Cookies.remove("token");
 
   // open the homepage --- example of how to redirect
   // another example
   const state = { redirect: "/" };
-  return <Redirect to={state.redirect} />;
+  return <Redirect to={state.redirect} />; 
 }
 
 /*
@@ -59,7 +60,7 @@ export default function LoginForm() {
 
                   <div className="form-group">
                   <label className="words">Password</label>
-                  <input className="form-control" type="text"
+                  <input className="form-control" type="password"
                           name="password"
                           id="password"
                           value={password}
@@ -80,7 +81,3 @@ export default function LoginForm() {
     </div>
   );
 }
-
-// export function test() {
-//   tests();
-// }
