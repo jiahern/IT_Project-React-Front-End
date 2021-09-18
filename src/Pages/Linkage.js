@@ -47,3 +47,10 @@ function Food(food) {
     </table>
   );
 }
+function Linkage() {
+  return <div className="">Linkage
+  <button type="button" class="btn btn-primary">Primary</button>
+  </div>;
+}
+
+export default Linkage;

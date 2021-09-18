@@ -9,6 +9,7 @@ import Union from "./Pages/Union";
 import Linkage from "./Pages/Linkage";
 import Task from "./Pages/Task";
 import Calendar from "./Pages/Calendar";
+import RegisterForm, { Registerout } from "./Components/Register/register";
 
 function App() {
   const [inactive, setInactive] = useState(false);
@@ -30,6 +31,12 @@ function App() {
             <Route path="/task" exact component={Task} />
             <Route path="/calendar" exact component={Calendar} />
             <Route path="/login" exact component={LoginForm} />
+            <Route exact path="/" />
+            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/test" component={test} />
+
+            <Route exact path="/Register" component={RegisterForm} />
           </Switch>
         </div>
       </Router>

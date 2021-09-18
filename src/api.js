@@ -25,6 +25,15 @@ axios.interceptors.request.use(
   }
 );
 
+// function getFood(id) {
+//   const endpoint = BASE_URL + `/foods/` + id;
+//   return axios.get(endpoint, {withCredentials:true}).then(res => res.data);
+// }
+
+export function tests(){
+  const endpoint = BASE_URL ;
+  return axios.get(endpoint, {withCredentials:true})
+}
 // component for handling user login
 export async function loginUser(user) {
   // unpack user details, email and password
@@ -48,6 +57,9 @@ export async function loginUser(user) {
     // i.e. data = token
     let data = await axios({
       url: endpoint,
+    try{
+      let data = await axios({
+      url:endpoint,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,6 +82,72 @@ export async function loginUser(user) {
   } catch (error) {
     alert("must provide valid email or password");
   }
+
+}
+
+
+
+  catch (error){
+    alert("Invalid Password or Email");
+  
+    // console.log("Error")
+  }
+  }
+      { withCredentials: true } // IMPORTANT
+    ),
+  }).then((res) => res.data);
+
+  // put token ourselves in the local storage, we will
+  // send the token in the request header to the API server
+  localStorage.setItem("token", data);
+
+  // redirect to homepage -- another way to redirect
+  window.location.href = "/";
+}
+
+
+export async function registerUser(newUser) {
+  // unpack user details, email and password
+  const {firstName,lastName,email, password,phoneNo} = newUser;
+
+  // if the user did not enter an email or password
+  if (!email || !password || !phoneNo || !firstName || !lastName) {
+    alert("The information is not complete");
+    return;
+  }
+
+  // define the route which the FoodBuddy API is handling
+  // login/authentication
+  const endpoint = BASE_URL + `/user/register`;
+
+  // POST the email and password to FoodBuddy API to
+  // authenticate user and receive the token explicitly
+  // i.e. data = token
+  
+  let data = await axios({
+    url: endpoint,
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(
+      {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        phoneNo:phoneNo,
+      },
+      { withCredentials: true } // IMPORTANT
+    ),
+  }).then((res) => res.data);
+  
+  // put token ourselves in the local storage, we will
+  // send the token in the request header to the API server
+  localStorage.setItem("token", data);
+  console.log(data);
+  // redirect to homepage -- another way to redirect
+  window.location.href = "/";
 }
 
 function getFoods() {
@@ -100,4 +178,3 @@ export function useFoods() {
     foods,
     error,
   };
-}
