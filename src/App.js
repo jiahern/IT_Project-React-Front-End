@@ -16,29 +16,32 @@ function App() {
   return (
     <div>
       <Router>
-        <Sidebar
-          onCollapse={(inactive) => {
-            // console.log(inactive);
-            setInactive(inactive);
-          }}
-        />
-        <div className={inactive ? "contain inactive" : "contain"}>
-          <Switch>
-            <Route path="/" exact />
-            <Route path="/homepage" exact component={HomePage} />
-            <Route path="/union" exact component={Union} />
-            <Route path="/linkage" exact component={Linkage} />
-            <Route path="/task" exact component={Task} />
-            <Route path="/calendar" exact component={Calendar} />
-            <Route path="/login" exact component={LoginForm} />
-            <Route exact path="/" />
-            <Route exact path="/login" component={LoginForm} />
-            <Route exact path="/logout" component={Logout} />
-            {/* <Route exact path="/test" component={test} /> */}
+        <Switch>
+          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/logout" component={Logout} />
+          <Route exact path="/Register" component={RegisterForm} />
 
-            <Route exact path="/Register" component={RegisterForm} />
-          </Switch>
-        </div>
+          <div>
+            <Sidebar
+              onCollapse={(inactive) => {
+                // console.log(inactive);
+                setInactive(inactive);
+              }}
+            />
+            <div className={inactive ? "contain inactive" : "contain"}>
+              <Switch>
+                <Route path="/" exact />
+                <Route path="/homepage" exact component={HomePage} />
+                <Route path="/union" exact component={Union} />
+                <Route path="/linkage" exact component={Linkage} />
+                <Route path="/task" exact component={Task} />
+                <Route path="/calendar" exact component={Calendar} />
+                <Route exact path="/" />
+                {/* <Route exact path="/test" component={test} /> */}
+              </Switch>
+            </div>
+          </div>
+        </Switch>
       </Router>
     </div>
   );
