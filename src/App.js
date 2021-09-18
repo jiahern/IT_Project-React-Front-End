@@ -9,7 +9,7 @@ import Union from "./Pages/Union";
 import Linkage from "./Pages/Linkage";
 import Task from "./Pages/Task";
 import Calendar from "./Pages/Calendar";
-import RegisterForm, { Registerout } from "./Components/Register/register";
+import RegisterForm from "./Components/Register/register";
 
 function App() {
   const [inactive, setInactive] = useState(false);

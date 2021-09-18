@@ -327,4 +327,4 @@ const Linkage = () => {
   );
 };
 
-export default Linkage;
+

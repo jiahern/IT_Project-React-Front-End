@@ -74,12 +74,14 @@ export async function loginUser(user) {
     localStorage.setItem("token", data);
 
     // redirect to homepage -- another way to redirect
+    
     window.location.href = "/";
+
   } catch (error) {
     alert("must provide valid email or password");
   }
 }
-
+ 
 export async function registerUser(newUser) {
   // unpack user details, email and password
   const { firstName, lastName, email, password, phoneNo } = newUser;
@@ -98,7 +100,8 @@ export async function registerUser(newUser) {
   // authenticate user and receive the token explicitly
   // i.e. data = token
 
-  let data = await axios({
+  try{
+    let data = await axios({
     url: endpoint,
     method: "POST",
     headers: {
@@ -119,9 +122,11 @@ export async function registerUser(newUser) {
   // put token ourselves in the local storage, we will
   // send the token in the request header to the API server
   localStorage.setItem("token", data);
-  console.log(data);
   // redirect to homepage -- another way to redirect
   window.location.href = "/";
+  }catch(error){
+    alert("The infomation is not complete");
+  }
 }
 
 function getFoods() {
