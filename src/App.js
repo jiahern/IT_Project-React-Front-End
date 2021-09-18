@@ -34,7 +34,7 @@ function App() {
             <Route exact path="/" />
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/logout" component={Logout} />
-            <Route exact path="/test" component={test} />
+            {/* <Route exact path="/test" component={test} /> */}
 
             <Route exact path="/Register" component={RegisterForm} />
           </Switch>

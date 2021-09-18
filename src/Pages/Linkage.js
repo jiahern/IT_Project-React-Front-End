@@ -1,7 +1,7 @@
 import React from "react";
 import { useFoods, useOneFood } from "../api";
 
-export default function Foods() {
+export default function Linkage() {
   const { loading, foods, error } = useFoods();
   if (loading) {
     return <p>Loading...</p>;
@@ -9,7 +9,6 @@ export default function Foods() {
   if (error) {
     return <p>Something went wrong: {error.message}</p>;
   }
-
 
   return (
     <section id="foodList">
@@ -47,10 +46,3 @@ function Food(food) {
     </table>
   );
 }
-function Linkage() {
-  return <div className="">Linkage
-  <button type="button" class="btn btn-primary">Primary</button>
-  </div>;
-}
-
-export default Linkage;

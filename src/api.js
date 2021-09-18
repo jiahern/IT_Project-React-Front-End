@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 // get are using Axios to communicate with the Server API for authentication only
 // for other purposes, this app using Fetch API -- you should switch others to Axios
 // if you want to try as an exercise
@@ -30,9 +29,9 @@ axios.interceptors.request.use(
 //   return axios.get(endpoint, {withCredentials:true}).then(res => res.data);
 // }
 
-export function tests(){
-  const endpoint = BASE_URL ;
-  return axios.get(endpoint, {withCredentials:true})
+export function tests() {
+  const endpoint = BASE_URL;
+  return axios.get(endpoint, { withCredentials: true });
 }
 // component for handling user login
 export async function loginUser(user) {
@@ -53,13 +52,10 @@ export async function loginUser(user) {
 
   // POST the email and password to FoodBuddy API to
   // authenticate user and receive the token explicitly
+
   try {
-    // i.e. data = token
     let data = await axios({
       url: endpoint,
-    try{
-      let data = await axios({
-      url:endpoint,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -82,33 +78,11 @@ export async function loginUser(user) {
   } catch (error) {
     alert("must provide valid email or password");
   }
-
 }
-
-
-
-  catch (error){
-    alert("Invalid Password or Email");
-  
-    // console.log("Error")
-  }
-  }
-      { withCredentials: true } // IMPORTANT
-    ),
-  }).then((res) => res.data);
-
-  // put token ourselves in the local storage, we will
-  // send the token in the request header to the API server
-  localStorage.setItem("token", data);
-
-  // redirect to homepage -- another way to redirect
-  window.location.href = "/";
-}
-
 
 export async function registerUser(newUser) {
   // unpack user details, email and password
-  const {firstName,lastName,email, password,phoneNo} = newUser;
+  const { firstName, lastName, email, password, phoneNo } = newUser;
 
   // if the user did not enter an email or password
   if (!email || !password || !phoneNo || !firstName || !lastName) {
@@ -123,7 +97,7 @@ export async function registerUser(newUser) {
   // POST the email and password to FoodBuddy API to
   // authenticate user and receive the token explicitly
   // i.e. data = token
-  
+
   let data = await axios({
     url: endpoint,
     method: "POST",
@@ -136,12 +110,12 @@ export async function registerUser(newUser) {
         lastName: lastName,
         email: email,
         password: password,
-        phoneNo:phoneNo,
+        phoneNo: phoneNo,
       },
       { withCredentials: true } // IMPORTANT
     ),
   }).then((res) => res.data);
-  
+
   // put token ourselves in the local storage, we will
   // send the token in the request header to the API server
   localStorage.setItem("token", data);
@@ -178,3 +152,4 @@ export function useFoods() {
     foods,
     error,
   };
+}
