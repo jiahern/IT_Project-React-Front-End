@@ -5,4 +5,3 @@ function Calendar() {
 }
 
 export default Calendar;
-Calendar;

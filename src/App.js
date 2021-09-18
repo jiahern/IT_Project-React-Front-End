@@ -4,7 +4,8 @@ import Navbar from "./Components/Navbar/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Components/Header/header";
 import Linkage from "./Components/Linkage/Linkage";
-import LoginForm, { Logout, test } from "./Components/Login/login";
+import LoginForm, { Logout } from "./Components/Login/login";
+import RegisterForm, { Registerout } from "./Components/Register/register";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/test" component={test} />
 
+          <Route exact path="/Register" component={RegisterForm} />
         </Switch>
       </Router>
     </div>
