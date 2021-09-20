@@ -1,5 +1,6 @@
 import "./App.css";
 import "./tailwind.min.css";
+import ReactDOM from "react-dom";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import {
   BrowserRouter as Router,
@@ -7,10 +8,11 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,View } from "react";
 import LoginForm, { Logout } from "./Components/Login/login";
 import HomePage from "./Pages/HomePage";
-import Union from "./Pages/Union";
+import Union from "./Components/Union/Union";
+import EditUnion from "./Components/Union/EditUnion";
 import Linkage from "./Pages/Linkage";
 import Task from "./Pages/Task";
 import Calendar from "./Pages/Calendar";
@@ -57,12 +59,8 @@ function App() {
               <Switch>
                 <Route path="/" exact />
                 <Route path="/homepage" exact component={HomePage} />
-                <ProtectedRoute
-                  path="/union"
-                  auth={auth}
-                  exact
-                  component={Union}
-                />
+                <ProtectedRoute path="/union" auth={auth} exact component={Union}/>
+                <Route path="/union/:name" exact component={EditUnion}/>
                 <Route path="/linkage" exact component={Linkage} />
                 <Route path="/task" exact component={Task} />
                 <Route path="/calendar" exact component={Calendar} />
@@ -75,6 +73,8 @@ function App() {
     </div>
   );
 }
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
 
 const IsAuthenticatedRoute = ({ auth, component: Component, ...rest }) => {
   return (

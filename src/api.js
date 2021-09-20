@@ -195,6 +195,7 @@ export function GetUnion() {
   };
 }
 
+
 export async function createUnion(newUser) {
   // unpack user details, email and password
   const { name, linkages } = newUser;
