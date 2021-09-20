@@ -15,7 +15,7 @@ axios.interceptors.request.use(
     const { origin } = new URL(config.url);
     const allowedOrigins = [BASE_URL];
     // const token = localStorage.getItem("token"); // get the token
-    const token = Cookies.get("token")
+    const token = Cookies.get("token");
     if (allowedOrigins.includes(origin)) {
       config.headers.authorization = `Bearer ${token}`; // we put our token in the header
     }
@@ -71,7 +71,8 @@ export async function loginUser(user) {
       ),
     }).then((res) => {
       // console.log(res)
-      return res.data});
+      return res.data;
+    });
 
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
@@ -101,7 +102,7 @@ export async function registerUser(newUser) {
   // POST the email and password to FoodBuddy API to
   // authenticate user and receive the token explicitly
   // i.e. data = token
-  try{
+  try {
     let data = await axios({
       url: endpoint,
       method: "POST",
@@ -162,30 +163,30 @@ export function useFoods() {
 }
 
 //get union information from mongodb
-function userUnion() {
-  const endpoint = BASE_URL + "/union";
-  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
-}
-export function getUnion(){
-  const [loading, setLoading] = useState(true);
-  const [unions, setUnion] = useState([]);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    userUnion()
-      .then((unions) => {
-        setUnion(unions);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setError(e);
-        setLoading(false);
-      });
-  }, []);
+// function userUnion() {
+//   const endpoint = BASE_URL + "/union";
+//   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+// }
+// export function getUnion() {
+//   const [loading, setLoading] = useState(true);
+//   const [unions, setUnion] = useState([]);
+//   const [error, setError] = useState(null);
+//   useEffect(() => {
+//     userUnion()
+//       .then((unions) => {
+//         setUnion(unions);
+//         setLoading(false);
+//       })
+//       .catch((e) => {
+//         console.log(e);
+//         setError(e);
+//         setLoading(false);
+//       });
+//   }, []);
 
-  return {
-    loading,
-    unions,
-    error,
-  };
-}
+//   return {
+//     loading,
+//     unions,
+//     error,
+//   };
+// }
