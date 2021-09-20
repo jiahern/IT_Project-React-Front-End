@@ -15,7 +15,7 @@ axios.interceptors.request.use(
     const { origin } = new URL(config.url);
     const allowedOrigins = [BASE_URL];
     // const token = localStorage.getItem("token"); // get the token
-    const token = Cookies.get("token")
+    const token = Cookies.get("token");
     if (allowedOrigins.includes(origin)) {
       config.headers.authorization = `Bearer ${token}`; // we put our token in the header
     }
@@ -30,7 +30,6 @@ axios.interceptors.request.use(
 //   const endpoint = BASE_URL + `/foods/` + id;
 //   return axios.get(endpoint, {withCredentials:true}).then(res => res.data);
 // }
-
 
 //From here is login --------------------------------------------------------------------
 export function tests() {
@@ -73,7 +72,8 @@ export async function loginUser(user) {
       ),
     }).then((res) => {
       // console.log(res)
-      return res.data});
+      return res.data;
+    });
 
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
@@ -104,7 +104,7 @@ export async function registerUser(newUser) {
   // POST the email and password to FoodBuddy API to
   // authenticate user and receive the token explicitly
   // i.e. data = token
-  try{
+  try {
     let data = await axios({
       url: endpoint,
       method: "POST",
@@ -171,7 +171,7 @@ function userUnion() {
   const endpoint = BASE_URL + "/union";
   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
 }
-export function GetUnion(){
+export function GetUnion() {
   const [loading, setLoading] = useState(true);
   const [unionContents, setUnion] = useState([]);
   const [error, setError] = useState(null);
@@ -195,10 +195,9 @@ export function GetUnion(){
   };
 }
 
-
 export async function createUnion(newUser) {
   // unpack user details, email and password
-  const { name,linkages } = newUser;
+  const { name, linkages } = newUser;
 
   // if the user did not enter an email or password
   if (!name) {
@@ -213,7 +212,7 @@ export async function createUnion(newUser) {
   // POST the email and password to FoodBuddy API to
   // authenticate user and receive the token explicitly
   // i.e. data = token
-  try{
+  try {
     let data = await axios({
       url: endpoint,
       method: "POST",
@@ -222,8 +221,8 @@ export async function createUnion(newUser) {
       },
       data: JSON.stringify(
         {
-          name:name,
-          linkages:linkages,
+          name: name,
+          linkages: linkages,
         },
         { withCredentials: true } // IMPORTANT
       ),
@@ -233,7 +232,6 @@ export async function createUnion(newUser) {
     // send the token in the request header to the API server
     // console.log(data);
     // redirect to homepage -- another way to redirect
-
   } catch (error) {
     alert("Invalid Information");
   }
