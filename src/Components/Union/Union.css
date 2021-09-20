@@ -1,13 +1,19 @@
-#viewPastTask{
-        background-color: rgb(58,175,169);
-}
-#createTask{
-        background-color: rgb(58,175,169);
-}
-.addLinkage{
-        background-color: rgb(58,175,169);
+.createUnion{
+        position: fixed;
+        left: 50%;
+        bottom: 2px;
+        width:50%;
+        height:100%;
+        visibility:visible;
+        background-color:aqua;
+        transition: height 0.3s ease-in;
+        
 }
 
-.inputPage{
-        background-color: rgb(58,175,169);
+.createUnion.inactive{
+        
+        height:0%;
+        
+        
 }
+

@@ -1,7 +1,12 @@
 import "./App.css";
 import "./tailwind.min.css";
 import Sidebar from "./Components/Sidebar/Sidebar";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import LoginForm, { Logout } from "./Components/Login/login";
 import HomePage from "./Pages/HomePage";
@@ -17,20 +22,30 @@ function App() {
   const [auth, setAuth] = useState(false);
   const readCookies = () => {
     const isLogIn = Cookies.get("token");
-    if (isLogIn){
+    if (isLogIn) {
       setAuth(true);
     }
-  }
+  };
   React.useEffect(() => {
     readCookies();
-  },[]);
+  }, []);
   return (
     <div className="allpage">
       <Router>
         <Switch>
-          <IsAuthenticatedRoute path="/login" auth={auth} exact  component={LoginForm} />
+          <IsAuthenticatedRoute
+            path="/login"
+            auth={auth}
+            exact
+            component={LoginForm}
+          />
           <Route exact path="/logout" component={Logout} />
-          <IsAuthenticatedRoute auth={auth} exact path="/Register" component={RegisterForm} />
+          <IsAuthenticatedRoute
+            auth={auth}
+            exact
+            path="/Register"
+            component={RegisterForm}
+          />
 
           <div>
             <Sidebar
@@ -42,7 +57,12 @@ function App() {
               <Switch>
                 <Route path="/" exact />
                 <Route path="/homepage" exact component={HomePage} />
-                <ProtectedRoute path="/union"  auth={auth} exact component={Union} />
+                <ProtectedRoute
+                  path="/union"
+                  auth={auth}
+                  exact
+                  component={Union}
+                />
                 <Route path="/linkage" exact component={Linkage} />
                 <Route path="/task" exact component={Task} />
                 <Route path="/calendar" exact component={Calendar} />
@@ -56,39 +76,23 @@ function App() {
   );
 }
 
-const IsAuthenticatedRoute = ({auth,component:Component,...rest}) => {
-  return(
+const IsAuthenticatedRoute = ({ auth, component: Component, ...rest }) => {
+  return (
     <Route
-    {...rest}
-    render = {()=>!auth? (
-      <Component/>
-    ):
-      (
-        <Redirect to= "/login"/>
-      )
-    }
+      {...rest}
+      render={() => (!auth ? <Component /> : <Redirect to="/homepage" />)}
     />
-  )
-}
+  );
+};
 
-const ProtectedRoute = ({auth,component:Component,...rest}) => {
-  return(
+const ProtectedRoute = ({ auth, component: Component, ...rest }) => {
+  return (
     <Route
-    {...rest}
-    render = {()=>auth? (
-      <Component/>
-    ):
-      (
-        <Redirect to= "/login"/>
-      )
-    }
+      {...rest}
+      render={() => (auth ? <Component /> : <Redirect to="/login" />)}
     />
-  )
-}
-
-
-
-
+  );
+};
 
 export default App;
 // class App extends Component {
