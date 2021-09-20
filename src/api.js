@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Redirect } from "react";
 // get are using Axios to communicate with the Server API for authentication only
 // for other purposes, this app using Fetch API -- you should switch others to Axios
 // if you want to try as an exercise
@@ -31,6 +31,7 @@ axios.interceptors.request.use(
 //   return axios.get(endpoint, {withCredentials:true}).then(res => res.data);
 // }
 
+//From here is login --------------------------------------------------------------------
 export function tests() {
   const endpoint = BASE_URL;
   return axios.get(endpoint, { withCredentials: true });
@@ -85,6 +86,7 @@ export async function loginUser(user) {
   }
 }
 
+//From here is register --------------------------------------------------------------------
 export async function registerUser(newUser) {
   // unpack user details, email and password
   const { firstName, lastName, email, password, phoneNo } = newUser;
@@ -132,6 +134,7 @@ export async function registerUser(newUser) {
   }
 }
 
+//From here is Linkage --------------------------------------------------------------------
 function getFoods() {
   const endpoint = BASE_URL + "/linkage";
   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
@@ -162,31 +165,74 @@ export function useFoods() {
   };
 }
 
+//From here is Union --------------------------------------------------------------------
 //get union information from mongodb
-// function userUnion() {
-//   const endpoint = BASE_URL + "/union";
-//   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
-// }
-// export function getUnion() {
-//   const [loading, setLoading] = useState(true);
-//   const [unions, setUnion] = useState([]);
-//   const [error, setError] = useState(null);
-//   useEffect(() => {
-//     userUnion()
-//       .then((unions) => {
-//         setUnion(unions);
-//         setLoading(false);
-//       })
-//       .catch((e) => {
-//         console.log(e);
-//         setError(e);
-//         setLoading(false);
-//       });
-//   }, []);
+function userUnion() {
+  const endpoint = BASE_URL + "/union";
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+}
+export function GetUnion() {
+  const [loading, setLoading] = useState(true);
+  const [unionContents, setUnion] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    userUnion()
+      .then((unionContents) => {
+        setUnion(unionContents);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
 
-//   return {
-//     loading,
-//     unions,
-//     error,
-//   };
-// }
+  return {
+    loading,
+    unionContents,
+    error,
+  };
+}
+
+export async function createUnion(newUser) {
+  // unpack user details, email and password
+  const { name, linkages } = newUser;
+
+  // if the user did not enter an email or password
+  if (!name) {
+    alert("The information is not complete");
+    return;
+  }
+
+  // define the route which the FoodBuddy API is handling
+  // login/authentication
+  const endpoint = BASE_URL + `/union`;
+
+  // POST the email and password to FoodBuddy API to
+  // authenticate user and receive the token explicitly
+  // i.e. data = token
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          name: name,
+          linkages: linkages,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert("Invalid Information");
+  }
+}

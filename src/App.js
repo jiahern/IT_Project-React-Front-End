@@ -80,7 +80,7 @@ const IsAuthenticatedRoute = ({ auth, component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() => (!auth ? <Component /> : <Redirect to="/login" />)}
+      render={() => (!auth ? <Component /> : <Redirect to="/homepage" />)}
     />
   );
 };
