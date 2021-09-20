@@ -19,7 +19,15 @@ export default function Union() {
                 // redirect to homepage
                 const state = { redirect: "/union" };
                 return <Redirect to={state.redirect} />;
-              }
+        }
+
+        const handleKeypress = e => {
+                if (e.keyCode === 13) {
+                        e.preventDefault();
+                        alert ("On Keypressed")
+                        onSave();
+                }
+        };
         const [active, setActive] = useState(true);
         const showsetActive = () => setActive(!active);
         const { loading, unionContents, error } = GetUnion();
@@ -100,13 +108,13 @@ export default function Union() {
                 </div>
                 <div class="createPage h-100">
                                 
-                        <form action="#">
+                        <form onSubmit={onSave}>
                                 <label class="font-bold ml-20 mt-40 text-2xl" for="Name">Name:</label>
-                                <input class="w-80 h-10 mt-40 rounded-full text-xl" type="text" id="name" value={name} placeholder="Name" onChange={(event) => {
+                                <input class="w-80 h-10 mt-40 rounded-full text-xl" type="text" id="name" value={name} placeholder="Name"  onChange={(event) => {
                                   setName(event.target.value);}}/>
                                 {/* <label class="font-bold ml-20 mt-40 text-2xl" for="Image">Union Image:</label>
                                 <input class="mt-40" type="file" id="Image" name="filename"/> */}
-                                <input onClick={onSave} class=" mt-40 font-bold text-2xl rounded bg-gray-100" type="button" value="SAVE"/>
+                                <input onClick={onSave} class=" mt-40 font-bold text-2xl rounded bg-gray-100" type="button" value="SAVE" />
                         </form>
                         
                 </div>

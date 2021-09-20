@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import LoginForm, { Logout } from "./Components/Login/login";
 import HomePage from "./Pages/HomePage";
-import Union from "./Pages/Union";
+import Union from "./Components/Union/Union";
 import Linkage from "./Pages/Linkage";
 import Task from "./Pages/Task";
 import Calendar from "./Pages/Calendar";
@@ -19,29 +19,27 @@ import Cookies from "js-cookie";
 
 function App() {
   const [inactive, setInactive] = useState(false);
-  const [auth, setAuth] = useState(false);
-  const readCookies = () => {
-    const isLogIn = Cookies.get("token");
-    if (isLogIn) {
-      setAuth(true);
-    }
-  };
-  React.useEffect(() => {
-    readCookies();
-  }, []);
+  // const [auth, setAuth] = useState(false);
+  // const readCookies = () => {
+  //   const isLogIn = Cookies.get("token");
+  //   if (isLogIn) {
+  //     setAuth(true);
+  //   }
+  // };
+  // React.useEffect(() => {
+  //   readCookies();
+  // }, []);
   return (
     <div className="allpage">
       <Router>
         <Switch>
           <IsAuthenticatedRoute
             path="/login"
-            auth={auth}
             exact
             component={LoginForm}
           />
           <Route exact path="/logout" component={Logout} />
           <IsAuthenticatedRoute
-            auth={auth}
             exact
             path="/Register"
             component={RegisterForm}
@@ -59,13 +57,13 @@ function App() {
                 <Route path="/homepage" exact component={HomePage} />
                 <ProtectedRoute
                   path="/union"
-                  auth={auth}
                   exact
                   component={Union}
                 />
                 <Route path="/linkage" exact component={Linkage} />
                 <Route path="/task" exact component={Task} />
                 <Route path="/calendar" exact component={Calendar} />
+                <Route path="*" component={() => "404 NOT FOUND"} />
                 <Route exact path="/" />
               </Switch>
             </div>
@@ -76,20 +74,20 @@ function App() {
   );
 }
 
-const IsAuthenticatedRoute = ({ auth, component: Component, ...rest }) => {
+const IsAuthenticatedRoute = ({component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() => (!auth ? <Component /> : <Redirect to="/homepage" />)}
+      render={() => (!Cookies.get("token") ? <Component /> : <Redirect to="/homepage" />)}
     />
   );
 };
 
-const ProtectedRoute = ({ auth, component: Component, ...rest }) => {
+const ProtectedRoute = ({component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() => (auth ? <Component /> : <Redirect to="/login" />)}
+      render={() => (Cookies.get("token") ? <Component /> : <Redirect to="/login" />)}
     />
   );
 };

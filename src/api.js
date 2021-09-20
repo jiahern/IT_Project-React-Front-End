@@ -231,6 +231,7 @@ export async function createUnion(newUser) {
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);
+    window.location.href = "/union";
     // redirect to homepage -- another way to redirect
   } catch (error) {
     alert("Invalid Information");
