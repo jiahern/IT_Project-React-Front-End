@@ -42,7 +42,7 @@ function App() {
               <Switch>
                 <Route path="/" exact />
                 <Route path="/homepage" exact component={HomePage} />
-                <ProtectedRoute path="/union"  auth={auth} exact component={Union} />
+                <ProtectedRoute path="/union" auth={auth} exact component={Union} />
                 <Route path="/linkage" exact component={Linkage} />
                 <Route path="/task" exact component={Task} />
                 <Route path="/calendar" exact component={Calendar} />
@@ -64,7 +64,7 @@ const IsAuthenticatedRoute = ({auth,component:Component,...rest}) => {
       <Component/>
     ):
       (
-        <Redirect to= "/login"/>
+        <Redirect to= "/homepage"/>
       )
     }
     />
