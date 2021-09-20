@@ -2,14 +2,7 @@ import React, { Component,useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import unionLogo from "./UnionLogo.png";
 import "./Union.css";
-import { userUnion, GetUnion,createUnion } from "../../api";
-// const butn = document.querySelector("button.name_button");
-// const nameHome = document.querySelector("span.nameHomepage");
-// const nameUnion = document.querySelector("span.nameUnion");
-// const nameLinkage = document.querySelector("span.nameLinkage");
-// const nameTask = document.querySelector("span.nameTask");
-// const nameCalendar = document.querySelector("span.nameCalendar");
-// const totalName = document.querySelector(".totalName");
+import { GetUnion,createUnion,useFoods } from "../../api";
 
 
 
@@ -92,7 +85,7 @@ export default function Union() {
         
 
         {/* Create a new Union here */}
-        <div class={active ? "createUnion rounded-2xl" : "createUnion inactive"}>
+        <div class={active ? "createUnion inactive" : "createUnion rounded-2xl"}>
                 <div class="flex justify-between">
                         <button onClick={showsetActive} class="backButton">
                                 <svg class="h-20 w-20" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
@@ -105,7 +98,7 @@ export default function Union() {
                                 New Union
                         </div>
                 </div>
-                <div class="inputPage h-100">
+                <div class="createPage h-100">
                                 
                         <form action="#">
                                 <label class="font-bold ml-20 mt-40 text-2xl" for="Name">Name:</label>
@@ -125,28 +118,3 @@ export default function Union() {
 </section>);
 };
 
-{/* /* butn.addEventListener("click", () => {
-        nameHome.classList.toggle("hidden");
-        nameUnion.classList.toggle("hidden");
-        nameLinkage.classList.toggle("hidden");
-        nameTask.classList.toggle("hidden");
-        nameCalendar.classList.toggle("hidden");
-         
-})
-
-
-const profileButn = document.querySelector("button.profileBarButton");
-const profileBar = document.querySelector(".profileBar");
-profileButn.addEventListener("click", () => {
-        profileBar.classList.toggle("hidden");
-})
-
-const CreateUnionButn = document.querySelector("button.newUnion");
-const newUnionSet = document.querySelector(".newCreateUnion");
-const backButton = document.querySelector("button.backButton");
-CreateUnionButn.addEventListener("click", () => {
-        newUnionSet.classList.toggle("translate-x-full");
-})
-backButton.addEventListener("click", () => {
-        newUnionSet.classList.toggle("translate-x-full");
-}) */}

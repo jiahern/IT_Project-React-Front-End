@@ -6,15 +6,14 @@
         height:100%;
         visibility:visible;
         background-color:aqua;
-        transition: height 0.3s;
+        transition: height 0.3s ease-in;
         
-        transition-delay: 0.4s;
 }
 
 .createUnion.inactive{
-        visibility:hidden;
+        
         height:0%;
-        transition: visibility 0.1s;
-        transition-delay: 0.4s;
+        
+        
 }
 
