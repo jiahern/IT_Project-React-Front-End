@@ -160,3 +160,32 @@ export function useFoods() {
     error,
   };
 }
+
+//get union information from mongodb
+function userUnion() {
+  const endpoint = BASE_URL + "/union";
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+}
+export function getUnion(){
+  const [loading, setLoading] = useState(true);
+  const [unions, setUnion] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    userUnion()
+      .then((unions) => {
+        setUnion(unions);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
+
+  return {
+    loading,
+    unions,
+    error,
+  };
+}
