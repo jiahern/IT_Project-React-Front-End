@@ -2,14 +2,7 @@ import React, { Component,useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import unionLogo from "./UnionLogo.png";
 import "./Union.css";
-import { userUnion, GetUnion,createUnion } from "../../api";
-// const butn = document.querySelector("button.name_button");
-// const nameHome = document.querySelector("span.nameHomepage");
-// const nameUnion = document.querySelector("span.nameUnion");
-// const nameLinkage = document.querySelector("span.nameLinkage");
-// const nameTask = document.querySelector("span.nameTask");
-// const nameCalendar = document.querySelector("span.nameCalendar");
-// const totalName = document.querySelector(".totalName");
+import { GetUnion,createUnion } from "../../api";
 
 
 
@@ -20,7 +13,6 @@ export default function Union() {
                 // using API function to submit data to FoodBuddy API
                 createUnion({
                   name: name,
-                  linkages:[],
                 });
             
                 // redirect to homepage
@@ -30,6 +22,7 @@ export default function Union() {
         const [active, setActive] = useState(true);
         const showsetActive = () => setActive(!active);
         const { loading, unionContents, error } = GetUnion();
+        console.log(unionContents);
         if (loading) {
         return <p>Loading...</p>;
         }
@@ -62,17 +55,19 @@ export default function Union() {
 
         {/* reading Union here */}
         {unionContents.map((item,index) =>{
-                 return (
+                return (
                 <div key={index} class=" PendingTasks w-full h-full mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-4 gap-x-4 gap-y-4">
                         <img class="w-20 h-20" src={unionLogo}/>
                         <span class="py-6">{item.name}</span>
                         <div class="Category h-5 ml-4 py-6 px-6">{item.linkages.length}</div>
                         <div class="flex space-x-5 px-10 py-6  h-5">
-                        <button class="edit h-5">
-                                <svg  width="15" height="13" viewBox="0 0 30 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18.4058 5.03062L24.4256 10.4054L9.18767 24.0107L3.17122 18.6359L18.4058 5.03062ZM28.9935 3.73433L26.3089 1.33734C25.2714 0.41099 23.5867 0.41099 22.5456 1.33734L19.974 3.63342L25.9939 9.00829L28.9935 6.33005C29.7982 5.61152 29.7982 4.45281 28.9935 3.73433ZM0.0209023 26.1907C-0.0886516 26.6309 0.356502 27.0253 0.849606 26.9183L7.55774 25.4661L1.54128 20.0913L0.0209023 26.1907Z" fill="black"/>
-                                </svg>
-                        </button>
+                        <Link to={{pathname:`/union/${item._id}`}}>
+                                <button class="edit h-5">
+                                        <svg  width="15" height="13" viewBox="0 0 30 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.4058 5.03062L24.4256 10.4054L9.18767 24.0107L3.17122 18.6359L18.4058 5.03062ZM28.9935 3.73433L26.3089 1.33734C25.2714 0.41099 23.5867 0.41099 22.5456 1.33734L19.974 3.63342L25.9939 9.00829L28.9935 6.33005C29.7982 5.61152 29.7982 4.45281 28.9935 3.73433ZM0.0209023 26.1907C-0.0886516 26.6309 0.356502 27.0253 0.849606 26.9183L7.55774 25.4661L1.54128 20.0913L0.0209023 26.1907Z" fill="black"/>
+                                        </svg>
+                                </button>
+                        </Link>
                         <button class="email h-5">
                                 <svg width="20" height="20" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect width="48" height="47" fill="white"/>
@@ -92,7 +87,7 @@ export default function Union() {
         
 
         {/* Create a new Union here */}
-        <div class={active ? "createUnion rounded-2xl" : "createUnion inactive"}>
+        <div class={active ? "createUnion inactive" : "createUnion rounded-2xl"}>
                 <div class="flex justify-between">
                         <button onClick={showsetActive} class="backButton">
                                 <svg class="h-20 w-20" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
@@ -105,7 +100,7 @@ export default function Union() {
                                 New Union
                         </div>
                 </div>
-                <div class="inputPage h-100">
+                <div class="createPage h-100">
                                 
                         <form action="#">
                                 <label class="font-bold ml-20 mt-40 text-2xl" for="Name">Name:</label>
@@ -125,28 +120,3 @@ export default function Union() {
 </section>);
 };
 
-{/* /* butn.addEventListener("click", () => {
-        nameHome.classList.toggle("hidden");
-        nameUnion.classList.toggle("hidden");
-        nameLinkage.classList.toggle("hidden");
-        nameTask.classList.toggle("hidden");
-        nameCalendar.classList.toggle("hidden");
-         
-})
-
-
-const profileButn = document.querySelector("button.profileBarButton");
-const profileBar = document.querySelector(".profileBar");
-profileButn.addEventListener("click", () => {
-        profileBar.classList.toggle("hidden");
-})
-
-const CreateUnionButn = document.querySelector("button.newUnion");
-const newUnionSet = document.querySelector(".newCreateUnion");
-const backButton = document.querySelector("button.backButton");
-CreateUnionButn.addEventListener("click", () => {
-        newUnionSet.classList.toggle("translate-x-full");
-})
-backButton.addEventListener("click", () => {
-        newUnionSet.classList.toggle("translate-x-full");
-}) */}
