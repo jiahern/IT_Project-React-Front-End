@@ -197,8 +197,8 @@ export function GetUnion() {
 
 export function GetOneUnion(unionID) {
   var unionContent = useState([]);
-  const {loading,unionContents,error} = GetUnion();
-  const {Loading,linkageContents,linkageError} = UseFoods();
+  const {unionLoading,unionContents,unionError} = GetUnion();
+  
  
   unionContents.map(item => {
    if(item._id === unionID){
@@ -207,12 +207,9 @@ export function GetOneUnion(unionID) {
   });
   console.log(unionContents);
   return{
-    loading,
+    unionLoading,
     unionContent,
-    error,
-    Loading,
-    linkageContents,
-    linkageError,
+    unionError,
   }
 }
 
