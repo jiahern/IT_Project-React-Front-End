@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import LoginForm, { Logout } from "./Components/Login/login";
 import HomePage from "./Pages/HomePage";
-import Union from "./Pages/Union";
+import Union from "./Components/Union/Union";
 import Linkage from "./Pages/Linkage";
 import Task from "./Pages/Task";
 import Calendar from "./Pages/Calendar";
