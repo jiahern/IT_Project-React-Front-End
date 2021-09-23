@@ -60,7 +60,7 @@ function App() {
                 <Route path="/" exact />
                 <Route path="/homepage" exact component={HomePage} />
                 <ProtectedRoute path="/union" auth={auth} exact component={Union}/>
-                <Route path="/union/:name" exact component={EditUnion}/>
+                <Route path="/union/:unionID" exact component={EditUnion}/>
                 <Route path="/linkage" exact component={Linkage} />
                 <Route path="/task" exact component={Task} />
                 <Route path="/calendar" exact component={Calendar} />

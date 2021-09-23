@@ -1,8 +1,8 @@
 import React from "react";
-import { useFoods, useOneFood } from "../api";
+import { UseFoods, useOneFood } from "../api";
 
 export default function Linkage() {
-  const { loading, foods, error } = useFoods();
+  const { loading, foods, error } = UseFoods();
   if (loading) {
     return <p>Loading...</p>;
   }

@@ -135,12 +135,12 @@ export async function registerUser(newUser) {
 }
 
 //From here is Linkage --------------------------------------------------------------------
-function getFoods() {
+ function getFoods() {
   const endpoint = BASE_URL + "/linkage";
   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
 }
 
-export function useFoods() {
+export function UseFoods() {
   const [loading, setLoading] = useState(true);
   const [foods, setFoods] = useState([]);
   const [error, setError] = useState(null);
@@ -157,7 +157,7 @@ export function useFoods() {
         setLoading(false);
       });
   }, []);
-
+  console.log(foods);
   return {
     loading,
     foods,
@@ -167,7 +167,7 @@ export function useFoods() {
 
 //From here is Union --------------------------------------------------------------------
 //get union information from mongodb
-function userUnion() {
+ function userUnion() {
   const endpoint = BASE_URL + "/union";
   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
 }
@@ -195,6 +195,26 @@ export function GetUnion() {
   };
 }
 
+export function GetOneUnion(unionID) {
+  var unionContent = useState([]);
+  const {loading,unionContents,error} = GetUnion();
+  const {Loading,linkageContents,linkageError} = UseFoods();
+ 
+  unionContents.map(item => {
+   if(item._id === unionID){
+    unionContent = item;
+   }
+  });
+  console.log(unionContents);
+  return{
+    loading,
+    unionContent,
+    error,
+    Loading,
+    linkageContents,
+    linkageError,
+  }
+}
 
 export async function createUnion(newUser) {
   // unpack user details, email and password
@@ -237,3 +257,47 @@ export async function createUnion(newUser) {
     alert("Invalid Information");
   }
 }
+
+export async function editUnion(newUser) {
+  // unpack user details, email and password
+  const { name, linkages } = newUser;
+
+  // if the user did not enter an email or password
+  if (!name) {
+    alert("The information is not complete");
+    return;
+  }
+
+  // define the route which the FoodBuddy API is handling
+  // login/authentication
+  const endpoint = BASE_URL + `/union`;
+
+  // POST the email and password to FoodBuddy API to
+  // authenticate user and receive the token explicitly
+  // i.e. data = token
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          name: name,
+          linkages: linkages,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert("Invalid Information");
+  }
+}
+
+

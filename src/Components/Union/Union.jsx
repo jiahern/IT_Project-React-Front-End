@@ -2,7 +2,7 @@ import React, { Component,useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import unionLogo from "./UnionLogo.png";
 import "./Union.css";
-import { GetUnion,createUnion,useFoods } from "../../api";
+import { GetUnion,createUnion } from "../../api";
 
 
 
@@ -13,7 +13,6 @@ export default function Union() {
                 // using API function to submit data to FoodBuddy API
                 createUnion({
                   name: name,
-                  linkages:[],
                 });
             
                 // redirect to homepage
@@ -23,6 +22,7 @@ export default function Union() {
         const [active, setActive] = useState(true);
         const showsetActive = () => setActive(!active);
         const { loading, unionContents, error } = GetUnion();
+        console.log(unionContents);
         if (loading) {
         return <p>Loading...</p>;
         }
@@ -55,14 +55,13 @@ export default function Union() {
 
         {/* reading Union here */}
         {unionContents.map((item,index) =>{
-                
                 return (
                 <div key={index} class=" PendingTasks w-full h-full mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-4 gap-x-4 gap-y-4">
                         <img class="w-20 h-20" src={unionLogo}/>
                         <span class="py-6">{item.name}</span>
                         <div class="Category h-5 ml-4 py-6 px-6">{item.linkages.length}</div>
                         <div class="flex space-x-5 px-10 py-6  h-5">
-                        <Link to={{pathname:"/union/" + item.name}}>
+                        <Link to={{pathname:`/union/${item._id}`}}>
                                 <button class="edit h-5">
                                         <svg  width="15" height="13" viewBox="0 0 30 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M18.4058 5.03062L24.4256 10.4054L9.18767 24.0107L3.17122 18.6359L18.4058 5.03062ZM28.9935 3.73433L26.3089 1.33734C25.2714 0.41099 23.5867 0.41099 22.5456 1.33734L19.974 3.63342L25.9939 9.00829L28.9935 6.33005C29.7982 5.61152 29.7982 4.45281 28.9935 3.73433ZM0.0209023 26.1907C-0.0886516 26.6309 0.356502 27.0253 0.849606 26.9183L7.55774 25.4661L1.54128 20.0913L0.0209023 26.1907Z" fill="black"/>
