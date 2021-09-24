@@ -5,8 +5,17 @@
         width:50%;
         height:100%;
         visibility:visible;
-        background-color:aqua;
+        background-color:#DEF2F1;
         transition: height 0.3s ease-in;
+        
+}
+
+.saveButton{
+        background-color: #3AAFA9;
+        padding: 4px 5px;
+        position: relative;
+        width:15%;
+        right: 10px;
         
 }
 

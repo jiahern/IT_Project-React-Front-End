@@ -165,7 +165,7 @@ export function UseFoods() {
   };
 }
 
-//From here is Union --------------------------------------------------------------------
+//From here is Union function--------------------------------------------------------------------
 //get union information from mongodb
  function userUnion() {
   const endpoint = BASE_URL + "/union";
@@ -313,8 +313,7 @@ export async function removeUnion(newUser) {
   } catch (error) {
     alert("Invalid Information");
   }
-
-  
 }
+//uninon function end here ---------------------------------------------------------------------------------
 
 

@@ -12,7 +12,7 @@ const EditUnion = (props) => {
   
   const [added,setAdded] = useState(() => {return false});
   var name = unionContent.name; 
-  
+  //function to save edit content and update database
   function onEdit() {
      //using API function to submit data to FoodBuddy API
         editUnion({
@@ -25,7 +25,7 @@ const EditUnion = (props) => {
     const state = { redirect: "/" };
     return <Redirect to={state.redirect} />;
   }
-
+  //delete union from database
   function onDelete() {
     //using API function to submit data to FoodBuddy API
     removeUnion({

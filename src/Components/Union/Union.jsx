@@ -9,13 +9,14 @@ import { GetUnion,createUnion,removeUnion } from "../../api";
 
 export default function Union() {
         const [name, setName] = useState("");
+        //create union function
         function onSave() {
                 // using API function to submit data to FoodBuddy API
                 createUnion({
                   name: name,
                 });
                 // redirect to homepage
-                //window.location.reload();
+                window.location.reload();
                 console.log(window.location);
               }
         const [active, setActive] = useState(true);
@@ -28,7 +29,7 @@ export default function Union() {
         if (error) {
         return <p>Something went wrong: {error.message}</p>;
         }
-
+        //delete union function
         function onDelete(unionID) {
                 //using API function to submit data to FoodBuddy API
                 removeUnion({
@@ -36,7 +37,7 @@ export default function Union() {
                    });
             
                //redirect to homepage
-               window.location.replace(window.location.href);
+               window.location.reload();
                
         }
 
@@ -45,15 +46,13 @@ export default function Union() {
         
         <div class="flex justify-between w-full h-16 mr-4 bg-gray-100 py-3">
                 <div class="font-bold text-4xl italic ml-20">Union</div>
+                {/* createUnion button */}
                 <div class="flex space-x-10 mr-4">
                         <button onClick={showsetActive} class="addUnion font-bold rounded mr-10" id="createTask">+ Union</button>
                 </div>
-                
         </div>
        
         <div class="PendingTasks w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-4 grid-rows-1 gap-x-24">
-                
-                
                 <div class="font-bold grid grid-cols-2 gap-x-4">
                         <div class="TaskTitle">Name</div>
                 </div>
@@ -62,7 +61,7 @@ export default function Union() {
                 <div class="ActionTitle font-bold">Action</div>
         </div>
 
-        {/* reading Union here */}
+        {/* reading Union from database here */}
         {unionContents.map((item,index) =>{
                 return (
                 <div key={index} class=" PendingTasks w-full h-full mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-4 gap-x-4 gap-y-4">
@@ -113,13 +112,15 @@ export default function Union() {
                 </div>
                 <div class="createPage h-100">
                                 
-                        <form onSubmit={onSave}>
-                                <label class="font-bold ml-20 mt-40 text-2xl" for="Name">Name:</label>
-                                <input class="w-80 h-10 mt-40 rounded-full text-xl" type="text" id="name" value={name} placeholder="Name"  onChange={(event) => {
-                                  setName(event.target.value);}}/>
+                        <form onSubmit={onSave} class="flex flex-col">
+                                <div class="flex space-x-4">
+                                        <label class="font-bold ml-20 mt-40 text-2xl" for="Name">Name:</label>
+                                        <input class="w-80 h-10 mt-40 rounded-xl text-xl" type="text" id="name" value={name} placeholder="Name"  onChange={(event) => {
+                                                setName(event.target.value);}}/>
+                                </div>
                                 {/* <label class="font-bold ml-20 mt-40 text-2xl" for="Image">Union Image:</label>
                                 <input class="mt-40" type="file" id="Image" name="filename"/> */}
-                                <input onClick={onSave} class=" mt-40 font-bold text-2xl rounded bg-gray-100" type="button" value="SAVE" />
+                                <input onClick={onSave} class=" saveButton mt-40 ml-96 font-bold text-2xl rounded bg-gray-100" type="button" value="SAVE" />
                         </form>
                         
                 </div>
