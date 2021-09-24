@@ -135,12 +135,12 @@ export async function registerUser(newUser) {
 }
 
 //From here is Linkage --------------------------------------------------------------------
-function getFoods() {
+ function getFoods() {
   const endpoint = BASE_URL + "/linkage";
   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
 }
 
-export function useFoods() {
+export function UseFoods() {
   const [loading, setLoading] = useState(true);
   const [foods, setFoods] = useState([]);
   const [error, setError] = useState(null);
@@ -157,7 +157,7 @@ export function useFoods() {
         setLoading(false);
       });
   }, []);
-
+  console.log(foods);
   return {
     loading,
     foods,
@@ -167,7 +167,7 @@ export function useFoods() {
 
 //From here is Union --------------------------------------------------------------------
 //get union information from mongodb
-function userUnion() {
+ function userUnion() {
   const endpoint = BASE_URL + "/union";
   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
 }
@@ -193,6 +193,24 @@ export function GetUnion() {
     unionContents,
     error,
   };
+}
+
+export function GetOneUnion(unionID) {
+  var unionContent = useState([]);
+  const {unionLoading,unionContents,unionError} = GetUnion();
+  
+ 
+  unionContents.map(item => {
+   if(item._id === unionID){
+    unionContent = item;
+   }
+  });
+  console.log(unionContents);
+  return{
+    unionLoading,
+    unionContent,
+    unionError,
+  }
 }
 
 export async function createUnion(newUser) {
@@ -237,3 +255,66 @@ export async function createUnion(newUser) {
     alert("Invalid Information");
   }
 }
+
+export async function editUnion(newUser) {
+  // unpack user details, email and password
+  const {unionID, name, linkages } = newUser;
+  const endpoint = BASE_URL +"/union/"+unionID + "/change";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          _id:unionID,
+          name: name,
+          linkages: linkages,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+  } catch (error) {
+    alert("Invalid Information");
+  }
+
+
+}
+
+export async function removeUnion(newUser) {
+  // unpack user details, email and password
+  const {unionID } = newUser;
+  const endpoint = BASE_URL +"/union/"+unionID + "/remove";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          _id:unionID,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+    
+  } catch (error) {
+    alert("Invalid Information");
+  }
+
+  
+}
+
+

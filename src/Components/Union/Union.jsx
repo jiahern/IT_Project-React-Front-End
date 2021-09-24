@@ -2,7 +2,7 @@ import React, { Component,useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import unionLogo from "./UnionLogo.png";
 import "./Union.css";
-import { GetUnion,createUnion,useFoods } from "../../api";
+import { GetUnion,createUnion,removeUnion } from "../../api";
 
 
 
@@ -13,24 +13,15 @@ export default function Union() {
                 // using API function to submit data to FoodBuddy API
                 createUnion({
                   name: name,
-                  linkages:[],
                 });
-            
                 // redirect to homepage
-                const state = { redirect: "/union" };
-                return <Redirect to={state.redirect} />;
-        }
-
-        const handleKeypress = e => {
-                if (e.keyCode === 13) {
-                        e.preventDefault();
-                        alert ("On Keypressed")
-                        onSave();
-                }
-        };
+                //window.location.reload();
+                console.log(window.location);
+              }
         const [active, setActive] = useState(true);
         const showsetActive = () => setActive(!active);
         const { loading, unionContents, error } = GetUnion();
+        console.log(unionContents);
         if (loading) {
         return <p>Loading...</p>;
         }
@@ -38,6 +29,16 @@ export default function Union() {
         return <p>Something went wrong: {error.message}</p>;
         }
 
+        function onDelete(unionID) {
+                //using API function to submit data to FoodBuddy API
+                removeUnion({
+                     unionID:unionID,
+                   });
+            
+               //redirect to homepage
+               window.location.replace(window.location.href);
+               
+        }
 
         return(
         <section className="ShowUnion">       
@@ -45,7 +46,7 @@ export default function Union() {
         <div class="flex justify-between w-full h-16 mr-4 bg-gray-100 py-3">
                 <div class="font-bold text-4xl italic ml-20">Union</div>
                 <div class="flex space-x-10 mr-4">
-                        <button onClick={showsetActive} class="newUnion font-bold rounded mr-10" id="createTask">+ Union</button>
+                        <button onClick={showsetActive} class="addUnion font-bold rounded mr-10" id="createTask">+ Union</button>
                 </div>
                 
         </div>
@@ -63,17 +64,19 @@ export default function Union() {
 
         {/* reading Union here */}
         {unionContents.map((item,index) =>{
-                 return (
+                return (
                 <div key={index} class=" PendingTasks w-full h-full mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-4 gap-x-4 gap-y-4">
                         <img class="w-20 h-20" src={unionLogo}/>
                         <span class="py-6">{item.name}</span>
                         <div class="Category h-5 ml-4 py-6 px-6">{item.linkages.length}</div>
                         <div class="flex space-x-5 px-10 py-6  h-5">
-                        <button class="edit h-5">
-                                <svg  width="15" height="13" viewBox="0 0 30 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18.4058 5.03062L24.4256 10.4054L9.18767 24.0107L3.17122 18.6359L18.4058 5.03062ZM28.9935 3.73433L26.3089 1.33734C25.2714 0.41099 23.5867 0.41099 22.5456 1.33734L19.974 3.63342L25.9939 9.00829L28.9935 6.33005C29.7982 5.61152 29.7982 4.45281 28.9935 3.73433ZM0.0209023 26.1907C-0.0886516 26.6309 0.356502 27.0253 0.849606 26.9183L7.55774 25.4661L1.54128 20.0913L0.0209023 26.1907Z" fill="black"/>
-                                </svg>
-                        </button>
+                        <Link to={{pathname:`/union/${item._id}`}}>
+                                <button class="edit h-5">
+                                        <svg  width="15" height="13" viewBox="0 0 30 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.4058 5.03062L24.4256 10.4054L9.18767 24.0107L3.17122 18.6359L18.4058 5.03062ZM28.9935 3.73433L26.3089 1.33734C25.2714 0.41099 23.5867 0.41099 22.5456 1.33734L19.974 3.63342L25.9939 9.00829L28.9935 6.33005C29.7982 5.61152 29.7982 4.45281 28.9935 3.73433ZM0.0209023 26.1907C-0.0886516 26.6309 0.356502 27.0253 0.849606 26.9183L7.55774 25.4661L1.54128 20.0913L0.0209023 26.1907Z" fill="black"/>
+                                        </svg>
+                                </button>
+                        </Link>
                         <button class="email h-5">
                                 <svg width="20" height="20" viewBox="0 0 48 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect width="48" height="47" fill="white"/>
@@ -81,12 +84,14 @@ export default function Union() {
                                         <path d="M47.42 11.6955C47.0655 11.534 46.6485 11.5903 46.3536 11.8371C39.0478 17.9014 29.7236 25.6745 26.79 28.2629C25.1435 29.7183 22.8583 29.7183 21.2079 28.261C18.081 25.5023 7.61025 16.7864 1.64644 11.837C1.34953 11.5902 0.931594 11.5358 0.580031 11.6954C0.226594 11.8562 0 12.2023 0 12.5839V37.2084C0 39.3685 1.79391 41.1251 4.00003 41.1251H44.0001C46.2061 41.1251 48 39.3685 48 37.2084V12.5839C48 12.2023 47.7734 11.8553 47.42 11.6955Z" fill="black"/>
                                 </svg>            
                         </button>
-                        <button class="bin h-5">
+                        
+                        <button onClick={()=>onDelete(item._id)} class="bin h-5">
                                 <svg  width="15" height="15" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M26.0025 3.625H20.0141V2.71875C20.0141 1.21721 18.5517 0 16.7477 0H12.3925C10.5885 0 9.12615 1.21721 9.12615 2.71875V3.625H3.13777C1.63448 3.625 0.415771 4.63938 0.415771 5.89062V7.70312C0.415771 8.20366 0.903213 8.60938 1.50457 8.60938H27.6357C28.2371 8.60938 28.7245 8.20366 28.7245 7.70312V5.89062C28.7245 4.63938 27.5058 3.625 26.0025 3.625ZM11.3037 2.71875C11.3037 2.21918 11.7923 1.8125 12.3925 1.8125H16.7477C17.3479 1.8125 17.8365 2.21918 17.8365 2.71875V3.625H11.3037V2.71875Z" fill="black"/>
                                 <path d="M2.48208 10.4219C2.2878 10.4219 2.13299 10.557 2.14224 10.7186L3.0405 26.4104C3.12352 27.8627 4.55665 29 6.30281 29H22.8376C24.5837 29 26.0168 27.8627 26.0999 26.4104L26.9981 10.7186C27.0074 10.557 26.8526 10.4219 26.6583 10.4219H2.48208ZM18.9254 12.6875C18.9254 12.1868 19.4126 11.7812 20.0142 11.7812C20.6157 11.7812 21.103 12.1868 21.103 12.6875V24.4688C21.103 24.9695 20.6157 25.375 20.0142 25.375C19.4126 25.375 18.9254 24.9695 18.9254 24.4688V12.6875ZM13.4814 12.6875C13.4814 12.1868 13.9686 11.7812 14.5702 11.7812C15.1717 11.7812 15.659 12.1868 15.659 12.6875V24.4688C15.659 24.9695 15.1717 25.375 14.5702 25.375C13.9686 25.375 13.4814 24.9695 13.4814 24.4688V12.6875ZM8.0374 12.6875C8.0374 12.1868 8.52463 11.7812 9.1262 11.7812C9.72776 11.7812 10.215 12.1868 10.215 12.6875V24.4688C10.215 24.9695 9.72776 25.375 9.1262 25.375C8.52463 25.375 8.0374 24.9695 8.0374 24.4688V12.6875Z" fill="black"/>
                                 </svg>
-                        </button>        
+                        </button>
+                               
                         </div>
                 </div>
                 );})}

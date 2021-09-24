@@ -11,9 +11,13 @@
 }
 
 .createUnion.inactive{
-        
         height:0%;
-        
-        
+}
+
+.addUnion{
+        background-color: #3AAFA9;
+        color: white;
+        font-size:large;
+        padding: 4px 20px;
 }
 
