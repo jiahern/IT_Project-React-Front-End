@@ -257,21 +257,8 @@ export async function createUnion(newUser) {
 
 export async function editUnion(newUser) {
   // unpack user details, email and password
-  const { name, linkages } = newUser;
-
-  // if the user did not enter an email or password
-  if (!name) {
-    alert("The information is not complete");
-    return;
-  }
-
-  // define the route which the FoodBuddy API is handling
-  // login/authentication
-  const endpoint = BASE_URL + `/union`;
-
-  // POST the email and password to FoodBuddy API to
-  // authenticate user and receive the token explicitly
-  // i.e. data = token
+  const {unionID, name, linkages } = newUser;
+  const endpoint = BASE_URL +"/union/"+unionID + "/change";
   try {
     let data = await axios({
       url: endpoint,
@@ -281,6 +268,7 @@ export async function editUnion(newUser) {
       },
       data: JSON.stringify(
         {
+          _id:unionID,
           name: name,
           linkages: linkages,
         },
@@ -291,10 +279,41 @@ export async function editUnion(newUser) {
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);
-    // redirect to homepage -- another way to redirect
   } catch (error) {
     alert("Invalid Information");
   }
+
+
+}
+
+export async function removeUnion(newUser) {
+  // unpack user details, email and password
+  const {unionID } = newUser;
+  const endpoint = BASE_URL +"/union/"+unionID + "/remove";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          _id:unionID,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+    
+  } catch (error) {
+    alert("Invalid Information");
+  }
+
+  
 }
 
 
