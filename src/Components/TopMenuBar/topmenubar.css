@@ -1,0 +1,11 @@
+.navbar {
+  height: 80px;
+  outline: solid lightgray 1px;
+  background-color: white;
+}
+
+.navbar .logo {
+  width: auto;
+  height: auto;
+  margin-left: 2%;
+}

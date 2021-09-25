@@ -18,6 +18,7 @@ import Task from "./Pages/Task";
 import Calendar from "./Pages/Calendar";
 import RegisterForm from "./Components/Register/register";
 import Cookies from "js-cookie";
+import TopMenuBar from "./Components/TopMenuBar/topmenubar";
 
 function App() {
   const [inactive, setInactive] = useState(false);
@@ -35,11 +36,7 @@ function App() {
     <div className="allpage">
       <Router>
         <Switch>
-          <IsAuthenticatedRoute
-            path="/login"
-            exact
-            component={LoginForm}
-          />
+          <IsAuthenticatedRoute path="/login" exact component={LoginForm} />
           <Route exact path="/logout" component={Logout} />
           <IsAuthenticatedRoute
             exact
@@ -48,6 +45,7 @@ function App() {
           />
 
           <div>
+            <TopMenuBar />
             <Sidebar
               onCollapse={(inactive) => {
                 setInactive(inactive);
@@ -57,11 +55,7 @@ function App() {
               <Switch>
                 <Route path="/" exact />
                 <Route path="/homepage" exact component={HomePage} />
-                <ProtectedRoute
-                  path="/union"
-                  exact
-                  component={Union}
-                />
+                <ProtectedRoute path="/union" exact component={Union} />
                 <Route path="/union/:unionID" exact component={EditUnion} />
                 <Route path="/linkage" exact component={Linkage} />
                 <Route path="/task" exact component={Task} />
@@ -79,20 +73,24 @@ function App() {
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(<App />, rootElement);
 
-const IsAuthenticatedRoute = ({component: Component, ...rest }) => {
+const IsAuthenticatedRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() => (!Cookies.get("token") ? <Component /> : <Redirect to="/homepage" />)}
+      render={() =>
+        !Cookies.get("token") ? <Component /> : <Redirect to="/homepage" />
+      }
     />
   );
 };
 
-const ProtectedRoute = ({component: Component, ...rest }) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() => (Cookies.get("token") ? <Component /> : <Redirect to="/login" />)}
+      render={() =>
+        Cookies.get("token") ? <Component /> : <Redirect to="/login" />
+      }
     />
   );
 };
