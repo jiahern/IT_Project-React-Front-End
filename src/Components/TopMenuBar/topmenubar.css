@@ -2,10 +2,39 @@
   height: 80px;
   outline: solid lightgray 1px;
   background-color: white;
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.navbar a:hover {
+  text-decoration: none;
 }
 
 .navbar .logo {
   width: auto;
   height: auto;
-  margin-left: 2%;
+  margin-left: 30%;
+}
+
+.navbar .profile {
+  height: 80px;
+  margin-right: 50px;
+  font-size: 40px;
+  display: flex;
+  color: #3aafa9;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.navbar .profile .profilename {
+  margin-left: 15px;
+  margin-top: 5px;
+  font-size: 22px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-weight: 600;
 }
