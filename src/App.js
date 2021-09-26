@@ -1,7 +1,7 @@
 import "./App.css";
 import "./tailwind.min.css";
 import ReactDOM from "react-dom";
-import Sidebar from "./Components/Sidebar/Sidebar";
+import Navbar from "./Components/Navbar/Navbar";
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,7 +18,6 @@ import Task from "./Pages/Task";
 import Calendar from "./Pages/Calendar";
 import RegisterForm from "./Components/Register/register";
 import Cookies from "js-cookie";
-import TopMenuBar from "./Components/TopMenuBar/Topmenubar";
 
 function App() {
   const [inactive, setInactive] = useState(false);
@@ -45,8 +44,7 @@ function App() {
           />
 
           <div>
-            <TopMenuBar />
-            <Sidebar
+            <Navbar
               onCollapse={(inactive) => {
                 setInactive(inactive);
               }}
