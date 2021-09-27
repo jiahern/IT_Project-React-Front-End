@@ -1,7 +1,7 @@
 import "./App.css";
 import "./tailwind.min.css";
 import ReactDOM from "react-dom";
-import Sidebar from "./Components/Sidebar/Sidebar";
+import Navbar from "./Components/Navbar/Navbar";
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,11 +35,7 @@ function App() {
     <div className="allpage">
       <Router>
         <Switch>
-          <IsAuthenticatedRoute
-            path="/login"
-            exact
-            component={LoginForm}
-          />
+          <IsAuthenticatedRoute path="/login" exact component={LoginForm} />
           <Route exact path="/logout" component={Logout} />
           <IsAuthenticatedRoute
             exact
@@ -48,7 +44,7 @@ function App() {
           />
 
           <div>
-            <Sidebar
+            <Navbar
               onCollapse={(inactive) => {
                 setInactive(inactive);
               }}
@@ -57,11 +53,7 @@ function App() {
               <Switch>
                 <Route path="/" exact />
                 <Route path="/homepage" exact component={HomePage} />
-                <ProtectedRoute
-                  path="/union"
-                  exact
-                  component={Union}
-                />
+                <ProtectedRoute path="/union" exact component={Union} />
                 <Route path="/union/:unionID" exact component={EditUnion} />
                 <Route path="/linkage" exact component={Linkage} />
                 <Route path="/task" exact component={Task} />
@@ -79,20 +71,24 @@ function App() {
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(<App />, rootElement);
 
-const IsAuthenticatedRoute = ({component: Component, ...rest }) => {
+const IsAuthenticatedRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() => (!Cookies.get("token") ? <Component /> : <Redirect to="/homepage" />)}
+      render={() =>
+        !Cookies.get("token") ? <Component /> : <Redirect to="/homepage" />
+      }
     />
   );
 };
 
-const ProtectedRoute = ({component: Component, ...rest }) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() => (Cookies.get("token") ? <Component /> : <Redirect to="/login" />)}
+      render={() =>
+        Cookies.get("token") ? <Component /> : <Redirect to="/login" />
+      }
     />
   );
 };
