@@ -13,7 +13,7 @@ import LoginForm, { Logout } from "./Components/Login/login";
 import HomePage from "./Pages/HomePage";
 import Union from "./Components/Union/Union";
 import EditUnion from "./Components/Union/EditUnion";
-import Linkage from "./Pages/Linkage";
+import Linkage from "./Components/Linkage/Linkage";
 import Task from "./Pages/Task";
 import Calendar from "./Pages/Calendar";
 import RegisterForm from "./Components/Register/register";

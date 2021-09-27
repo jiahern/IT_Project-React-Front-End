@@ -165,6 +165,56 @@ export function UseFoods() {
   };
 }
 
+export async function createLinkage(newUser) {
+  // unpack user details, email and password
+  const { firstName,middleName,lastName,adress,email,phoneNumber, note } = newUser;
+
+  // if the user did not enter an email or password
+  if (!firstName || !lastName) {
+    alert("The information is not complete");
+    return;
+  }
+
+  // define the route which the FoodBuddy API is handling
+  // login/authentication
+  const endpoint = BASE_URL + `/linkage`;
+
+  // POST the email and password to FoodBuddy API to
+  // authenticate user and receive the token explicitly
+  // i.e. data = token
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          firstName:firstName,
+          middleName:middleName,
+          lastName:lastName,
+          address:adress,
+          email:email,
+          phoneNumber:phoneNumber,
+          note:note,
+          linkedSince: Date.now,
+          lastConnection:Date.now,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+    window.location.href = "/";
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
 //From here is Union function--------------------------------------------------------------------
 //get union information from mongodb
 function userUnion() {
