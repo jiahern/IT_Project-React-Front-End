@@ -8,8 +8,16 @@ import { NavLink, Link } from "react-router-dom";
 // import "./Topmenubar.css";
 import GestioLogo from "./Logo.svg";
 import Dropdown from "./Dropdown";
+import { GetUserProfile } from "../../api";
 
 const Navbar = (props) => {
+  // const { loading, foods, error } = UseFoods();
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
+  // if (error) {
+  //   return <p>Something went wrong: {error.message}</p>;
+  // }
   // const { onClick, to, exact } = props;
   const [inactive, setInactive] = useState(false);
   const showsetInactive = () => setInactive(!inactive);
@@ -19,6 +27,17 @@ const Navbar = (props) => {
     props.onCollapse(inactive);
   }, [inactive]);
 
+  const { loading, profile, error } = GetUserProfile();
+  console.log(profile);
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>Something went wrong: {error.message}</p>;
+  }
+
+  var profileName = JSON.stringify(profile);
+  console.log("What FUCK" + profileName);
   return (
     <>
       <div>
@@ -41,7 +60,13 @@ const Navbar = (props) => {
             onMouseLeave={() => setDropdown(false)}
           >
             <BsIcons.BsPeopleCircle />
-            <span className="profilename">People</span>
+            {profile.map((item, index) => {
+              return (
+                <span className="profilename">
+                  {item.firstName + item.lastName}
+                </span>
+              );
+            })}
             {dropdown && <Dropdown />}
           </div>
         </nav>
