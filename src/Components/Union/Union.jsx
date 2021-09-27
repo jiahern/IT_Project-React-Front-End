@@ -45,14 +45,19 @@ export default function Union() {
     console.log("image = ", image[0]);
   }
 
-  function sendEmail(linkage) {
-    console.log(linkage);
-    var email = "mailto:";
-    linkage.map((item, index) => {
-      email = email + item.email + ",";
-    });
-    console.log(email);
-    return email;
+  function setEmail(item) {
+    if (item.length >= 1){
+            let email = "mailto:";
+            item.map((item_linkage,index) => {
+                    email+=item_linkage.email+ ",";
+            })
+            // console.log("email = "+ email);
+            window.location.href = email;
+  
+    }
+    else{
+            alert("Canot send email to Empty Linkage");
+    }
   }
 
   return (
@@ -114,7 +119,7 @@ export default function Union() {
                 </button>
               </Link>
               <button
-                onClick={() => sendEmail(item.linkages)}
+                onClick ={()=>setEmail(item.linkages_info)}
                 className="email h-5"
               >
                 <svg
