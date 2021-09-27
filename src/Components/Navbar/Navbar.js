@@ -11,14 +11,6 @@ import Dropdown from "./Dropdown";
 import { GetUserProfile } from "../../api";
 
 const Navbar = (props) => {
-  // const { loading, foods, error } = UseFoods();
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
-  // if (error) {
-  //   return <p>Something went wrong: {error.message}</p>;
-  // }
-  // const { onClick, to, exact } = props;
   const [inactive, setInactive] = useState(false);
   const showsetInactive = () => setInactive(!inactive);
   const [dropdown, setDropdown] = useState(false);

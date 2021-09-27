@@ -12,7 +12,7 @@ export const SubmenuData = [
 
   {
     title: "Logout",
-    path: "/homepage",
+    path: "/logout",
     icon: <BiIcons.BiLogOut />,
     cName: "submenu-item",
   },

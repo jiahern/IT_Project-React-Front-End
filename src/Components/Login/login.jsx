@@ -12,8 +12,8 @@ export function Logout() {
 
   // open the homepage --- example of how to redirect
   // another example
-  const state = { redirect: "/" };
-  return <Redirect to={state.redirect} />; 
+  const state = { redirect: "/login" };
+  return <Redirect to={state.redirect} />;
 }
 
 /*
@@ -43,41 +43,52 @@ export default function LoginForm() {
       </div>
 
       <div className="signInPage py-20 mt-20 bg-gray-100 rounded-2xl">
-          <form className="inputPage">
-                  <h3 className="words">Sign In</h3>
+        <form className="inputPage">
+          <h3 className="words">Sign In</h3>
 
-                  <div className="form-group">
-                  <label className="words">Email address</label>
-                  <input className="form-control" type="email"
-                          name="email"
-                          id="email"
-                          value={email}
-                          placeholder="qsj@email.com"
-                          onChange={(event) => {
-                                  setEmail(event.target.value);
-                          }} />
-                  </div>
+          <div className="form-group">
+            <label className="words">Email address</label>
+            <input
+              className="form-control"
+              type="email"
+              name="email"
+              id="email"
+              value={email}
+              placeholder="qsj@email.com"
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
+          </div>
 
-                  <div className="form-group">
-                  <label className="words">Password</label>
-                  <input className="form-control" type="password"
-                          name="password"
-                          id="password"
-                          value={password}
-                          placeholder="************"
-                          onChange={(event) => {
-                                  setPassword(event.target.value);
-                          }} />
-                  </div>
+          <div className="form-group">
+            <label className="words">Password</label>
+            <input
+              className="form-control"
+              type="password"
+              name="password"
+              id="password"
+              value={password}
+              placeholder="************"
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+            />
+          </div>
 
-                  <input type="button" className="btn btn-primary " value="Log In" onClick={onSubmit}/>
-                  <Link to="/register">
-                  <p className="forgot-password text-right">
-                  Don't have a account? sign up?
-                  </p>
-                  </Link>
-          </form>
-        </div>
+          <input
+            type="button"
+            className="btn btn-primary "
+            value="Log In"
+            onClick={onSubmit}
+          />
+          <Link to="/register">
+            <p className="forgot-password text-right">
+              Don't have a account? sign up?
+            </p>
+          </Link>
+        </form>
+      </div>
     </div>
   );
 }
