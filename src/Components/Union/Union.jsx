@@ -9,11 +9,14 @@ import { GetUnion,createUnion,removeUnion } from "../../api";
 
 export default function Union() {
         const [name, setName] = useState("");
+        const [unionImage, setUnionImage] = useState(null);
+        const [imageUploaded, setImageUploaded] = useState(false);
         //create union function
         function onSave() {
                 // using API function to submit data to FoodBuddy API
                 createUnion({
                   name: name,
+                  unionImage : unionImage,
                 });
                 // redirect to homepage
                 window.location.reload();
@@ -39,6 +42,10 @@ export default function Union() {
                //redirect to homepage
                window.location.reload();
                
+        }
+        function fileSelecterHandler(image) {
+                setUnionImage(image[0]);
+                console.log ("image = ", image[0]);
         }
 
         return(
@@ -111,7 +118,34 @@ export default function Union() {
                         </div>
                 </div>
                 <div class="createPage h-100">
-                                
+                        <div  class = "uploadImage ml-96 mt-40">
+                                <div calss = "">
+                                        {(() => {
+                                                // console.log("unionImage(union.jsx) ="+ unionImage);
+                                                if (unionImage != null && unionImage) {
+                                                        console.log("unionImage(union.jsx) else =="+ unionImage);
+                                                        return(
+                                                        <div>
+                                                                Div 2, unionImage != null
+                                                                <img src={URL.createObjectURL(unionImage)} style ={{width: "150px"}}/>
+                                                                </div>
+                                                        )
+                                                } else {
+                                                        console.log("unionImage(union.jsx) ="+ unionImage);
+                                                        return (
+                                                        <div class="flex">
+                                                                Div 1, unionImage === null or undefined
+
+                                                                </div>
+                                                        )
+                                                }
+                                        })()}
+                                </div>
+                                {/* <p>Hello Wordls s</p> */}
+                                <div class = "mt-1">
+                                <input type="file" onChange={(event) => fileSelecterHandler(event.target.files)}/>
+                                </div>
+                        </div>      
                         <form onSubmit={onSave} class="flex flex-col">
                                 <div class="flex space-x-4">
                                         <label class="font-bold ml-20 mt-40 text-2xl" for="Name">Name:</label>
