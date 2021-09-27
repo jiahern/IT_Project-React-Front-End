@@ -3,21 +3,24 @@ import { Link, Redirect } from "react-router-dom";
 import unionLogo from "./UnionLogo.png";
 import "./Union.css";
 import { GetUnion,createUnion,removeUnion } from "../../api";
-
+const BASE_URL = "http://localhost:5000/";
+//const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
 
 
 export default function Union() {
         const [name, setName] = useState("");
+        const [unionImage, setUnionImage] = useState(null);
         //create union function
         function onSave() {
                 // using API function to submit data to FoodBuddy API
                 createUnion({
                   name: name,
+                  unionImage : unionImage,
                 });
                 // redirect to homepage
                 window.location.reload();
-                console.log(window.location);
+                // console.log(window.location);
               }
         const [active, setActive] = useState(true);
         const showsetActive = () => setActive(!active);
@@ -39,6 +42,10 @@ export default function Union() {
                //redirect to homepage
                window.location.reload();
                
+        }
+        function fileSelecterHandler(image) {
+                setUnionImage(image[0]);
+                console.log ("image = ", image[0]);
         }
 
         return(
@@ -65,7 +72,7 @@ export default function Union() {
         {unionContents.map((item,index) =>{
                 return (
                 <div key={index} class=" PendingTasks w-full h-full mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-4 gap-x-4 gap-y-4">
-                        <img class="w-20 h-20" src={unionLogo}/>
+                        <img class="w-20 h-20" src={BASE_URL + item.profilePic} alt="Union Profile Pic"/>
                         <span class="py-6">{item.name}</span>
                         <div class="Category h-5 ml-4 py-6 px-6">{item.linkages.length}</div>
                         <div class="flex space-x-5 px-10 py-6  h-5">
@@ -111,7 +118,32 @@ export default function Union() {
                         </div>
                 </div>
                 <div class="createPage h-100">
-                                
+                        <div  class = "uploadImage ml-20 mt-40">
+                                <div class="font-bold mb-4 text-2xl">Union Image:</div>
+                                <div calss = "">
+                                        {(() => {
+                                                // console.log("unionImage(union.jsx) ="+ unionImage);
+                                                if (unionImage != null && unionImage) {
+                                                        console.log("unionImage(union.jsx) else =="+ unionImage);
+                                                        return(
+                                                        <div>
+                                                                <img src={URL.createObjectURL(unionImage)} style ={{width: "150px"}} alt = "union upload pic"/>
+                                                                </div>
+                                                        )
+                                                } else {
+                                                        console.log("unionImage(union.jsx) ="+ unionImage);
+                                                        return (
+                                                        <div class="flex">
+                                                                </div>
+                                                        )
+                                                }
+                                        })()}
+                                </div>
+                                {/* <p>Hello Wordls s</p> */}
+                                <div class = "mt-4 flex-col">
+                                <input type="file" onChange={(event) => fileSelecterHandler(event.target.files)}/>
+                                </div>
+                        </div>      
                         <form onSubmit={onSave} class="flex flex-col">
                                 <div class="flex space-x-4">
                                         <label class="font-bold ml-20 mt-40 text-2xl" for="Name">Name:</label>

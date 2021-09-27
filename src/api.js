@@ -215,43 +215,38 @@ export function GetOneUnion(unionID) {
 
 export async function createUnion(newUser) {
   // unpack user details, email and password
-  const { name, linkages } = newUser;
+  const { name, unionImage, linkages } = newUser;
 
   // if the user did not enter an email or password
   if (!name) {
     alert("The information is not complete");
     return;
   }
-
-  // define the route which the FoodBuddy API is handling
-  // login/authentication
+  console.log("unionImage.mimetype = " ,unionImage.mimetype);
+  if (!unionImage.name.match(/.(jpg|jpeg|png|)$/i)){
+    alert('please upload only image to Union Image');
+    return;
+  }
   const endpoint = BASE_URL + `/union`;
-
-  // POST the email and password to FoodBuddy API to
-  // authenticate user and receive the token explicitly
-  // i.e. data = token
   try {
-    let data = await axios({
-      url: endpoint,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify(
-        {
-          name: name,
-          linkages: linkages,
-        },
-        { withCredentials: true } // IMPORTANT
-      ),
-    }).then((res) => res.data);
+    const fd = new FormData();
+    fd.append('unionImage', unionImage);
+    fd.append('name', name);
+    fd.append('linkages', linkages);
+    await axios.post(endpoint,fd, { withCredentials: true })
+    .then(res => { 
+      // console.log(res);
+      return res.data
+    })
 
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);
+  
     window.location.href = "/union";
     // redirect to homepage -- another way to redirect
   } catch (error) {
+    console.log(error)
     alert("Invalid Information");
   }
 }
@@ -317,3 +312,50 @@ export async function removeUnion(newUser) {
 //uninon function end here ---------------------------------------------------------------------------------
 
 
+// const AddUnion = async (req, res) => {
+//   console.log("req.body = ",req.body);
+//   console.log("req.file = ",req.file);
+  
+//   var newUser = new Union();
+//   newUser.userId =  new ObjectId(`${req.user._id}`);
+//   newUser.name = req.body.name;
+//   newUser.linkages = [];
+//   console.log("profilepic = "+JSON.stringify(req.body));
+//   newUser.profilePic = req.file.path;
+//   newUser.save();
+//   console.log("newUser = ",newUser);
+//   res.send(newUser)
+
+// }
+
+
+// const multer = require('multer');
+
+
+// const storage = multer.diskStorage({
+//     destination: function(req, file, cb) {
+//         cb(null, './uploads');
+//     },
+//     filename: function(req, file, cb) {
+//         cb(null, new Date().toISOString().replace(/:/g, '-')+ file.fieldname);
+//     }
+// })
+
+// const fileFilter = (req, file, cb) => {
+//     //reject File that are not png, jpeg
+//     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+//         cb(null, true);
+//     }
+//     else{
+//         cb(new Error("invalid image type") , false);
+//     }
+// };
+
+
+// const upload = multer({
+//     storage: storage, 
+//     limits:{
+//     fileSize: 1024 *1024 *5,
+// },
+// fileFilter : fileFilter
+// })
