@@ -1,0 +1,19 @@
+.remove.unactive{
+        visibility: hidden;
+}
+.add.unactive{
+        visibility: hidden;
+}
+.deleteUnion{
+       background-color: #3AAFA9;
+       color: white;
+       font-size:large;
+       padding: 4px 20px;
+}
+
+.saveUnion{
+        background-color: #3AAFA9;
+        color: white;
+        font-size:large;
+        padding: 4px 20px;
+}

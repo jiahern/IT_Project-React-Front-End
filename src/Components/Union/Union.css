@@ -1,13 +1,32 @@
-#viewPastTask{
-        background-color: rgb(58,175,169);
-}
-#createTask{
-        background-color: rgb(58,175,169);
-}
-.addLinkage{
-        background-color: rgb(58,175,169);
+.createUnion{
+        position: fixed;
+        left: 50%;
+        bottom: 2px;
+        width:50%;
+        height:100%;
+        visibility:visible;
+        background-color:#DEF2F1;
+        transition: height 0.3s ease-in;
+        
 }
 
-.inputPage{
-        background-color: rgb(58,175,169);
+.saveButton{
+        background-color: #3AAFA9;
+        padding: 4px 5px;
+        position: relative;
+        width:15%;
+        right: 10px;
+        
 }
+
+.createUnion.inactive{
+        height:0%;
+}
+
+.addUnion{
+        background-color: #3AAFA9;
+        color: white;
+        font-size:large;
+        padding: 4px 20px;
+}
+
