@@ -9,7 +9,12 @@ const HomePage = () => {
 
   return (
     <React.Fragment children>
-        <div className="font-bold text-4xl ml-20">Home</div>   
+      <div class="row">
+      <div className="flex justify-between w-full h-16 mr-4 bg-gray-100 py-3">
+
+        <div className="font-bold text-4xl italic ml-20">Home</div>   
+      </div>
+      </div>
 
         <div class="row">
         <div className="Count w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-3 grid-rows-1 gap-x-24">
@@ -59,16 +64,17 @@ const HomePage = () => {
             </div>
           );
         })} */}
-
+        
         <div className="Number w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-3 grid-rows-1 gap-x-24">
 
-            <div className="LinkageCount font-bold">8</div>
-            <div className="UnionCount font-bold">2</div>
-            <div className="EventCount font-bold">1</div>
+            <div className="LinkageCount font-bold">{foods.length}</div>
+            <div className="UnionCount font-bold">{unionContents.length}</div>
+            <div className="EventCount font-bold">0</div>
 
         </div>
         </div>
-        
+
+        <div class="row">
         <div class="List w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-1 grid-rows-1 gap-x-24">
         <div className="PendingTask font-bold">Pending Tasks</div>
           <div class="table-responsive">
@@ -104,6 +110,8 @@ const HomePage = () => {
                   </div>
 
         </div>
+        </div>
+      
 
         
 
