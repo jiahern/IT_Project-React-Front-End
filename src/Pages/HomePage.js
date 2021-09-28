@@ -3,7 +3,7 @@ import React from "react";
 function HomePage() {
   return (
     <div>
-      HomePage
+      <h1>Home</h1>
       <button type="button" className="btn btn-primary">
         Primary
       </button>
