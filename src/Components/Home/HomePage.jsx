@@ -69,11 +69,43 @@ const HomePage = () => {
         </div>
         </div>
         
-        <div class="row">
-        <div className="List w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-2 grid-rows-1 gap-x-24">
-            <div className="PendingTask font-bold">Pending Tasks</div>
-            <div className="ComingEvent font-bold">Upcoming Events</div>
+        <div class="List w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-1 grid-rows-1 gap-x-24">
+        <div className="PendingTask font-bold">Pending Tasks</div>
+          <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="col-md-1">-----</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="col-md-1">-----</td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+                  </div>
         </div>
+          <div class="List w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-1 grid-rows-1 gap-x-24">
+                  <h2 class="sub-header">Upcoming Events</h2>
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>                         
+                          <th class="col-md-2">-----</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="col-md-1">-----</td>
+                          
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+
         </div>
 
         
