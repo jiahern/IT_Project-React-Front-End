@@ -2,11 +2,12 @@ import React, { Component, useState } from "react";
 import linkage from "./Linkage.png";
 import "./Linkage.css";
 import { FaTruckLoading } from "react-icons/fa";
-import { createLinkage, UseFoods } from "../../api";
+import { createLinkage, UseLinkages, editLinkage } from "../../api";
 
 const Linkage = () => {
-  const { loading, foods, error } = UseFoods();
+  const { loading, linkages, error } = UseLinkages();
   const [active, setActive] = useState(false);
+  const [editActive, setEditActive] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -29,8 +30,26 @@ const Linkage = () => {
     window.location.reload();
     console.log(window.location);
   }
+
+  function editSave() {
+    editLinkage({
+      firstName: firstName,
+      middleName: middleName,
+      lastName: lastName,
+      address: address,
+      email: email,
+      phoneNumber: phoneNumber,
+      note: note,
+    });
+    // redirect to homepage
+    window.location.reload();
+    console.log(window.location);
+  }
   function addLinkagePage() {
     setActive(!active);
+  }
+  function editLinkagePage() {
+    setEditActive(!editActive);
   }
   return (
     <React.Fragment children>
@@ -83,7 +102,7 @@ const Linkage = () => {
         <div className=""></div>
       </div>
       {/* linkage content */}
-      {foods.map((item, index) => {
+      {linkages.map((item, index) => {
         return (
           <section>
             <div className="Linkage w-full h-full mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-5 gap-x-4 gap-y-4">
@@ -99,7 +118,7 @@ const Linkage = () => {
                 {item.lastConnection}
               </div>
               <div className="flex space-x-5 px-10 py-6  h-5">
-                <button className="editButton h-5">
+                <button onClick={editLinkagePage} className="editButton h-5">
                   <svg
                     width="15"
                     height="13"
@@ -300,9 +319,11 @@ const Linkage = () => {
           </div>
         </div>
       </div>
-      <div className="editLinkage border-l-2 border-t-2 border-b-2 border-black absolute right-0 h-full w-30 ml-4 rounded transition ease-in-out duration-1000 transform translate-x-full bg-gray-300 flex flex-col space-y-10">
+
+      {/* Edit linkage */}
+      <div className={editActive ? "editLinkage" : "editLinkage unactive"}>
         <div className="flex justify-between">
-          <button className="backButtonEdit">
+          <button onClick={editLinkagePage} className="backButton">
             <svg
               className="h-20 w-20"
               xmlns="http://www.w3.org/2000/svg"
@@ -318,12 +339,12 @@ const Linkage = () => {
 
           <div className="font-bold text-4xl mt-8 mr-8">Edit Linkage</div>
         </div>
-        {/* edit profile */}
-        <div className="editPage flex flex-col space-y-4 h-100">
+
+        <div className="inputPage flex flex-col space-y-4 h-100">
           <div className="grid justify-items-center mt-4">
             <img className="h-20 w-20" src={linkage} />
           </div>
-          <div className=" h-100">
+          <div className="inputPage h-100">
             <form className="flex flex-col space-y-2" action="#">
               <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Contact Information:
@@ -332,20 +353,32 @@ const Linkage = () => {
                 <input
                   className="w-40 ml-20 h-8 rounded-full text-l"
                   type="text"
-                  id="FirstName"
-                  name="FirstName"
+                  id="firstName"
+                  name="firstName"
+                  value={firstName}
+                  onChange={(event) => {
+                    setFirstName(event.target.value);
+                  }}
                 />
                 <input
                   className="w-40 ml-20 h-8 rounded-full text-l"
                   type="text"
-                  id="MiddleName"
-                  name="MiddleName"
+                  id="middleName"
+                  name="middleName"
+                  value={middleName}
+                  onChange={(event) => {
+                    setMiddleName(event.target.value);
+                  }}
                 />
                 <input
                   className="w-40 ml-20 h-8 rounded-full text-l"
                   type="text"
-                  id="LasttName"
-                  name="LastName"
+                  id="lasttName"
+                  name="lastName"
+                  value={lastName}
+                  onChange={(event) => {
+                    setLastName(event.target.value);
+                  }}
                 />
               </div>
               <label className="font-bold ml-20 text-xl" htmlFor="Name">
@@ -356,6 +389,23 @@ const Linkage = () => {
                 type="text"
                 id="email"
                 name="email"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+              />
+              <label className="font-bold ml-20 text-xl" htmlFor="Name">
+                Adress:
+              </label>
+              <input
+                className="w-80 ml-20 h-8 rounded-full text-l"
+                type="text"
+                id="adress"
+                name="adress"
+                value={address}
+                onChange={(event) => {
+                  setAddress(event.target.value);
+                }}
               />
               <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Phone Number:
@@ -365,6 +415,10 @@ const Linkage = () => {
                 type="text"
                 id="phoneNumber"
                 name="phoneNumber"
+                value={phoneNumber}
+                onChange={(event) => {
+                  setPhoneNumber(event.target.value);
+                }}
               />
               <label className="font-bold ml-20 text-xl" htmlFor="Name">
                 Events:
@@ -381,8 +435,12 @@ const Linkage = () => {
               <input
                 className="w-80 ml-20 h-20 rounded-lg text-l"
                 type="text"
-                id="Note"
-                name="Note"
+                id="note"
+                name="note"
+                value={note}
+                onChange={(event) => {
+                  setNote(event.target.value);
+                }}
               />
 
               <label className="font-bold ml-20 text-xl" htmlFor="Image">
@@ -394,18 +452,25 @@ const Linkage = () => {
                 id="Image"
                 name="filename"
               />
-              <input
-                className="submit border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-80"
-                type="submit"
-                value="SAVE"
-              />
+              <div className="deleteAndEdit">
+                <input
+                  className="deleteEditButton btn btn-danger font-weight-bold"
+                  type="submit"
+                  value="DELETE"
+                  onClick={createSave}
+                />
+                <input
+                  className="saveCreateButton btn btn-success font-weight-bold"
+                  type="submit"
+                  value="SAVE"
+                  onClick={editSave}
+                />
+              </div>
             </form>
-            <button className="deleteB border-2 border-black mt-40 font-bold text-2xl rounded bg-gray-100 absolute bottom-20 right-40">
-              DELETE
-            </button>
           </div>
         </div>
       </div>
+      {/* Edit Linkage End Here */}
     </React.Fragment>
   );
 };

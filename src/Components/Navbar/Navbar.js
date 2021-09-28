@@ -48,7 +48,7 @@ const Navbar = (props) => {
 
           <div
             className="profile"
-            onMouseEnter={() => setDropdown(true)}
+            onClick={() => setDropdown(!false)}
             onMouseLeave={() => setDropdown(false)}
           >
             <BsIcons.BsPeopleCircle />

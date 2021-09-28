@@ -27,7 +27,7 @@ axios.interceptors.request.use(
 );
 
 // function getFood(id) {
-//   const endpoint = BASE_URL + `/foods/` + id;
+//   const endpoint = BASE_URL + `/linkages/` + id;
 //   return axios.get(endpoint, {withCredentials:true}).then(res => res.data);
 // }
 
@@ -135,20 +135,20 @@ export async function registerUser(newUser) {
 }
 
 //From here is Linkage --------------------------------------------------------------------
-function getFoods() {
+function getLinkages() {
   const endpoint = BASE_URL + "/linkage";
   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
 }
 
-export function UseFoods() {
+export function UseLinkages() {
   const [loading, setLoading] = useState(true);
-  const [foods, setFoods] = useState([]);
+  const [linkages, setLinkages] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getFoods()
-      .then((foods) => {
-        setFoods(foods);
+    getLinkages()
+      .then((linkages) => {
+        setLinkages(linkages);
         setLoading(false);
       })
       .catch((e) => {
@@ -157,17 +157,18 @@ export function UseFoods() {
         setLoading(false);
       });
   }, []);
-  console.log(foods);
+  console.log(linkages);
   return {
     loading,
-    foods,
+    linkages,
     error,
   };
 }
 
 export async function createLinkage(newUser) {
   // unpack user details, email and password
-  const { firstName,middleName,lastName,adress,email,phoneNumber, note } = newUser;
+  const { firstName, middleName, lastName, adress, email, phoneNumber, note } =
+    newUser;
 
   // if the user did not enter an email or password
   if (!firstName || !lastName) {
@@ -191,15 +192,64 @@ export async function createLinkage(newUser) {
       },
       data: JSON.stringify(
         {
-          firstName:firstName,
-          middleName:middleName,
-          lastName:lastName,
-          address:adress,
-          email:email,
-          phoneNumber:phoneNumber,
-          note:note,
+          firstName: firstName,
+          middleName: middleName,
+          lastName: lastName,
+          address: adress,
+          email: email,
+          phoneNumber: phoneNumber,
+          note: note,
           linkedSince: Date.now,
-          lastConnection:Date.now,
+          lastConnection: Date.now,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+    window.location.href = "/";
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+export async function editLinkage(newUser) {
+  // unpack user details, email and password
+  const { firstName, middleName, lastName, adress, email, phoneNumber, note } =
+    newUser;
+
+  // if the user did not enter an email or password
+  if (!firstName || !lastName) {
+    alert("The information is not complete");
+    return;
+  }
+
+  // define the route which the FoodBuddy API is handling
+  // login/authentication
+  const endpoint = BASE_URL + `/editlinkage`;
+
+  // POST the email and password to FoodBuddy API to
+  // authenticate user and receive the token explicitly
+  // i.e. data = token
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          firstName: firstName,
+          middleName: middleName,
+          lastName: lastName,
+          address: adress,
+          email: email,
+          phoneNumber: phoneNumber,
+          note: note,
         },
         { withCredentials: true } // IMPORTANT
       ),
