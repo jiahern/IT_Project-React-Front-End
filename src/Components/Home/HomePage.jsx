@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import "./HomePage.css";
+import { GetUnion, UseFoods } from "../../api";
 
 const HomePage = () => {
+  const { loading, foods, error } = UseFoods();
+  const { load, unionContents, err } = GetUnion();
+
+
   return (
     <React.Fragment children>
         <div className="font-bold text-4xl ml-20">Home</div>   
