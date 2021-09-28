@@ -81,14 +81,13 @@ const HomePage = () => {
                       <tbody>
                         <tr>
                           <td class="col-md-1">-----</td>
-                        </tr>
-                        
+                        </tr>          
                       </tbody>
                     </table>
                   </div>
         </div>
           <div class="List w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-1 grid-rows-1 gap-x-24">
-                  <h2 class="sub-header">Upcoming Events</h2>
+          <div className="ComingEvent font-bold">Upcoming events</div>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
@@ -98,10 +97,8 @@ const HomePage = () => {
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="col-md-1">-----</td>
-                          
-                        </tr>
-                        
+                          <td class="col-md-1">-----</td>                         
+                        </tr>                       
                       </tbody>
                     </table>
                   </div>
