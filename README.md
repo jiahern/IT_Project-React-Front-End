@@ -100,15 +100,13 @@ Apple Safari (latest publicly-released version) running on the two latest public
 <br /><br /><br />
 <a name = "technologies_used"></a>
 ## 6.0 Technologies Used:
-### Back-end
-MongoDB:
-https://www.mongodb.com/
+### Front-end
+HTML
 
-Mongoose:
-https://mongoosejs.com/
+CSS3:
 
-Nodejs:
-https://nodejs.org/en/
+Reactjs:
+https://reactjs.org/
 
 Jest:
 https://jestjs.io/
