@@ -124,7 +124,7 @@ The It Peoject application is developed by Reactjs in the front-end and Nodejs a
 1. To start front-end for developing:
  1. install npm, can refer to https://www.npmjs.com/get-npm
  2. install the front-end project, in CLI: npm install
- 3. npm start The front-end is now running on http://localhost:5000
+ 3. npm start The front-end is now running on http://localhost:3000
 
 
 ### Available Scripts:
