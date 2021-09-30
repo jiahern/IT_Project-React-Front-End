@@ -1,13 +1,3 @@
-#viewPastTask {
-  background-color: rgb(58, 175, 169);
-}
-#createTask {
-  background-color: rgb(58, 175, 169);
-}
-.addLinkage {
-  background-color: rgb(58, 175, 169);
-}
-
 .newCreateLinkage {
   position: fixed;
   left: 50%;
@@ -22,40 +12,29 @@
   height: 0%;
 }
 
-.deleteAndEdit {
-  position: relative;
-  top: 20px;
-  display: flex;
-  justify-content: space-evenly;
-  align-content: space-between;
-  width: 30em;
+.newUnion {
+  background-color: #3aafa9;
+  color: white;
+  padding: 9px;
 }
 
-.saveCreateButton {
-  padding: 4px 5px;
-  /* position: relative; */
-  width: 10em;
-  /* right: 10px; */
-}
-
-.deleteEditButton {
-  padding: 4px 5px;
-  /* position: relative; */
-  width: 10em;
-  /* right: 40px; */
-}
-
-.editLinkage {
-  /* transform: scale(0.8); */
-  position: fixed;
-  left: 50%;
-  bottom: 2px;
-  width: 50%;
-  height: 100%;
-  visibility: visible;
+.scrollLinkage {
+  height: 535px;
+  overflow: hidden;
+  overflow-y: scroll;
   background-color: #def2f1;
-  transition: height 0.3s ease-in;
 }
-.editLinkage.unactive {
-  height: 0%;
+
+.LinkageTitle {
+  background-color: #3aafa9;
+  color: white;
+  font-weight: 300px;
+}
+
+.searchBox {
+  background-color: #def2f1;
+  box-sizing: border-box;
+  border: 1px solid;
+  border-color: #ccc;
+  border-radius: 5px;
 }

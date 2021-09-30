@@ -1,4 +1,12 @@
+.topnavbar-box {
+  z-index: 98;
+  width: 100%;
+  /* position: fixed; */
+}
+
 .topnavbar {
+  /* margin-top: -80px; */
+  z-index: 10;
   height: 80px;
   outline: solid lightgray 1px;
   background-color: white;
@@ -53,6 +61,7 @@
 }
 
 .side-menu {
+  top: 80px;
   position: fixed;
   background-color: #f9fbff;
   width: 300px;
@@ -62,6 +71,7 @@
   transition: width 0.2s ease-in;
   border: 1px solid;
   border-color: #ccc;
+  overflow: hidden;
   /* outline-style: inset;
   outline-width: thin;
   outline-color: #666; */

@@ -1,19 +1,31 @@
-.remove.unactive{
-        visibility: hidden;
+.remove.unactive {
+  visibility: hidden;
 }
-.add.unactive{
-        visibility: hidden;
+.add.unactive {
+  visibility: hidden;
 }
-.deleteUnion{
-       background-color: #3AAFA9;
-       color: white;
-       font-size:large;
-       padding: 4px 20px;
+.deleteUnion {
+  background-color: #3aafa9;
+  color: white;
+  font-size: large;
+  padding: 4px 20px;
 }
 
-.saveUnion{
-        background-color: #3AAFA9;
-        color: white;
-        font-size:large;
-        padding: 4px 20px;
+.saveUnion {
+  background-color: #3aafa9;
+  color: white;
+  font-size: large;
+  padding: 4px 20px;
+}
+
+.scrollEditUnion {
+  height: 540px;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: #def2f1;
+}
+
+.EditTasks {
+  background-color: #3aafa9;
+  color: white;
 }

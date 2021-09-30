@@ -28,41 +28,39 @@ const Navbar = (props) => {
     return <p>Something went wrong: {error.message}</p>;
   }
 
-  var profileName = JSON.stringify(profile);
-  console.log("What FUCK" + profileName);
+  // var profileName = JSON.stringify(profile);
+  // console.log("What FUCK" + profileName);
   return (
-    <>
-      <div>
-        <nav className="topnavbar">
-          <div className="toggle-menu-btn">
-            <FaIcons.FaBars onClick={showsetInactive} />
-          </div>
-          <Link to="/" className="logobox">
-            <img
-              className="logo"
-              src={GestioLogo}
-              style={{ width: 130 }}
-              alt="website logo"
-            />
-          </Link>
+    <div className="topnavbar-box">
+      <nav className="topnavbar">
+        <div className="toggle-menu-btn">
+          <FaIcons.FaBars onClick={showsetInactive} />
+        </div>
+        <Link to="/" className="logobox">
+          <img
+            className="logo"
+            src={GestioLogo}
+            style={{ width: 130 }}
+            alt="website logo"
+          />
+        </Link>
 
-          <div
-            className="profile"
-            onClick={() => setDropdown(!false)}
-            onMouseLeave={() => setDropdown(false)}
-          >
-            <BsIcons.BsPeopleCircle />
-            {profile.map((item, index) => {
-              return (
-                <span className="profilename">
-                  {item.firstName + item.lastName}
-                </span>
-              );
-            })}
-            {dropdown && <Dropdown />}
-          </div>
-        </nav>
-      </div>
+        <div
+          className="profile"
+          onClick={() => setDropdown(!false)}
+          onMouseLeave={() => setDropdown(false)}
+        >
+          <BsIcons.BsPeopleCircle />
+          {profile.map((item, index) => {
+            return (
+              <span className="profilename">
+                {item.firstName + item.lastName}
+              </span>
+            );
+          })}
+          {dropdown && <Dropdown />}
+        </div>
+      </nav>
 
       <body className={inactive ? "side-menu inactive" : "side-menu"}>
         <div className="top-section">
@@ -92,7 +90,7 @@ const Navbar = (props) => {
           </div>
         </div>
       </body>
-    </>
+    </div>
   );
 };
 
