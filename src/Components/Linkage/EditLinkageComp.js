@@ -96,7 +96,7 @@ const EditLinkageComp = (props) => {
             </label>
             <div className="flex space-x-4">
               <input
-                className="w-40 ml-20 h-8 rounded-full text-l"
+                className="w-40 ml-20 h-8  text-l"
                 {...register("firstName")}
                 type="text"
                 id="firstName"
@@ -107,7 +107,7 @@ const EditLinkageComp = (props) => {
                 }}
               />
               <input
-                className="w-40 ml-20 h-8 rounded-full text-l"
+                className="w-40 ml-20 h-8  text-l"
                 {...register("middleName")}
                 type="text"
                 id="middleName"
@@ -119,7 +119,7 @@ const EditLinkageComp = (props) => {
                 }}
               />
               <input
-                className="w-40 ml-20 h-8 rounded-full text-l"
+                className="w-40 ml-20 h-8  text-l"
                 {...register("lastName")}
                 type="text"
                 id="lasttName"
@@ -135,7 +135,7 @@ const EditLinkageComp = (props) => {
               Email:
             </label>
             <input
-              className="w-80 ml-20 h-8 rounded-full text-l"
+              className="w-80 ml-20 h-8  text-l"
               {...register("email")}
               type="text"
               id="email"
@@ -150,7 +150,7 @@ const EditLinkageComp = (props) => {
               Address:
             </label>
             <input
-              className="w-80 ml-20 h-8 rounded-full text-l"
+              className="w-80 ml-20 h-8  text-l"
               {...register("adress")}
               type="text"
               id="address"
@@ -165,7 +165,7 @@ const EditLinkageComp = (props) => {
               Phone Number:
             </label>
             <input
-              className="w-80 ml-20 h-8 rounded-full text-l"
+              className="w-80 ml-20 h-8  text-l"
               {...register("phoneNumber")}
               type="text"
               id="phoneNumber"
@@ -180,7 +180,7 @@ const EditLinkageComp = (props) => {
               Events:
             </label>
             <input
-              className="w-80 ml-20 h-8 rounded-full text-l"
+              className="w-80 ml-20 h-8  text-l"
               {...register("event")}
               type="text"
               id="Event"

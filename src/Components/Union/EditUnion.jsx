@@ -81,7 +81,7 @@ const EditUnion = (props) => {
     <section className="ShowUnion">
       <form className="showUnionBelow flex justify-between w-full h-16 mr-4 py-3">
         <input
-          className="font-bold text-4xl ml-20"
+          className="font-bold text-3xl ml-20"
           defaultValue={name}
           placeholder="Name"
           onChange={(event) => {
