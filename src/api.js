@@ -321,11 +321,14 @@ export async function createUnion(newUser) {
     alert("The information is not complete");
     return;
   }
-  console.log("unionImage.mimetype = ", unionImage.mimetype);
-  if (!unionImage.name.match(/.(jpg|jpeg|png|)$/i)) {
+  if (!unionImage){
+
+  }
+  else if (!unionImage.name.match(/.(jpg|jpeg|png|)$/i)) {
     alert("please upload only image to Union Image");
     return;
   }
+  // console.log("unionImage.mimetype = ", unionImage.mimetype);
   const endpoint = BASE_URL + `/union`;
   try {
     const fd = new FormData();
@@ -344,8 +347,9 @@ export async function createUnion(newUser) {
     window.location.href = "/union";
     // redirect to homepage -- another way to redirect
   } catch (error) {
-    console.log(error);
     alert("Invalid Information");
+    console.log(error);
+    
   }
 }
 
@@ -380,7 +384,7 @@ export async function editUnion(newUser) {
 
 export async function removeUnion(newUser) {
   // unpack user details, email and password
-  const { unionID } = newUser;
+  const { unionID, profilePic } = newUser;
   const endpoint = BASE_URL + "/union/" + unionID + "/remove";
   try {
     let data = await axios({
@@ -391,6 +395,7 @@ export async function removeUnion(newUser) {
       },
       data: JSON.stringify(
         {
+          profilePic: profilePic,
           _id: unionID,
         },
         { withCredentials: true } // IMPORTANT

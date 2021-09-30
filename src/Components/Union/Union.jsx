@@ -11,6 +11,7 @@ export default function Union() {
   const [unionImage, setUnionImage] = useState(null);
   //create union function
   function onSave() {
+    
     // using API function to submit data to FoodBuddy API
     createUnion({
       name: name,
@@ -31,10 +32,11 @@ export default function Union() {
     return <p>Something went wrong: {error.message}</p>;
   }
   //delete union function
-  function onDelete(unionID) {
+  function onDelete(unionID, profilePic) {
     //using API function to submit data to FoodBuddy API
     removeUnion({
       unionID: unionID,
+      profilePic: profilePic,
     });
 
     //redirect to homepage
@@ -141,7 +143,7 @@ export default function Union() {
                 </svg>
               </button>
 
-              <button onClick={() => onDelete(item._id)} class="bin h-5">
+              <button onClick={() => onDelete(item._id, item.profilePic)} class="bin h-5">
                 <svg
                   width="15"
                   height="15"
