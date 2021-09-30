@@ -19,6 +19,7 @@ import Task from "./Pages/Task";
 import Calendar from "./Pages/Calendar";
 import RegisterForm from "./Components/Register/register";
 import Cookies from "js-cookie";
+import EditLinkageComp from "./Components/Linkage/EditLinkageComp";
 
 function App() {
   const [inactive, setInactive] = useState(false);
@@ -57,6 +58,11 @@ function App() {
                 <ProtectedRoute path="/union" exact component={Union} />
                 <Route path="/union/:unionID" exact component={EditUnion} />
                 <Route path="/linkage" exact component={Linkage} />
+                <Route
+                  path="/linkage/:linkageID"
+                  exact
+                  component={EditLinkageComp}
+                />
                 <Route path="/task" exact component={Task} />
                 <Route path="/calendar" exact component={Calendar} />
                 <Route path="*" component={() => "404 NOT FOUND"} />

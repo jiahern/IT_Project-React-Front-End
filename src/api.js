@@ -165,9 +165,10 @@ export function UseLinkages() {
   };
 }
 
+//Create New Linkage
 export async function createLinkage(newUser) {
   // unpack user details, email and password
-  const { firstName, middleName, lastName, adress, email, phoneNumber, note } =
+  const { firstName, middleName, lastName, address, email, phoneNumber, note } =
     newUser;
 
   // if the user did not enter an email or password
@@ -195,7 +196,7 @@ export async function createLinkage(newUser) {
           firstName: firstName,
           middleName: middleName,
           lastName: lastName,
-          address: adress,
+          address: address,
           email: email,
           phoneNumber: phoneNumber,
           note: note,
@@ -216,24 +217,40 @@ export async function createLinkage(newUser) {
   }
 }
 
+//Get One Linkage
+export function GetOneLinkage(linkageID) {
+  var linkageContent = useState([]);
+  const { loading, linkages, error } = UseLinkages();
+
+  linkages.map((item) => {
+    if (item._id === linkageID) {
+      linkageContent = item;
+    }
+  });
+  console.log(linkageContent);
+  return {
+    loading,
+    linkageContent,
+    error,
+  };
+}
+
+//edit Linkage
 export async function editLinkage(newUser) {
   // unpack user details, email and password
-  const { firstName, middleName, lastName, adress, email, phoneNumber, note } =
-    newUser;
+  const {
+    _id,
+    firstName,
+    middleName,
+    lastName,
+    address,
+    email,
+    phoneNumber,
+    note,
+  } = newUser;
 
-  // if the user did not enter an email or password
-  if (!firstName || !lastName) {
-    alert("The information is not complete");
-    return;
-  }
+  const endpoint = BASE_URL + "/linkage/" + _id + "/change";
 
-  // define the route which the FoodBuddy API is handling
-  // login/authentication
-  const endpoint = BASE_URL + `/editlinkage`;
-
-  // POST the email and password to FoodBuddy API to
-  // authenticate user and receive the token explicitly
-  // i.e. data = token
   try {
     let data = await axios({
       url: endpoint,
@@ -243,10 +260,11 @@ export async function editLinkage(newUser) {
       },
       data: JSON.stringify(
         {
+          _id: _id,
           firstName: firstName,
           middleName: middleName,
           lastName: lastName,
-          address: adress,
+          address: address,
           email: email,
           phoneNumber: phoneNumber,
           note: note,
@@ -258,10 +276,36 @@ export async function editLinkage(newUser) {
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);
-    window.location.href = "/";
+    // window.location.href = "/";
     // redirect to homepage -- another way to redirect
   } catch (error) {
     alert(error.message);
+  }
+}
+export async function removeLinkage(newUser) {
+  // unpack user details, email and password
+  const { linkageID } = newUser;
+  const endpoint = BASE_URL + "/linkage/" + linkageID + "/remove";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          _id: linkageID,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+  } catch (error) {
+    alert("Invalid Information");
   }
 }
 

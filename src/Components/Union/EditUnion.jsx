@@ -79,20 +79,21 @@ const EditUnion = (props) => {
   }
   return (
     <section className="ShowUnion">
-      <form class="flex justify-between w-full h-16 mr-4 bg-gray-100 py-3">
+      <form className="showUnionBelow flex justify-between w-full h-16 mr-4 py-3">
         <input
-          class="font-bold text-4xl italic ml-20"
-          placeholder={name}
+          className="font-bold text-4xl ml-20"
+          defaultValue={name}
+          placeholder="Name"
           onChange={(event) => {
             name = event.target.value;
           }}
         />
 
-        <div class="flex space-x-10 mr-4">
+        <div className="flex space-x-10 mr-4">
           <Link to={{ pathname: `/union` }}>
             <button
               onClick={onDelete}
-              class="deleteUnion font-bold rounded mr-10"
+              className="deleteUnion font-bold rounded mr-10"
               id="createTask"
             >
               Delete
@@ -101,7 +102,7 @@ const EditUnion = (props) => {
           <Link to={{ pathname: `/union` }}>
             <button
               onClick={onEdit}
-              class="saveUnion font-bold rounded mr-10"
+              className="saveUnion font-bold rounded mr-10"
               id="createTask"
             >
               Save
@@ -110,54 +111,60 @@ const EditUnion = (props) => {
         </div>
       </form>
 
-      <div class="PendingTasks w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-4 grid-rows-1 gap-x-24">
-        <div class="TaskTitle font-bold text-xl">All Linkages</div>
+      <div className="EditTasks w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-4 grid-rows-1 gap-x-24">
+        <div className="TaskTitle font-bold text-2xl">All Linkages</div>
       </div>
-
-      {linkages.map((item) => {
-        return (
-          <div
-            key={item._id}
-            class=" w-full h-16 mr-4 px-20 py-6 flex flex-col bg-blue-100 grid grid-cols-2 grid-rows-1 gap-x-24"
-          >
-            <div class="">
-              {item.firstName + " " + item.middleName + " " + item.lastName}
-            </div>
-            <div class="flex space-x-10 ml-40">
-              <button
-                class={checkStatus(item._id) ? "add unactive" : "add"}
-                onClick={() => Add(item._id)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24px"
-                  viewBox="0 0 24 24"
-                  width="24px"
-                  fill="#000000"
+      <div className="scrollEditUnion">
+        {linkages.map((item) => {
+          return (
+            <div
+              key={item._id}
+              className=" w-full h-16 mr-4 px-20 py-6 flex flex-col  grid grid-cols-2 grid-rows-1 gap-x-24"
+            >
+              <div className="">
+                {item.firstName + " " + item.middleName + " " + item.lastName}
+              </div>
+              <div className="flex space-x-10 ml-40">
+                <button
+                  className={checkStatus(item._id) ? "add unactive" : "add"}
+                  onClick={() => Add(item._id)}
                 >
-                  <path d="M0 0h24v24H0V0z" fill="none" />
-                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="green" />
-                </svg>
-              </button>
-              <button
-                class={checkStatus(item._id) ? "remove" : "remove unactive"}
-                onClick={() => Remove(item._id)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24px"
-                  viewBox="0 0 24 24"
-                  width="24px"
-                  fill="#000000"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    width="24px"
+                    fill="#000000"
+                  >
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path
+                      d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                      fill="green"
+                    />
+                  </svg>
+                </button>
+                <button
+                  className={
+                    checkStatus(item._id) ? "remove" : "remove unactive"
+                  }
+                  onClick={() => Remove(item._id)}
                 >
-                  <path d="M0 0h24v24H0V0z" fill="none" />
-                  <path d="M19 13H5v-2h14v2z" fill="red" />
-                </svg>
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    width="24px"
+                    fill="#000000"
+                  >
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path d="M19 13H5v-2h14v2z" fill="red" />
+                  </svg>
+                </button>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </section>
   );
 };
