@@ -96,7 +96,7 @@ export default function Union() {
             return (
               <div
                 key={index}
-                class=" PendingTasks w-full h-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-4 gap-x-4 gap-y-4"
+                class=" PendingTasks w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-4 gap-x-4 gap-y-4"
               >
                 <img
                   class="w-20 h-20"
