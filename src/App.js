@@ -60,13 +60,9 @@ function App() {
                 <ProtectedRoute path="/homepage" exact component={HomePage} />
                 <ProtectedRoute path="/union" exact component={Union} />
 
-                <ProtectedRoute
-                  path="/union/:unionID"
-                  exact
-                  component={EditUnion}
-                />
+                <Route path="/union/:unionID" exact component={EditUnion} />
                 <ProtectedRoute path="/linkage" exact component={Linkage} />
-                <ProtectedRoute
+                <Route
                   path="/linkage/:linkageID"
                   exact
                   component={EditLinkageComp}
