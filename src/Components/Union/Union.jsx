@@ -24,18 +24,23 @@ export default function Union() {
   const [active, setActive] = useState(true);
   const showsetActive = () => setActive(!active);
   const { loading, unionContents, error } = GetUnion();
-  console.log(unionContents);
+  // console.log(unionContents);
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div data-testid="Loading">
+        <p>Loading...</p>{" "}
+      </div>
+    );
   }
   if (error) {
     return <p>Something went wrong: {error.message}</p>;
   }
   //delete union function
-  function onDelete(unionID) {
+  function onDelete(unionID, profilePic) {
     //using API function to submit data to FoodBuddy API
     removeUnion({
       unionID: unionID,
+      profilePic: profilePic,
     });
 
     //redirect to homepage
@@ -60,7 +65,7 @@ export default function Union() {
   }
 
   return (
-    <section className="ShowUnion">
+    <section data-testid="Union" className="ShowUnion">
       <div class="flex justify-between w-full h-16 mr-4 py-3">
         <div class="font-bold text-4xl ml-20">Union</div>
         {/* createUnion button */}
@@ -126,7 +131,10 @@ export default function Union() {
                     <GrIcons.GrMail />
                   </button>
 
-                  <button onClick={() => onDelete(item._id)} class="bin h-5">
+                  <button
+                    onClick={() => onDelete(item._id, item.profilePic)}
+                    class="bin h-5"
+                  >
                     <svg
                       width="15"
                       height="15"

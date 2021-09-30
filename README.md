@@ -1,14 +1,12 @@
 # IT_Project-React-Front-End
 ## Table of Contents
 [1. Project Description](#project_description)\
-[2. Demo](#demo)\
-[3. Feature](#feature)\
-[4. Documentation](#documentation)\
-[5. System Requirement](#system_requirement)\
-[6. Technologies Used](#technologies_used)\
-[7. Setup Guide](#setup_guide)\
-[8. Testing](#testing)\
-[9. Release History](#release_history)
+[2. Feature](#feature)\
+[3. Documentation](#documentation)\
+[4. System Requirement](#system_requirement)\
+[5. Technologies Used](#technologies_used)\
+[6. Setup Guide](#setup_guide)\
+[7. Release History](#release_history)
 
 <br /><br />
 <a name = "project_description"></a>
@@ -19,14 +17,10 @@ IT Project (COMP30022) is the capstone project for the Informatics major and the
 ### Project
 This Project aims to have a web apps that document the linkages of the users and could group them in to a group called Union, every linkage will have an attibute called "last in-touch", which records when is the last time the user get in touch with the linkage. Furthermore, users are able to create an event with the linkage. In addition, there is a task section, where users are able to make a task. All the events and tasks will be shown in the calendar.
  
- <br /><br /><br />
- <a name = "demo"></a>
-## 2.0 Demo
-
 
 <br /><br /><br />
 <a name = "feature"></a>
-## 3.0 Feature
+## 2.0 Feature
 
 #### Welcome Page
 A welcome page with discription of the software.
@@ -52,7 +46,7 @@ Show events and tasks in the Calendar Page
 
 <br /><br /><br />
 <a name = "documentation"></a>
-## 4.0 Documentation
+## 3.0 Documentation
 Confluence: 
 https://comp30022-sm2-2021-team022.atlassian.net/wiki/spaces/COMP30022S/overview
 
@@ -73,7 +67,7 @@ https://trello.com/b/qOTGuTqQ/team
 
 <br /><br /><br />
 <a name = "system_requirement"></a>
-## 5.0 System Requirement 
+## 4.0 System Requirement 
 The following table lists the minimum and recommended hardware requirements for the web application.
 
 ### WEB APPLICATION HARDWARE REQUIREMENTS
@@ -99,7 +93,7 @@ Apple Safari (latest publicly-released version) running on the two latest public
 
 <br /><br /><br />
 <a name = "technologies_used"></a>
-## 6.0 Technologies Used:
+## 5.0 Technologies Used:
 ### Front-end
 HTML
 
@@ -115,7 +109,7 @@ https://jestjs.io/
 
 <br /><br /><br />
 <a name = "setup_guide"></a>
-## 7.0 Setup Guide
+## 6.0 Setup Guide
 ### Overview
 The It Peoject application is developed by Reactjs in the front-end and Nodejs and MongoDB databases in the back-end.
 
@@ -142,36 +136,31 @@ Launches the test runner in the interactive watch mode.
 
 
 <br /><br /><br />
-<a name = "testing"></a>
-## 8.0 Testing
-
-
-<br /><br /><br />
 <a name = "release_history"></a>
-## 9.0 Release History
+## 7.0 Release History
 v1.0.0  Feature development from user story ID 1.Finish navbar function, can acess all exist page.
 
-v1.0.0  Feature development from user story ID 10.Finish login function, can login with right account name and password.
+v1.0.0  Feature development from user story ID 8.Finish login function, can login with right account name and password.
 
-v1.0.0  Feature development from user story ID 10.Finish navbar function, can regist with account name and password.
+v1.0.0  Feature development from user story ID 8.Finish navbar function, can regist with account name and password.
 
 v1.0.0  Feature development from user story ID 5.Finish union create function, can create new union.
 
-v1.0.0  Feature development from user story ID 11.Finish union edit and delete function, can delete and edit union.
+v1.0.0  Feature development from user story ID 10.Finish union edit and delete function, can delete and edit union.
 
 v1.0.0  Bug fixed from user story ID 11. Solve the page relod issue.
 
-v1.0.0  Feature development from user story ID 12.Able to send Email to all linkage in same union.
+v1.0.0  Feature development from user story ID 11.Able to send Email to all linkage in same union.
 
 v1.0.0  Feature development from user story ID 1.Adding the top bar on page.
 
 v1.0.0  Feature development from user story ID 2.Finish linkage create function, can create new linkage.
 
-v1.0.0  Feature development from user story ID 12.Able to send email to linkage.
+v1.0.0  Feature development from user story ID 11.Able to send email to linkage.
 
 v1.0.0  Feature development from user story ID 2. Finish the create and delete function for lnkage.
 
-v1.0.0  Feature development from user story ID 13. Able to showing information about linkage and union number on Homepage.
+v1.0.0  Feature development from user story ID 12. Able to showing information about linkage and union number on Homepage.
 <br /><br /><br />
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)

@@ -53,20 +53,28 @@ function App() {
             />
             <div className={inactive ? "contain inactive" : "contain"}>
               <Switch>
-                <Route path="/" exact />
-                <Route path="/homepage" exact component={HomePage} />
+                <Route path="/" exact>
+                  {" "}
+                  <Redirect to="/homepage" />{" "}
+                </Route>
+                <ProtectedRoute path="/homepage" exact component={HomePage} />
                 <ProtectedRoute path="/union" exact component={Union} />
-                <Route path="/union/:unionID" exact component={EditUnion} />
-                <Route path="/linkage" exact component={Linkage} />
-                <Route
+
+                <ProtectedRoute
+                  path="/union/:unionID"
+                  exact
+                  component={EditUnion}
+                />
+                <ProtectedRoute path="/linkage" exact component={Linkage} />
+                <ProtectedRoute
                   path="/linkage/:linkageID"
                   exact
                   component={EditLinkageComp}
                 />
-                <Route path="/task" exact component={Task} />
-                <Route path="/calendar" exact component={Calendar} />
-                <Route path="*" component={() => "404 NOT FOUND"} />
-                <Route exact path="/" />
+                <ProtectedRoute path="/task" exact component={Task} />
+                <ProtectedRoute path="/calendar" exact component={Calendar} />
+                <ProtectedRoute path="*" component={() => "404 NOT FOUND"} />
+                {/* <Route exact path="/" /> */}
               </Switch>
             </div>
           </div>
