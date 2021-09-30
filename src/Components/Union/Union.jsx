@@ -23,9 +23,9 @@ export default function Union() {
   const [active, setActive] = useState(true);
   const showsetActive = () => setActive(!active);
   const { loading, unionContents, error } = GetUnion();
-  console.log(unionContents);
+  // console.log(unionContents);
   if (loading) {
-    return <p>Loading...</p>;
+    return <div data-testid="Loading"><p>Loading...</p> </div>;
   }
   if (error) {
     return <p>Something went wrong: {error.message}</p>;
@@ -61,7 +61,7 @@ export default function Union() {
   }
 
   return (
-    <section className="ShowUnion">
+    <section data-testid="Union" className="ShowUnion">
       <div class="flex justify-between w-full h-16 mr-4 bg-gray-100 py-3">
         <div class="font-bold text-4xl italic ml-20">Union</div>
         {/* createUnion button */}
