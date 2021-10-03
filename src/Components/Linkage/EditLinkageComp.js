@@ -227,7 +227,7 @@ const EditLinkageComp = (props) => {
                     // console.log("unionImage(union.jsx) else ==" + linkageImage);
                     return (
                       <div>
-                        <img
+                        <img class="ml-20"
                           src={URL.createObjectURL(linkageImage)}
                           style={{ width: "150px" }}
                           alt="union upload pic"

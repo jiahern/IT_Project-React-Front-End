@@ -345,14 +345,14 @@ const Linkage = () => {
               <label className="font-bold ml-20 text-xl" htmlFor="Image">
                 Change Profile:
               </label>
-              <div calss="">
+              <div calss="w-80 ml-20 h-20 rounded-lg text-l">
                 {(() => {
                   // console.log("unionImage(union.jsx) ="+ unionImage);
                   if (linkageImage != null && linkageImage) {
                     // console.log("unionImage(union.jsx) else ==" + linkageImage);
                     return (
-                      <div>
-                        <img
+                      <div >
+                        <img class="ml-20"
                           src={URL.createObjectURL(linkageImage)}
                           style={{ width: "150px" }}
                           alt="union upload pic"
@@ -366,7 +366,7 @@ const Linkage = () => {
                 })()}
               </div>
             {/* <p>Hello Wordls s</p> */}
-              <div class="mt-4 flex-col">
+              <div class="w-80 ml-20 h-20 rounded-lg text-l mt-4 flex-col">
                 <input
                   type="file"
                   onChange={(event) => fileSelecterHandler(event.target.files)}
