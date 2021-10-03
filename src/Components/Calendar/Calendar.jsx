@@ -16,6 +16,7 @@ export default function ShowCalendar() {
         
         <section>
             {/* the list and calendar */}
+            {/* https://www.npmjs.com/package/react-calendar */}
         <div class ="flex w-full justify-between mr-4 py-3">
             <div> Hi
             </div>

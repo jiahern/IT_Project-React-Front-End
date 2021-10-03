@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 import { editLinkage, GetOneLinkage } from "../../api";
 import "./EditLinkageComp.css";
 import * as BsIcons from "react-icons/bs";
+const BASE_URL = "http://localhost:5000/";
+//const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
 const EditLinkageComp = (props) => {
   // const { state = {} } = props;
@@ -32,7 +34,12 @@ const EditLinkageComp = (props) => {
   var phoneNumber = linkageContent.phoneNumber;
   var note = linkageContent.note;
   var address = linkageContent.address;
-
+  var profilePic = linkageContent.profilePic;
+  const [linkageImage, setLinkageImage] = useState(null);
+  function fileSelecterHandler(image) {
+    setLinkageImage(image[0]);
+    // console.log("image = ", image[0]);
+  }
   // const [inactive, setInactive] = useState(props.statusInactive);
   // console.log("inside= " + inactive);
 
@@ -52,9 +59,10 @@ const EditLinkageComp = (props) => {
       email: email,
       phoneNumber: phoneNumber,
       note: note,
+      profilePic: linkageImage,
     });
     // redirect to homepage
-    // window.location.reload();
+    window.location.href="/linkage";
     // console.log(window.location);
   }
   return (
@@ -83,7 +91,13 @@ const EditLinkageComp = (props) => {
 
       <div className="inputPage flex flex-col space-y-4 h-100">
         <div className="linkage-pic">
-          <BsIcons.BsFillPersonFill className="w-20 h-20" />
+          {/* <BsIcons.BsFillPersonFill className="w-20 h-20" />
+           */}
+           <img
+                  class="w-20 h-20"
+                  src={BASE_URL + profilePic}
+                  alt="Union Profile Pic"
+                />
         </div>
         <div className="inputPage h-100">
           <form
@@ -206,6 +220,33 @@ const EditLinkageComp = (props) => {
                 note = event.target.value;
               }}
             />
+            <div calss="w-80 ml-20 h-20 rounded-lg text-l">
+                {(() => {
+                  // console.log("unionImage(union.jsx) ="+ unionImage);
+                  if (linkageImage != null && linkageImage) {
+                    // console.log("unionImage(union.jsx) else ==" + linkageImage);
+                    return (
+                      <div>
+                        <img
+                          src={URL.createObjectURL(linkageImage)}
+                          style={{ width: "150px" }}
+                          alt="union upload pic"
+                        />
+                      </div>
+                    );
+                  } else {
+                    // console.log("unionImage(union.jsx) =" + linkageImage);
+                    return <div class="flex"></div>;
+                  }
+                })()}
+              </div>
+            {/* <p>Hello Wordls s</p> */}
+              <div class="w-80 ml-20 h-20 rounded-lg text-l mt-4 flex-col">
+                <input
+                  type="file"
+                  onChange={(event) => fileSelecterHandler(event.target.files)}
+                />
+              </div>
 
             {/* <label className="font-bold ml-20 text-xl" htmlFor="Image">
               Change Profile:

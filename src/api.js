@@ -168,7 +168,7 @@ export function UseLinkages() {
 //Create New Linkage
 export async function createLinkage(newUser) {
   // unpack user details, email and password
-  const { firstName, middleName, lastName, address, email, phoneNumber, note } =
+  const { firstName, middleName, lastName, address, email, phoneNumber, note, linkageImage} =
     newUser;
 
   // if the user did not enter an email or password
@@ -176,7 +176,13 @@ export async function createLinkage(newUser) {
     alert("The information is not complete");
     return;
   }
+  if (!linkageImage){
 
+  }
+  else if (!linkageImage.name.match(/.(jpg|jpeg|png|)$/i)) {
+    alert("please upload only image to Linkage Image");
+    return;
+  }
   // define the route which the FoodBuddy API is handling
   // login/authentication
   const endpoint = BASE_URL + `/linkage`;
@@ -185,37 +191,28 @@ export async function createLinkage(newUser) {
   // authenticate user and receive the token explicitly
   // i.e. data = token
   try {
-    let data = await axios({
-      url: endpoint,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify(
-        {
-          firstName: firstName,
-          middleName: middleName,
-          lastName: lastName,
-          address: address,
-          email: email,
-          phoneNumber: phoneNumber,
-          note: note,
-          linkedSince: Date.now,
-          lastConnection: Date.now,
-        },
-        { withCredentials: true } // IMPORTANT
-      ),
-    }).then((res) => res.data);
+    const fd = new FormData();
+    fd.append("linkageImage", linkageImage);
+    fd.append("firstName", firstName);
+    fd.append("middleName", middleName);
+    fd.append("lastName", lastName);
+    fd.append("address", address);
+    fd.append("email", email);
+    fd.append("phoneNumber", phoneNumber);
+    fd.append("note", note);
+    fd.append("linkedSince", Date.now);
+    fd.append("lastConnection", Date.now);
 
-    // put token ourselves in the local storage, we will
-    // send the token in the request header to the API server
-    // console.log(data);
+    await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
+      // console.log(res);
+      return res.data;
+    });
     window.location.href = "/";
     // redirect to homepage -- another way to redirect
   } catch (error) {
     alert(error.message);
   }
-}
+} 
 
 //Get One Linkage
 export function GetOneLinkage(linkageID) {
@@ -227,7 +224,7 @@ export function GetOneLinkage(linkageID) {
       linkageContent = item;
     }
   });
-  console.log(linkageContent);
+  // console.log(linkageContent);
   return {
     loading,
     linkageContent,
@@ -247,36 +244,29 @@ export async function editLinkage(newUser) {
     email,
     phoneNumber,
     note,
+    profilePic,
   } = newUser;
 
   const endpoint = BASE_URL + "/linkage/" + _id + "/change";
 
   try {
-    let data = await axios({
-      url: endpoint,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify(
-        {
-          _id: _id,
-          firstName: firstName,
-          middleName: middleName,
-          lastName: lastName,
-          address: address,
-          email: email,
-          phoneNumber: phoneNumber,
-          note: note,
-        },
-        { withCredentials: true } // IMPORTANT
-      ),
-    }).then((res) => res.data);
+    const fd = new FormData();
+    fd.append("_id", _id);
+    fd.append("linkageImage", profilePic);
+    fd.append("firstName", firstName);
+    fd.append("middleName", middleName);
+    fd.append("lastName", lastName);
+    fd.append("address", address);
+    fd.append("email", email);
+    fd.append("phoneNumber", phoneNumber);
+    fd.append("note", note);
 
-    // put token ourselves in the local storage, we will
-    // send the token in the request header to the API server
-    // console.log(data);
-    // window.location.href = "/";
+    await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
+      // console.log(res);
+      return res.data;
+    });
+  
+    window.location.href = "/linkage";
     // redirect to homepage -- another way to redirect
   } catch (error) {
     alert(error.message);
@@ -284,7 +274,7 @@ export async function editLinkage(newUser) {
 }
 export async function removeLinkage(newUser) {
   // unpack user details, email and password
-  const { linkageID } = newUser;
+  const { linkageID, profilePic } = newUser;
   const endpoint = BASE_URL + "/linkage/" + linkageID + "/remove";
   try {
     let data = await axios({
@@ -296,6 +286,7 @@ export async function removeLinkage(newUser) {
       data: JSON.stringify(
         {
           _id: linkageID,
+          profilePic: profilePic
         },
         { withCredentials: true } // IMPORTANT
       ),
