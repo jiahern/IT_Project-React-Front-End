@@ -16,10 +16,11 @@ import Union from "./Components/Union/Union";
 import EditUnion from "./Components/Union/EditUnion";
 import Linkage from "./Components/Linkage/Linkage";
 import Task from "./Pages/Task";
-import Calendar from "./Pages/Calendar";
+// import Calendar from "./Pages/Calendar";
 import RegisterForm from "./Components/Register/register";
 import Cookies from "js-cookie";
 import EditLinkageComp from "./Components/Linkage/EditLinkageComp";
+import ShowCalendar from "./Components/Calendar/Calendar";
 
 function App() {
   const [inactive, setInactive] = useState(false);
@@ -68,7 +69,7 @@ function App() {
                   component={EditLinkageComp}
                 />
                 <ProtectedRoute path="/task" exact component={Task} />
-                <ProtectedRoute path="/calendar" exact component={Calendar} />
+                <ProtectedRoute path="/calendar" exact component={ShowCalendar} />
                 <ProtectedRoute path="*" component={() => "404 NOT FOUND"} />
                 {/* <Route exact path="/" /> */}
               </Switch>
