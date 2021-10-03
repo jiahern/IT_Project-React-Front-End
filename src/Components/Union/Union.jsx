@@ -48,7 +48,7 @@ export default function Union() {
   }
   function fileSelecterHandler(image) {
     setUnionImage(image[0]);
-    console.log("image = ", image[0]);
+    // console.log("image = ", image[0]);
   }
 
   function setEmail(item) {
@@ -185,7 +185,7 @@ export default function Union() {
               {(() => {
                 // console.log("unionImage(union.jsx) ="+ unionImage);
                 if (unionImage != null && unionImage) {
-                  console.log("unionImage(union.jsx) else ==" + unionImage);
+                  // console.log("unionImage(union.jsx) else ==" + unionImage);
                   return (
                     <div>
                       <img
@@ -196,7 +196,7 @@ export default function Union() {
                     </div>
                   );
                 } else {
-                  console.log("unionImage(union.jsx) =" + unionImage);
+                  // console.log("unionImage(union.jsx) =" + unionImage);
                   return <div class="flex"></div>;
                 }
               })()}

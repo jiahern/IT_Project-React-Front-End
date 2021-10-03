@@ -7,19 +7,22 @@ import { createLinkage, UseLinkages, removeLinkage } from "../../api";
 import EditLinkageComp from "./EditLinkageComp";
 import * as BsIcons from "react-icons/bs";
 import * as GrIcons from "react-icons/gr";
+const BASE_URL = "http://localhost:5000/";
+//const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
 const Linkage = () => {
   const [inactive, setInactive] = useState(false);
-  console.log("outside= " + inactive);
+  // console.log("outside= " + inactive);
 
   const showsetInactive = (id) => {
     setInactive(!inactive);
   };
   //delete union function
-  function onDelete(linkageID) {
+  function onDelete(linkageID, profilePic) {
     //using API function to submit data to FoodBuddy API
     removeLinkage({
       linkageID: linkageID,
+      profilePic: profilePic,
     });
 
     //redirect to homepage
@@ -37,6 +40,7 @@ const Linkage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [event, setEvent] = useState("");
   const [note, setNote] = useState("");
+  const [linkageImage, setLinkageImage] = useState(null);
   function createSave() {
     createLinkage({
       firstName: firstName,
@@ -47,6 +51,7 @@ const Linkage = () => {
       phoneNumber: phoneNumber,
       event: event,
       note: note,
+      linkageImage: linkageImage,
     });
     // redirect to homepage
     window.location.reload();
@@ -55,6 +60,10 @@ const Linkage = () => {
 
   function addLinkagePage() {
     setActive(!active);
+  }
+  function fileSelecterHandler(image) {
+    setLinkageImage(image[0]);
+    // console.log("image = ", image[0]);
   }
   function editLinkagePage() {
     setEditActive(!editActive);
@@ -116,7 +125,12 @@ const Linkage = () => {
           return (
             <section key={index}>
               <div className="Linkage w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-5 gap-x-4 gap-y-4">
-                <BsIcons.BsFillPersonFill className="w-20 h-20" />
+                {/* <BsIcons.BsFillPersonFill className="w-20 h-20" /> */}
+                <img
+                  class="w-20 h-20"
+                  src={BASE_URL + item.profilePic}
+                  alt="Union Profile Pic"
+                />
                 <span className="py-6">
                   {item.firstName + " " + item.middleName + " " + item.lastName}
                 </span>
@@ -167,7 +181,7 @@ const Linkage = () => {
                   </button>
                   <button
                     className="bin h-5"
-                    onClick={() => onDelete(item._id)}
+                    onClick={() => onDelete(item._id, item.profilePic)}
                   >
                     <svg
                       width="15"
@@ -331,12 +345,33 @@ const Linkage = () => {
               <label className="font-bold ml-20 text-xl" htmlFor="Image">
                 Change Profile:
               </label>
-              <input
-                className="mt-40 ml-20"
-                type="file"
-                id="Image"
-                name="filename"
-              />
+              <div calss="w-80 ml-20 h-20 rounded-lg text-l">
+                {(() => {
+                  // console.log("unionImage(union.jsx) ="+ unionImage);
+                  if (linkageImage != null && linkageImage) {
+                    // console.log("unionImage(union.jsx) else ==" + linkageImage);
+                    return (
+                      <div >
+                        <img class="ml-20"
+                          src={URL.createObjectURL(linkageImage)}
+                          style={{ width: "150px" }}
+                          alt="union upload pic"
+                        />
+                      </div>
+                    );
+                  } else {
+                    // console.log("unionImage(union.jsx) =" + linkageImage);
+                    return <div class="flex"></div>;
+                  }
+                })()}
+              </div>
+            {/* <p>Hello Wordls s</p> */}
+              <div class="w-80 ml-20 h-20 rounded-lg text-l mt-4 flex-col">
+                <input
+                  type="file"
+                  onChange={(event) => fileSelecterHandler(event.target.files)}
+                />
+              </div>
               <input
                 className="saveCreateButton ml-96 mt-4 font-bold rounded-xl"
                 type="submit"
