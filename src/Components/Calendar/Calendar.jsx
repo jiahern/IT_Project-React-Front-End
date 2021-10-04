@@ -8,6 +8,7 @@ import { GetCalendar } from "../../api";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import eventLogo from "./event.png"
+import CsvDownload from 'react-json-to-csv'
 // var eventLogo = require('./event.png')
 
 
@@ -36,6 +37,8 @@ export default function ShowCalendar() {
     if (error) {
         return <p>Something went wrong: {error.message}</p>;
     }
+
+
     function calculate_remaining(time){
         // (new Date(time).getDate() - new Date().getDate())
         var Difference_In_Time = new Date(time).getTime() - new Date().getTime();
@@ -46,6 +49,7 @@ export default function ShowCalendar() {
     return (
         <React.Fragment children>
     <div className="flex justify-between w-full h-18 mr-4 py-3">
+    <script src="https://cdn.jsdelivr.net/npm/react-json-to-csv"></script>
         <div className="font-bold text-4xl ml-20">Calendar</div>
         {/* <div className="flex space-x-4">
           <div className="searchBox">
@@ -80,10 +84,13 @@ export default function ShowCalendar() {
             className="export_task border-x border-black font-bold rounded mr-10"
             id="createTask"
           >
-            <div className = "py-1">
-                <FaIcons.FaFileExport/> 
+            <CsvDownload data={calendarContents} >
+            <div className=" flex  space-x-10 mr-4">
+                <div className = "py-1 font-bold">
+                    <FaIcons.FaFileExport/> 
+                </div> &#160; Export CSV
             </div>
-            &#160; Export CSV
+            </CsvDownload>
           </button>
         </div>
       </div>
@@ -131,15 +138,15 @@ export default function ShowCalendar() {
                                 })()}
                             </span>
                             <div className="FrindSince h-5 ml-2 py-6 px-6">
-                                {calculate_remaining(item.dateTime)}
+                                {calculate_remaining(item.StartTime)}
                                 {/* {new Date(item.dateTime) - new Date()} */}
                             </div>
                             <div className="LastInTouch h-5 ml-4 py-6 px-6">
-                                {new Date(item.dateTime).toLocaleDateString()}
+                                {new Date(item.StartTime).toLocaleDateString()}
                             </div>
                             <div className="flex space-x-5 px-10 py-6 ml-5">
                             <button
-                                onClick={()=>showsetActive2(item.dateTime)}
+                                onClick={()=>showsetActive2(item.StartTime)}
                                 className="export_task border-x border-black font-bold rounded mr-10"
                                 id="createTask"
                                 >
@@ -210,7 +217,10 @@ export default function ShowCalendar() {
             <div className="font-bold text-4xl ml-20">Schedule</div>
             {/* https://www.youtube.com/watch?v=iNkryf_TtZw */}
             <div class="py-6">
-                <ScheduleComponent currentView="Month">
+                <ScheduleComponent
+                currentView="Week"
+                eventSettings={ { dataSource: calendarContents} }
+                >
                     <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
                 </ScheduleComponent>
             </div>

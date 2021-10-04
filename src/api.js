@@ -494,16 +494,18 @@ function userCalendar() {
     const responseTask = responses[0].data;
     const responseEvent = responses[1].data;
     responseTask.forEach(element => {
-      element.type = "Task"
+      element.type = "Task";
+      element.Subject = element.name;
+      element.IsAllDay = false;
     });
     responseEvent.forEach(element => {
-      element.type = "Event"
+      element.type = "Event";
+      element.Subject = element.name;
+      // element.StartTime = new Date(element.dateTime);
+      element.IsAllDay = false;
     });
-    // console.log("responseTask = ",responseTask);
-    // console.log("responseEvent = ",responseEvent);
     const response_merge = responseEvent.concat(responseTask);
-    // console.log("response_merge = ",response_merge);
-    const sortedResponse = response_merge.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
+    const sortedResponse = response_merge.sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
     return sortedResponse;
   }))
 }
