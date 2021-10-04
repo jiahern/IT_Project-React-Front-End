@@ -5,17 +5,23 @@ import {render} from "react-dom";
 // import 'react-calendar/dist/Calendar.css';
 import {Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda} from '@syncfusion/ej2-react-schedule';
 import { GetTask } from "../../api";
-import * as AiIcons from "react-icons/ai";
 import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+
 
 export default function ShowCalendar() {
     const [date1, setDate1] = useState(new Date());
 
-    const onChange = date1 => {
-        setDate1(date1);
-    }
+    // function updateDate(time){
+    //     setDate1(new Date(time));
+    // }
     const [active, setActive] = useState(true);
     const showsetActive = () => setActive(!active);
+    
+    function showsetActive2(time){
+        setActive(!active);
+        setDate1(new Date(time));
+    }
     const { loading, taskContents, error } = GetTask();
     // console.log(unionContents);
     if (loading) {
@@ -39,7 +45,7 @@ export default function ShowCalendar() {
         <React.Fragment children>
     <div className="flex justify-between w-full h-18 mr-4 py-3">
         <div className="font-bold text-4xl ml-20">Calendar</div>
-        <div className="flex space-x-4">
+        {/* <div className="flex space-x-4">
           <div className="searchBox">
             <input
               className="w-80 h-10 rounded text-2xl "
@@ -65,7 +71,7 @@ export default function ShowCalendar() {
               </svg>
             </button>
           </div>
-        </div>
+        </div> */}
         <div className=" flex  space-x-10 mr-4">
           <button
             // onClick={addLinkagePage}
@@ -73,7 +79,7 @@ export default function ShowCalendar() {
             id="createTask"
           >
             <div className = "py-1">
-                <AiIcons.AiOutlineExport/> 
+                <FaIcons.FaFileExport/> 
             </div>
             &#160; Export CSV
           </button>
@@ -116,23 +122,54 @@ export default function ShowCalendar() {
                             </div>
                             <div className="flex space-x-5 px-10 py-6 ml-5">
                             <button
-                                onClick={showsetActive}
+                                onClick={()=>showsetActive2(item.dateTime)}
                                 className="export_task border-x border-black font-bold rounded mr-10"
                                 id="createTask"
                                 >
                                     <div className = "py-1">
                                         <FaIcons.FaCalendarPlus />
                                     </div>
-                                    &#160; Edit
+                                    &#160; Show
                             </button>
                             </div>
                         </div>
-                    </section>
+                   
+                    <div class={active ? "view_calendar_page inactive" : "view_calendar_page rounded-2xl"}> 
+                    <div >
+                        <button onClick={showsetActive} class="backButton">
+                            <svg
+                            class="h-20 w-20"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="24px"
+                            viewBox="0 0 24 24"
+                            width="24px"
+                            fill="#000000"
+                            >
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                            </svg>
+                        </button>
+                        <Calendar  value={date1}/>
+                        <div class="d-flex justify-content-center py-6">
+                            
+                            <button 
+                            className="export_task border-x border-black font-bold rounded mr-30" 
+                            // onClick={}
+                            >
+                                <div className = "py-1">
+                                <AiIcons.AiFillEdit />
+                                </div>
+                                &#160;&#160;Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                </section>
                 );
                 })}
             </div>
 
-            <div class={active ? "view_calendar_page inactive" : "view_calendar_page rounded-2xl"}> 
+            {/* <div class={active ? "view_calendar_page inactive" : "view_calendar_page rounded-2xl"}> 
                 <div >
                     <button onClick={showsetActive} class="backButton">
                         <svg
@@ -149,10 +186,10 @@ export default function ShowCalendar() {
                     </button>
                     <Calendar  onChange={onChange} value={date1}/>
                 </div>
-            </div>
+            </div> */}
         {/* </div> */}
 
-        <div class = "py-32">
+        <div class = "py-16">
             <div className="font-bold text-4xl ml-20">Schedule</div>
             {/* https://www.youtube.com/watch?v=iNkryf_TtZw */}
             <div class="py-6">
