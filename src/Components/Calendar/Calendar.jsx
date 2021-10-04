@@ -4,9 +4,12 @@ import "./calendar.css";
 import {render} from "react-dom";
 // import 'react-calendar/dist/Calendar.css';
 import {Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda} from '@syncfusion/ej2-react-schedule';
-import { GetTask } from "../../api";
+import { GetCalendar } from "../../api";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
+import eventLogo from "./event.png"
+import CsvDownload from 'react-json-to-csv'
+// var eventLogo = require('./event.png')
 
 
 export default function ShowCalendar() {
@@ -22,7 +25,7 @@ export default function ShowCalendar() {
         setActive(!active);
         setDate1(new Date(time));
     }
-    const { loading, taskContents, error } = GetTask();
+    const { loading, calendarContents, error } = GetCalendar();
     // console.log(unionContents);
     if (loading) {
         return (
@@ -34,16 +37,19 @@ export default function ShowCalendar() {
     if (error) {
         return <p>Something went wrong: {error.message}</p>;
     }
+
+
     function calculate_remaining(time){
         // (new Date(time).getDate() - new Date().getDate())
         var Difference_In_Time = new Date(time).getTime() - new Date().getTime();
         var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
-        var Difference_In_Hours = ((Difference_In_Time / (1000 * 3600 * 24) - Math.floor(Difference_In_Time / (1000 * 3600 * 24)))*24).toFixed(1);
+        var Difference_In_Hours = ((Difference_In_Time / (1000 * 3600 * 24) - Math.floor(Difference_In_Time / (1000 * 3600 * 24)))*24).toFixed(0);
         return (<div>{Difference_In_Days} days {Difference_In_Hours} hours</div>)
     }
     return (
         <React.Fragment children>
     <div className="flex justify-between w-full h-18 mr-4 py-3">
+    <script src="https://cdn.jsdelivr.net/npm/react-json-to-csv"></script>
         <div className="font-bold text-4xl ml-20">Calendar</div>
         {/* <div className="flex space-x-4">
           <div className="searchBox">
@@ -78,17 +84,20 @@ export default function ShowCalendar() {
             className="export_task border-x border-black font-bold rounded mr-10"
             id="createTask"
           >
-            <div className = "py-1">
-                <FaIcons.FaFileExport/> 
+            <CsvDownload data={calendarContents} >
+            <div className=" flex  space-x-10 mr-4">
+                <div className = "py-1 font-bold">
+                    <FaIcons.FaFileExport/> 
+                </div> &#160; Export CSV
             </div>
-            &#160; Export CSV
+            </CsvDownload>
           </button>
         </div>
       </div>
 
       <div className="LinkageTitle text-1xl w-full h-16 mr-4 px-20 py-6 flex flex-col  grid grid-cols-4 grid-rows-1 gap-x-24">
         <div className="font-bold  grid grid-cols-2 gap-x-4">
-          <div className="TaskTitle">Month</div>
+          <div className="TaskTitle">Name</div>
         </div>
         {/* <div className="CreateTitle font-bold">Type</div> */}
         <div className="CreateTitle font-bold">Time Remaining</div>
@@ -102,27 +111,42 @@ export default function ShowCalendar() {
         {/* <div class ="flex w-full justify-between mr-4 py-3"> */}
 
             <div className="scrollCalendar"> 
-                {taskContents.map((item, index) => {
+                {calendarContents.map((item, index) => {
                     return (
                     <section key={index}>
                         <div className="Linkage w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-4 gap-x-4 gap-y-4">
-                            {/* <BsIcons.BsFillPersonFill className="w-20 h-20" /> */}
-                            {/* <div key={index} class=" PendingTasks w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-4 gap-x-4 gap-y-4">
-                                {item.name}
-                            </div> */}
                             <span className="py-6">
-                            {item.name}
+                            {(() => {
+                                if (item.type === "Task") {
+                                    return (
+                                    <div class="flex">
+                                        <div className = "">
+                                            <FaIcons.FaTasks class="w-8 h-8" />
+                                        </div> 
+                                        &#160;&#160;{item.name}
+                                    </div>
+                                    );
+                                } else {
+                                    
+                                    return(
+                                    <div class="flex">
+                                        <img class="w-8 h-8" src={eventLogo} alt="" />
+                                        &#160;&#160;{item.name}
+                                    </div>
+                                    )
+                                }
+                                })()}
                             </span>
                             <div className="FrindSince h-5 ml-2 py-6 px-6">
-                                {calculate_remaining(item.dateTime)}
+                                {calculate_remaining(item.StartTime)}
                                 {/* {new Date(item.dateTime) - new Date()} */}
                             </div>
                             <div className="LastInTouch h-5 ml-4 py-6 px-6">
-                                {new Date(item.dateTime).toLocaleDateString()}
+                                {new Date(item.StartTime).toLocaleDateString()}
                             </div>
                             <div className="flex space-x-5 px-10 py-6 ml-5">
                             <button
-                                onClick={()=>showsetActive2(item.dateTime)}
+                                onClick={()=>showsetActive2(item.StartTime)}
                                 className="export_task border-x border-black font-bold rounded mr-10"
                                 id="createTask"
                                 >
@@ -134,7 +158,7 @@ export default function ShowCalendar() {
                             </div>
                         </div>
                    
-                    <div class={active ? "view_calendar_page inactive" : "view_calendar_page rounded-2xl"}> 
+                    <div class={active ? "view_calendar_page inactive" : "view_calendar_page  rounded-2xl"}> 
                     <div >
                         <button onClick={showsetActive} class="backButton">
                             <svg
@@ -193,7 +217,10 @@ export default function ShowCalendar() {
             <div className="font-bold text-4xl ml-20">Schedule</div>
             {/* https://www.youtube.com/watch?v=iNkryf_TtZw */}
             <div class="py-6">
-                <ScheduleComponent currentView="Month">
+                <ScheduleComponent
+                currentView="Week"
+                eventSettings={ { dataSource: calendarContents} }
+                >
                     <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
                 </ScheduleComponent>
             </div>
