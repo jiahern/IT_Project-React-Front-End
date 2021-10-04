@@ -477,18 +477,44 @@ export function GetUserProfile() {
 }
 
 // get the tasks of the user
-function userTask() {
-  const endpoint = BASE_URL + "/task";
-  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+function userCalendar() {
+  const endpoint1 = BASE_URL + "/task";
+  const endpoint2 = BASE_URL + "/linkage/event";
+  const requestTask = axios.get(endpoint1, { withCredentials: true })
+  const requestEvent = axios.get(endpoint2, { withCredentials: true })  
+  // return axios.get(endpoint2, { withCredentials: true })
+  // .then((res) => {
+  //   res = res.data
+  //   const sortedActivities = res.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
+  //   console.log("sortedActivities = ",sortedActivities);
+
+  //   return res
+  // });
+  return axios.all([requestTask, requestEvent]).then(axios.spread((...responses) => {
+    const responseTask = responses[0].data;
+    const responseEvent = responses[1].data;
+    responseTask.forEach(element => {
+      element.type = "Task"
+    });
+    responseEvent.forEach(element => {
+      element.type = "Event"
+    });
+    // console.log("responseTask = ",responseTask);
+    // console.log("responseEvent = ",responseEvent);
+    const response_merge = responseEvent.concat(responseTask);
+    // console.log("response_merge = ",response_merge);
+    const sortedResponse = response_merge.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
+    return sortedResponse;
+  }))
 }
-export function GetTask() {
+export function GetCalendar() {
   const [loading, setLoading] = useState(true);
-  const [taskContents, setTask] = useState([]);
+  const [calendarContents, setTask] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
-    userTask()
-      .then((taskContents) => {
-        setTask(taskContents);
+    userCalendar()
+      .then((calendarContents) => {
+        setTask(calendarContents);
         setLoading(false);
       })
       .catch((e) => {
@@ -500,7 +526,7 @@ export function GetTask() {
 
   return {
     loading,
-    taskContents,
+    calendarContents,
     error,
   };
 }
