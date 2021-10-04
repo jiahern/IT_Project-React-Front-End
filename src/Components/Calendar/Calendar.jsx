@@ -28,7 +28,13 @@ export default function ShowCalendar() {
     if (error) {
         return <p>Something went wrong: {error.message}</p>;
     }
-
+    function calculate_remaining(time){
+        // (new Date(time).getDate() - new Date().getDate())
+        var Difference_In_Time = new Date(time).getTime() - new Date().getTime();
+        var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
+        var Difference_In_Hours = ((Difference_In_Time / (1000 * 3600 * 24) - Math.floor(Difference_In_Time / (1000 * 3600 * 24)))*24).toFixed(1);
+        return (<div>{Difference_In_Days} days {Difference_In_Hours} hours</div>)
+    }
     return (
         <React.Fragment children>
     <div className="flex justify-between w-full h-18 mr-4 py-3">
@@ -102,7 +108,8 @@ export default function ShowCalendar() {
                             {item.name}
                             </span>
                             <div className="FrindSince h-5 ml-2 py-6 px-6">
-                                {new Date(item.dateTime).toLocaleDateString()}
+                                {calculate_remaining(item.dateTime)}
+                                {/* {new Date(item.dateTime) - new Date()} */}
                             </div>
                             <div className="LastInTouch h-5 ml-4 py-6 px-6">
                                 {new Date(item.dateTime).toLocaleDateString()}
@@ -145,11 +152,14 @@ export default function ShowCalendar() {
             </div>
         {/* </div> */}
 
-        <div>
+        <div class = "py-32">
+            <div className="font-bold text-4xl ml-20">Schedule</div>
             {/* https://www.youtube.com/watch?v=iNkryf_TtZw */}
-            <ScheduleComponent currentView="Month">
-                <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
-            </ScheduleComponent>
+            <div class="py-6">
+                <ScheduleComponent currentView="Month">
+                    <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
+                </ScheduleComponent>
+            </div>
         </div>
         </section>
         </React.Fragment>
