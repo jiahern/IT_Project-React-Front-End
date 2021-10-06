@@ -496,13 +496,17 @@ function userCalendar() {
     responseTask.forEach(element => {
       element.type = "Task";
       element.Subject = element.name;
+      element.ResourceID = 1;
       element.IsAllDay = false;
+      // element.IsReadonly = true;
     });
     responseEvent.forEach(element => {
       element.type = "Event";
       element.Subject = element.name;
+      element.ResourceID = 2;
       // element.StartTime = new Date(element.dateTime);
       element.IsAllDay = false;
+      // element.IsReadonly = true;
     });
     const response_merge = responseEvent.concat(responseTask);
     const sortedResponse = response_merge.sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
