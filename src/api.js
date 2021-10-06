@@ -476,10 +476,10 @@ export function GetUserProfile() {
   };
 }
 
-// get the tasks of the user
+// get the tasks and events of the user
 function userCalendar() {
-  const endpoint1 = BASE_URL + "/task";
-  const endpoint2 = BASE_URL + "/linkage/event";
+  const endpoint1 = BASE_URL + "/task/pending";
+  const endpoint2 = BASE_URL + "/linkage/event/pending";
   const requestTask = axios.get(endpoint1, { withCredentials: true })
   const requestEvent = axios.get(endpoint2, { withCredentials: true })  
   // return axios.get(endpoint2, { withCredentials: true })
