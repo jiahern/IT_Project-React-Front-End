@@ -3,7 +3,8 @@ import Calendar from "react-calendar";
 import "./calendar.css";
 import {render} from "react-dom";
 // import 'react-calendar/dist/Calendar.css';
-import {Inject, ScheduleComponent, Day, Week, WorkWeek, Month, Agenda} from '@syncfusion/ej2-react-schedule';
+import {Inject, ScheduleComponent, Day, Week, WorkWeek, Month, 
+    Agenda, ResourceDirective, ResourcesDirective} from '@syncfusion/ej2-react-schedule';
 import { GetCalendar } from "../../api";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
@@ -15,6 +16,10 @@ import CsvDownload from 'react-json-to-csv'
 export default function ShowCalendar() {
     const [date1, setDate1] = useState(new Date());
 
+    const resourceDataSource = [
+        {Name:"Event", Id:2, Color:"#ea7a57"},
+        {Name:"Task", Id:1, Color:"#357CD2"},
+    ]
     // function updateDate(time){
     //     setDate1(new Date(time));
     // }
@@ -218,9 +223,16 @@ export default function ShowCalendar() {
             {/* https://www.youtube.com/watch?v=iNkryf_TtZw */}
             <div class="py-6">
                 <ScheduleComponent
+                width="99%"
+                // height="1000px"
                 currentView="Week"
                 eventSettings={ { dataSource: calendarContents} }
                 >
+                    <ResourcesDirective>
+                        <ResourceDirective field="ResourceID" title="Resource Name" name ="Resources"
+                        textField="Name" idField="Id" colorField="Color" dataSource={resourceDataSource}>
+                        </ResourceDirective>
+                    </ResourcesDirective>
                     <Inject services={[Day, Week, WorkWeek, Month, Agenda]}/>
                 </ScheduleComponent>
             </div>
