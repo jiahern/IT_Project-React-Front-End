@@ -7,6 +7,8 @@ import { createLinkage, UseLinkages, removeLinkage } from "../../api";
 import EditLinkageComp from "./EditLinkageComp";
 import * as BsIcons from "react-icons/bs";
 import * as GrIcons from "react-icons/gr";
+import * as HiIcons from "react-icons/hi";
+
 const BASE_URL = "http://localhost:5000/";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
@@ -71,7 +73,7 @@ const Linkage = () => {
   return (
     <React.Fragment children>
       <div className="flex justify-between w-full h-18 mr-4 py-3">
-        <div className="font-bold text-4xl ml-20">Linkage</div>
+        <div className="LinkageTitleText font-bold text-4xl ml-20">Linkage</div>
         <div className="flex space-x-4">
           <div className="searchBox">
             <input
@@ -84,25 +86,14 @@ const Linkage = () => {
           </div>
           <div>
             <button className="searchLinkage">
-              <svg
-                width="40"
-                height="34"
-                viewBox="0 0 40 34"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M25.8333 19.8333H24.5167L24.05 19.4508C25.6833 17.8358 26.6667 15.7392 26.6667 13.4583C26.6667 8.3725 21.8167 4.25 15.8333 4.25C9.85 4.25 5 8.3725 5 13.4583C5 18.5442 9.85 22.6667 15.8333 22.6667C18.5167 22.6667 20.9833 21.8308 22.8833 20.4425L23.3333 20.8392V21.9583L31.6667 29.0275L34.15 26.9167L25.8333 19.8333ZM15.8333 19.8333C11.6833 19.8333 8.33333 16.9858 8.33333 13.4583C8.33333 9.93083 11.6833 7.08333 15.8333 7.08333C19.9833 7.08333 23.3333 9.93083 23.3333 13.4583C23.3333 16.9858 19.9833 19.8333 15.8333 19.8333Z"
-                  fill="black"
-                />
-              </svg>
+              <HiIcons.HiOutlineSearch className="searchIcon" />
             </button>
           </div>
         </div>
         <div className=" flex space-x-10 mr-4">
           <button
             onClick={addLinkagePage}
-            className="newUnion border-x border-black font-bold rounded mr-10"
+            className="newUnion border-x border-black rounded mr-10"
             id="createTask"
           >
             + Add Linkage
@@ -110,13 +101,13 @@ const Linkage = () => {
         </div>
       </div>
 
-      <div className="LinkageTitle text-1xl w-full h-16 mr-4 px-20 py-6 flex flex-col  grid grid-cols-5 grid-rows-1 gap-x-24">
+      <div className="LinkageTitle text-1xl w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-5 grid-rows-1 gap-x-24">
         <div className="font-bold  grid grid-cols-2 gap-x-4">
           <div className="TaskTitle">Name</div>
         </div>
         <div className="StatusTitle"></div>
-        <div className="CreateTitle font-bold">Friend Since</div>
-        <div className="ActionTitle font-bold">Last In Touch</div>
+        <div className="CreateTitle ">Friend Since</div>
+        <div className="ActionTitle ">Last In Touch</div>
         <div className=""></div>
       </div>
       {/* linkage content */}
@@ -226,7 +217,7 @@ const Linkage = () => {
             </svg>
           </button>
 
-          <div className="font-bold text-4xl mt-8 mr-8">New Linkage</div>
+          <div className="text-4xl mt-8 mr-8">New Linkage</div>
         </div>
 
         <div className="inputPage flex flex-col space-y-4 h-100">
@@ -235,7 +226,7 @@ const Linkage = () => {
           </div>
           <div className="inputPage h-100">
             <form className="flex flex-col space-y-2" action="#">
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
+              <label className="ml-20 text-xl" htmlFor="Name">
                 Contact Information:
               </label>
               <div className="flex space-x-4">
@@ -273,7 +264,7 @@ const Linkage = () => {
                   }}
                 />
               </div>
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
+              <label className="ml-20 text-xl" htmlFor="Name">
                 Email:
               </label>
               <input
@@ -287,7 +278,7 @@ const Linkage = () => {
                   setEmail(event.target.value);
                 }}
               />
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
+              <label className="ml-20 text-xl" htmlFor="Name">
                 Adress:
               </label>
               <input
@@ -301,7 +292,7 @@ const Linkage = () => {
                   setAddress(event.target.value);
                 }}
               />
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
+              <label className="ml-20 text-xl" htmlFor="Name">
                 Phone Number:
               </label>
               <input
@@ -315,7 +306,7 @@ const Linkage = () => {
                   setPhoneNumber(event.target.value);
                 }}
               />
-              {/* <label className="font-bold ml-20 text-xl" htmlFor="Name">
+              {/* <label className="ml-20 text-xl" htmlFor="Name">
                 Events:
               </label>
               <input
@@ -327,7 +318,7 @@ const Linkage = () => {
                   setEvent(event.target.value);
                 }}
               /> */}
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
+              <label className="ml-20 text-xl" htmlFor="Name">
                 Notes:
               </label>
               <input
@@ -342,7 +333,7 @@ const Linkage = () => {
                 }}
               />
 
-              <label className="font-bold ml-20 text-xl" htmlFor="Image">
+              <label className="ml-20 text-xl" htmlFor="Image">
                 Change Profile:
               </label>
               <div calss="w-80 ml-20 h-20 rounded-lg text-l">
@@ -351,8 +342,9 @@ const Linkage = () => {
                   if (linkageImage != null && linkageImage) {
                     // console.log("unionImage(union.jsx) else ==" + linkageImage);
                     return (
-                      <div >
-                        <img class="ml-20"
+                      <div>
+                        <img
+                          class="ml-20"
                           src={URL.createObjectURL(linkageImage)}
                           style={{ width: "150px" }}
                           alt="union upload pic"
@@ -365,7 +357,7 @@ const Linkage = () => {
                   }
                 })()}
               </div>
-            {/* <p>Hello Wordls s</p> */}
+              {/* <p>Hello Wordls s</p> */}
               <div class="w-80 ml-20 h-20 rounded-lg text-l mt-4 flex-col">
                 <input
                   type="file"
