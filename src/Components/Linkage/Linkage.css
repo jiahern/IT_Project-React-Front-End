@@ -47,5 +47,21 @@
   margin-top: 5px;
   width: 30px;
   height: auto;
-  color: var(--color-orange);
+  color: #0072c9;
+}
+
+.Linkage {
+  align-items: center;
+}
+
+.linkageProfilePic img {
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  outline: solid 1px #ccc;
+  outline-offset: 15px;
 }

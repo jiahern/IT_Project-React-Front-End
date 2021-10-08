@@ -144,6 +144,7 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+  color: var(--color-dark-grey);
 }
 
 .side-menu .top-section .main-menu .menu-item-trigger.active {

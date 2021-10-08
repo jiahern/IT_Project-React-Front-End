@@ -117,21 +117,23 @@ const Linkage = () => {
             <section key={index}>
               <div className="Linkage w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-5 gap-x-4 gap-y-4">
                 {/* <BsIcons.BsFillPersonFill className="w-20 h-20" /> */}
-                <img
-                  class="w-20 h-20"
-                  src={BASE_URL + item.profilePic}
-                  alt="Union Profile Pic"
-                />
+                <div className="linkageProfilePic">
+                  <img
+                    class="w-20 h-20"
+                    src={BASE_URL + item.profilePic}
+                    alt="Union Profile Pic"
+                  />
+                </div>
                 <span className="py-6">
                   {item.firstName + " " + item.middleName + " " + item.lastName}
                 </span>
-                <div className="FrindSince h-5 ml-2 py-6 px-6">
+                <div className="FrindSince py-6 px-12">
                   {new Date(item.linkedSince).toLocaleDateString()}
                 </div>
-                <div className="LastInTouch h-5 ml-4 py-6 px-6">
+                <div className="LastInTouch py-6 px-16">
                   {new Date(item.lastConnection).toLocaleDateString()}
                 </div>
-                <div className="flex space-x-5 px-10 py-6">
+                <div className="flex space-x-5 px-5 py-6">
                   <Link
                     to={{
                       pathname: `/linkage/${item._id}`,
