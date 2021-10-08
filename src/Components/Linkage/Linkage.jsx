@@ -308,7 +308,7 @@ const Linkage = () => {
                   setPhoneNumber(event.target.value);
                 }}
               />
-              {/* <label className="ml-20 text-xl" htmlFor="Name">
+              <label className="ml-20 text-xl" htmlFor="Name">
                 Events:
               </label>
               <input
@@ -319,7 +319,7 @@ const Linkage = () => {
                 onChange={(event) => {
                   setEvent(event.target.value);
                 }}
-              /> */}
+              />
               <label className="ml-20 text-xl" htmlFor="Name">
                 Notes:
               </label>

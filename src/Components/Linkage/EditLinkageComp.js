@@ -62,7 +62,7 @@ const EditLinkageComp = (props) => {
       profilePic: linkageImage,
     });
     // redirect to homepage
-    window.location.href="/linkage";
+    window.location.href = "/linkage";
     // console.log(window.location);
   }
   return (
@@ -93,11 +93,11 @@ const EditLinkageComp = (props) => {
         <div className="linkage-pic">
           {/* <BsIcons.BsFillPersonFill className="w-20 h-20" />
            */}
-           <img
-                  class="w-20 h-20"
-                  src={BASE_URL + profilePic}
-                  alt="Union Profile Pic"
-                />
+          <img
+            class="w-20 h-20"
+            src={BASE_URL + profilePic}
+            alt="Union Profile Pic"
+          />
         </div>
         <div className="inputPage h-100">
           <form
@@ -190,7 +190,7 @@ const EditLinkageComp = (props) => {
                 phoneNumber = event.target.value;
               }}
             />
-            {/* <label className="font-bold ml-20 text-xl" htmlFor="Name">
+            <label className="font-bold ml-20 text-xl" htmlFor="Name">
               Events:
             </label>
             <input
@@ -202,9 +202,9 @@ const EditLinkageComp = (props) => {
               defaultValue={linkageContent.event}
               placeholder="Event"
               onChange={(event) => {
-                   Event = event.target.value;
+                Event = event.target.value;
               }}
-            /> */}
+            />
             <label className="font-bold ml-20 text-xl" htmlFor="Name">
               Notes:
             </label>
@@ -221,32 +221,33 @@ const EditLinkageComp = (props) => {
               }}
             />
             <div calss="w-80 ml-20 h-20 rounded-lg text-l">
-                {(() => {
-                  // console.log("unionImage(union.jsx) ="+ unionImage);
-                  if (linkageImage != null && linkageImage) {
-                    // console.log("unionImage(union.jsx) else ==" + linkageImage);
-                    return (
-                      <div>
-                        <img class="ml-20"
-                          src={URL.createObjectURL(linkageImage)}
-                          style={{ width: "150px" }}
-                          alt="union upload pic"
-                        />
-                      </div>
-                    );
-                  } else {
-                    // console.log("unionImage(union.jsx) =" + linkageImage);
-                    return <div class="flex"></div>;
-                  }
-                })()}
-              </div>
+              {(() => {
+                // console.log("unionImage(union.jsx) ="+ unionImage);
+                if (linkageImage != null && linkageImage) {
+                  // console.log("unionImage(union.jsx) else ==" + linkageImage);
+                  return (
+                    <div>
+                      <img
+                        class="ml-20"
+                        src={URL.createObjectURL(linkageImage)}
+                        style={{ width: "150px" }}
+                        alt="union upload pic"
+                      />
+                    </div>
+                  );
+                } else {
+                  // console.log("unionImage(union.jsx) =" + linkageImage);
+                  return <div class="flex"></div>;
+                }
+              })()}
+            </div>
             {/* <p>Hello Wordls s</p> */}
-              <div class="w-80 ml-20 h-20 rounded-lg text-l mt-4 flex-col">
-                <input
-                  type="file"
-                  onChange={(event) => fileSelecterHandler(event.target.files)}
-                />
-              </div>
+            <div class="w-80 ml-20 h-20 rounded-lg text-l mt-4 flex-col">
+              <input
+                type="file"
+                onChange={(event) => fileSelecterHandler(event.target.files)}
+              />
+            </div>
 
             {/* <label className="font-bold ml-20 text-xl" htmlFor="Image">
               Change Profile:
