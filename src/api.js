@@ -1,4 +1,4 @@
-import { useState, useEffect, Redirect } from "react";
+import { UseState,useState, useEffect, Redirect } from "react";
 // get are using Axios to communicate with the Server API for authentication only
 // for other purposes, this app using Fetch API -- you should switch others to Axios
 // if you want to try as an exercise
@@ -536,3 +536,152 @@ export function GetCalendar() {
     error,
   };
 }
+
+// From here we start task part
+function GetPendingTask() {
+  const endpoint = BASE_URL + "/task/pending";
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+}
+
+export function GetAllPendingTask() {
+  const [loading, setLoading] = useState(true);
+  const [pendingTask, setPendingTask] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    GetPendingTask()
+      .then((pendingTask) => {
+        setPendingTask(pendingTask);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
+  // console.log(profile);
+  return {
+    loading,
+    pendingTask,
+    error,
+  };
+}
+
+export function GetOneTask(taskID) {
+  var taskContent = useState([]);
+  const { taskLoading, pendingTask, taskError } = GetAllPendingTask();
+
+  pendingTask.map((item) => {
+    if (item._id === taskID) {
+      taskContent = item;
+    }
+  });
+  console.log("!!!!!"+taskContent);
+  return {
+    taskLoading,
+    taskContent,
+    taskError,
+  };
+}
+
+export async function createTask(newUser) {
+  // unpack user details, email and password
+  const { name, linkages } = newUser;
+
+  // if the user did not enter an email or password
+  if (!name) {
+    alert("The information is not complete");
+    return;
+  }
+  
+  // console.log("unionImage.mimetype = ", unionImage.mimetype);
+  const endpoint = BASE_URL + `/task`;
+  try {
+    const fd = new FormData();
+    fd.append("name", name);
+    fd.append("linkages", linkages);
+    await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
+      // console.log(res);
+      return res.data;
+    });
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+
+    window.location.href = "/task";
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert("Invalid Information");
+    console.log(error);
+    
+  }
+}
+
+export async function GetAll() {
+  // const {unionLoading, unionContents, unionError} = GetUnion();
+  // const {linakgeLoading, linkages, linkageError} = UseLinkages();
+  const [outLoading, setLoading] = useState(true);
+  const [outUnion, setOutUnion] = useState([]);
+  const [outLinkage, setOutLinkage] = useState([]);
+  const [unionError, setUnionError] = useState(null);
+  const [linkageError, setLinkageError] = useState(null);
+  useEffect(() => {
+    getLinkages()
+      .then((outLinkage) => {
+        setOutLinkage(outLinkage);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setLinkageError(e);
+        setLoading(false);
+      });
+    userUnion()
+      .then((outUnion) => {
+        setOutUnion(outUnion);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setUnionError(e);
+        setLoading(false);
+      });
+  }, []);
+ 
+  return {
+    outLoading,
+    outUnion,
+    outLinkage,
+    unionError,
+    linkageError,
+  };
+}
+
+// function ReplaceUnion() {
+//   const endpoint = BASE_URL + "/union";
+//   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+// }
+// export function ReplaceGetUnion() {
+//   const [unionLoading, setLoading] = useState(true);
+//   const [unionContents, setUnion] = useState([]);
+//   const [unionError, setError] = useState(null);
+//   useEffect(() => {
+//     ReplaceUnion()
+//       .then((unionContents) => {
+//         setUnion(unionContents);
+//         setLoading(false);
+//       })
+//       .catch((e) => {
+//         console.log(e);
+//         setError(e);
+//         setLoading(false);
+//       });
+//   }, []);
+
+//   return {
+//     unionLoading,
+//     unionContents,
+//     unionError,
+//   };
+// }
