@@ -408,13 +408,14 @@ export async function editUnion(newUser) {
         { withCredentials: true } // IMPORTANT
       ),
     }).then((res) => res.data);
-
+    window.location.href = "/union";
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);
   } catch (error) {
     alert("Invalid Information");
   }
+
 }
 
 export async function removeUnion(newUser) {
@@ -436,7 +437,7 @@ export async function removeUnion(newUser) {
         { withCredentials: true } // IMPORTANT
       ),
     }).then((res) => res.data);
-
+    window.location.href = "/union";
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);
@@ -618,10 +619,11 @@ export async function createTask(newUser) {
   }
 }
 
-export async function GetAll() {
+export function GetAll() {
   // const {unionLoading, unionContents, unionError} = GetUnion();
   // const {linakgeLoading, linkages, linkageError} = UseLinkages();
-  const [outLoading, setLoading] = useState(true);
+  const [linkageLoading, setLinkageLoading] = useState(true);
+  const [unionLoading, setUnionLoading] = useState(true);
   const [outUnion, setOutUnion] = useState([]);
   const [outLinkage, setOutLinkage] = useState([]);
   const [unionError, setUnionError] = useState(null);
@@ -630,58 +632,31 @@ export async function GetAll() {
     getLinkages()
       .then((outLinkage) => {
         setOutLinkage(outLinkage);
-        setLoading(false);
+        setLinkageLoading(false);
       })
       .catch((e) => {
         console.log(e);
         setLinkageError(e);
-        setLoading(false);
+        setLinkageLoading(false);
       });
     userUnion()
       .then((outUnion) => {
         setOutUnion(outUnion);
-        setLoading(false);
+        setUnionLoading(false);
       })
       .catch((e) => {
         console.log(e);
         setUnionError(e);
-        setLoading(false);
+        setUnionLoading(false);
       });
   }, []);
  
   return {
-    outLoading,
+    linkageLoading,
+    unionLoading,
     outUnion,
     outLinkage,
     unionError,
     linkageError,
   };
 }
-
-// function ReplaceUnion() {
-//   const endpoint = BASE_URL + "/union";
-//   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
-// }
-// export function ReplaceGetUnion() {
-//   const [unionLoading, setLoading] = useState(true);
-//   const [unionContents, setUnion] = useState([]);
-//   const [unionError, setError] = useState(null);
-//   useEffect(() => {
-//     ReplaceUnion()
-//       .then((unionContents) => {
-//         setUnion(unionContents);
-//         setLoading(false);
-//       })
-//       .catch((e) => {
-//         console.log(e);
-//         setError(e);
-//         setLoading(false);
-//       });
-//   }, []);
-
-//   return {
-//     unionLoading,
-//     unionContents,
-//     unionError,
-//   };
-// }

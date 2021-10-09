@@ -1,0 +1,12 @@
+@import url("http://cdn.@syncfusion/ej2/material.css");
+
+.status-box{
+        
+        
+        display: flex;
+        flex: 10;
+        flex-direction: column;
+}
+.status-box.inactive{
+        visibility: hidden;
+}
