@@ -25,6 +25,25 @@
   background-color: var(--color-white-grey);
 }
 
+.scrollLinkage a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.scrollLinkage a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+a section {
+  transition: background 0.2s ease;
+  border-bottom: solid 1px #ccc;
+  padding: 10px;
+}
+
+a section:hover {
+  background: white;
+}
 .LinkageTitle {
   background-color: var(--color-dark-grey);
   color: white;

@@ -70,3 +70,7 @@ input {
   font-family: "Roboto";
   font-weight: 400;
 }
+
+input:focus {
+  outline: none;
+}

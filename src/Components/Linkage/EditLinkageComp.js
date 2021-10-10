@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { editLinkage, GetOneLinkage } from "../../api";
 import "./EditLinkageComp.css";
 import * as BsIcons from "react-icons/bs";
+import * as IoIcons from "react-icons/io5";
 const BASE_URL = "http://localhost:5000/";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
@@ -70,8 +71,9 @@ const EditLinkageComp = (props) => {
       {/* Edit linkage */}
       <div className="editLinkage-top">
         <Link to={{ pathname: `/linkage` }}>
-          <button className="backButton">
-            <svg
+          <button className="backButton ml-2 mt-1">
+            <IoIcons.IoArrowBack />
+            {/* <svg
               className="h-20 w-20"
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
@@ -81,16 +83,16 @@ const EditLinkageComp = (props) => {
             >
               <path d="M0 0h24v24H0V0z" fill="none" />
               <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-            </svg>
+            </svg> */}
           </button>
         </Link>
-        <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8">
-          Edit Linkage
-        </div>
       </div>
 
-      <div className="inputPage flex flex-col space-y-4 h-100">
-        <div className="linkage-pic">
+      <div className="inputPage flex flex-col space-y-4 h-100 ml-28">
+        <div className="edit-linkage-title  text-4xl mb-4">
+          Linkage Information
+        </div>
+        <div className="linkage-pic ml-4 mb-4">
           {/* <BsIcons.BsFillPersonFill className="w-20 h-20" />
            */}
           <img
@@ -102,15 +104,16 @@ const EditLinkageComp = (props) => {
         <div className="inputPage h-100">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="edit-linkage-form flex flex-col space-y-2"
+            className="edit-linkage-form flex flex-col space-y-2 pb-14"
             action="#"
           >
-            <label className="font-bold ml-20 text-xl" htmlFor="Name">
+            <label className="  text-xl" htmlFor="Name">
               Contact Information:
             </label>
             <div className="flex space-x-4">
               <input
-                className="w-40 ml-20 h-8  text-l"
+                disabled
+                className="w-40  h-8  text-l"
                 {...register("firstName")}
                 type="text"
                 id="firstName"
@@ -121,7 +124,7 @@ const EditLinkageComp = (props) => {
                 }}
               />
               <input
-                className="w-40 ml-20 h-8  text-l"
+                className="w-40  h-8  text-l"
                 {...register("middleName")}
                 type="text"
                 id="middleName"
@@ -133,7 +136,7 @@ const EditLinkageComp = (props) => {
                 }}
               />
               <input
-                className="w-40 ml-20 h-8  text-l"
+                className="w-40  h-8  text-l"
                 {...register("lastName")}
                 type="text"
                 id="lasttName"
@@ -145,11 +148,11 @@ const EditLinkageComp = (props) => {
                 }}
               />
             </div>
-            <label className="font-bold ml-20 text-xl" htmlFor="Name">
+            <label className="  text-xl" htmlFor="Name">
               Email:
             </label>
             <input
-              className="w-80 ml-20 h-8  text-l"
+              className="w-80  h-8  text-l"
               {...register("email")}
               type="text"
               id="email"
@@ -160,11 +163,11 @@ const EditLinkageComp = (props) => {
                 email = event.target.value;
               }}
             />
-            <label className="font-bold ml-20 text-xl" htmlFor="Name">
+            <label className="  text-xl" htmlFor="Name">
               Address:
             </label>
             <input
-              className="w-80 ml-20 h-8  text-l"
+              className="w-80  h-8  text-l"
               {...register("adress")}
               type="text"
               id="address"
@@ -175,11 +178,11 @@ const EditLinkageComp = (props) => {
                 address = event.target.value;
               }}
             />
-            <label className="font-bold ml-20 text-xl" htmlFor="Name">
+            <label className="  text-xl" htmlFor="Name">
               Phone Number:
             </label>
             <input
-              className="w-80 ml-20 h-8  text-l"
+              className="w-80  h-8  text-l"
               {...register("phoneNumber")}
               type="text"
               id="phoneNumber"
@@ -190,11 +193,11 @@ const EditLinkageComp = (props) => {
                 phoneNumber = event.target.value;
               }}
             />
-            <label className="font-bold ml-20 text-xl" htmlFor="Name">
+            <label className="  text-xl" htmlFor="Name">
               Events:
             </label>
             <input
-              className="w-80 ml-20 h-8  text-l"
+              className="w-80  h-8  text-l"
               {...register("event")}
               type="text"
               id="Event"
@@ -205,11 +208,11 @@ const EditLinkageComp = (props) => {
                 Event = event.target.value;
               }}
             />
-            <label className="font-bold ml-20 text-xl" htmlFor="Name">
+            <label className="  text-xl" htmlFor="Name">
               Notes:
             </label>
             <input
-              className="w-80 ml-20 h-20 rounded-lg text-l"
+              className="w-80  h-20 rounded-lg text-l"
               {...register("note")}
               type="text"
               id="note"
@@ -220,7 +223,7 @@ const EditLinkageComp = (props) => {
                 note = event.target.value;
               }}
             />
-            <div calss="w-80 ml-20 h-20 rounded-lg text-l">
+            <div calss="w-80  h-20 rounded-lg text-l">
               {(() => {
                 // console.log("unionImage(union.jsx) ="+ unionImage);
                 if (linkageImage != null && linkageImage) {
@@ -228,7 +231,7 @@ const EditLinkageComp = (props) => {
                   return (
                     <div>
                       <img
-                        class="ml-20"
+                        class="mt-2"
                         src={URL.createObjectURL(linkageImage)}
                         style={{ width: "150px" }}
                         alt="union upload pic"
@@ -241,19 +244,19 @@ const EditLinkageComp = (props) => {
                 }
               })()}
             </div>
-            {/* <p>Hello Wordls s</p> */}
-            <div class="w-80 ml-20 h-20 rounded-lg text-l mt-4 flex-col">
+            <div class="h-8 rounded-lg mt-4 mb-4">
               <input
+                className="chooseFile"
                 type="file"
                 onChange={(event) => fileSelecterHandler(event.target.files)}
               />
             </div>
 
-            {/* <label className="font-bold ml-20 text-xl" htmlFor="Image">
+            {/* <label className="  text-xl" htmlFor="Image">
               Change Profile:
             </label>
             <input
-              className="mt-40 ml-20"
+              className="mt-40 "
               {...register("filename")}
               type="file"
               id="Image"
@@ -261,7 +264,8 @@ const EditLinkageComp = (props) => {
             /> */}
             <div className="deleteAndEdit">
               <input
-                className="deleteEditButton btn btn-danger font-weight-bold"
+                id="deleteButton"
+                className="deleteEditButton btn btn-danger "
                 // ref = {register}
                 type="submit"
                 value="DELETE"
@@ -269,7 +273,8 @@ const EditLinkageComp = (props) => {
               />
               <Link to={{ pathname: `/linkage` }}>
                 <input
-                  className="saveCreateButton btn btn-success font-weight-bold"
+                  id="saveButton"
+                  className="saveCreateButton btn btn-success "
                   // ref = {register}
                   type="submit"
                   value="SAVE"
