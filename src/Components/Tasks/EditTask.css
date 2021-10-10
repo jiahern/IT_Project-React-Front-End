@@ -10,3 +10,6 @@
 .status-box.inactive{
         visibility: hidden;
 }
+.recurring{
+        width: 50%;
+}

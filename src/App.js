@@ -18,6 +18,7 @@ import EditUnion from "./Components/Union/EditUnion";
 import Linkage from "./Components/Linkage/Linkage";
 import Task from "./Components/Tasks/Task";
 import editTask from "./Components/Tasks/editTask";
+import pastTask from "./Components/Tasks/pastTask";
 // import Calendar from "./Pages/Calendar";
 import RegisterForm from "./Components/Register/register";
 import Cookies from "js-cookie";
@@ -71,6 +72,7 @@ function App() {
                   component={EditLinkageComp}
                 />
                 <ProtectedRoute path="/task" exact component={Task} />
+                <ProtectedRoute path="/task/past" exact component={pastTask} />
                 <Route path="/task/:taskID" exact component={editTask} />
                 <ProtectedRoute path="/calendar" exact component={ShowCalendar} />
                 <ProtectedRoute path="*" component={() => "404 NOT FOUND"} />

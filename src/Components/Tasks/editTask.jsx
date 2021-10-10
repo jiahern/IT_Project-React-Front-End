@@ -2,33 +2,19 @@ import React, { Component, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
 import "./EditTask.css";
-import { GetOneTask,GetAll } from "../../api";
+import { GetOneTask, taskEdit,RemoveTask } from "../../api";
 import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
-
+import { RecurrenceEditorComponent } from '@syncfusion/ej2-react-schedule';
 
 const EditTask = (props) => {
       const [statusBox,setStatusBox] = useState(false);
       const {taskID} = props.match.params;
       const {taskLoading,taskContent,taskError} = GetOneTask(taskID);
-      const [added, setAdded] = useState(() => {
-        return false;
-      });
-      var taskName = taskContent.name; 
-      var endTime = taskContent.EndTime;
-      var startTime = taskContent.StartTime;
-      function setPending(){
-        taskContent.status = "pending";
-        setStatusBox(false);
-      }
-      function setComplete(){
-        taskContent.status = "complete";
-        console.log("cuurent status = "+currentStatus);
-        setStatusBox(false);
-      }
-      function setOverdue(){
-        taskContent.status = "overdue";
-        setStatusBox(false);
-      }
+      console.log("past task = "+taskContent);
+
+      const [endTime,setEndTime] = useState(null);
+      const [startTime,setStartTime] = useState(null);
+      
       if (taskLoading) {
         return <p>Loading...</p>;
       }
@@ -87,100 +73,109 @@ const EditTask = (props) => {
           </svg>);
         }
       }
-        // const { loading, linkages, error } = UseLinkages();
-        // if (loading) {
-        //   return <p>Loading...</p>;
-        // }
-        // if (error) {
-        //   return <p>Something went wrong: {error.message}</p>;
-        // }
-        // const { unionLoading, unionContents, unionError } = ReplaceGetUnion();
-        // if (unionLoading) {
-        //   return <p>Loading...</p>;
-        // }
-        // if (unionError) {
-        //   return <p>Something went wrong: {error.message}</p>;
-        // }
-        // const {outLoading,unionContents,linkages,outError} = GetAll();
-        // console.log(linkages);
-        function checkStatus(linkage) {
-          if (taskContent.linkages) {
-            if (taskContent.linkages.includes(linkage)) {
-              return true;
-            }
-          }
-          return false;
-        }
 
-        function Add(linkage) {
-          taskContent.linkages = taskContent.linkages.concat(linkage);
-          setAdded(!added);
+      function onEdit() {
+        //using API function to submit data to FoodBuddy API
+        var timediff = new Date(taskContent.EndTime).getTime() - new Date(taskContent.StartTime).getTime();
+    
+        if(timediff <= 0){
+          return alert("Please put right Time");
         }
-        function Remove(linkage) {
-          const updatedLinkages = [...taskContent.linkages].filter(
-            (todo) => todo !== linkage
-          );
-          taskContent.linkages = updatedLinkages;
-          setAdded(!added);
-        }
-
-
-        const {linkageLoading,unionLoading,outUnion,outLinkage,unionError,linkageError} = GetAll();
-        if (linkageLoading ||unionLoading) {
-          return <p>Loading...</p>;
-        }
-        if (unionError) {
-          return <p>Something went wrong: {unionError.message}</p>;
-        }else if(linkageError){
-          return <p>Something went wrong: {linkageError.message}</p>;
-        }
+        taskEdit({
+          taskID: taskID,
+          name: taskContent.name,
+          note: taskContent.note,
+          StartTime: taskContent.StartTime,
+          EndTime: taskContent.EndTime,
+          status: taskContent.status,
+          recurring:taskContent.recurring,
+        });
+        window.location.href = "/task";
+      }
+      function onDelete() {
+        //using API function to submit data to FoodBuddy API
+        
+        RemoveTask({
+          taskID: taskID,
+        });
+      }
+      
         
         return (
-          <section className="ShowUnion">
-            <form className="showUnionBelow flex justify-between w-full h-16 mr-4 py-3">
+          <div className="ShowUnion">
+            <div className="showUnionBelow flex w-full h-16 mr-4 py-3">
+              <Link to={{ pathname: `/task` }}>
+                <svg
+                  class="pb-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="48px"
+                  viewBox="0 0 24 24"
+                  width="48px"
+                  fill="#000000"
+                >
+                  <path d="M0 0h24v24H0V0z" fill="none" />
+                  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                </svg>
+              </Link>
+              <div class = "font-bold w-2 text-2xl ml-20">Name: </div>
               <input
                 className="font-bold text-3xl ml-20"
-                defaultValue={taskName}
+                defaultValue={taskContent.name}
                 placeholder="Name"
-                
+                onChange = {(event)=>{taskContent.name = event.target.value;}}
               />
+              <div class = "ml-2 mt-2">
+              <svg
+                  width="15"
+                  height="13"
+                  viewBox="0 0 30 27"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  >
+                  <path
+                          d="M18.4058 5.03062L24.4256 10.4054L9.18767 24.0107L3.17122 18.6359L18.4058 5.03062ZM28.9935 3.73433L26.3089 1.33734C25.2714 0.41099 23.5867 0.41099 22.5456 1.33734L19.974 3.63342L25.9939 9.00829L28.9935 6.33005C29.7982 5.61152 29.7982 4.45281 28.9935 3.73433ZM0.0209023 26.1907C-0.0886516 26.6309 0.356502 27.0253 0.849606 26.9183L7.55774 25.4661L1.54128 20.0913L0.0209023 26.1907Z"
+                          fill="black"
+                  />
+                  </svg>
+                  </div>
       
-              <div className="flex space-x-10 mr-4">
+              <div className="flex space-x-10 mr-4 ml-96">
                 <Link to={{ pathname: `/task` }}>
                   <button
-                    onClick=""
+                    onClick={()=>{onDelete()}}
                     className="deleteUnion font-bold rounded mr-10"
                     id="createTask"
                   >
                     Delete
                   </button>
                 </Link>
-                <Link to={{ pathname: `/task` }}>
+                
                   <button
-                    onClick=""
+                    onClick={onEdit}
                     className="saveUnion font-bold rounded mr-10"
                     id="createTask"
                   >
                     Save
                   </button>
-                </Link>
+                
               </div>
-            </form>
-      
-            <div className="EditTasks w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-4 grid-rows-1 gap-x-24">
-              <div className="TaskTitle font-bold text-2xl">All linkages</div>
             </div>
+            <div>
+            <div className="EditTasks w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-4 grid-rows-1 gap-x-24">
+              <div className="TaskTitle font-bold text-2xl">Edit Task</div>
+            </div>
+            
             <div class = "flex space-x-24  mt-4 ml-4">
               <div class = "flex flex-col space-y-4">
                 <div class = "font-bold">Start Time</div>
                 <div class = "w-60">
-                <DateTimePickerComponent id="datetimepicker" placeholder = "Start Time" value = {startTime} ></DateTimePickerComponent>
+                <DateTimePickerComponent divat = "yyyy/MM/dd HH:mm" id="datetimepicker" placeholder = "Start Time" value = {taskContent.StartTime} onChange = {(date) => {taskContent.StartTime = date.target.value;}} ></DateTimePickerComponent>
                 </div>
               </div>
               <div class = "flex flex-col space-y-4">
                 <div class = "font-bold">End Time</div>
                   <div class = "w-60">
-                  <DateTimePickerComponent id="datetimepicker" placeholder = "End Time" value = {endTime} ></DateTimePickerComponent>
+                  <DateTimePickerComponent divat = "yyyy/MM/dd HH:mm" id="datetimepicker" placeholder = "End Time" value = {taskContent.EndTime} onChange = {(date)=>{taskContent.EndTime = date.target.value;}}></DateTimePickerComponent>
                 </div>
               </div>
               <div class = "flex flex-col">
@@ -188,11 +183,11 @@ const EditTask = (props) => {
                   <div>Status: </div>
                   <div class = "mt-2">{showStatus(taskContent.status)}</div>
                   <div class = "flex flex-col space-y-4">
-                    <button onClick = {()=>{setStatusBox(!statusBox)}} class = "">
+                    <button onClick = {()=>{setStatusBox(!statusBox);}} class = "">
                       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
                     </button>
                     <div class = {statusBox ? "status-box space-y-2" : "status-box inactive"}>
-                      <button onClick ={()=>{setPending()}} class="process w-5 h-5">
+                      <button onClick ={()=>{taskContent.status = "pending";setStatusBox(!statusBox);}} class="process w-5 h-5">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           enable-background="new 0 0 24 24"
@@ -207,7 +202,7 @@ const EditTask = (props) => {
                           />
                         </svg>
                       </button>
-                      <button onClick ={()=>{setComplete()}} class="done w-5 h-5">
+                      <button onClick ={()=>{taskContent.status = "complete";setStatusBox(!statusBox);}} class="done w-5 h-5">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           height="20px"
@@ -222,7 +217,7 @@ const EditTask = (props) => {
                           />
                         </svg>
                       </button>
-                      <button onClick ={()=>{setOverdue()}} class="overdue w-5 h-5">
+                      <button onClick ={()=>{taskContent.status = "overdue";setStatusBox(!statusBox);}} class="overdue w-5 h-5">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           enable-background="new 0 0 24 24"
@@ -248,63 +243,17 @@ const EditTask = (props) => {
                 
               </div>
             </div>
+            <div class="recurring mt-6 ml-4">
+              <RecurrenceEditorComponent id='RecurrenceEditor' value = {taskContent.recurring} change = {(args)=>{taskContent.recurring = args.value;}}></RecurrenceEditorComponent>
+            </div>
             <div class = "flex flex-col space-y-4 mt-4 ml-4 font-bold">
               <div>Notes: </div>
-              <div class = "border-2 border-black w-96 h-80 rounded">{taskContent.note}</div>
+              <input class = "border-2 border-black w-96 rounded" type = "text" defaultValue = {taskContent.note} onChange ={(event)=>{taskContent.note = event.target.value;}}/>
             </div>
-
-            {/* <div className="scrollEditUnion">
-              {outLinkage.map((item) => {
-                return (
-                  <div
-                    key={item._id}
-                    className=" w-full h-16 mr-4 px-20 py-6 flex flex-col  grid grid-cols-2 grid-rows-1 gap-x-24"
-                  >
-                    <div className="">
-                      {item.firstName + " " + item.middleName + " " + item.lastName}
-                    </div>
-                    <div className="flex space-x-10 ml-40">
-                      <button
-                        className={checkStatus(item._id) ? "add unactive" : "add"}
-                        onClick={() => Add(item._id)}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="24px"
-                          viewBox="0 0 24 24"
-                          width="24px"
-                          fill="#000000"
-                        >
-                          <path d="M0 0h24v24H0V0z" fill="none" />
-                          <path
-                            d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
-                            fill="green"
-                          />
-                        </svg>
-                      </button>
-                      <button
-                        className={
-                          checkStatus(item._id) ? "remove" : "remove unactive"
-                        }
-                        onClick={() => Remove(item._id)}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="24px"
-                          viewBox="0 0 24 24"
-                          width="24px"
-                          fill="#000000"
-                        >
-                          <path d="M0 0h24v24H0V0z" fill="none" />
-                          <path d="M19 13H5v-2h14v2z" fill="red" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div> */}
-          </section>
+            
+            </div>
+           
+          </div>
         );
       };
       

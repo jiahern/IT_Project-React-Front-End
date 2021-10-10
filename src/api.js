@@ -538,7 +538,7 @@ export function GetCalendar() {
   };
 }
 
-// From here we start task part
+// From here we start task part----------------------------------------------------------------------
 function GetPendingTask() {
   const endpoint = BASE_URL + "/task/pending";
   return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
@@ -568,11 +568,69 @@ export function GetAllPendingTask() {
   };
 }
 
+function GetPastTask() {
+  const endpoint = BASE_URL + "/task/past";
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+}
+
+export function GetAllPastTask() {
+  const [loading, setLoading] = useState(true);
+  const [pastTask, setPendingTask] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    GetPastTask()
+      .then((pastTask) => {
+        setPendingTask(pastTask);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
+  // console.log(profile);
+  return {
+    loading,
+    pastTask,
+    error,
+  };
+}
+
+function GetTask() {
+  const endpoint = BASE_URL + "/task";
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+}
+
+export function GetAllTask() {
+  const [loading, setLoading] = useState(true);
+  const [allTask, setAllTask] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    GetTask()
+      .then((allTask) => {
+        setAllTask(allTask);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
+  // console.log(profile);
+  return {
+    loading,
+    allTask,
+    error,
+  };
+}
+
 export function GetOneTask(taskID) {
   var taskContent = useState([]);
-  const { taskLoading, pendingTask, taskError } = GetAllPendingTask();
+  const { taskLoading, allTask, taskError } = GetAllTask();
 
-  pendingTask.map((item) => {
+  allTask.map((item) => {
     if (item._id === taskID) {
       taskContent = item;
     }
@@ -587,10 +645,10 @@ export function GetOneTask(taskID) {
 
 export async function createTask(newUser) {
   // unpack user details, email and password
-  const { name, linkages } = newUser;
-
+  const { name,StartTime,EndTime,note,recurring,status} = newUser;
+  
   // if the user did not enter an email or password
-  if (!name) {
+  if (!name || !StartTime || !EndTime) {
     alert("The information is not complete");
     return;
   }
@@ -598,13 +656,25 @@ export async function createTask(newUser) {
   // console.log("unionImage.mimetype = ", unionImage.mimetype);
   const endpoint = BASE_URL + `/task`;
   try {
-    const fd = new FormData();
-    fd.append("name", name);
-    fd.append("linkages", linkages);
-    await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
-      // console.log(res);
-      return res.data;
-    });
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          name: name,
+          StartTime: StartTime,
+          EndTime: EndTime,
+          note: note,
+          recurring: recurring,
+          status: status,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+    
 
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
@@ -619,44 +689,103 @@ export async function createTask(newUser) {
   }
 }
 
-export function GetAll() {
-  // const {unionLoading, unionContents, unionError} = GetUnion();
-  // const {linakgeLoading, linkages, linkageError} = UseLinkages();
-  const [linkageLoading, setLinkageLoading] = useState(true);
-  const [unionLoading, setUnionLoading] = useState(true);
-  const [outUnion, setOutUnion] = useState([]);
-  const [outLinkage, setOutLinkage] = useState([]);
-  const [unionError, setUnionError] = useState(null);
-  const [linkageError, setLinkageError] = useState(null);
-  useEffect(() => {
-    getLinkages()
-      .then((outLinkage) => {
-        setOutLinkage(outLinkage);
-        setLinkageLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLinkageError(e);
-        setLinkageLoading(false);
-      });
-    userUnion()
-      .then((outUnion) => {
-        setOutUnion(outUnion);
-        setUnionLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setUnionError(e);
-        setUnionLoading(false);
-      });
-  }, []);
+// export function GetAll() {
+//   // const {unionLoading, unionContents, unionError} = GetUnion();
+//   // const {linakgeLoading, linkages, linkageError} = UseLinkages();
+//   const [linkageLoading, setLinkageLoading] = useState(true);
+//   const [unionLoading, setUnionLoading] = useState(true);
+//   const [outUnion, setOutUnion] = useState([]);
+//   const [outLinkage, setOutLinkage] = useState([]);
+//   const [unionError, setUnionError] = useState(null);
+//   const [linkageError, setLinkageError] = useState(null);
+//   useEffect(() => {
+//     getLinkages()
+//       .then((outLinkage) => {
+//         setOutLinkage(outLinkage);
+//         setLinkageLoading(false);
+//       })
+//       .catch((e) => {
+//         console.log(e);
+//         setLinkageError(e);
+//         setLinkageLoading(false);
+//       });
+//     userUnion()
+//       .then((outUnion) => {
+//         setOutUnion(outUnion);
+//         setUnionLoading(false);
+//       })
+//       .catch((e) => {
+//         console.log(e);
+//         setUnionError(e);
+//         setUnionLoading(false);
+//       });
+//   }, []);
  
-  return {
-    linkageLoading,
-    unionLoading,
-    outUnion,
-    outLinkage,
-    unionError,
-    linkageError,
-  };
+//   return {
+//     linkageLoading,
+//     unionLoading,
+//     outUnion,
+//     outLinkage,
+//     unionError,
+//     linkageError,
+//   };
+// }
+
+export async function taskEdit(newUser){
+  const { taskID,name,note,StartTime,EndTime,status,recurring } = newUser;
+  const endpoint = BASE_URL + "/task/edit";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          _id: taskID,
+          name: name,
+          note: note,
+          StartTime: StartTime,
+          EndTime: EndTime,
+          status: status,
+          recurring:recurring,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+    window.location.href = "/task";
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+  } catch (error) {
+    alert("Invalid Information");
+  }
+}
+
+export async function RemoveTask(newUser) {
+  // unpack user details, email and password
+  const { taskID } = newUser;
+  const endpoint = BASE_URL + "/task/delete";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          _id: taskID,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+    
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+  } catch (error) {
+    alert("Invalid Information");
+  }
 }

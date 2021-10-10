@@ -17,16 +17,3 @@
         font-size: large;
         padding: 4px 25px;
 }
-.createTask {
-        position: fixed;
-        left: 50%;
-        bottom: 2px;
-        width: 50%;
-        height: 100%;
-        visibility: visible;
-        background-color: #def2f1;
-        transition: height 0.3s ease-in;
-      }
-.createTask.inactive {
-        height: 0%;
-}
