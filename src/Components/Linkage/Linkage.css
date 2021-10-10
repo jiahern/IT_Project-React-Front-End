@@ -7,6 +7,8 @@
   visibility: visible;
   background-color: var(--color-light-grey);
   transition: height 0.3s ease-in;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .newCreateLinkage.unactive {
   height: 0%;
@@ -83,4 +85,18 @@ a section:hover {
   object-fit: contain;
   outline: solid 1px #ccc;
   outline-offset: 15px;
+}
+
+#saveCreateButton {
+  background-color: var(--color-orange);
+  color: white;
+  padding: 0.8rem;
+  width: 15rem;
+  text-indent: 0px;
+  font-weight: 580;
+  transition: transform ease 0.2s;
+}
+
+#saveCreateButton:hover {
+  transform: scale(1.1);
 }

@@ -69,7 +69,11 @@ function App() {
                   component={EditLinkageComp}
                 />
                 <ProtectedRoute path="/task" exact component={Task} />
-                <ProtectedRoute path="/calendar" exact component={ShowCalendar} />
+                <ProtectedRoute
+                  path="/calendar"
+                  exact
+                  component={ShowCalendar}
+                />
                 <ProtectedRoute path="*" component={() => "404 NOT FOUND"} />
                 {/* <Route exact path="/" /> */}
               </Switch>

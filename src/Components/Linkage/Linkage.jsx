@@ -8,6 +8,7 @@ import EditLinkageComp from "./EditLinkageComp";
 import * as BsIcons from "react-icons/bs";
 import * as GrIcons from "react-icons/gr";
 import * as HiIcons from "react-icons/hi";
+import * as IoIcons from "react-icons/io5";
 
 const BASE_URL = "http://localhost:5000/";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
@@ -121,7 +122,11 @@ const Linkage = () => {
             >
               <section key={index}>
                 <div
-                  onClick="/"
+                  onClick={() => {
+                    if (inactive) {
+                      setInactive(false);
+                    }
+                  }}
                   className="Linkage w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-5 gap-x-4 gap-y-4"
                 >
                   {/* <BsIcons.BsFillPersonFill className="w-20 h-20" /> */}
@@ -146,29 +151,6 @@ const Linkage = () => {
                     {new Date(item.lastConnection).toLocaleDateString()}
                   </div>
                   <div className="flex space-x-5 px-5 py-6">
-                    <Link
-                      to={{
-                        pathname: `/linkage/${item._id}`,
-                      }}
-                    >
-                      <button
-                        // onClick={() => showsetInactive(item._id)}
-                        className="editButton h-5"
-                      >
-                        <svg
-                          width="15"
-                          height="13"
-                          viewBox="0 0 30 27"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M18.4058 5.03062L24.4256 10.4054L9.18767 24.0107L3.17122 18.6359L18.4058 5.03062ZM28.9935 3.73433L26.3089 1.33734C25.2714 0.41099 23.5867 0.41099 22.5456 1.33734L19.974 3.63342L25.9939 9.00829L28.9935 6.33005C29.7982 5.61152 29.7982 4.45281 28.9935 3.73433ZM0.0209023 26.1907C-0.0886516 26.6309 0.356502 27.0253 0.849606 26.9183L7.55774 25.4661L1.54128 20.0913L0.0209023 26.1907Z"
-                            fill="black"
-                          />
-                        </svg>
-                      </button>
-                    </Link>
                     {/* <div
                   className={inactive ? "editLinkage unactive" : "editLinkage"}
                 >
@@ -218,18 +200,8 @@ const Linkage = () => {
         className={active ? "newCreateLinkage" : "newCreateLinkage unactive"}
       >
         <div className="flex justify-between">
-          <button onClick={addLinkagePage} className="backButton">
-            <svg
-              className="h-20 w-20"
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 0 24 24"
-              width="24px"
-              fill="#000000"
-            >
-              <path d="M0 0h24v24H0V0z" fill="none" />
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-            </svg>
+          <button onClick={addLinkagePage} className="backButton ml-2 mt-1">
+            <IoIcons.IoArrowBack />
           </button>
 
           <div className="text-4xl mt-8 mr-8">New Linkage</div>
@@ -349,9 +321,9 @@ const Linkage = () => {
               />
 
               <label className="ml-20 text-xl" htmlFor="Image">
-                Change Profile:
+                Profile Picture:
               </label>
-              <div calss="w-80 ml-20 h-20 rounded-lg text-l">
+              <div calss="w-80 ml-20 rounded-lg text-l">
                 {(() => {
                   // console.log("unionImage(union.jsx) ="+ unionImage);
                   if (linkageImage != null && linkageImage) {
@@ -373,174 +345,24 @@ const Linkage = () => {
                 })()}
               </div>
               {/* <p>Hello Wordls s</p> */}
-              <div class="w-80 ml-20 h-20 rounded-lg text-l mt-4 flex-col">
+              <div class="w-80 ml-20 rounded-lg text-l mt-1 flex-col">
                 <input
+                  className="chooseFile"
                   type="file"
                   onChange={(event) => fileSelecterHandler(event.target.files)}
                 />
               </div>
               <input
-                className="saveCreateButton ml-96 mt-4 font-bold rounded-xl"
+                id="saveCreateButton"
+                className="ml-96 mt-4 mb-4 rounded-l"
                 type="submit"
-                value="SAVE"
+                value="CREATE"
                 onClick={createSave}
               />
             </form>
           </div>
         </div>
       </div>
-
-      {/* Edit linkage */}
-      {/* <div className={editActive ? "editLinkage" : "editLinkage unactive"}>
-        <div className="flex justify-between">
-          <button onClick={editLinkagePage} className="backButton">
-            <svg
-              className="h-20 w-20"
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 0 24 24"
-              width="24px"
-              fill="#000000"
-            >
-              <path d="M0 0h24v24H0V0z" fill="none" />
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-            </svg>
-          </button>
-
-          <div className="font-bold text-4xl mt-8 mr-8">Edit Linkage</div>
-        </div>
-
-        <div className="inputPage flex flex-col space-y-4 h-100">
-          <div className="grid justify-items-center mt-4">
-            <img className="h-20 w-20" src={linkage} />
-          </div>
-          <div className="inputPage h-100">
-            <form className="flex flex-col space-y-2" action="#">
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
-                Contact Information:
-              </label>
-              <div className="flex space-x-4">
-                <input
-                  className="w-40 ml-20 h-8 rounded-l text-l"
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={firstName}
-                  onChange={(event) => {
-                    setFirstName(event.target.value);
-                  }}
-                />
-                <input
-                  className="w-40 ml-20 h-8 rounded-l text-l"
-                  type="text"
-                  id="middleName"
-                  name="middleName"
-                  value={middleName}
-                  onChange={(event) => {
-                    setMiddleName(event.target.value);
-                  }}
-                />
-                <input
-                  className="w-40 ml-20 h-8 rounded-l text-l"
-                  type="text"
-                  id="lasttName"
-                  name="lastName"
-                  value={lastName}
-                  onChange={(event) => {
-                    setLastName(event.target.value);
-                  }}
-                />
-              </div>
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
-                Email:
-              </label>
-              <input
-                className="w-80 ml-20 h-8 rounded-l text-l"
-                type="text"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-              />
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
-                Adress:
-              </label>
-              <input
-                className="w-80 ml-20 h-8 rounded-l text-l"
-                type="text"
-                id="adress"
-                name="adress"
-                value={address}
-                onChange={(event) => {
-                  setAddress(event.target.value);
-                }}
-              />
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
-                Phone Number:
-              </label>
-              <input
-                className="w-80 ml-20 h-8 rounded-l text-l"
-                type="text"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={phoneNumber}
-                onChange={(event) => {
-                  setPhoneNumber(event.target.value);
-                }}
-              />
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
-                Events:
-              </label>
-              <input
-                className="w-80 ml-20 h-8 rounded-l text-l"
-                type="text"
-                id="Event"
-                name="Event"
-              />
-              <label className="font-bold ml-20 text-xl" htmlFor="Name">
-                Notes:
-              </label>
-              <input
-                className="w-80 ml-20 h-20 rounded-lg text-l"
-                type="text"
-                id="note"
-                name="note"
-                value={note}
-                onChange={(event) => {
-                  setNote(event.target.value);
-                }}
-              />
-
-              <label className="font-bold ml-20 text-xl" htmlFor="Image">
-                Change Profile:
-              </label>
-              <input
-                className="mt-40 ml-20"
-                type="file"
-                id="Image"
-                name="filename"
-              />
-              <div className="deleteAndEdit">
-                <input
-                  className="deleteEditButton btn btn-danger font-weight-bold"
-                  type="submit"
-                  value="DELETE"
-                  onClick={createSave}
-                />
-                <input
-                  className="saveCreateButton btn btn-success font-weight-bold"
-                  type="submit"
-                  value="SAVE"
-                  onClick={editSave}
-                />
-              </div>
-            </form>
-          </div>
-        </div>
-      </div> */}
-      {/* Edit Linkage End Here */}
     </React.Fragment>
   );
 };
