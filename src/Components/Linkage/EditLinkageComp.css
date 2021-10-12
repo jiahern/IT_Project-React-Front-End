@@ -94,3 +94,28 @@
 #saveButton {
   font-weight: 550;
 }
+
+/* Popup Create Event CSS */
+
+.createEventBox {
+  border: #ccc solid 1px;
+  background-color: white;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.popup-content {
+  margin: auto;
+  background: rgb(255, 255, 255);
+  width: 50%;
+  padding: 30px;
+}
+
+.popup-arrow {
+  color: rgb(255, 255, 255);
+}

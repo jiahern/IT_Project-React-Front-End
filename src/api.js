@@ -1,4 +1,4 @@
-import { UseState,useState, useEffect, Redirect } from "react";
+import { UseState, useState, useEffect, Redirect } from "react";
 // get are using Axios to communicate with the Server API for authentication only
 // for other purposes, this app using Fetch API -- you should switch others to Axios
 // if you want to try as an exercise
@@ -168,18 +168,24 @@ export function UseLinkages() {
 //Create New Linkage
 export async function createLinkage(newUser) {
   // unpack user details, email and password
-  const { firstName, middleName, lastName, address, email, phoneNumber, note, linkageImage} =
-    newUser;
+  const {
+    firstName,
+    middleName,
+    lastName,
+    address,
+    email,
+    phoneNumber,
+    note,
+    linkageImage,
+  } = newUser;
 
   // if the user did not enter an email or password
   if (!firstName || !lastName) {
     alert("The information is not complete");
     return;
   }
-  if (!linkageImage){
-
-  }
-  else if (!linkageImage.name.match(/.(jpg|jpeg|png|)$/i)) {
+  if (!linkageImage) {
+  } else if (!linkageImage.name.match(/.(jpg|jpeg|png|)$/i)) {
     alert("please upload only image to Linkage Image");
     return;
   }
@@ -212,7 +218,7 @@ export async function createLinkage(newUser) {
   } catch (error) {
     alert(error.message);
   }
-} 
+}
 
 //Get One Linkage
 export function GetOneLinkage(linkageID) {
@@ -265,8 +271,8 @@ export async function editLinkage(newUser) {
       // console.log(res);
       return res.data;
     });
-  
-    window.location.href = "/linkage";
+
+    window.location.href = "/linkage/" + _id;
     // redirect to homepage -- another way to redirect
   } catch (error) {
     alert(error.message);
@@ -286,7 +292,7 @@ export async function removeLinkage(newUser) {
       data: JSON.stringify(
         {
           _id: linkageID,
-          profilePic: profilePic
+          profilePic: profilePic,
         },
         { withCredentials: true } // IMPORTANT
       ),
@@ -297,6 +303,50 @@ export async function removeLinkage(newUser) {
     // console.log(data);
   } catch (error) {
     alert("Invalid Information");
+  }
+}
+
+export async function createLinkageEvents(newUser) {
+  // unpack user details, email and password
+  const { linkages, name, StartTime, EndTime, recurring, status } = newUser;
+
+  // if the user did not enter an email or password
+  if (!name || !StartTime || !EndTime) {
+    alert("The information is not complete");
+    return;
+  }
+
+  // console.log("unionImage.mimetype = ", unionImage.mimetype);
+  const endpoint = BASE_URL + `/linkage/` + linkages + "/createEvent";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          linkages: linkages,
+          name: name,
+          StartTime: StartTime,
+          EndTime: EndTime,
+          recurring: recurring,
+          status: status,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+
+    window.location.href = "/linkage/" + linkages;
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert("Invalid Information");
+    console.log(error);
   }
 }
 
@@ -356,10 +406,8 @@ export async function createUnion(newUser) {
     alert("The information is not complete");
     return;
   }
-  if (!unionImage){
-
-  }
-  else if (!unionImage.name.match(/.(jpg|jpeg|png|)$/i)) {
+  if (!unionImage) {
+  } else if (!unionImage.name.match(/.(jpg|jpeg|png|)$/i)) {
     alert("please upload only image to Union Image");
     return;
   }
@@ -384,7 +432,6 @@ export async function createUnion(newUser) {
   } catch (error) {
     alert("Invalid Information");
     console.log(error);
-    
   }
 }
 
@@ -415,7 +462,6 @@ export async function editUnion(newUser) {
   } catch (error) {
     alert("Invalid Information");
   }
-
 }
 
 export async function removeUnion(newUser) {
@@ -481,8 +527,8 @@ export function GetUserProfile() {
 function userCalendar() {
   const endpoint1 = BASE_URL + "/task/pending";
   const endpoint2 = BASE_URL + "/linkage/event/pending";
-  const requestTask = axios.get(endpoint1, { withCredentials: true })
-  const requestEvent = axios.get(endpoint2, { withCredentials: true })  
+  const requestTask = axios.get(endpoint1, { withCredentials: true });
+  const requestEvent = axios.get(endpoint2, { withCredentials: true });
   // return axios.get(endpoint2, { withCredentials: true })
   // .then((res) => {
   //   res = res.data
@@ -491,28 +537,32 @@ function userCalendar() {
 
   //   return res
   // });
-  return axios.all([requestTask, requestEvent]).then(axios.spread((...responses) => {
-    const responseTask = responses[0].data;
-    const responseEvent = responses[1].data;
-    responseTask.forEach(element => {
-      element.type = "Task";
-      element.Subject = element.name;
-      element.ResourceID = 1;
-      element.IsAllDay = false;
-      // element.IsReadonly = true;
-    });
-    responseEvent.forEach(element => {
-      element.type = "Event";
-      element.Subject = element.name;
-      element.ResourceID = 2;
-      // element.StartTime = new Date(element.dateTime);
-      element.IsAllDay = false;
-      // element.IsReadonly = true;
-    });
-    const response_merge = responseEvent.concat(responseTask);
-    const sortedResponse = response_merge.sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
-    return sortedResponse;
-  }))
+  return axios.all([requestTask, requestEvent]).then(
+    axios.spread((...responses) => {
+      const responseTask = responses[0].data;
+      const responseEvent = responses[1].data;
+      responseTask.forEach((element) => {
+        element.type = "Task";
+        element.Subject = element.name;
+        element.ResourceID = 1;
+        element.IsAllDay = false;
+        // element.IsReadonly = true;
+      });
+      responseEvent.forEach((element) => {
+        element.type = "Event";
+        element.Subject = element.name;
+        element.ResourceID = 2;
+        // element.StartTime = new Date(element.dateTime);
+        element.IsAllDay = false;
+        // element.IsReadonly = true;
+      });
+      const response_merge = responseEvent.concat(responseTask);
+      const sortedResponse = response_merge.sort(
+        (a, b) => new Date(a.StartTime) - new Date(b.StartTime)
+      );
+      return sortedResponse;
+    })
+  );
 }
 export function GetCalendar() {
   const [loading, setLoading] = useState(true);
@@ -635,7 +685,7 @@ export function GetOneTask(taskID) {
       taskContent = item;
     }
   });
-  console.log("!!!!!"+taskContent);
+  console.log("!!!!!" + taskContent);
   return {
     taskLoading,
     taskContent,
@@ -645,14 +695,14 @@ export function GetOneTask(taskID) {
 
 export async function createTask(newUser) {
   // unpack user details, email and password
-  const { name,StartTime,EndTime,note,recurring,status} = newUser;
-  
+  const { name, StartTime, EndTime, note, recurring, status } = newUser;
+
   // if the user did not enter an email or password
   if (!name || !StartTime || !EndTime) {
     alert("The information is not complete");
     return;
   }
-  
+
   // console.log("unionImage.mimetype = ", unionImage.mimetype);
   const endpoint = BASE_URL + `/task`;
   try {
@@ -674,7 +724,6 @@ export async function createTask(newUser) {
         { withCredentials: true } // IMPORTANT
       ),
     }).then((res) => res.data);
-    
 
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
@@ -685,7 +734,6 @@ export async function createTask(newUser) {
   } catch (error) {
     alert("Invalid Information");
     console.log(error);
-    
   }
 }
 
@@ -720,7 +768,7 @@ export async function createTask(newUser) {
 //         setUnionLoading(false);
 //       });
 //   }, []);
- 
+
 //   return {
 //     linkageLoading,
 //     unionLoading,
@@ -731,8 +779,8 @@ export async function createTask(newUser) {
 //   };
 // }
 
-export async function taskEdit(newUser){
-  const { taskID,name,note,StartTime,EndTime,status,recurring } = newUser;
+export async function taskEdit(newUser) {
+  const { taskID, name, note, StartTime, EndTime, status, recurring } = newUser;
   const endpoint = BASE_URL + "/task/edit";
   try {
     let data = await axios({
@@ -749,7 +797,7 @@ export async function taskEdit(newUser){
           StartTime: StartTime,
           EndTime: EndTime,
           status: status,
-          recurring:recurring,
+          recurring: recurring,
         },
         { withCredentials: true } // IMPORTANT
       ),
@@ -781,7 +829,7 @@ export async function RemoveTask(newUser) {
         { withCredentials: true } // IMPORTANT
       ),
     }).then((res) => res.data);
-    
+
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);

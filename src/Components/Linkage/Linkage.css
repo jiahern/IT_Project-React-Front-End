@@ -89,6 +89,7 @@ a section:hover {
 
 #saveCreateButton {
   background-color: var(--color-orange);
+  text-align: center;
   color: white;
   padding: 0.8rem;
   width: 15rem;
@@ -98,5 +99,6 @@ a section:hover {
 }
 
 #saveCreateButton:hover {
+  cursor: pointer;
   transform: scale(1.1);
 }
