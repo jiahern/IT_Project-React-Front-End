@@ -65,7 +65,7 @@ export default function Task() {
         return(
 <section data-testid="Union" className="ShowUnion">
       <div class="flex justify-between w-full h-16 mr-4 py-3">
-        <div class="font-bold text-4xl ml-20">Past Tasks</div>
+        <div class=" font-bold text-4xl ml-20" id="pastTaskTitle">Past Tasks</div>
         
         <div class="addTaskButton flex space-x-10 mr-4">
         <Link to={{ pathname: `/task` }}>

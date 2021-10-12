@@ -4,7 +4,7 @@ import unionLogo from "./UnionLogo.png";
 import "./EditUnion.css";
 import { editUnion, GetOneUnion, removeUnion } from "../../api";
 import { UseLinkages } from "../../api";
-
+import { loadingAnimation } from '../Loading/Loading';
 const EditUnion = (props) => {
   const { unionID } = props.match.params;
   var { unionLoading, unionContent, unionError } = GetOneUnion(unionID);
@@ -40,7 +40,7 @@ const EditUnion = (props) => {
   }
 
   if (unionLoading) {
-    return <p>Loading...</p>;
+    return <loadingAnimation/>;
   }
   if (unionError) {
     return <p>Union went wrong: {unionError.message}</p>;
@@ -49,7 +49,7 @@ const EditUnion = (props) => {
   // Try Linkage
   const { loading, linkages, error } = UseLinkages();
   if (loading) {
-    return <p>Loading...</p>;
+    return <loadingAnimation/>;
   }
   if (error) {
     return <p>Something went wrong: {error.message}</p>;
@@ -79,7 +79,21 @@ const EditUnion = (props) => {
   }
   return (
     <section className="ShowUnion">
-      <form className="showUnionBelow flex justify-between w-full h-16 mr-4 py-3">
+      <form className="showUnionBelow flex w-full h-16 mr-4 py-3">
+      <Link to={{ pathname: `/union` }}>
+                <svg
+                  class="pb-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="48px"
+                  viewBox="0 0 24 24"
+                  width="48px"
+                  fill="#000000"
+                >
+                  <path d="M0 0h24v24H0V0z" fill="none" />
+                  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                </svg>
+              </Link>
+      <div class = "font-bold w-2 text-2xl ml-20">Name: </div>
         <input
           className="font-bold text-3xl ml-20"
           defaultValue={name}
@@ -88,8 +102,22 @@ const EditUnion = (props) => {
             name = event.target.value;
           }}
         />
+        <div class = "ml-2 mt-2">
+              <svg
+                  width="15"
+                  height="13"
+                  viewBox="0 0 30 27"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  >
+                  <path
+                          d="M18.4058 5.03062L24.4256 10.4054L9.18767 24.0107L3.17122 18.6359L18.4058 5.03062ZM28.9935 3.73433L26.3089 1.33734C25.2714 0.41099 23.5867 0.41099 22.5456 1.33734L19.974 3.63342L25.9939 9.00829L28.9935 6.33005C29.7982 5.61152 29.7982 4.45281 28.9935 3.73433ZM0.0209023 26.1907C-0.0886516 26.6309 0.356502 27.0253 0.849606 26.9183L7.55774 25.4661L1.54128 20.0913L0.0209023 26.1907Z"
+                          fill="black"
+                  />
+                  </svg>
+                  </div>
 
-        <div className="flex space-x-10 mr-4">
+        <div className="flex space-x-10 mr-4 ml-96">
           <Link to={{ pathname: `/union` }}>
             <button
               onClick={onDelete}

@@ -106,7 +106,7 @@ const EditTask = (props) => {
             <div className="showUnionBelow flex w-full h-16 mr-4 py-3">
               <Link to={{ pathname: `/task` }}>
                 <svg
-                  class="pb-2"
+                  class="mb-2"
                   xmlns="http://www.w3.org/2000/svg"
                   height="48px"
                   viewBox="0 0 24 24"

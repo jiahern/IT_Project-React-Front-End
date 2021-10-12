@@ -1,16 +1,17 @@
 #viewPastTask{
-        background-color: rgb(58,175,169);
+        background-color: var(--color-orange);
 }
 #createTask{
-        background-color: rgb(58,175,169);
+        background-color: var(--color-orange);
 }
 
 .addTask {
-        background-color: #3aafa9;
+        background-color: var(--color-light-grey);
         color: white;
         font-size: large;
         padding: 4px 25px;
 }
+
 .viewPast{
         background-color: #3aafa9;
         color: white;
@@ -24,9 +25,12 @@
         width: 50%;
         height: 100%;
         visibility: visible;
-        background-color: #def2f1;
+        background-color: var(--color-light-grey);
         transition: height 0.3s ease-in;
       }
 .createTask.inactive {
         height: 0%;
+}
+.taskTitle{
+        color: var(--color-dark-grey);
 }

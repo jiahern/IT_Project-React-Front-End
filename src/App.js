@@ -19,6 +19,7 @@ import Linkage from "./Components/Linkage/Linkage";
 import Task from "./Components/Tasks/Task";
 import editTask from "./Components/Tasks/editTask";
 import pastTask from "./Components/Tasks/pastTask";
+import Loading from "./Components/Loading/Loading";
 // import Calendar from "./Pages/Calendar";
 import RegisterForm from "./Components/Register/register";
 import Cookies from "js-cookie";
@@ -62,6 +63,7 @@ function App() {
                   <Redirect to="/homepage" />{" "}
                 </Route>
                 <ProtectedRoute path="/homepage" exact component={HomePage} />
+                <Route path="/loading" exact component={Loading} />
                 <ProtectedRoute path="/union" exact component={Union} />
 
                 <Route path="/union/:unionID" exact component={EditUnion} />
