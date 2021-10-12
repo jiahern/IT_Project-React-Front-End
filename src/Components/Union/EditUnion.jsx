@@ -22,10 +22,10 @@ const EditUnion = (props) => {
       name: name,
       linkages: unionContent.linkages,
     });
-
+    
     //redirect to homepage
-    const state = { redirect: "/" };
-    return <Redirect to={state.redirect} />;
+    // const state = { redirect: "/" };
+    // return <Redirect to={state.redirect} />;
   }
   //delete union from database
   function onDelete() {
@@ -35,8 +35,8 @@ const EditUnion = (props) => {
     });
 
     //redirect to homepage
-    const state = { redirect: "/" };
-    return <Redirect to={state.redirect} />;
+    // const state = { redirect: "/" };
+    // return <Redirect to={state.redirect} />;
   }
 
   if (unionLoading) {
