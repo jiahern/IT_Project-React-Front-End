@@ -300,6 +300,7 @@ export async function removeLinkage(newUser) {
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);
+    window.location.href = "/linkage/" + linkageID;
   } catch (error) {
     alert("Invalid Information");
   }

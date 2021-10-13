@@ -106,7 +106,7 @@
   outline-offset: 15px;
 }
 
-#saveCreateButton {
+.saveCreateButton {
   background-color: var(--color-orange);
   text-align: center;
   color: white;
@@ -117,7 +117,7 @@
   transition: transform ease 0.2s;
 }
 
-#saveCreateButton:hover {
+.saveCreateButton:hover {
   cursor: pointer;
   transform: scale(1.1);
 }

@@ -36,16 +36,15 @@ const Linkage = () => {
   const { loading, linkages, error } = UseLinkages();
   const [active, setActive] = useState(false);
   const [editActive, setEditActive] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [middleName, setMiddleName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [event, setEvent] = useState("");
+  const [note, setNote] = useState("");
   const [linkageImage, setLinkageImage] = useState(null);
-
-  var firstName = null;
-  var middleName = null;
-  var lastName = null;
-  var address = null;
-  var email = null;
-  var phoneNumber = null;
-  var note = null;
 
   function createSave() {
     createLinkage({
@@ -60,9 +59,9 @@ const Linkage = () => {
       linkageImage: linkageImage,
     });
     // redirect to homepage
-    // window.location.reload();
+    window.location.reload();
     // window.location.href = "/linkage";
-    // console.log(window.location);
+    console.log(window.location);
   }
 
   function addLinkagePage() {
@@ -77,9 +76,11 @@ const Linkage = () => {
   }
 
   function sendEmail(item) {
-    email = "mailto:" + item;
+    var newEmail = null;
 
-    window.location.href = email;
+    newEmail = "mailto:" + item;
+
+    window.location.href = newEmail;
   }
 
   return (
@@ -224,25 +225,34 @@ const Linkage = () => {
                 <input
                   className="w-40 ml-20 h-8 rounded-l text-l"
                   type="text"
+                  id="firstName"
+                  name="firstName"
+                  value={firstName}
                   placeholder="First Name"
                   onChange={(event) => {
-                    firstName = event.target.value;
+                    setFirstName(event.target.value);
                   }}
                 />
                 <input
                   className="w-40 ml-20 h-8 rounded-l text-l"
                   type="text"
+                  id="middleName"
+                  name="middleName"
+                  value={middleName}
                   placeholder="Middle Name"
                   onChange={(event) => {
-                    middleName = event.target.value;
+                    setMiddleName(event.target.value);
                   }}
                 />
                 <input
                   className="w-40 ml-20 h-8 rounded-l text-l"
                   type="text"
+                  id="lasttName"
+                  name="lastName"
+                  value={lastName}
                   placeholder="Last Name"
                   onChange={(event) => {
-                    lastName = event.target.value;
+                    setLastName(event.target.value);
                   }}
                 />
               </div>
@@ -252,9 +262,12 @@ const Linkage = () => {
               <input
                 className="w-80 ml-20 h-8 rounded-l text-l"
                 type="text"
+                id="email"
+                name="email"
+                value={email}
                 placeholder="Fill in your Email"
                 onChange={(event) => {
-                  email = event.target.value;
+                  setEmail(event.target.value);
                 }}
               />
               <label className="ml-20 text-xl" htmlFor="Name">
@@ -263,9 +276,12 @@ const Linkage = () => {
               <input
                 className="w-80 ml-20 h-8 rounded-l text-l"
                 type="text"
+                id="address"
+                name="address"
+                value={address}
                 placeholder="Fill in your Address"
                 onChange={(event) => {
-                  address = event.target.value;
+                  setAddress(event.target.value);
                 }}
               />
               <label className="ml-20 text-xl" htmlFor="Name">
@@ -274,37 +290,34 @@ const Linkage = () => {
               <input
                 className="w-80 ml-20 h-8 rounded-l text-l"
                 type="text"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={phoneNumber}
                 placeholder="Fill in your Phone Number"
                 onChange={(event) => {
-                  phoneNumber = event.target.value;
+                  setPhoneNumber(event.target.value);
                 }}
               />
 
-              {/* <input
-                className="w-80 ml-20 h-8 rounded-l text-l"
-                type="text"
-                id="Event"
-                name="Event"
-                onChange={(event) => {
-                  setEvent(event.target.value);
-                }}
-              /> */}
               <label className="ml-20 text-xl" htmlFor="Name">
                 Notes:
               </label>
               <input
                 className="w-80 ml-20 h-20 rounded-lg text-l"
                 type="text"
+                id="note"
+                name="note"
+                value={note}
                 placeholder="Fill in the Notes"
                 onChange={(event) => {
-                  note = event.target.value;
+                  setNote(event.target.value);
                 }}
               />
 
               <label className="ml-20 text-xl" htmlFor="Image">
                 Profile Picture:
               </label>
-              <div calss="w-80 ml-20 rounded-lg text-l">
+              <div class="w-80 ml-20 rounded-lg text-l">
                 {(() => {
                   // console.log("unionImage(union.jsx) ="+ unionImage);
                   if (linkageImage != null && linkageImage) {
@@ -334,9 +347,8 @@ const Linkage = () => {
                 />
               </div>
               <input
-                id="saveCreateButton"
-                className="ml-96 mt-4 mb-4 rounded-l"
-                type="button"
+                className="saveCreateButton ml-96 mt-4 mb-4 rounded-l"
+                type="submit"
                 value="CREATE"
                 onClick={createSave}
               />
