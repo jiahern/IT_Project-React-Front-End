@@ -4,7 +4,7 @@ import unionLogo from "./UnionLogo.png";
 import "./EditUnion.css";
 import { editUnion, GetOneUnion, removeUnion } from "../../api";
 import { UseLinkages } from "../../api";
-import { loadingAnimation } from '../Loading/Loading';
+import Loading from '../Loading/Loading';
 const EditUnion = (props) => {
   const { unionID } = props.match.params;
   var { unionLoading, unionContent, unionError } = GetOneUnion(unionID);
@@ -40,7 +40,7 @@ const EditUnion = (props) => {
   }
 
   if (unionLoading) {
-    return <loadingAnimation/>;
+    return <Loading/>;
   }
   if (unionError) {
     return <p>Union went wrong: {unionError.message}</p>;
@@ -49,7 +49,7 @@ const EditUnion = (props) => {
   // Try Linkage
   const { loading, linkages, error } = UseLinkages();
   if (loading) {
-    return <loadingAnimation/>;
+    return <Loading/>;
   }
   if (error) {
     return <p>Something went wrong: {error.message}</p>;

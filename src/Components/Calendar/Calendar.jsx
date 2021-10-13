@@ -3,7 +3,8 @@ import Calendar from "react-calendar";
 import "./calendar.css";
 import {render} from "react-dom";
 // import 'react-calendar/dist/Calendar.css';
-import {Inject, ScheduleComponent, Day, Week, WorkWeek, Month, 
+import {Inject, ViewsDirective,
+    ViewDirective,ScheduleComponent, Day, Week, WorkWeek, Month, 
     Agenda, ResourceDirective, ResourcesDirective} from '@syncfusion/ej2-react-schedule';
 import { GetCalendar } from "../../api";
 import * as FaIcons from "react-icons/fa";
@@ -217,7 +218,6 @@ export default function ShowCalendar() {
                 </div>
             </div> */}
         {/* </div> */}
-
         <div class = "py-16">
             <div className="font-bold text-4xl ml-20">Schedule</div>
             {/* https://www.youtube.com/watch?v=iNkryf_TtZw */}
