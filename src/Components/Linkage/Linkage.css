@@ -37,15 +37,34 @@
   color: inherit;
 }
 
-a section {
+.sectionLinkage {
   transition: background 0.2s ease;
   border-bottom: solid 1px #ccc;
   padding: 10px;
+  z-index: 1;
 }
 
-a section:hover {
+.sectionLinkage:hover {
   background: white;
 }
+
+.emailAndBin {
+}
+
+.email {
+}
+
+.email:hover {
+  transform: scale(1.2);
+}
+
+.bin {
+}
+
+.bin:hover {
+  transform: scale(1.2);
+}
+
 .LinkageTitle {
   background-color: var(--color-dark-grey);
   color: white;

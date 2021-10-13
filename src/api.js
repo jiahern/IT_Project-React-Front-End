@@ -213,7 +213,7 @@ export async function createLinkage(newUser) {
       // console.log(res);
       return res.data;
     });
-    window.location.href = "/";
+    window.location.href = "/linkage";
     // redirect to homepage -- another way to redirect
   } catch (error) {
     alert(error.message);
@@ -272,7 +272,6 @@ export async function editLinkage(newUser) {
       return res.data;
     });
 
-    window.location.href = "/linkage/" + _id;
     // redirect to homepage -- another way to redirect
   } catch (error) {
     alert(error.message);
@@ -305,6 +304,8 @@ export async function removeLinkage(newUser) {
     alert("Invalid Information");
   }
 }
+
+//Event
 
 export async function createLinkageEvents(newUser) {
   // unpack user details, email and password
@@ -348,6 +349,119 @@ export async function createLinkageEvents(newUser) {
     alert("Invalid Information");
     console.log(error);
   }
+}
+
+export async function editEvent(newUser) {
+  // unpack user details, email and password
+  const { name, StartTime, EndTime, recurring, linkages, eventId } = newUser;
+
+  const endpoint = BASE_URL + `/linkage/` + linkages + "/changeEvent";
+
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          _id: eventId,
+          linkages: linkages,
+          name: name,
+          StartTime: StartTime,
+          EndTime: EndTime,
+          recurring: recurring,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+
+    // window.location.href = "/linkage/" + linkages;
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert("Invalid Information");
+    console.log(error);
+  }
+}
+
+export async function removeEvent(newUser) {
+  // unpack user details, email and password
+  const { linkageID } = newUser;
+  const endpoint = BASE_URL + "/linkage/" + linkageID + "/removeEvent";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          linkages: linkageID,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+  } catch (error) {
+    alert("Invalid Information");
+  }
+}
+
+function getEvents() {
+  const endpoint = BASE_URL + "/linkage/event/pending";
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+}
+
+export function UseEvents() {
+  const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getEvents()
+      .then((events) => {
+        setEvents(events);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
+  console.log(events);
+  return {
+    loading,
+    events,
+    error,
+  };
+}
+
+//Get One Event
+export function GetOneEvent(linkageID) {
+  var eventContent = useState([]);
+  const { loading, events, error } = UseEvents();
+
+  events.map((item) => {
+    if (item.linkages === linkageID) {
+      eventContent = item;
+    }
+  });
+  // console.log(linkageContent);
+  return {
+    loading,
+    eventContent,
+    error,
+  };
 }
 
 //From here is Union function--------------------------------------------------------------------

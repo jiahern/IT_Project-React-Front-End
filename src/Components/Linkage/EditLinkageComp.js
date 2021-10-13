@@ -7,7 +7,15 @@ import React, {
 } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { editLinkage, GetOneLinkage, createLinkageEvents } from "../../api";
+import {
+  editLinkage,
+  GetOneLinkage,
+  createLinkageEvents,
+  removeLinkage,
+  GetOneEvent,
+  editEvent,
+  removeEvent,
+} from "../../api";
 import "./EditLinkageComp.css";
 import * as BsIcons from "react-icons/bs";
 import * as IoIcons from "react-icons/io5";
@@ -69,6 +77,24 @@ const EditLinkageComp = (props) => {
 
   // const showsetInactive = () => setInactive(!inactive);
 
+  //Handle Event
+  var { eventContent } = GetOneEvent(linkageID);
+
+  function onDelete() {
+    //using API function to submit data to FoodBuddy API
+    removeLinkage({
+      linkageID: linkageID,
+      profilePic: profilePic,
+    });
+
+    removeEvent({
+      linkageID: linkageID,
+    });
+
+    //redirect to homepage
+    window.location.href = "/linkage";
+  }
+
   function editSave() {
     editLinkage({
       _id: linkageID,
@@ -81,8 +107,18 @@ const EditLinkageComp = (props) => {
       note: note,
       profilePic: linkageImage,
     });
+    editEvent({
+      linkages: linkageID,
+      eventId: eventContent._id,
+      name: eventContent.name,
+      StartTime: eventContent.StartTime,
+      EndTime: eventContent.EndTime,
+      recurring: eventContent.recurring,
+    });
+
     // redirect to homepage
-    window.location.href = "/linkage/" + linkageID;
+    window.location.reload();
+    // window.location.href = "/linkage/" + linkageID;
     // console.log(window.location);
   }
 
@@ -135,93 +171,112 @@ const EditLinkageComp = (props) => {
         <div className="flex edit-linkage-title text-4xl mb-4">
           <div className=""> Linkage Information</div>
           <div>
-            <div className="deleteAndEdit">
-              <input
-                id="deleteButton"
-                className="deleteEditButton btn btn-secondary "
-                // ref = {register}
-                type="submit"
-                value="Edit"
-                onClick={triggerEdit}
-              />
+            {editLinkageTrigger ? (
+              <div className="editAndCreateEvent">
+                <input
+                  id="editLinkageButton"
+                  className=" btn btn-secondary ml-4"
+                  // ref = {register}
+                  type="submit"
+                  value="Edit"
+                  onClick={triggerEdit}
+                />
 
-              {/* Popup for Create Event */}
-              <Popup
-                trigger={
-                  <button className="btn btn-primary"> Create Event </button>
-                }
-                modal
-                nested
-              >
-                <span>
-                  <form>
-                    <label className="text-xl mb-2 mt-2">Create Events:</label>
-                    <div class="flex space-x-4">
-                      <label class="font-bold" for="Name">
-                        Event Name:
-                      </label>
-                      <input
-                        disabled={editLinkageTrigger}
-                        class="w-40 h-10 rounded-xl"
-                        type="text"
-                        id="name"
-                        placeholder="Name"
-                        onChange={(event) => {
-                          newEventName = event.target.value;
-                        }}
-                      />
-                    </div>
-                    <div class="flex mt-10 mb-2">
-                      <label class="font-bold mr-2" for="Name">
-                        Start Time:
-                      </label>
-                      <div>
-                        <DateTimePickerComponent
-                          disabled={triggerEdit}
-                          divat="yyyy/MM/dd HH:mm"
-                          id="datetimepicker"
-                          onChange={(date) => {
-                            newEventStartTime = date.target.value;
-                          }}
-                        ></DateTimePickerComponent>
-                      </div>
-                      <label class="font-bold ml-5 mr-2" for="Name">
-                        End Time:
-                      </label>
-                      <div>
-                        <DateTimePickerComponent
-                          disabled={triggerEdit}
-                          divat="yyyy/MM/dd HH:mm"
-                          id="datetimepicker"
-                          onChange={(date) => {
-                            newEventEndTime = date.target.value;
-                          }}
-                        ></DateTimePickerComponent>
-                      </div>
-                    </div>
+                {/* Popup for Create Event */}
 
-                    <div className="RecurrenceEditor">
-                      <label className="font-bold mt-4" for="Name">
-                        Recurring:
-                      </label>
-                      <RecurrenceEditorComponent
-                        id="RecurrenceEditor"
-                        change={(args) => {
-                          newRecurringDate = args.value;
-                        }}
-                      ></RecurrenceEditorComponent>
-                    </div>
-                    <input
-                      id="saveCreateButton"
-                      className="ml-96 mt-4 mb-4 rounded-l"
-                      value="CREATE"
-                      type="submit"
-                      onClick={createEvents}
-                    />
-                  </form>
-                </span>
-              </Popup>
-            </div>
+                {(() => {
+                  // console.log("unionImage(union.jsx) ="+ unionImage);
+                  if (eventContent._id == null) {
+                    // console.log("unionImage(union.jsx) else ==" + linkageImage);
+                    return (
+                      <Popup
+                        trigger={
+                          <button
+                            id="createEventButton"
+                            className="btn btn-primary ml-4"
+                          >
+                            {" "}
+                            Create Event{" "}
+                          </button>
+                        }
+                        modal
+                        nested
+                      >
+                        <span>
+                          <form>
+                            <label className="text-xl mb-2 mt-2">
+                              Create Events:
+                            </label>
+                            <div class="flex space-x-4">
+                              <label class="font-bold" for="Name">
+                                Event Name:
+                              </label>
+                              <input
+                                class="w-40 h-10 rounded-xl"
+                                type="text"
+                                id="name"
+                                placeholder="Name"
+                                onChange={(event) => {
+                                  newEventName = event.target.value;
+                                }}
+                              />
+                            </div>
+                            <div class="flex mt-10 mb-2">
+                              <label class="font-bold mr-2" for="Name">
+                                Start Time:
+                              </label>
+                              <div>
+                                <DateTimePickerComponent
+                                  divat="yyyy/MM/dd HH:mm"
+                                  id="datetimepicker"
+                                  onChange={(date) => {
+                                    newEventStartTime = date.target.value;
+                                  }}
+                                ></DateTimePickerComponent>
+                              </div>
+                              <label class="font-bold ml-5 mr-2" for="Name">
+                                End Time:
+                              </label>
+                              <div>
+                                <DateTimePickerComponent
+                                  divat="yyyy/MM/dd HH:mm"
+                                  id="datetimepicker"
+                                  onChange={(date) => {
+                                    newEventEndTime = date.target.value;
+                                  }}
+                                ></DateTimePickerComponent>
+                              </div>
+                            </div>
+
+                            <div className="RecurrenceEditor">
+                              <label className="font-bold mt-4" for="Name">
+                                Recurring:
+                              </label>
+                              <RecurrenceEditorComponent
+                                id="RecurrenceEditor"
+                                change={(args) => {
+                                  newRecurringDate = args.value;
+                                }}
+                              ></RecurrenceEditorComponent>
+                            </div>
+                            <input
+                              id="saveCreateButton"
+                              className="ml-96 mt-4 mb-4 rounded-l"
+                              value="CREATE"
+                              type="submit"
+                              onClick={createEvents}
+                            />
+                          </form>
+                        </span>
+                      </Popup>
+                    );
+                  } else {
+                    // console.log("unionImage(union.jsx) =" + linkageImage);
+                    return null;
+                  }
+                })()}
+              </div>
+            ) : null}
           </div>
         </div>
         <div className="linkage-pic ml-4 mb-4">
@@ -237,7 +292,6 @@ const EditLinkageComp = (props) => {
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="edit-linkage-form flex flex-col space-y-2 pb-14"
-            action="#"
           >
             <label className="  text-xl" htmlFor="Name">
               Contact Information:
@@ -341,42 +395,60 @@ const EditLinkageComp = (props) => {
                 disabled={editLinkageTrigger}
                 class="w-40 h-10 rounded-xl"
                 type="text"
-                id="name"
+                id="eventName"
+                name="eventName"
+                defaultValue={eventContent.name}
                 // value={existEventName}
-                placeholder="Name"
+                placeholder="Event Name"
                 onChange={(event) => {
-                  // setName(event.target.value);
+                  eventContent.name = event.target.value;
                 }}
               />
             </div>
             <div class="flex mt-14 mb-2">
-              <label class="font-bold" for="Name">
+              <label className="font-bold mr-2" for="Name">
                 Start Time:
               </label>
               <div>
                 <DateTimePickerComponent
-                  disabled={triggerEdit}
+                  readonly={editLinkageTrigger}
                   divat="yyyy/MM/dd HH:mm"
                   id="datetimepicker"
+                  value={eventContent.StartTime}
                   onChange={(date) => {
-                    // setStartTime(date.target.value);
+                    eventContent.StartTime = date.target.value;
                   }}
                 ></DateTimePickerComponent>
               </div>
-              <label class="font-bold ml-5" for="Name">
+              <label class="font-bold ml-5 mr-2" for="Name">
                 End Time:
               </label>
               <div>
                 <DateTimePickerComponent
-                  disabled={triggerEdit}
+                  readonly={editLinkageTrigger}
                   divat="yyyy/MM/dd HH:mm"
                   id="datetimepicker"
+                  value={eventContent.EndTime}
                   onChange={(date) => {
-                    // setEndTime(date.target.value);
+                    eventContent.EndTime = date.target.value;
                   }}
                 ></DateTimePickerComponent>
               </div>
             </div>
+            {!editLinkageTrigger ? (
+              <div className="RecurrenceEditor w-50">
+                <label className="font-bold mt-4" for="Name">
+                  Recurring:
+                </label>
+                <RecurrenceEditorComponent
+                  id="RecurrenceEditor"
+                  value={eventContent.recurring}
+                  change={(args) => {
+                    eventContent.recurring = args.value;
+                  }}
+                ></RecurrenceEditorComponent>
+              </div>
+            ) : null}
             <label className="  text-xl" htmlFor="Name">
               Notes:
             </label>
@@ -393,39 +465,45 @@ const EditLinkageComp = (props) => {
                 note = event.target.value;
               }}
             />
-            <label className="  text-xl" htmlFor="Image">
-              Linkage Photo:
-            </label>
-            <div calss="w-80  h-20 rounded-lg text-l">
-              {(() => {
-                // console.log("unionImage(union.jsx) ="+ unionImage);
-                if (linkageImage != null && linkageImage) {
-                  // console.log("unionImage(union.jsx) else ==" + linkageImage);
-                  return (
-                    <div>
-                      <img
-                        class="mt-2"
-                        src={URL.createObjectURL(linkageImage)}
-                        style={{ width: "150px" }}
-                        alt="union upload pic"
-                      />
-                    </div>
-                  );
-                } else {
-                  // console.log("unionImage(union.jsx) =" + linkageImage);
-                  return <div class="flex"></div>;
-                }
-              })()}
-            </div>
-            <div class="h-8 rounded-lg mt-4 mb-4">
-              <input
-                disabled={editLinkageTrigger}
-                className="chooseFile"
-                type="file"
-                onChange={(event) => fileSelecterHandler(event.target.files)}
-              />
-            </div>
+            {!editLinkageTrigger ? (
+              <div>
+                <label className="  text-xl" htmlFor="Image">
+                  Linkage Photo:
+                </label>
+                <div calss="w-80  h-20 rounded-lg text-l">
+                  {(() => {
+                    // console.log("unionImage(union.jsx) ="+ unionImage);
+                    if (linkageImage != null && linkageImage) {
+                      // console.log("unionImage(union.jsx) else ==" + linkageImage);
+                      return (
+                        <div>
+                          <img
+                            class="mt-2"
+                            src={URL.createObjectURL(linkageImage)}
+                            style={{ width: "150px" }}
+                            alt="union upload pic"
+                          />
+                        </div>
+                      );
+                    } else {
+                      // console.log("unionImage(union.jsx) =" + linkageImage);
+                      return <div class="flex"></div>;
+                    }
+                  })()}
+                </div>
 
+                <div class="h-8 rounded-lg mt-4 mb-4">
+                  <input
+                    disabled={editLinkageTrigger}
+                    className="chooseFile"
+                    type="file"
+                    onChange={(event) =>
+                      fileSelecterHandler(event.target.files)
+                    }
+                  />
+                </div>
+              </div>
+            ) : null}
             {/* 
             <input
               className="mt-40 "
@@ -434,26 +512,36 @@ const EditLinkageComp = (props) => {
               id="Image"
               name="filename"
             /> */}
-            <div className="deleteAndEdit">
-              <input
-                id="deleteButton"
-                className="deleteEditButton btn btn-danger "
-                // ref = {register}
-                type="submit"
-                value="DELETE"
-                //   onClick={createSave}
-              />
-              <Link to={{ pathname: `/linkage` }}>
+            {!editLinkageTrigger ? (
+              <div>
+                <div className="deleteAndEdit">
+                  <input
+                    id="deleteButton"
+                    className="deleteEditButton bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ease-in"
+                    // ref = {register}
+                    type="button"
+                    value="CANCEL"
+                    onClick={triggerEdit}
+                  />
+                  <input
+                    id="saveButton"
+                    className="saveCreateButton btn btn-success "
+                    // ref = {register}
+                    type="submit"
+                    value="SAVE"
+                    onClick={editSave}
+                  />
+                </div>
                 <input
-                  id="saveButton"
-                  className="saveCreateButton btn btn-success "
+                  id="deleteButton"
+                  className="deleteEditButton btn btn-danger mt-4"
                   // ref = {register}
-                  type="submit"
-                  value="SAVE"
-                  onClick={editSave}
+                  type="button"
+                  value="DELETE"
+                  onClick={onDelete}
                 />
-              </Link>
-            </div>
+              </div>
+            ) : null}
           </form>
         </div>
       </div>

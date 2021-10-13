@@ -9,6 +9,7 @@ import * as BsIcons from "react-icons/bs";
 import * as GrIcons from "react-icons/gr";
 import * as HiIcons from "react-icons/hi";
 import * as IoIcons from "react-icons/io5";
+import * as MdIcons from "react-icons/md";
 
 const BASE_URL = "http://localhost:5000/";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
@@ -59,7 +60,7 @@ const Linkage = () => {
       linkageImage: linkageImage,
     });
     // redirect to homepage
-    window.location.reload();
+    // window.location.reload();
     // window.location.href = "/linkage";
     // console.log(window.location);
   }
@@ -74,6 +75,13 @@ const Linkage = () => {
   function editLinkagePage() {
     setEditActive(!editActive);
   }
+
+  function sendEmail(item) {
+    email = "mailto:" + item;
+
+    window.location.href = email;
+  }
+
   return (
     <React.Fragment children>
       <div className="flex justify-between w-full h-18 mr-4 py-3">
@@ -122,13 +130,13 @@ const Linkage = () => {
                 pathname: `/linkage/${item._id}`,
               }}
             >
-              <section key={index}>
+              <section className="sectionLinkage" key={index}>
                 <div
-                  onClick={() => {
-                    if (inactive) {
-                      setInactive(false);
-                    }
-                  }}
+                  // onClick={() => {
+                  //   if (inactive) {
+                  //     setInactive(false);
+                  //   }
+                  // }}
                   className="Linkage w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-5 gap-x-4 gap-y-4"
                 >
                   {/* <BsIcons.BsFillPersonFill className="w-20 h-20" /> */}
@@ -152,8 +160,27 @@ const Linkage = () => {
                   <div className="LastInTouch py-6 px-16">
                     {new Date(item.lastConnection).toLocaleDateString()}
                   </div>
-                  <div className="flex space-x-5 px-5 py-6">
-                    {/* <div
+                  <div className="emailAndBin flex space-x-5 px-5 py-6">
+                    <button
+                      onClick={(e) => {
+                        sendEmail(item.email);
+                        e.preventDefault();
+                      }}
+                      className="email h-7"
+                    >
+                      <GrIcons.GrMail size="lg" />
+                    </button>
+                    <button
+                      className="bin h-7"
+                      onClick={(e) => {
+                        onDelete(item._id, item.profilePic);
+                        e.preventDefault();
+                      }}
+                    >
+                      <MdIcons.MdDelete size="lg" />
+                    </button>
+                  </div>
+                  {/* <div
                   className={inactive ? "editLinkage unactive" : "editLinkage"}
                 >
                   {/* <EditLinkageComp
@@ -165,31 +192,6 @@ const Linkage = () => {
                     id={item._id}
                   /> 
                 </div> */}
-                    <button href={"mailto:" + item.email} className="email h-5">
-                      <GrIcons.GrMail />
-                    </button>
-                    <button
-                      className="bin h-5"
-                      onClick={() => onDelete(item._id, item.profilePic)}
-                    >
-                      <svg
-                        width="15"
-                        height="15"
-                        viewBox="0 0 29 29"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M26.0025 3.625H20.0141V2.71875C20.0141 1.21721 18.5517 0 16.7477 0H12.3925C10.5885 0 9.12615 1.21721 9.12615 2.71875V3.625H3.13777C1.63448 3.625 0.415771 4.63938 0.415771 5.89062V7.70312C0.415771 8.20366 0.903213 8.60938 1.50457 8.60938H27.6357C28.2371 8.60938 28.7245 8.20366 28.7245 7.70312V5.89062C28.7245 4.63938 27.5058 3.625 26.0025 3.625ZM11.3037 2.71875C11.3037 2.21918 11.7923 1.8125 12.3925 1.8125H16.7477C17.3479 1.8125 17.8365 2.21918 17.8365 2.71875V3.625H11.3037V2.71875Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M2.48208 10.4219C2.2878 10.4219 2.13299 10.557 2.14224 10.7186L3.0405 26.4104C3.12352 27.8627 4.55665 29 6.30281 29H22.8376C24.5837 29 26.0168 27.8627 26.0999 26.4104L26.9981 10.7186C27.0074 10.557 26.8526 10.4219 26.6583 10.4219H2.48208ZM18.9254 12.6875C18.9254 12.1868 19.4126 11.7812 20.0142 11.7812C20.6157 11.7812 21.103 12.1868 21.103 12.6875V24.4688C21.103 24.9695 20.6157 25.375 20.0142 25.375C19.4126 25.375 18.9254 24.9695 18.9254 24.4688V12.6875ZM13.4814 12.6875C13.4814 12.1868 13.9686 11.7812 14.5702 11.7812C15.1717 11.7812 15.659 12.1868 15.659 12.6875V24.4688C15.659 24.9695 15.1717 25.375 14.5702 25.375C13.9686 25.375 13.4814 24.9695 13.4814 24.4688V12.6875ZM8.0374 12.6875C8.0374 12.1868 8.52463 11.7812 9.1262 11.7812C9.72776 11.7812 10.215 12.1868 10.215 12.6875V24.4688C10.215 24.9695 9.72776 25.375 9.1262 25.375C8.52463 25.375 8.0374 24.9695 8.0374 24.4688V12.6875Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </button>
-                  </div>
                 </div>
               </section>
             </Link>
@@ -334,6 +336,7 @@ const Linkage = () => {
               <input
                 id="saveCreateButton"
                 className="ml-96 mt-4 mb-4 rounded-l"
+                type="button"
                 value="CREATE"
                 onClick={createSave}
               />
