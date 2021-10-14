@@ -13,6 +13,8 @@ import LoginForm, { Logout } from "./Components/Login/login";
 
 import HomePage from "./Components/Home/HomePage";
 import Profile from "./Components/Profile/Profile";
+import EditProfile from "./Components/Profile/EditProfile";
+import ChangePassword from "./Components/Profile/ChangePassword";
 import Union from "./Components/Union/Union";
 import EditUnion from "./Components/Union/EditUnion";
 import Linkage from "./Components/Linkage/Linkage";
@@ -61,7 +63,9 @@ function App() {
                 </Route>
                 <ProtectedRoute path="/homepage" exact component={HomePage} />
                 <ProtectedRoute path="/union" exact component={Union} />
-                <ProtectedRoute path="/Profile" exact component={Profile} />
+                <ProtectedRoute path="/profile" exact component={Profile} />
+                <ProtectedRoute path="/profile/:profileID" exact component={EditProfile} />
+                <ProtectedRoute path="/password" exact component={ChangePassword} />
                 <Route path="/union/:unionID" exact component={EditUnion} />
                 <ProtectedRoute path="/linkage" exact component={Linkage} />
                 <Route

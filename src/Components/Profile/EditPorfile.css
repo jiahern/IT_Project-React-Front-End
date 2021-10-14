@@ -1,0 +1,48 @@
+.deleteAndEdit {
+  position: relative;
+  top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-content: space-between;
+  width: 30em;
+}
+
+.saveCreateButton {
+  padding: 4px 5px;
+  /* position: relative; */
+  width: 10em;
+  /* right: 10px; */
+}
+
+.deleteEditButton {
+  padding: 4px 5px;
+  /* position: relative; */
+  width: 10em;
+  /* right: 40px; */
+}
+
+.edit-linkage-title {
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.linkage-pic {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.edit-linkage-form {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.editLinkage-box {
+  height: 670px;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-bottom: 30px;
+}

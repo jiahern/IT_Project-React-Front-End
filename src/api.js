@@ -476,6 +476,42 @@ export function GetUserProfile() {
   };
 }
 
+export async function editProfile(newUser) {
+  // unpack user details, email and password
+  const {
+    _id,
+    firstName,
+    middleName,
+    lastName,
+    address,
+    email,
+    phoneNumber,
+  } = newUser;
+
+  const endpoint = BASE_URL + "/Profile/" + _id + "/change";
+
+  try {
+    const fd = new FormData();
+    fd.append("_id", _id);
+    fd.append("firstName", firstName);
+    fd.append("middleName", middleName);
+    fd.append("lastName", lastName);
+    fd.append("address", address);
+    fd.append("email", email);
+    fd.append("phoneNumber", phoneNumber);
+
+    await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
+      // console.log(res);
+      return res.data;
+    });
+  
+    window.location.href = "/Profile";
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
 // get the tasks and events of the user
 function userCalendar() {
   const endpoint1 = BASE_URL + "/task/pending";
