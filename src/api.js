@@ -476,25 +476,40 @@ export function GetUserProfile() {
   };
 }
 
+export function GetOneUser() {
+  var profileContent = useState([]);
+  const { loading, profile, error } = GetUserProfile();
+
+  profile.map((item) => {
+
+    profileContent = item;
+
+  });
+  
+  return {
+    loading,
+    profileContent,
+    error,
+  };
+}
+
 export async function editProfile(newUser) {
   // unpack user details, email and password
   const {
     _id,
     firstName,
-    middleName,
     lastName,
     address,
     email,
     phoneNumber,
   } = newUser;
 
-  const endpoint = BASE_URL + "/Profile/" + _id + "/change";
+  const endpoint = BASE_URL + "/user/profile/change";
 
   try {
     const fd = new FormData();
     fd.append("_id", _id);
     fd.append("firstName", firstName);
-    fd.append("middleName", middleName);
     fd.append("lastName", lastName);
     fd.append("address", address);
     fd.append("email", email);

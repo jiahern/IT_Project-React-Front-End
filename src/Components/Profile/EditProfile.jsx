@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { editProfile, GetUserProfile } from "../../api";
+import { editProfile, GetOneUser, GetUserProfile } from "../../api";
 //import "./EditProfile.css";
 import * as BsIcons from "react-icons/bs";
 const BASE_URL = "http://localhost:5000/";
@@ -20,22 +20,20 @@ const EditProfile = (props) => {
   //const { ProfileID } = props.match.params;
 
   
-  var { ProfileContent } = GetUserProfile();
-
+  var { loading, profileContent, error } = GetOneUser();
 
   const { register, handleSubmit } = useForm({});
 
   const onSubmit = (data) => {
     alert(JSON.stringify(data));
   };
-  var profileID = ProfileContent._id;
-  var firstName = ProfileContent.firstName;
-  var middleName = ProfileContent.middleName;
-  var lastName = ProfileContent.lastName;
-  var email = ProfileContent.email;
-  var phoneNumber = ProfileContent.phoneNumber;
-  var address = ProfileContent.address;
-  var profilePic = ProfileContent.profilePic;
+  var profileID = profileContent._id;
+  var firstName = profileContent.firstName;
+  var lastName = profileContent.lastName;
+  var email = profileContent.email;
+  var phoneNumber = profileContent.phoneNumber;
+  var address = profileContent.address;
+  var profilePic = profileContent.profilePic;
   //const [linkageImage, setLinkageImage] = useState(null);
   // function fileSelecterHandler(image) {
   //   setLinkageImage(image[0]);
@@ -48,7 +46,6 @@ const EditProfile = (props) => {
     editProfile({
       _id: profileID,
       firstName: firstName,
-      middleName: middleName,
       lastName: lastName,
       address: address,
       email: email,
@@ -91,9 +88,11 @@ const EditProfile = (props) => {
           <img
                   class="w-20 h-20"
                   src={BASE_URL + profilePic}
-                  alt="Union Profile Pic"
+                  alt="Profile Pic"
                 />
         </div>
+        {/* {profileContent.map((item, index) => { */}
+          {/* return( */}
         <div className="inputPage h-100">
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -106,34 +105,23 @@ const EditProfile = (props) => {
             <div className="flex space-x-4">
               <input
                 className="w-40 ml-20 h-8  text-l"
-                {...register("firstName")}
+        
                 type="text"
                 id="firstName"
                 name="firstName"
-                defaultValue={ProfileContent.firstName}
+                defaultValue={profileContent.firstName}
                 onChange={(event) => {
                   firstName = event.target.value;
                 }}
               />
+              
               <input
                 className="w-40 ml-20 h-8  text-l"
-                {...register("middleName")}
-                type="text"
-                id="middleName"
-                name="middleName"
-                defaultValue={ProfileContent.middleName}
-                placeholder="Middle Name"
-                onChange={(event) => {
-                  middleName = event.target.value;
-                }}
-              />
-              <input
-                className="w-40 ml-20 h-8  text-l"
-                {...register("lastName")}
+                
                 type="text"
                 id="lasttName"
                 name="lastName"
-                defaultValue={ProfileContent.lastName}
+                defaultValue={profileContent.lastName}
                 placeholder="Last Name"
                 onChange={(event) => {
                   lastName = event.target.value;
@@ -145,11 +133,11 @@ const EditProfile = (props) => {
             </label>
             <input
               className="w-80 ml-20 h-8  text-l"
-              {...register("email")}
+              
               type="text"
               id="email"
               name="email"
-              defaultValue={ProfileContent.email}
+              defaultValue={profileContent.email}
               placeholder="Email"
               onChange={(event) => {
                 email = event.target.value;
@@ -160,11 +148,11 @@ const EditProfile = (props) => {
             </label>
             <input
               className="w-80 ml-20 h-8  text-l"
-              {...register("adress")}
+              
               type="text"
               id="address"
               name="address"
-              defaultValue={ProfileContent.address}
+              defaultValue={profileContent.address}
               placeholder="Address"
               onChange={(event) => {
                 address = event.target.value;
@@ -175,11 +163,11 @@ const EditProfile = (props) => {
             </label>
             <input
               className="w-80 ml-20 h-8  text-l"
-              {...register("phoneNumber")}
+              
               type="text"
               id="phoneNumber"
               name="phoneNumber"
-              defaultValue={ProfileContent.phoneNumber}
+              defaultValue={profileContent.phoneNumber}
               placeholder="Phone Number"
               onChange={(event) => {
                 phoneNumber = event.target.value;
@@ -217,13 +205,6 @@ const EditProfile = (props) => {
 
             
             <div className="deleteAndEdit">
-              <input
-                className="deleteEditButton btn btn-danger font-weight-bold"
-                // ref = {register}
-                type="submit"
-                value="DELETE"
-                //   onClick={createSave}
-              />
               <Link to={{ pathname: `/profile` }}>
                 <input
                   className="saveCreateButton btn btn-success font-weight-bold"
@@ -236,7 +217,10 @@ const EditProfile = (props) => {
             </div>
           </form>
         </div>
+        {/* )
+        })} */}
       </div>
+      
 
 
       {/* Edit Linkage End Here */}

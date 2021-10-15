@@ -7,22 +7,23 @@ const Profile = () => {
     
     return (
         <React.Fragment children>
-            <div className="font-bold text-4xl  ml-20">Account Profile</div>
+            <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8 h-20">
+            Account Profile
+            </div>
             {profile.map((item, index) => {
                 return (
                 <div>
                     <div key={index}>
                         
                         {/*<div class="py-6">Password: {item.password}</div>*/}
-                        <div class="py-6">Email: {item.email}</div>
-                        <div class="py-6">FirstName: {item.firstName}</div>
-                        <div class="py-6">LastName: {item.lastName}</div>
-                        <div class="py-6">PhoneNo: {item.phoneNo}</div>
-
+                        <div className="h-20 text-l text-center">Email: {item.email}</div>
+                        <div className="h-20 text-l text-center">FirstName: {item.firstName}</div>
+                        <div className="h-20 text-l text-center">LastName: {item.lastName}</div>
+                        <div className="h-20 text-l text-center">PhoneNo: {item.phoneNo}</div>
                         
                     </div>
                     
-                    <div>
+                    <div className="text-center">
                         <Link to={{
                             pathname: `/profile/${item._id}`,
                         }}>
@@ -33,9 +34,7 @@ const Profile = () => {
                                 Edit Profile
                             </button>
                         </Link>
-                    </div>
-
-                    <div>
+                    
                         <Link to={{
                             pathname: `/password`,
                         }}>

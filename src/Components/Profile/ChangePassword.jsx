@@ -15,6 +15,7 @@ const BASE_URL = "http://localhost:5000/";
 const ChangePassword = () => {
 
     return(
+      <div>
         <div className="editLinkage-top">
         <Link to={{ pathname: `/profile` }}>
           <button className="backButton">
@@ -31,8 +32,67 @@ const ChangePassword = () => {
             </svg>
           </button>
         </Link>
-        <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8">
+        <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8 h-20">
           Change Password
+        </div>
+        </div>
+        <div className="inputPage flex flex-col space-y-4 h-100">
+        
+        
+        <div className="inputPage h-120">
+          <form
+            // onSubmit={handleSubmit(onSubmit)}
+            className="edit-linkage-form flex flex-col space-y-2"
+            action="#"
+          >
+            <label className="font-bold ml-20 text-xl" htmlFor="Name">
+              New Password:
+            </label>
+            <div className="flex space-x-4">
+              
+              <input
+                className="w-80 ml-20 h-8  text-l"
+                
+                type="text"
+                id="lasttName"
+                name="lastName"
+                // defaultValue={profileContent.lastName}
+                placeholder="********"
+                // onChange={(event) => {
+                //   lastName = event.target.value;
+                // }}
+              />
+            </div>
+            <label className="font-bold ml-20 text-xl" htmlFor="Name">
+              Confirm Password:
+            </label>
+            <input
+              className="w-80 ml-20 h-8  text-l"
+              
+              type="text"
+              id="email"
+              name="email"
+              //defaultValue={profileContent.email}
+              placeholder="********"
+              // onChange={(event) => {
+              //   email = event.target.value;
+              // }}
+            />
+            <div className="deleteAndEdit h-20">
+              <Link to={{ pathname: `/profile` }}>
+                <input
+                  className="saveCreateButton btn btn-success font-weight-bold"
+                  // ref = {register}
+                  type="submit"
+                  value="CONFIRM"
+                  // onClick={editSave}
+                />
+              </Link>
+            </div>
+          </form>
+          
+        </div>
+        
         </div>
       </div>
     );
