@@ -16,10 +16,10 @@ const Profile = () => {
                     <div key={index}>
                         
                         {/*<div class="py-6">Password: {item.password}</div>*/}
-                        <div className="h-20 text-l text-center">Email: {item.email}</div>
-                        <div className="h-20 text-l text-center">FirstName: {item.firstName}</div>
-                        <div className="h-20 text-l text-center">LastName: {item.lastName}</div>
-                        <div className="h-20 text-l text-center">PhoneNo: {item.phoneNo}</div>
+                        <div className="font-bold text-xl h-20 text-center">Email: {item.email}</div>
+                        <div className="font-bold text-xl h-20 text-center">FirstName: {item.firstName}</div>
+                        <div className="font-bold text-xl h-20 text-center">LastName: {item.lastName}</div>
+                        <div className="font-bold text-xl h-20 text-center">PhoneNo: {item.phoneNo}</div>
                         
                     </div>
                     
