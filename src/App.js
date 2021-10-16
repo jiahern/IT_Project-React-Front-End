@@ -65,7 +65,7 @@ function App() {
                 <ProtectedRoute path="/union" exact component={Union} />
                 <ProtectedRoute path="/profile" exact component={Profile} />
                 <ProtectedRoute path="/profile/:profileID" exact component={EditProfile} />
-                <ProtectedRoute path="/password" exact component={ChangePassword} />
+                <Route path="/password" exact component={ChangePassword} />
                 <Route path="/union/:unionID" exact component={EditUnion} />
                 <ProtectedRoute path="/linkage" exact component={Linkage} />
                 <Route

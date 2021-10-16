@@ -7,13 +7,40 @@ import React, {
   } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { editProfile, GetUserProfile} from "../../api";
+import { editProfile, GetOneUser, editPassword} from "../../api";
 //import "./EditProfile.css";
 import * as BsIcons from "react-icons/bs";
 const BASE_URL = "http://localhost:5000/";
 
 const ChangePassword = () => {
 
+  var { loading, profileContent, error } = GetOneUser();
+
+  const { register, handleSubmit } = useForm({});
+
+  // const onSubmit = (data) => {
+  //   alert(JSON.stringify(data));
+  // };
+  var password = profileContent.password;
+  var confirmPassword = "";
+  
+
+
+  function editSave() {
+    if (password !== confirmPassword){
+      alert("passwords not match");
+      return;
+    }
+    editPassword({
+      password: password
+      
+    });
+    // redirect to homepage
+    
+    const state = { redirect: "/" };
+    return <Redirect to={state.redirect} />;
+    // console.log(window.location);
+  }
     return(
       <div>
         <div className="editLinkage-top">
@@ -41,7 +68,7 @@ const ChangePassword = () => {
         
         <div className="inputPage h-120">
           <form
-            // onSubmit={handleSubmit(onSubmit)}
+            onSubmit={editSave}
             className="edit-linkage-form flex flex-col space-y-2"
             action="#"
           >
@@ -53,14 +80,14 @@ const ChangePassword = () => {
               <input
                 className="w-80 ml-20 h-8  text-l"
                 
-                type="text"
-                id="lasttName"
-                name="lastName"
+                type="password"
+                id="password"
+                name="password"
                 // defaultValue={profileContent.lastName}
                 placeholder="********"
-                // onChange={(event) => {
-                //   lastName = event.target.value;
-                // }}
+                onChange={(event) => {
+                  password = event.target.value;
+                }}
               />
             </div>
             <label className="font-bold ml-20 text-xl" htmlFor="Name">
@@ -69,25 +96,25 @@ const ChangePassword = () => {
             <input
               className="w-80 ml-20 h-8  text-l"
               
-              type="text"
-              id="email"
-              name="email"
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
               //defaultValue={profileContent.email}
               placeholder="********"
-              // onChange={(event) => {
-              //   email = event.target.value;
-              // }}
+              onChange={(event) => {
+                confirmPassword = event.target.value;
+              }}
             />
             <div className="deleteAndEdit h-20">
-              <Link to={{ pathname: `/profile` }}>
-                <input
-                  className="saveCreateButton btn btn-success font-weight-bold"
-                  // ref = {register}
-                  type="submit"
-                  value="CONFIRM"
-                  // onClick={editSave}
-                />
-              </Link>
+              
+              <input
+                className="saveCreateButton btn btn-success font-weight-bold"
+                // ref = {register}
+                type="submit"
+                value="CONFIRM"
+                onClick={editSave}
+              />
+             
             </div>
           </form>
           
