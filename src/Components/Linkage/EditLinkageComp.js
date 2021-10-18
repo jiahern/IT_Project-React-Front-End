@@ -270,7 +270,7 @@ const EditLinkageComp = (props) => {
                             </div>
                             <input
                               id="saveCreateButton"
-                              className="ml-96 mt-4 mb-4 rounded-l"
+                              className="saveCreateButton ml-96 mt-4 mb-4 rounded-l"
                               value="CREATE"
                               type="submit"
                               onClick={createEvents}
