@@ -45,7 +45,7 @@ const EditLinkageComp = (props) => {
   }
 
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
   };
 
   var firstName = linkageContent.firstName;
@@ -93,6 +93,15 @@ const EditLinkageComp = (props) => {
 
     //redirect to homepage
     window.location.href = "/linkage";
+  }
+
+  function onDeleteEvent() {
+    removeEvent({
+      linkageID: linkageID,
+    });
+
+    //redirect to homepage
+    window.location.href = "/linkage/" + linkageID;
   }
 
   function editSave() {
@@ -290,7 +299,7 @@ const EditLinkageComp = (props) => {
         </div>
         <div className="inputPage h-100">
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            // onSubmit={handleSubmit(onSubmit)}
             className="edit-linkage-form flex flex-col space-y-2 pb-14"
           >
             <label className="  text-xl" htmlFor="Name">
@@ -384,71 +393,92 @@ const EditLinkageComp = (props) => {
                 phoneNumber = event.target.value;
               }}
             />
-            <label className="text-xl mb-2 mt-2" htmlFor="Name">
-              Events:
-            </label>
-            <div class="flex space-x-4">
-              <label class="font-bold" for="Name">
-                Name:
-              </label>
-              <input
-                disabled={editLinkageTrigger}
-                class="w-40 h-10 rounded-xl"
-                type="text"
-                id="eventName"
-                name="eventName"
-                defaultValue={eventContent.name}
-                // value={existEventName}
-                placeholder="Event Name"
-                onChange={(event) => {
-                  eventContent.name = event.target.value;
-                }}
-              />
-            </div>
-            <div class="flex mt-14 mb-2">
-              <label className="font-bold mr-2" for="Name">
-                Start Time:
-              </label>
-              <div>
-                <DateTimePickerComponent
-                  readonly={editLinkageTrigger}
-                  divat="yyyy/MM/dd HH:mm"
-                  id="datetimepicker"
-                  value={eventContent.StartTime}
-                  onChange={(date) => {
-                    eventContent.StartTime = date.target.value;
-                  }}
-                ></DateTimePickerComponent>
-              </div>
-              <label class="font-bold ml-5 mr-2" for="Name">
-                End Time:
-              </label>
-              <div>
-                <DateTimePickerComponent
-                  readonly={editLinkageTrigger}
-                  divat="yyyy/MM/dd HH:mm"
-                  id="datetimepicker"
-                  value={eventContent.EndTime}
-                  onChange={(date) => {
-                    eventContent.EndTime = date.target.value;
-                  }}
-                ></DateTimePickerComponent>
-              </div>
-            </div>
-            {!editLinkageTrigger ? (
-              <div className="RecurrenceEditor w-50">
-                <label className="font-bold mt-4" for="Name">
-                  Recurring:
-                </label>
-                <RecurrenceEditorComponent
-                  id="RecurrenceEditor"
-                  value={eventContent.recurring}
-                  change={(args) => {
-                    eventContent.recurring = args.value;
-                  }}
-                ></RecurrenceEditorComponent>
-              </div>
-            ) : null}
+
+            {(() => {
+              if (eventContent._id != null) {
+                return (
+                  <div>
+                    <label className="text-xl mb-2 mt-2" htmlFor="Name">
+                      Events:
+                    </label>
+                    <div class="flex">
+                      <label class="eventName font-bold" for="Name">
+                        Name:
+                      </label>
+                      <input
+                        disabled={editLinkageTrigger}
+                        className="w-40 h-10 rounded-xl ml-2"
+                        type="text"
+                        id="eventName"
+                        name="eventName"
+                        defaultValue={eventContent.name}
+                        // value={existEventName}
+                        placeholder="Event Name"
+                        onChange={(event) => {
+                          eventContent.name = event.target.value;
+                        }}
+                      />
+                      {!editLinkageTrigger ? (
+                        <input
+                          id="deleteEventButton"
+                          className="deleteEventButton btn btn-warning"
+                          // ref = {register}
+                          type="button"
+                          value="DELETE EVENT"
+                          onClick={onDeleteEvent}
+                        />
+                      ) : null}
+                    </div>
+                    <div class="flex mt-14 mb-2">
+                      <label className="font-bold mr-2" for="Name">
+                        Start Time:
+                      </label>
+                      <div>
+                        <DateTimePickerComponent
+                          readonly={editLinkageTrigger}
+                          divat="yyyy/MM/dd HH:mm"
+                          id="datetimepicker"
+                          value={eventContent.StartTime}
+                          onChange={(date) => {
+                            eventContent.StartTime = date.target.value;
+                          }}
+                        ></DateTimePickerComponent>
+                      </div>
+                      <label class="font-bold ml-5 mr-2" for="Name">
+                        End Time:
+                      </label>
+                      <div>
+                        <DateTimePickerComponent
+                          readonly={editLinkageTrigger}
+                          divat="yyyy/MM/dd HH:mm"
+                          id="datetimepicker"
+                          value={eventContent.EndTime}
+                          onChange={(date) => {
+                            eventContent.EndTime = date.target.value;
+                          }}
+                        ></DateTimePickerComponent>
+                      </div>
+                    </div>
+                    {!editLinkageTrigger ? (
+                      <div className="RecurrenceEditor w-50">
+                        <label className="font-bold mt-4" for="Name">
+                          Recurring:
+                        </label>
+                        <RecurrenceEditorComponent
+                          id="RecurrenceEditor"
+                          value={eventContent.recurring}
+                          change={(args) => {
+                            eventContent.recurring = args.value;
+                          }}
+                        ></RecurrenceEditorComponent>
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })()}
             <label className="  text-xl" htmlFor="Name">
               Notes:
             </label>

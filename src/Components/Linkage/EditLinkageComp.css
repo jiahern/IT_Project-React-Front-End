@@ -57,6 +57,20 @@
   text-indent: 0px;
   /* right: 40px; */
 }
+.eventName {
+  margin-top: auto;
+}
+
+.deleteEventButton {
+  padding: 1px 2px;
+  height: min-content;
+  /* width: 10em; */
+  text-indent: 0px;
+  /* right: 40px; */
+  /* justify-content: flex-end; */
+  /* align-content: flex-end; */
+  margin-left: auto;
+}
 
 .edit-linkage-title {
   text-align: start;
