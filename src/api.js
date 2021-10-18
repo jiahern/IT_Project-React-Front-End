@@ -477,6 +477,93 @@ export function GetUserProfile() {
   };
 }
 
+export function GetOneUser() {
+  var profileContent = useState([]);
+  const { loading, profile, error } = GetUserProfile();
+
+  profile.map((item) => {
+
+    profileContent = item;
+
+  });
+  
+  return {
+    loading,
+    profileContent,
+    error,
+  };
+}
+
+export async function editProfile(newUser) {
+  // unpack user details, email and password
+  const {
+    _id,
+    firstName,
+    lastName,
+    address,
+    email,
+    phoneNumber,
+  } = newUser;
+
+  const endpoint = BASE_URL + "/user/profile/change";
+
+    try {
+      let data = await axios({
+        url: endpoint,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(
+          {
+            firstName: firstName,
+            lastName: lastName,
+            address: address,
+            email: email,
+            phoneNumber: phoneNumber,
+          },
+          { withCredentials: true } // IMPORTANT
+        ),
+      }).then((res) => res.data);
+  
+    window.location.href = "/Profile";
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+export async function editPassword(newUser) {
+  // unpack user details, email and password
+  const {
+    password,
+  } = newUser;
+
+  const endpoint = BASE_URL + "/user/password";
+
+    try {
+      let data = await axios({
+        url: endpoint,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(
+          {
+            password: password,
+          },
+          { withCredentials: true } // IMPORTANT
+        ),
+      }).then((res) => res.data);
+  
+    // window.location.href = "/profile";
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert(error.message);
+  }
+  // window.location.href = "/Profile";
+}
+
 // get the tasks and events of the user
 function userCalendar() {
   const endpoint1 = BASE_URL + "/task/pending";
