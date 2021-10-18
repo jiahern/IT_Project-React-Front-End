@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import Calendar from "react-calendar";
 import "./calendar.css";
 import {render} from "react-dom";
@@ -11,11 +12,14 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import eventLogo from "./event.png"
 import CsvDownload from 'react-json-to-csv'
+import Loading from '../Loading/Loading';
 // var eventLogo = require('./event.png')
 
 
 export default function ShowCalendar() {
     const [date1, setDate1] = useState(new Date());
+    const [taskId, setTaskId] = useState("");
+    const [taskType, setTaskType] = useState("");
 
     const resourceDataSource = [
         {Name:"Event", Id:2, Color:"#ea7a57"},
@@ -25,20 +29,30 @@ export default function ShowCalendar() {
     //     setDate1(new Date(time));
     // }
     const [active, setActive] = useState(true);
-    const showsetActive = () => setActive(!active);
-    
-    function showsetActive2(time){
+    function showsetActive(){
         setActive(!active);
-        setDate1(new Date(time));
+        setTaskId("");
+        setTaskType("");
+    };
+    
+    function showsetActive2(item){
+        setActive(!active);
+        setDate1(new Date(item.StartTime));
+        setTaskType(item.type);
+        if (item.type === "Task"){
+            setTaskId(item._id);
+        }
+        else if (item.type === "Event"){
+            // console.log("item.type= ",item.type);
+            setTaskId(item.linkage);
+        }
     }
     const { loading, calendarContents, error } = GetCalendar();
     // console.log(unionContents);
     if (loading) {
         return (
-        <div data-testid="Loading">
-            <p>Loading...</p>{" "}
-        </div>
-        );
+            <Loading/>
+          );
     }
     if (error) {
         return <p>Something went wrong: {error.message}</p>;
@@ -52,38 +66,12 @@ export default function ShowCalendar() {
         var Difference_In_Hours = ((Difference_In_Time / (1000 * 3600 * 24) - Math.floor(Difference_In_Time / (1000 * 3600 * 24)))*24).toFixed(0);
         return (<div>{Difference_In_Days} days {Difference_In_Hours} hours</div>)
     }
+
     return (
         <React.Fragment children>
     <div className="flex justify-between w-full h-18 mr-4 py-3">
     <script src="https://cdn.jsdelivr.net/npm/react-json-to-csv"></script>
         <div className="font-bold text-4xl ml-20">Calendar</div>
-        {/* <div className="flex space-x-4">
-          <div className="searchBox">
-            <input
-              className="w-80 h-10 rounded text-2xl "
-              type="text"
-              id="Name"
-              name="Name"
-              placeholder="Fill in Name"
-            />
-          </div>
-          <div>
-            <button className="searchLinkage">
-              <svg
-                width="40"
-                height="34"
-                viewBox="0 0 40 34"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M25.8333 19.8333H24.5167L24.05 19.4508C25.6833 17.8358 26.6667 15.7392 26.6667 13.4583C26.6667 8.3725 21.8167 4.25 15.8333 4.25C9.85 4.25 5 8.3725 5 13.4583C5 18.5442 9.85 22.6667 15.8333 22.6667C18.5167 22.6667 20.9833 21.8308 22.8833 20.4425L23.3333 20.8392V21.9583L31.6667 29.0275L34.15 26.9167L25.8333 19.8333ZM15.8333 19.8333C11.6833 19.8333 8.33333 16.9858 8.33333 13.4583C8.33333 9.93083 11.6833 7.08333 15.8333 7.08333C19.9833 7.08333 23.3333 9.93083 23.3333 13.4583C23.3333 16.9858 19.9833 19.8333 15.8333 19.8333Z"
-                  fill="black"
-                />
-              </svg>
-            </button>
-          </div>
-        </div> */}
         <div className=" flex  space-x-10 mr-4">
           <button
             // onClick={addLinkagePage}
@@ -152,7 +140,7 @@ export default function ShowCalendar() {
                             </div>
                             <div className="flex space-x-5 px-10 py-6 ml-5">
                             <button
-                                onClick={()=>showsetActive2(item.StartTime)}
+                                onClick={()=>showsetActive2(item)}
                                 className="export_task border-x border-black font-bold rounded mr-10"
                                 id="createTask"
                                 >
@@ -163,7 +151,6 @@ export default function ShowCalendar() {
                             </button>
                             </div>
                         </div>
-                   
                     <div class={active ? "view_calendar_page inactive" : "view_calendar_page  rounded-2xl"}> 
                     <div >
                         <button onClick={showsetActive} class="backButton">
@@ -180,17 +167,45 @@ export default function ShowCalendar() {
                             </svg>
                         </button>
                         <Calendar  value={date1}/>
+                        
+            
+        
                         <div class="d-flex justify-content-center py-6">
-                            
-                            <button 
-                            className="export_task border-x border-black font-bold rounded mr-30" 
-                            // onClick={}
-                            >
-                                <div className = "py-1">
-                                <AiIcons.AiFillEdit />
-                                </div>
-                                &#160;&#160;Edit
-                            </button>
+                            {(() => {
+                                if (taskType=== "Task") {
+                                    return (
+                                    <div>
+                                        {/* <div>Task {taskType}</div> */}
+                                        <Link to={{ pathname: `/task/${taskId}` }}>
+                                            <button  
+                                            className="export_task border-x border-black font-bold rounded mr-30" 
+                                            >
+                                                <div className = "py-1">
+                                                <AiIcons.AiFillEdit />
+                                                </div>
+                                                &#160;&#160;Edit
+                                            </button>
+                                        </Link>
+                                    </div>
+                                    );
+                                } else {
+                                    return(
+                                    <div>
+                                        {/* <div> Event {taskId}</div> */}
+                                        <Link to={{ pathname: `/linkage/${taskId}` }}>
+                                            <button  
+                                            className="export_task border-x border-black font-bold rounded mr-30" 
+                                            >
+                                                <div className = "py-1">
+                                                <AiIcons.AiFillEdit />
+                                                </div>
+                                                &#160;&#160;Edit
+                                            </button>
+                                        </Link>
+                                    </div>
+                                    )
+                                }
+                                })()}
                         </div>
                     </div>
                 </div>

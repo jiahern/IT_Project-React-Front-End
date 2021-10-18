@@ -483,14 +483,6 @@ function userCalendar() {
   const endpoint2 = BASE_URL + "/linkage/event/pending";
   const requestTask = axios.get(endpoint1, { withCredentials: true })
   const requestEvent = axios.get(endpoint2, { withCredentials: true })  
-  // return axios.get(endpoint2, { withCredentials: true })
-  // .then((res) => {
-  //   res = res.data
-  //   const sortedActivities = res.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
-  //   console.log("sortedActivities = ",sortedActivities);
-
-  //   return res
-  // });
   return axios.all([requestTask, requestEvent]).then(axios.spread((...responses) => {
     const responseTask = responses[0].data;
     const responseEvent = responses[1].data;
@@ -498,29 +490,16 @@ function userCalendar() {
       element.type = "Task";
       element.Subject = element.name;
       element.ResourceID = 1;
-      // element.IsAllDay = false;
-      // if (element.recurring || element.recurring !== ""){
-      //   element.RecurrenceRule = element.recurring;
-      // }
-      // else{
-      //   element.RecurrenceRule = "";
-      // }
       element.RecurrenceRule = element.recurring;
       element.IsReadonly = true;
+      element.IsAllDay = false;
     });
     responseEvent.forEach(element => {
       element.type = "Event";
       element.Subject = element.name;
       element.ResourceID = 2;
-      // element.StartTime = new Date(element.dateTime);
-      // if (element.recurring || element.recurring !== ""){
-      //   element.RecurrenceRule = element.recurring;
-      // }
-      // else{
-      //   element.RecurrenceRule = "";
-      // }
       element.RecurrenceRule = element.recurring;
-      // element.IsAllDay = false;
+      element.IsAllDay = false;
       element.IsReadonly = true;
     });
     const response_merge = responseEvent.concat(responseTask);
