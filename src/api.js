@@ -503,29 +503,23 @@ export async function editProfile(newUser) {
     address,
     email,
     phoneNumber,
+    profilePic,
   } = newUser;
 
   const endpoint = BASE_URL + "/user/profile/change";
 
     try {
-      let data = await axios({
-        url: endpoint,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify(
-          {
-            firstName: firstName,
-            lastName: lastName,
-            address: address,
-            email: email,
-            phoneNumber: phoneNumber,
-          },
-          { withCredentials: true } // IMPORTANT
-        ),
-      }).then((res) => res.data);
-  
+      const fd = new FormData();
+      fd.append("firstName", firstName);
+      fd.append("lastName", lastName);
+      fd.append("address", address);
+      fd.append("email", email);
+      fd.append("phoneNumber", phoneNumber);
+      fd.append("profilePic", profilePic);
+      await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
+        // console.log(res);
+        return res.data;
+      })
     window.location.href = "/Profile";
     // redirect to homepage -- another way to redirect
   } catch (error) {

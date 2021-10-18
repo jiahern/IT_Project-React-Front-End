@@ -27,6 +27,11 @@ const EditProfile = (props) => {
   const onSubmit = (data) => {
     alert(JSON.stringify(data));
   };
+  const [linkageImage, setLinkageImage] = useState(null);
+  function fileSelecterHandler(image) {
+    setLinkageImage(image[0]);
+    // console.log("image = ", image[0]);
+  }
   var profileID = profileContent._id;
   var firstName = profileContent.firstName;
   var lastName = profileContent.lastName;
@@ -50,6 +55,7 @@ const EditProfile = (props) => {
       address: address,
       email: email,
       phoneNumber: phoneNumber,
+      profilePic: linkageImage,
       
     });
     // redirect to homepage
@@ -82,14 +88,30 @@ const EditProfile = (props) => {
 
       
       <div className="inputPage flex flex-col space-y-4 h-100">
-        <div className="linkage-pic">
-          {/* <BsIcons.BsFillPersonFill className="w-20 h-20" />
-          */}
-          <img
+        <div className="ml-32 linkage-pic">
+        {(() => {
+          if (!profilePic || profilePic === "") {
+              return (
+              <div class="flex">
+                <BsIcons.BsPeopleCircle class="w-20 h-20"/>
+              </div>
+              );
+          } else {
+              
+              return(
+                <div class="flex">
+                  <img
                   class="w-20 h-20"
                   src={BASE_URL + profilePic}
                   alt="Profile Pic"
                 />
+              </div>
+              )
+          }
+          })()}
+          {/* <BsIcons.BsFillPersonFill className="w-20 h-20" />
+          */}
+
         </div>
         {/* {profileContent.map((item, index) => { */}
           {/* return( */}
@@ -161,6 +183,34 @@ const EditProfile = (props) => {
             <label className="font-bold ml-20 text-xl" htmlFor="Name">
               Phone Number:
             </label>
+            <div calss="w-80 h-20 rounded-lg text-l">
+              {(() => {
+                // console.log("unionImage(union.jsx) ="+ unionImage);
+                if (linkageImage != null && linkageImage) {
+                  // console.log("unionImage(union.jsx) else ==" + linkageImage);
+                  return (
+                    <div className= "ml-20">
+                      <img
+                        class="mt-2"
+                        src={URL.createObjectURL(linkageImage)}
+                        style={{ width: "150px" }}
+                        alt="union upload pic"
+                      />
+                    </div>
+                  );
+                } else {
+                  // console.log("unionImage(union.jsx) =" + linkageImage);
+                  return <div class="flex"></div>;
+                }
+              })()}
+            </div>
+            <div class="h-8 ml-20 rounded-lg mt-4 mb-4">
+              <input
+                className="chooseFile"
+                type="file"
+                onChange={(event) => fileSelecterHandler(event.target.files)}
+              />
+            </div>
             <input
               className="w-80 ml-20 h-8  text-l"
               
@@ -204,7 +254,7 @@ const EditProfile = (props) => {
               </div> */}
 
             
-            <div className="deleteAndEdit">
+            <div className="deleteAndEdit ml-20 py-6">
               <Link to={{ pathname: `/profile` }}>
                 <input
                   className="saveCreateButton btn btn-success font-weight-bold"

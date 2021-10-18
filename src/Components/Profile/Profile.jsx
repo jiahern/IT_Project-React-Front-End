@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { GetUserProfile } from "../../api";
 import { Link, Redirect } from "react-router-dom";
+import "./Profile.css";
+import * as BsIcons from "react-icons/bs";
+const BASE_URL = "http://localhost:5000/";
+
 
 const Profile = () => {
     const { loading, profile, error } = GetUserProfile();
@@ -14,6 +18,28 @@ const Profile = () => {
                 return (
                 <div>
                     <div key={index}>
+                    <div className="image_container-div">
+                        {(() => {
+                        if (!item.profilePic || item.profilePic === "") {
+                            return (
+                            // <div>
+                                <BsIcons.BsPeopleCircle class="w-24 h-24"/>
+                            // </div>
+                            );
+                        } else {
+                            
+                            return(
+                                // <div >
+                                <img
+                                class="w-24 h-24"
+                                src={BASE_URL + item.profilePic}
+                                alt="Profile Pic"
+                                />
+                            // </div>
+                            )
+                        }
+                        })()}
+                    </div>
                         
                         {/*<div class="py-6">Password: {item.password}</div>*/}
                         <div className="font-bold text-xl h-20 text-center">Email: {item.email}</div>
