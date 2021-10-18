@@ -5,7 +5,7 @@
   width: 50%;
   height: 100%;
   visibility: visible;
-  background-color: #def2f1;
+  background-color: var(--color-light-grey);
   transition: height 0.3s ease-in;
 }
 .newCreateLinkage.unactive {
@@ -13,7 +13,7 @@
 }
 
 .newUnion {
-  background-color: #3aafa9;
+  background-color: var(--color-orange);
   color: white;
   padding: 9px;
 }
@@ -22,19 +22,65 @@
   height: 535px;
   overflow: hidden;
   overflow-y: scroll;
-  background-color: #def2f1;
+  background-color: var(--color-white-grey);
 }
 
+.scrollLinkage a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.scrollLinkage a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+a section {
+  transition: background 0.2s ease;
+  border-bottom: solid 1px #ccc;
+  padding: 10px;
+}
+
+a section:hover {
+  background: white;
+}
 .LinkageTitle {
-  background-color: #3aafa9;
+  background-color: var(--color-dark-grey);
   color: white;
-  font-weight: 300px;
+  font-size: large;
+  /* border-radius: 30px 30px 0 0; */
 }
 
-/* .searchBox {
-  background-color: #def2f1;
-  box-sizing: border-box;
-  border: 1px solid;
-  border-color: #ccc;
-  border-radius: 5px;
-} */
+.LinkageTitleText {
+  color: var(--color-dark-grey);
+}
+
+.searchBox {
+  /* font-weight: 400px; */
+}
+
+.searchIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  width: 30px;
+  height: auto;
+  color: #0072c9;
+}
+
+.Linkage {
+  align-items: center;
+}
+
+.linkageProfilePic img {
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  outline: solid 1px #ccc;
+  outline-offset: 15px;
+}

@@ -2,12 +2,14 @@ import React, { Component, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import unionLogo from "./UnionLogo.png";
 import * as GrIcons from "react-icons/gr";
+import Loading from '../Loading/Loading';
 import "./Union.css";
 import { GetUnion, createUnion, removeUnion } from "../../api";
 const BASE_URL = "http://localhost:5000/";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
 export default function Union() {
+  
   const [name, setName] = useState("");
   const [unionImage, setUnionImage] = useState(null);
   //create union function
@@ -27,9 +29,7 @@ export default function Union() {
   // console.log(unionContents);
   if (loading) {
     return (
-      <div data-testid="Loading">
-        <p>Loading...</p>{" "}
-      </div>
+      <Loading/>
     );
   }
   if (error) {
@@ -67,14 +67,14 @@ export default function Union() {
   return (
     <section data-testid="Union" className="ShowUnion">
       <div class="flex justify-between w-full h-16 mr-4 py-3">
-        <div class="font-bold text-4xl ml-20">Union</div>
+        <div class="UnionTitle font-bold text-4xl ml-20">Union</div>
         {/* createUnion button */}
 
-        <div class="addUnionButton flex space-x-10 mr-4">
+        <div class=" flex space-x-10 mr-4">
           <button
             onClick={showsetActive}
             class="addUnion font-bold rounded mr-10"
-            id="createTask"
+            id="createInTask"
           >
             + Union
           </button>
@@ -229,7 +229,7 @@ export default function Union() {
                                 <input class="mt-40" type="file" id="Image" name="filename"/> */}
             <input
               onClick={onSave}
-              class=" saveButton mt-40 ml-96 font-bold text-2xl rounded bg-gray-100"
+              class=" saveButton mt-40 ml-96 font-bold text-2xl rounded-xl"
               type="button"
               value="SAVE"
             />

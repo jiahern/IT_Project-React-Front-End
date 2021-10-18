@@ -1,4 +1,4 @@
-import { useState, useEffect, Redirect } from "react";
+import { UseState,useState, useEffect, Redirect } from "react";
 // get are using Axios to communicate with the Server API for authentication only
 // for other purposes, this app using Fetch API -- you should switch others to Axios
 // if you want to try as an exercise
@@ -408,13 +408,14 @@ export async function editUnion(newUser) {
         { withCredentials: true } // IMPORTANT
       ),
     }).then((res) => res.data);
-
+    window.location.href = "/union";
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);
   } catch (error) {
     alert("Invalid Information");
   }
+
 }
 
 export async function removeUnion(newUser) {
@@ -436,7 +437,7 @@ export async function removeUnion(newUser) {
         { withCredentials: true } // IMPORTANT
       ),
     }).then((res) => res.data);
-
+    window.location.href = "/union";
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);
@@ -569,14 +570,6 @@ function userCalendar() {
   const endpoint2 = BASE_URL + "/linkage/event/pending";
   const requestTask = axios.get(endpoint1, { withCredentials: true })
   const requestEvent = axios.get(endpoint2, { withCredentials: true })  
-  // return axios.get(endpoint2, { withCredentials: true })
-  // .then((res) => {
-  //   res = res.data
-  //   const sortedActivities = res.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime))
-  //   console.log("sortedActivities = ",sortedActivities);
-
-  //   return res
-  // });
   return axios.all([requestTask, requestEvent]).then(axios.spread((...responses) => {
     const responseTask = responses[0].data;
     const responseEvent = responses[1].data;
@@ -584,16 +577,17 @@ function userCalendar() {
       element.type = "Task";
       element.Subject = element.name;
       element.ResourceID = 1;
+      element.RecurrenceRule = element.recurring;
+      element.IsReadonly = true;
       element.IsAllDay = false;
-      // element.IsReadonly = true;
     });
     responseEvent.forEach(element => {
       element.type = "Event";
       element.Subject = element.name;
       element.ResourceID = 2;
-      // element.StartTime = new Date(element.dateTime);
+      element.RecurrenceRule = element.recurring;
       element.IsAllDay = false;
-      // element.IsReadonly = true;
+      element.IsReadonly = true;
     });
     const response_merge = responseEvent.concat(responseTask);
     const sortedResponse = response_merge.sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
@@ -622,4 +616,256 @@ export function GetCalendar() {
     calendarContents,
     error,
   };
+}
+
+// From here we start task part----------------------------------------------------------------------
+function GetPendingTask() {
+  const endpoint = BASE_URL + "/task/pending";
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+}
+
+export function GetAllPendingTask() {
+  const [loading, setLoading] = useState(true);
+  const [pendingTask, setPendingTask] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    GetPendingTask()
+      .then((pendingTask) => {
+        setPendingTask(pendingTask);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
+  // console.log(profile);
+  return {
+    loading,
+    pendingTask,
+    error,
+  };
+}
+
+function GetPastTask() {
+  const endpoint = BASE_URL + "/task/past";
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+}
+
+export function GetAllPastTask() {
+  const [loading, setLoading] = useState(true);
+  const [pastTask, setPendingTask] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    GetPastTask()
+      .then((pastTask) => {
+        setPendingTask(pastTask);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
+  // console.log(profile);
+  return {
+    loading,
+    pastTask,
+    error,
+  };
+}
+
+function GetTask() {
+  const endpoint = BASE_URL + "/task";
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+}
+
+export function GetAllTask() {
+  const [loading, setLoading] = useState(true);
+  const [allTask, setAllTask] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    GetTask()
+      .then((allTask) => {
+        setAllTask(allTask);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
+  // console.log(profile);
+  return {
+    loading,
+    allTask,
+    error,
+  };
+}
+
+export function GetOneTask(taskID) {
+  var taskContent = useState([]);
+  const { taskLoading, allTask, taskError } = GetAllTask();
+
+  allTask.map((item) => {
+    if (item._id === taskID) {
+      taskContent = item;
+    }
+  });
+  console.log("!!!!!"+taskContent);
+  return {
+    taskLoading,
+    taskContent,
+    taskError,
+  };
+}
+
+export async function createTask(newUser) {
+  // unpack user details, email and password
+  const { name,StartTime,EndTime,note,recurring,status} = newUser;
+  
+  // if the user did not enter an email or password
+  if (!name || !StartTime || !EndTime) {
+    alert("The information is not complete");
+    return;
+  }
+  
+  // console.log("unionImage.mimetype = ", unionImage.mimetype);
+  const endpoint = BASE_URL + `/task`;
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          name: name,
+          StartTime: StartTime,
+          EndTime: EndTime,
+          note: note,
+          recurring: recurring,
+          status: status,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+    
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+
+    window.location.href = "/task";
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert("Invalid Information");
+    console.log(error);
+    
+  }
+}
+
+// export function GetAll() {
+//   // const {unionLoading, unionContents, unionError} = GetUnion();
+//   // const {linakgeLoading, linkages, linkageError} = UseLinkages();
+//   const [linkageLoading, setLinkageLoading] = useState(true);
+//   const [unionLoading, setUnionLoading] = useState(true);
+//   const [outUnion, setOutUnion] = useState([]);
+//   const [outLinkage, setOutLinkage] = useState([]);
+//   const [unionError, setUnionError] = useState(null);
+//   const [linkageError, setLinkageError] = useState(null);
+//   useEffect(() => {
+//     getLinkages()
+//       .then((outLinkage) => {
+//         setOutLinkage(outLinkage);
+//         setLinkageLoading(false);
+//       })
+//       .catch((e) => {
+//         console.log(e);
+//         setLinkageError(e);
+//         setLinkageLoading(false);
+//       });
+//     userUnion()
+//       .then((outUnion) => {
+//         setOutUnion(outUnion);
+//         setUnionLoading(false);
+//       })
+//       .catch((e) => {
+//         console.log(e);
+//         setUnionError(e);
+//         setUnionLoading(false);
+//       });
+//   }, []);
+ 
+//   return {
+//     linkageLoading,
+//     unionLoading,
+//     outUnion,
+//     outLinkage,
+//     unionError,
+//     linkageError,
+//   };
+// }
+
+export async function taskEdit(newUser){
+  const { taskID,name,note,StartTime,EndTime,status,recurring } = newUser;
+  const endpoint = BASE_URL + "/task/edit";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          _id: taskID,
+          name: name,
+          note: note,
+          StartTime: StartTime,
+          EndTime: EndTime,
+          status: status,
+          recurring:recurring,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+    window.location.href = "/task";
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+  } catch (error) {
+    alert("Invalid Information");
+  }
+}
+
+export async function RemoveTask(newUser) {
+  // unpack user details, email and password
+  const { taskID } = newUser;
+  const endpoint = BASE_URL + "/task/delete";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          _id: taskID,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+    
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+  } catch (error) {
+    alert("Invalid Information");
+  }
 }

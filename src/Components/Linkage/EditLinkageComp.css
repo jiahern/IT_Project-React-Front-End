@@ -1,14 +1,36 @@
+.editLinkage-top a {
+  color: black;
+  text-decoration: none;
+}
+
+.editLinkage-top a:hover {
+  color: black;
+}
+
+.backButton {
+  font-size: 50px;
+  transition: transform ease 0.2s;
+}
+
+.backButton:hover {
+  transform: scale(1.2);
+  color: black;
+}
+
 .deleteAndEdit {
-  position: relative;
-  top: 20px;
   display: flex;
-  justify-content: space-evenly;
-  align-content: space-between;
-  width: 30em;
+  justify-content: space-between;
+  width: 23em;
+  flex: 1 1 auto;
+  text-align: center;
+  margin-right: 5px;
 }
 
 .saveCreateButton {
   padding: 4px 5px;
+  text-align: center;
+  text-indent: 0px;
+
   /* position: relative; */
   width: 10em;
   /* right: 10px; */
@@ -16,28 +38,40 @@
 
 .deleteEditButton {
   padding: 4px 5px;
+  /* text-align: center; */
   /* position: relative; */
   width: 10em;
+  text-indent: 0px;
   /* right: 40px; */
 }
 
 .edit-linkage-title {
-  text-align: center;
-  justify-content: center;
-  align-content: center;
+  text-align: start;
+  justify-content: flex-start;
+  align-content: flex-start;
 }
 
 .linkage-pic {
   display: flex;
-  align-content: center;
-  justify-content: center;
-  margin-top: 20px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.linkage-pic img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  outline: solid 1px #ccc;
+  outline-offset: 15px;
 }
 
 .edit-linkage-form {
   flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
+  justify-content: flex-start;
+  align-content: flex-start;
 }
 
 .editLinkage-box {
@@ -45,4 +79,18 @@
   overflow: hidden;
   overflow-y: scroll;
   padding-bottom: 30px;
+}
+
+.chooseFile {
+  border: none;
+  background-color: inherit;
+  text-indent: 2px;
+}
+
+#deleteButton {
+  font-weight: 550;
+}
+
+#saveButton {
+  font-weight: 550;
 }

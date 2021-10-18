@@ -16,7 +16,7 @@
 }
 
 .topnavbar .toggle-menu-btn {
-  color: black;
+  color: var(--color-dark-grey);
   font-size: 25px;
   cursor: pointer;
   margin-left: 22px;
@@ -41,7 +41,7 @@
   height: 80px;
   font-size: 40px;
   display: flex;
-  color: #3aafa9;
+  color: var(--color-dark-grey);
   padding: 15px;
   border-radius: 5px;
   cursor: pointer;
@@ -56,14 +56,14 @@
   text-align: start;
   /* justify-content: center; */
   /* align-items: center; */
-  color: black;
-  font-weight: 600;
+  color: var(--color-dark-grey);
+  font-weight: 550;
 }
 
 .side-menu {
   top: 80px;
   position: fixed;
-  background-color: #f9fbff;
+  background-color: white;
   width: 300px;
   height: 100%;
   box-sizing: border-box;
@@ -107,11 +107,11 @@
 }
 
 .side-menu .main-menu ul li .menu-item-trigger:hover {
-  background-color: #def2f1;
+  background-color: var(--color-light-grey);
 }
 
 .side-menu .main-menu .menu-item {
-  color: black;
+  color: var(--color-dark-grey);
   text-decoration: none;
   font-size: 20px;
   display: inline-block;
@@ -144,11 +144,12 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+  color: var(--color-dark-grey);
 }
 
 .side-menu .top-section .main-menu .menu-item-trigger.active {
   display: block;
   box-sizing: border-box;
-  background-color: #def2f1;
+  background-color: var(--color-light-grey);
   border-radius: 5px;
 }
