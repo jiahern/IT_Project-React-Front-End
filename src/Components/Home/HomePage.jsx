@@ -28,18 +28,12 @@ if (errors) {
 }
 
 function calculate_remaining(time, item){
-  if (!item.recurring || item.recurring ===""){
-      var Difference_In_Time = new Date(time).getTime() - new Date().getTime();
-      var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
-      var Difference_In_Hours = ((Difference_In_Time / (1000 * 3600 * 24) - Math.floor(Difference_In_Time / (1000 * 3600 * 24)))*24).toFixed(0);
-      return (<div className="font-bold ml-2">{Difference_In_Days} days {Difference_In_Hours} hours</div>)
-  }
-  else if (item.type ==="Task"){
-      return(<div>Recurring Task</div>)
-  }
-  else if (item.type ==="Event"){
-      return(<div>Recurring Event</div>)
-  }
+  
+  var Difference_In_Time = new Date(time).getTime() - new Date().getTime();
+  var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
+  var Difference_In_Hours = ((Difference_In_Time / (1000 * 3600 * 24) - Math.floor(Difference_In_Time / (1000 * 3600 * 24)))*24).toFixed(0);
+  return (<div className="font-bold ml-2">{Difference_In_Days} days {Difference_In_Hours} hours</div>)
+  
 }
 
 
@@ -70,10 +64,11 @@ function calculate_remaining(time, item){
           <div className="scrollEvent">
             {events.map((event, index) => {
               return(
-              <div className="Number w-full mr-4 px-20 py-6 flex flex-col grid grid-cols-3 gap-x-4 gap-y-4">
-                <div className="TaskName font-bold ">Event Name: {event.name}</div>
-                <div className="TaskTime font-bold flex">In {calculate_remaining(event.StartTime, event)}</div>
-                <div className="TaskDate font-bold ">Date: {new Date(event.StartTime).toLocaleDateString()}</div>
+              <div className="Number w-full mr-4 px-20 py-6 flex flex-col grid grid-cols-4 gap-x-4 gap-y-4">
+                <div className="TaskName font-bold ">Event: {event.name}</div>
+                <div className="TaskTime font-bold ">Date: {new Date(event.StartTime).toLocaleDateString()}</div>
+                <div className="TaskTime font-bold flex"> Starts in: {calculate_remaining(event.StartTime, event)}</div>
+                <div className="TaskDate font-bold flex">Due in: {calculate_remaining(event.EndTime, event)}</div>
               </div>
             )})}
           </div>
@@ -86,10 +81,11 @@ function calculate_remaining(time, item){
           <div className="scrollTask">
             {pendingTask.map((task, index) => {
               return(
-              <div className="Number w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-3 gap-x-4 gap-y-4">
-                <div className="TaskName font-bold ">Task Name: {task.name}</div>
-                <div className="TaskTime font-bold flex">In {calculate_remaining(task.StartTime, task)}</div>
+              <div className="Number w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-4 gap-x-4 gap-y-4">
+                <div className="TaskName font-bold ">Task: {task.name}</div>
                 <div className="TaskTime font-bold ">Date: {new Date(task.StartTime).toLocaleDateString()}</div>
+                <div className="TaskTime font-bold flex">Starts in: {calculate_remaining(task.StartTime, task)}</div>
+                <div className="TaskDate font-bold flex">Due in: {calculate_remaining(task.EndTime, task)}</div>
               </div>
             )})}
           </div>
