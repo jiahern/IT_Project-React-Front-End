@@ -59,12 +59,20 @@ export default function ShowCalendar() {
     }
 
 
-    function calculate_remaining(time){
+    function calculate_remaining(time, item){
         // (new Date(time).getDate() - new Date().getDate())
-        var Difference_In_Time = new Date(time).getTime() - new Date().getTime();
-        var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
-        var Difference_In_Hours = ((Difference_In_Time / (1000 * 3600 * 24) - Math.floor(Difference_In_Time / (1000 * 3600 * 24)))*24).toFixed(0);
-        return (<div>{Difference_In_Days} days {Difference_In_Hours} hours</div>)
+        if (!item.recurring || item.recurring ===""){
+            var Difference_In_Time = new Date(time).getTime() - new Date().getTime();
+            var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
+            var Difference_In_Hours = ((Difference_In_Time / (1000 * 3600 * 24) - Math.floor(Difference_In_Time / (1000 * 3600 * 24)))*24).toFixed(0);
+            return (<div>{Difference_In_Days} days {Difference_In_Hours} hours</div>)
+        }
+        else if (item.type ==="Task"){
+            return(<div>Recurring Task</div>)
+        }
+        else if (item.type ==="Event"){
+            return(<div>Recurring Event</div>)
+        }
     }
 
     return (
@@ -132,7 +140,7 @@ export default function ShowCalendar() {
                                 })()}
                             </span>
                             <div className="FrindSince h-5 ml-2 py-6 px-6">
-                                {calculate_remaining(item.StartTime)}
+                                {calculate_remaining(item.StartTime, item)}
                                 {/* {new Date(item.dateTime) - new Date()} */}
                             </div>
                             <div className="LastInTouch h-5 ml-4 py-6 px-6">
