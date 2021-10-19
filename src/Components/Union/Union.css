@@ -14,13 +14,15 @@
 }
 
 .saveButton {
-  
+  transition: transform 0.3s;
   padding: 4px 5px;
   position: relative;
   width: 15%;
   right: 10px;
 }
-
+.saveButton:hover{
+  transform: scale(1.1);
+}
 .createUnion.inactive {
   height: 0%;
 }
@@ -30,6 +32,10 @@
   color: rgb(255, 255, 255);
   font-size: large;
   padding: 4px 25px;
+  transition: transform 0.3s;
+}
+.addUnion:hover{
+  transform: scale(1.1);
 }
 .UnionTitle{
   color: var(--color-dark-grey);
@@ -57,12 +63,13 @@
   transition: transform 0.3s;
 }
 .bin:hover{
-  transform: scale(1.5);
+  transform: scale(1.1);
 }
 
 .email{
   transition: transform 0.3s;
+  color:black;
 }
 .email:hover{
-  transform: scale(1.5);
+  transform: scale(1.1);
 }

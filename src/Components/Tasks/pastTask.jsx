@@ -69,7 +69,7 @@ export default function Task() {
         
         <div class="addTaskButton flex space-x-10 mr-4">
         <Link to={{ pathname: `/task` }}>
-        <button class="viewPast font-bold rounded mr-10" id="createTask">
+        <button class="viewPending font-bold rounded mr-10" id="createTask">
             View Pending Task
           </button>
         </Link>
@@ -89,39 +89,24 @@ export default function Task() {
           <div class="ActionTitle font-bold">Action</div>
         </div>
 
-        <div className="unionScroll">
+        <div className="pastTaskScroll">
          
           
         {pastTask.map((item, index) => {
           return (
+            <Link to={{ pathname: `/task/${item._id}` }}>
         <div class=" PendingTasks w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-4 gap-x-4 gap-y-4">
         
         
           <div class = "flex space-x-4 py-6">
-                  <span class="">{item.name}</span>
+                  <span class="text-black">{item.name}</span>
                   <div>
                   {showStatus(item.status)}
                   </div>
           </div>
-          <div class = "py-6">{item.EndTime}</div>
-          <div class="Category h-5 ml-4 py-6 px-6">{item.StartTime}</div>
+          <div class = "py-6 text-black">{item.EndTime}</div>
+          <div class="Category h-5 ml-4 py-6 px-6 text-black">{item.StartTime}</div>
           <div class="flex space-x-5 px-14 py-6  h-5">
-          <Link to={{ pathname: `/task/${item._id}` }}>
-                  <button class="edit h-5">
-                  <svg
-                  width="15"
-                  height="13"
-                  viewBox="0 0 30 27"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  >
-                  <path
-                          d="M18.4058 5.03062L24.4256 10.4054L9.18767 24.0107L3.17122 18.6359L18.4058 5.03062ZM28.9935 3.73433L26.3089 1.33734C25.2714 0.41099 23.5867 0.41099 22.5456 1.33734L19.974 3.63342L25.9939 9.00829L28.9935 6.33005C29.7982 5.61152 29.7982 4.45281 28.9935 3.73433ZM0.0209023 26.1907C-0.0886516 26.6309 0.356502 27.0253 0.849606 26.9183L7.55774 25.4661L1.54128 20.0913L0.0209023 26.1907Z"
-                          fill="black"
-                  />
-                  </svg>
-                  </button>
-            </Link>
                   <button
                   onClick = {()=>{onDelete(item._id);}}
                   class="bin h-5"
@@ -145,6 +130,7 @@ export default function Task() {
                   </button>
           </div>
         </div>
+        </Link>
         );})}
         </div>
       </div>

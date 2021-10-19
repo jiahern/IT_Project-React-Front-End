@@ -10,6 +10,10 @@
         color: white;
         font-size: large;
         padding: 4px 25px;
+        transition: transform 0.3s;
+}
+.addTask:hover{
+        transform: scale(1.1);
 }
 
 .viewPast{
@@ -17,6 +21,10 @@
         color: white;
         font-size: large;
         padding: 4px 25px;
+        transition: transform 0.3s;
+}
+.viewPast:hover{
+        transform: scale(1.1);
 }
 .createTask {
         position: fixed;
