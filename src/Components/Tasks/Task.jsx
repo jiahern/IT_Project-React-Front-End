@@ -5,6 +5,7 @@ import * as GrIcons from "react-icons/gr";
 import "./Task.css";
 import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
 import { RecurrenceEditorComponent } from '@syncfusion/ej2-react-schedule';
+import Loading from '../Loading/Loading';
 
 const BASE_URL = "http://localhost:5000/";
 
@@ -50,11 +51,9 @@ export default function Task() {
 
   if (loading) {
     return (
-      <div data-testid="Loading">
-        <p>Loading...</p>{" "}
-      </div>
-    );
-  }
+        <Loading/>
+      );
+}
   if (error) {
     return <p>Something went wrong: {error.message}</p>;
   }

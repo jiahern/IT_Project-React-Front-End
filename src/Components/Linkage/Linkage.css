@@ -7,6 +7,8 @@
   visibility: visible;
   background-color: var(--color-light-grey);
   transition: height 0.3s ease-in;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .newCreateLinkage.unactive {
   height: 0%;
@@ -35,15 +37,34 @@
   color: inherit;
 }
 
-a section {
+.sectionLinkage {
   transition: background 0.2s ease;
   border-bottom: solid 1px #ccc;
   padding: 10px;
+  z-index: 1;
 }
 
-a section:hover {
+.sectionLinkage:hover {
   background: white;
 }
+
+.emailAndBin {
+}
+
+.email {
+}
+
+.email:hover {
+  transform: scale(1.2);
+}
+
+.bin {
+}
+
+.bin:hover {
+  transform: scale(1.2);
+}
+
 .LinkageTitle {
   background-color: var(--color-dark-grey);
   color: white;
@@ -83,4 +104,20 @@ a section:hover {
   object-fit: contain;
   outline: solid 1px #ccc;
   outline-offset: 15px;
+}
+
+.saveCreateButton {
+  background-color: var(--color-orange);
+  text-align: center;
+  color: white;
+  padding: 0.8rem;
+  width: 15rem;
+  text-indent: 0px;
+  font-weight: 580;
+  transition: transform ease 0.2s;
+}
+
+.saveCreateButton:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }

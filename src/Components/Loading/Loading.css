@@ -17,26 +17,23 @@
         }
       }
       
-.loadingLogo {
 
-animation: arrows 1s 0s infinite ease-in;
+
+.loadingLogo {
+  animation: arrows 1s 0s infinite ease-in;
 }
 .loadingLogo1 {
-
-animation: arrows 1s 0.1s infinite ease-in;
+  animation: arrows 1s 0.1s infinite ease-in;
 }
 .loadingLogo2 {
-
-animation: arrows 1s 0.2s infinite ease-in;
+  animation: arrows 1s 0.2s infinite ease-in;
 }
 .loadingLogo3 {
-
-animation: arrows 1s 0.3s infinite ease-in;
+  animation: arrows 1s 0.3s infinite ease-in;
 }
 .loadingLogo4 {
-
-animation: arrows 1s 0.4s infinite ease-in;
-}.loadingLogo5 {
-
-animation: arrows 1s 0.5s infinite ease-in;
+  animation: arrows 1s 0.4s infinite ease-in;
+}
+.loadingLogo5 {
+  animation: arrows 1s 0.5s infinite ease-in;
 }

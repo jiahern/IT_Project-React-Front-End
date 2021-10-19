@@ -38,7 +38,6 @@ body {
 }
 
 .contain {
-  z-index: 1;
   /* top: 80px; */
   /* margin-top: 80px; */
   margin-left: 300px;
@@ -58,7 +57,7 @@ body {
 
 input {
   text-indent: 10px;
-  background-color: white;
+  /* background-color: white; */
   box-sizing: border-box;
   border: 1px solid;
   border-color: #ccc;

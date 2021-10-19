@@ -7,10 +7,21 @@ import React, {
 } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { editLinkage, GetOneLinkage } from "../../api";
+import {
+  editLinkage,
+  GetOneLinkage,
+  createLinkageEvents,
+  removeLinkage,
+  GetOneEvent,
+  editEvent,
+  removeEvent,
+} from "../../api";
 import "./EditLinkageComp.css";
 import * as BsIcons from "react-icons/bs";
 import * as IoIcons from "react-icons/io5";
+import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
+import { RecurrenceEditorComponent } from "@syncfusion/ej2-react-schedule";
+import Popup from "reactjs-popup";
 const BASE_URL = "http://localhost:5000/";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
@@ -23,9 +34,18 @@ const EditLinkageComp = (props) => {
   var { linkageContent } = GetOneLinkage(linkageID);
 
   const { register, handleSubmit } = useForm({});
+  // const [startTime, setStartTime] = useState(null);
+  // const [endTime, setEndTime] = useState(null);
+  // const [eventName, setName] = useState("");
+  const [editLinkageTrigger, setEditLinkagePop] = useState(true);
+  // const [recurring, setRecuring] = useState("");
+
+  function triggerEdit() {
+    setEditLinkagePop(!editLinkageTrigger);
+  }
 
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
   };
 
   var firstName = linkageContent.firstName;
@@ -36,6 +56,13 @@ const EditLinkageComp = (props) => {
   var note = linkageContent.note;
   var address = linkageContent.address;
   var profilePic = linkageContent.profilePic;
+  // var existEventName =
+
+  var newEventName = null;
+  var newEventStartTime = null;
+  var newEventEndTime = null;
+  var newRecurringDate = null;
+
   const [linkageImage, setLinkageImage] = useState(null);
   function fileSelecterHandler(image) {
     setLinkageImage(image[0]);
@@ -50,6 +77,33 @@ const EditLinkageComp = (props) => {
 
   // const showsetInactive = () => setInactive(!inactive);
 
+  //Handle Event
+  var { eventContent } = GetOneEvent(linkageID);
+
+  function onDelete() {
+    //using API function to submit data to FoodBuddy API
+    removeLinkage({
+      linkageID: linkageID,
+      profilePic: profilePic,
+    });
+
+    removeEvent({
+      linkageID: linkageID,
+    });
+
+    //redirect to homepage
+    window.location.href = "/linkage";
+  }
+
+  function onDeleteEvent() {
+    removeEvent({
+      linkageID: linkageID,
+    });
+
+    //redirect to homepage
+    window.location.href = "/linkage/" + linkageID;
+  }
+
   function editSave() {
     editLinkage({
       _id: linkageID,
@@ -62,8 +116,43 @@ const EditLinkageComp = (props) => {
       note: note,
       profilePic: linkageImage,
     });
+    editEvent({
+      linkages: linkageID,
+      eventId: eventContent._id,
+      name: eventContent.name,
+      StartTime: eventContent.StartTime,
+      EndTime: eventContent.EndTime,
+      recurring: eventContent.recurring,
+    });
+
     // redirect to homepage
-    window.location.href = "/linkage";
+    window.location.reload();
+    // window.location.href = "/linkage/" + linkageID;
+    // console.log(window.location);
+  }
+
+  function createEvents() {
+    // using API function to submit data to FoodBuddy API
+    var newStatus = "";
+    var timediff =
+      new Date(newEventEndTime).getTime() -
+      new Date(newEventStartTime).getTime();
+
+    if (timediff > 0) {
+      newStatus = "pending";
+    } else {
+      return alert("Please Enter Valid Time/Date");
+    }
+    createLinkageEvents({
+      linkages: linkageID,
+      name: newEventName,
+      StartTime: newEventStartTime,
+      EndTime: newEventEndTime,
+      recurring: newRecurringDate,
+      status: newStatus,
+    });
+    // redirect to homepage
+    // window.location.reload();
     // console.log(window.location);
   }
   return (
@@ -87,10 +176,117 @@ const EditLinkageComp = (props) => {
           </button>
         </Link>
       </div>
-
       <div className="inputPage flex flex-col space-y-4 h-100 ml-28">
-        <div className="edit-linkage-title  text-4xl mb-4">
-          Linkage Information
+        <div className="flex edit-linkage-title text-4xl mb-4">
+          <div className=""> Linkage Information</div>
+          <div>
+            {editLinkageTrigger ? (
+              <div className="editAndCreateEvent">
+                <input
+                  id="editLinkageButton"
+                  className=" btn btn-secondary ml-4"
+                  // ref = {register}
+                  type="submit"
+                  value="Edit"
+                  onClick={triggerEdit}
+                />
+
+                {/* Popup for Create Event */}
+
+                {(() => {
+                  // console.log("unionImage(union.jsx) ="+ unionImage);
+                  if (eventContent._id == null) {
+                    // console.log("unionImage(union.jsx) else ==" + linkageImage);
+                    return (
+                      <Popup
+                        trigger={
+                          <button
+                            id="createEventButton"
+                            className="btn btn-primary ml-4"
+                          >
+                            {" "}
+                            Create Event{" "}
+                          </button>
+                        }
+                        modal
+                        nested
+                      >
+                        <span>
+                          <form>
+                            <label className="text-xl mb-2 mt-2">
+                              Create Events:
+                            </label>
+                            <div class="flex space-x-4">
+                              <label class="font-bold" for="Name">
+                                Event Name:
+                              </label>
+                              <input
+                                class="w-40 h-10 rounded-xl"
+                                type="text"
+                                id="name"
+                                placeholder="Name"
+                                onChange={(event) => {
+                                  newEventName = event.target.value;
+                                }}
+                              />
+                            </div>
+                            <div class="flex mt-10 mb-2">
+                              <label class="font-bold mr-2" for="Name">
+                                Start Time:
+                              </label>
+                              <div>
+                                <DateTimePickerComponent
+                                  divat="yyyy/MM/dd HH:mm"
+                                  id="datetimepicker"
+                                  onChange={(date) => {
+                                    newEventStartTime = date.target.value;
+                                  }}
+                                ></DateTimePickerComponent>
+                              </div>
+                              <label class="font-bold ml-5 mr-2" for="Name">
+                                End Time:
+                              </label>
+                              <div>
+                                <DateTimePickerComponent
+                                  divat="yyyy/MM/dd HH:mm"
+                                  id="datetimepicker"
+                                  onChange={(date) => {
+                                    newEventEndTime = date.target.value;
+                                  }}
+                                ></DateTimePickerComponent>
+                              </div>
+                            </div>
+
+                            <div className="RecurrenceEditor">
+                              <label className="font-bold mt-4" for="Name">
+                                Recurring:
+                              </label>
+                              <RecurrenceEditorComponent
+                                id="RecurrenceEditor"
+                                change={(args) => {
+                                  newRecurringDate = args.value;
+                                }}
+                              ></RecurrenceEditorComponent>
+                            </div>
+                            <input
+                              id="saveCreateButton"
+                              className="saveCreateButton ml-96 mt-4 mb-4 rounded-l"
+                              value="CREATE"
+                              type="submit"
+                              onClick={createEvents}
+                            />
+                          </form>
+                        </span>
+                      </Popup>
+                    );
+                  } else {
+                    // console.log("unionImage(union.jsx) =" + linkageImage);
+                    return null;
+                  }
+                })()}
+              </div>
+            ) : null}
+          </div>
         </div>
         <div className="linkage-pic ml-4 mb-4">
           {/* <BsIcons.BsFillPersonFill className="w-20 h-20" />
@@ -98,21 +294,20 @@ const EditLinkageComp = (props) => {
           <img
             class="w-20 h-20"
             src={BASE_URL + profilePic}
-            alt="Union Profile Pic"
+            alt="Linkage Profile Pic"
           />
         </div>
         <div className="inputPage h-100">
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            // onSubmit={handleSubmit(onSubmit)}
             className="edit-linkage-form flex flex-col space-y-2 pb-14"
-            action="#"
           >
             <label className="  text-xl" htmlFor="Name">
               Contact Information:
             </label>
             <div className="flex space-x-4">
               <input
-                disabled
+                disabled={editLinkageTrigger}
                 className="w-40  h-8  text-l"
                 {...register("firstName")}
                 type="text"
@@ -124,6 +319,7 @@ const EditLinkageComp = (props) => {
                 }}
               />
               <input
+                disabled={editLinkageTrigger}
                 className="w-40  h-8  text-l"
                 {...register("middleName")}
                 type="text"
@@ -136,6 +332,7 @@ const EditLinkageComp = (props) => {
                 }}
               />
               <input
+                disabled={editLinkageTrigger}
                 className="w-40  h-8  text-l"
                 {...register("lastName")}
                 type="text"
@@ -152,6 +349,7 @@ const EditLinkageComp = (props) => {
               Email:
             </label>
             <input
+              disabled={editLinkageTrigger}
               className="w-80  h-8  text-l"
               {...register("email")}
               type="text"
@@ -167,6 +365,7 @@ const EditLinkageComp = (props) => {
               Address:
             </label>
             <input
+              disabled={editLinkageTrigger}
               className="w-80  h-8  text-l"
               {...register("adress")}
               type="text"
@@ -178,10 +377,11 @@ const EditLinkageComp = (props) => {
                 address = event.target.value;
               }}
             />
-            <label className="  text-xl" htmlFor="Name">
+            <label className="  text-xl " htmlFor="Name">
               Phone Number:
             </label>
             <input
+              disabled={editLinkageTrigger}
               className="w-80  h-8  text-l"
               {...register("phoneNumber")}
               type="text"
@@ -193,25 +393,97 @@ const EditLinkageComp = (props) => {
                 phoneNumber = event.target.value;
               }}
             />
-            <label className="  text-xl" htmlFor="Name">
-              Events:
-            </label>
-            <input
-              className="w-80  h-8  text-l"
-              {...register("event")}
-              type="text"
-              id="Event"
-              name="Event"
-              defaultValue={linkageContent.event}
-              placeholder="Event"
-              onChange={(event) => {
-                Event = event.target.value;
-              }}
-            />
+
+            {(() => {
+              if (eventContent._id != null) {
+                return (
+                  <div>
+                    <label className="text-xl mb-2 mt-2" htmlFor="Name">
+                      Events:
+                    </label>
+                    <div class="flex">
+                      <label class="eventName font-bold" for="Name">
+                        Name:
+                      </label>
+                      <input
+                        disabled={editLinkageTrigger}
+                        className="w-40 h-10 rounded-xl ml-2"
+                        type="text"
+                        id="eventName"
+                        name="eventName"
+                        defaultValue={eventContent.name}
+                        // value={existEventName}
+                        placeholder="Event Name"
+                        onChange={(event) => {
+                          eventContent.name = event.target.value;
+                        }}
+                      />
+                      {!editLinkageTrigger ? (
+                        <input
+                          id="deleteEventButton"
+                          className="deleteEventButton btn btn-warning"
+                          // ref = {register}
+                          type="button"
+                          value="DELETE EVENT"
+                          onClick={onDeleteEvent}
+                        />
+                      ) : null}
+                    </div>
+                    <div class="flex mt-14 mb-2">
+                      <label className="font-bold mr-2" for="Name">
+                        Start Time:
+                      </label>
+                      <div>
+                        <DateTimePickerComponent
+                          readonly={editLinkageTrigger}
+                          divat="yyyy/MM/dd HH:mm"
+                          id="datetimepicker"
+                          value={eventContent.StartTime}
+                          onChange={(date) => {
+                            eventContent.StartTime = date.target.value;
+                          }}
+                        ></DateTimePickerComponent>
+                      </div>
+                      <label class="font-bold ml-5 mr-2" for="Name">
+                        End Time:
+                      </label>
+                      <div>
+                        <DateTimePickerComponent
+                          readonly={editLinkageTrigger}
+                          divat="yyyy/MM/dd HH:mm"
+                          id="datetimepicker"
+                          value={eventContent.EndTime}
+                          onChange={(date) => {
+                            eventContent.EndTime = date.target.value;
+                          }}
+                        ></DateTimePickerComponent>
+                      </div>
+                    </div>
+                    {!editLinkageTrigger ? (
+                      <div className="RecurrenceEditor w-50">
+                        <label className="font-bold mt-4" for="Name">
+                          Recurring:
+                        </label>
+                        <RecurrenceEditorComponent
+                          id="RecurrenceEditor"
+                          value={eventContent.recurring}
+                          change={(args) => {
+                            eventContent.recurring = args.value;
+                          }}
+                        ></RecurrenceEditorComponent>
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })()}
             <label className="  text-xl" htmlFor="Name">
               Notes:
             </label>
             <input
+              disabled={editLinkageTrigger}
               className="w-80  h-20 rounded-lg text-l"
               {...register("note")}
               type="text"
@@ -223,38 +495,46 @@ const EditLinkageComp = (props) => {
                 note = event.target.value;
               }}
             />
-            <div calss="w-80  h-20 rounded-lg text-l">
-              {(() => {
-                // console.log("unionImage(union.jsx) ="+ unionImage);
-                if (linkageImage != null && linkageImage) {
-                  // console.log("unionImage(union.jsx) else ==" + linkageImage);
-                  return (
-                    <div>
-                      <img
-                        class="mt-2"
-                        src={URL.createObjectURL(linkageImage)}
-                        style={{ width: "150px" }}
-                        alt="union upload pic"
-                      />
-                    </div>
-                  );
-                } else {
-                  // console.log("unionImage(union.jsx) =" + linkageImage);
-                  return <div class="flex"></div>;
-                }
-              })()}
-            </div>
-            <div class="h-8 rounded-lg mt-4 mb-4">
-              <input
-                className="chooseFile"
-                type="file"
-                onChange={(event) => fileSelecterHandler(event.target.files)}
-              />
-            </div>
+            {!editLinkageTrigger ? (
+              <div>
+                <label className="  text-xl" htmlFor="Image">
+                  Linkage Photo:
+                </label>
+                <div calss="w-80  h-20 rounded-lg text-l">
+                  {(() => {
+                    // console.log("unionImage(union.jsx) ="+ unionImage);
+                    if (linkageImage != null && linkageImage) {
+                      // console.log("unionImage(union.jsx) else ==" + linkageImage);
+                      return (
+                        <div>
+                          <img
+                            class="mt-2"
+                            src={URL.createObjectURL(linkageImage)}
+                            style={{ width: "150px" }}
+                            alt="union upload pic"
+                          />
+                        </div>
+                      );
+                    } else {
+                      // console.log("unionImage(union.jsx) =" + linkageImage);
+                      return <div class="flex"></div>;
+                    }
+                  })()}
+                </div>
 
-            {/* <label className="  text-xl" htmlFor="Image">
-              Change Profile:
-            </label>
+                <div class="h-8 rounded-lg mt-4 mb-4">
+                  <input
+                    disabled={editLinkageTrigger}
+                    className="chooseFile"
+                    type="file"
+                    onChange={(event) =>
+                      fileSelecterHandler(event.target.files)
+                    }
+                  />
+                </div>
+              </div>
+            ) : null}
+            {/* 
             <input
               className="mt-40 "
               {...register("filename")}
@@ -262,26 +542,36 @@ const EditLinkageComp = (props) => {
               id="Image"
               name="filename"
             /> */}
-            <div className="deleteAndEdit">
-              <input
-                id="deleteButton"
-                className="deleteEditButton btn btn-danger "
-                // ref = {register}
-                type="submit"
-                value="DELETE"
-                //   onClick={createSave}
-              />
-              <Link to={{ pathname: `/linkage` }}>
+            {!editLinkageTrigger ? (
+              <div>
+                <div className="deleteAndEdit">
+                  <input
+                    id="deleteButton"
+                    className="deleteEditButton bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ease-in"
+                    // ref = {register}
+                    type="button"
+                    value="CANCEL"
+                    onClick={triggerEdit}
+                  />
+                  <input
+                    id="saveButton"
+                    className="saveCreateButton btn btn-success "
+                    // ref = {register}
+                    type="submit"
+                    value="SAVE"
+                    onClick={editSave}
+                  />
+                </div>
                 <input
-                  id="saveButton"
-                  className="saveCreateButton btn btn-success "
+                  id="deleteButton"
+                  className="deleteEditButton btn btn-danger mt-4"
                   // ref = {register}
-                  type="submit"
-                  value="SAVE"
-                  onClick={editSave}
+                  type="button"
+                  value="DELETE"
+                  onClick={onDelete}
                 />
-              </Link>
-            </div>
+              </div>
+            ) : null}
           </form>
         </div>
       </div>

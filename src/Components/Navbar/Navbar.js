@@ -9,6 +9,8 @@ import { NavLink, Link } from "react-router-dom";
 import GestioLogo from "./Logo.svg";
 import Dropdown from "./Dropdown";
 import { GetUserProfile } from "../../api";
+const BASE_URL = "http://localhost:5000/";
+//const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
 const Navbar = (props) => {
   const [inactive, setInactive] = useState(false);
@@ -50,12 +52,42 @@ const Navbar = (props) => {
           onClick={() => setDropdown(!false)}
           onMouseLeave={() => setDropdown(false)}
         >
-          <BsIcons.BsPeopleCircle />
+          {/* <BsIcons.BsPeopleCircle /> */}
           {profile.map((item, index) => {
             return (
-              <span className="profilename">
-                {item.firstName + item.lastName}
-              </span>
+              <div>
+                {(() => {
+                  if (!item.profilePic || item.profilePic === "") {
+                    return (
+                      <div class="flex">
+                        <div className=" py-1">
+                          <BsIcons.BsPeopleCircle class="w-8 h-8" />
+                        </div>
+                        <span className="profilename ">
+                          {item.firstName + item.lastName}
+                        </span>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div class="flex">
+                        <div className="">
+                          <img
+                            class="w-8 h-8"
+                            src={BASE_URL + item.profilePic}
+                            // alt="Profile Pic"
+                          />
+                        </div>
+                        <span className="profilename ">
+                          {item.firstName + item.lastName}
+                        </span>
+                      </div>
+                    );
+                  }
+                })()}
+                {/* {item.firstName + item.lastName}
+              </span> */}
+              </div>
             );
           })}
           {dropdown && <Dropdown />}

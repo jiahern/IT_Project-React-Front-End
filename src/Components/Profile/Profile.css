@@ -1,0 +1,6 @@
+.image_container-div{ 
+    Display: flex;
+    Align-Items: center;
+    Justify-Content: center;
+    padding-bottom: 30px;
+}
