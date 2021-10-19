@@ -43,8 +43,8 @@ export default function ShowCalendar() {
             setTaskId(item._id);
         }
         else if (item.type === "Event"){
-            // console.log("item.type= ",item.type);
-            setTaskId(item.linkage);
+            // console.log("item.linkage= ",item.linkage);
+            setTaskId(item.linkages);
         }
     }
     const { loading, calendarContents, error } = GetCalendar();
