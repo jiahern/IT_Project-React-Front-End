@@ -1,10 +1,24 @@
 import React, { Component } from "react";
 import "./HomePage.css";
 import { GetUnion, UseLinkages } from "../../api";
+import Loading from '../Loading/Loading';
 
 const HomePage = () => {
   const { loading, linkages, error } = UseLinkages();
   const { load, unionContents, err } = GetUnion();
+
+  if (loading || load) {
+    return (
+        <Loading/>
+      );
+}
+if (error) {
+    return <p>Something went wrong: {error.message}</p>;
+}
+if (err) {
+  return <p>Something went wrong: {err.message}</p>;
+}
+
 
   return (
     <React.Fragment children>
