@@ -55,38 +55,36 @@ const Navbar = (props) => {
           {/* <BsIcons.BsPeopleCircle /> */}
           {profile.map((item, index) => {
             return (
-              
               <div>
                 {(() => {
                   if (!item.profilePic || item.profilePic === "") {
-                      return (
+                    return (
                       <div class="flex">
-                        <div className = " py-1">
-                          <BsIcons.BsPeopleCircle class="w-8 h-8"/>
+                        <div className=" py-1">
+                          <BsIcons.BsPeopleCircle class="w-8 h-8" />
                         </div>
-                      <span className="profilename ">
-                        {item.firstName + item.lastName}
-                      </span>
+                        <span className="profilename ">
+                          {item.firstName + item.lastName}
+                        </span>
                       </div>
-                      );
+                    );
                   } else {
-                      
-                      return(
-                        <div class="flex">
-                          <div className="">
-                            <img
-                              class="w-8 h-8"
-                              src={BASE_URL + item.profilePic}
-                              alt="Profile Pic"
-                            />
-                          </div>
-                          <span className="profilename ">
-                            {item.firstName + item.lastName}
-                          </span>
+                    return (
+                      <div class="flex">
+                        <div className="">
+                          <img
+                            class="w-8 h-8"
+                            src={BASE_URL + item.profilePic}
+                            // alt="Profile Pic"
+                          />
+                        </div>
+                        <span className="profilename ">
+                          {item.firstName + item.lastName}
+                        </span>
                       </div>
-                      )
+                    );
                   }
-                  })()}
+                })()}
                 {/* {item.firstName + item.lastName}
               </span> */}
               </div>

@@ -46,6 +46,7 @@ const Linkage = () => {
   const [event, setEvent] = useState("");
   const [note, setNote] = useState("");
   const [linkageImage, setLinkageImage] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   function createSave() {
     createLinkage({
@@ -94,17 +95,20 @@ const Linkage = () => {
         <div className="flex space-x-4">
           <div className="searchBox">
             <input
-              className="w-80 h-10 rounded text-2xl "
+              className="w-80 h-10 rounded text-xl "
               type="text"
               id="Name"
               name="Name"
               placeholder="Fill in Name"
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }}
             />
           </div>
           <div>
-            <button className="searchLinkage">
+            <div className="searchLinkage">
               <HiIcons.HiOutlineSearch className="searchIcon" />
-            </button>
+            </div>
           </div>
         </div>
         <div className=" flex space-x-10 mr-4">
@@ -128,64 +132,76 @@ const Linkage = () => {
       </div>
       {/* linkage content */}
       <div className="scrollLinkage">
-        {linkages.map((item, index) => {
-          return (
-            <Link
-              to={{
-                pathname: `/linkage/${item._id}`,
-              }}
-            >
-              <section className="sectionLinkage" key={index}>
-                <div
-                  // onClick={() => {
-                  //   if (inactive) {
-                  //     setInactive(false);
-                  //   }
-                  // }}
-                  className="Linkage w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-5 gap-x-4 gap-y-4"
-                >
-                  {/* <BsIcons.BsFillPersonFill className="w-20 h-20" /> */}
-                  <div className="linkageProfilePic">
-                    <img
-                      class="w-20 h-20"
-                      src={BASE_URL + item.profilePic}
-                      alt="Union Profile Pic"
-                    />
-                  </div>
-                  <span className="py-6">
-                    {item.firstName +
-                      " " +
-                      item.middleName +
-                      " " +
-                      item.lastName}
-                  </span>
-                  <div className="FrindSince py-6 px-12">
-                    {new Date(item.linkedSince).toLocaleDateString()}
-                  </div>
-                  <div className="LastInTouch py-6 px-16">
-                    {new Date(item.lastConnection).toLocaleDateString()}
-                  </div>
-                  <div className="emailAndBin flex space-x-5 px-5 py-6">
-                    <button
-                      onClick={(e) => {
-                        sendEmail(item.email);
-                        e.preventDefault();
-                      }}
-                      className="email h-7"
-                    >
-                      <GrIcons.GrMail size="lg" />
-                    </button>
-                    <button
-                      className="bin h-7"
-                      onClick={(e) => {
-                        onDelete(item._id, item.profilePic);
-                        e.preventDefault();
-                      }}
-                    >
-                      <MdIcons.MdDelete size="lg" />
-                    </button>
-                  </div>
-                  {/* <div
+        {linkages
+          .filter((val) => {
+            if (searchTerm == "") {
+              return val;
+            } else if (
+              val.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              val.middleName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              val.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              return val;
+            }
+          })
+          .map((item, index) => {
+            return (
+              <Link
+                to={{
+                  pathname: `/linkage/${item._id}`,
+                }}
+              >
+                <section className="sectionLinkage" key={index}>
+                  <div
+                    // onClick={() => {
+                    //   if (inactive) {
+                    //     setInactive(false);
+                    //   }
+                    // }}
+                    className="Linkage w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-5 gap-x-4 gap-y-4"
+                  >
+                    {/* <BsIcons.BsFillPersonFill className="w-20 h-20" /> */}
+                    <div className="linkageProfilePic">
+                      <img
+                        class="w-20 h-20"
+                        src={BASE_URL + item.profilePic}
+                        alt="Union Profile Pic"
+                      />
+                    </div>
+                    <span className="py-6">
+                      {item.firstName +
+                        " " +
+                        item.middleName +
+                        " " +
+                        item.lastName}
+                    </span>
+                    <div className="FrindSince py-6 px-12">
+                      {new Date(item.linkedSince).toLocaleDateString()}
+                    </div>
+                    <div className="LastInTouch py-6 px-16">
+                      {new Date(item.lastConnection).toLocaleDateString()}
+                    </div>
+                    <div className="emailAndBin flex space-x-5 px-5 py-6">
+                      <button
+                        onClick={(e) => {
+                          sendEmail(item.email);
+                          e.preventDefault();
+                        }}
+                        className="email h-7"
+                      >
+                        <GrIcons.GrMail size="lg" />
+                      </button>
+                      <button
+                        className="bin h-7"
+                        onClick={(e) => {
+                          onDelete(item._id, item.profilePic);
+                          e.preventDefault();
+                        }}
+                      >
+                        <MdIcons.MdDelete size="lg" />
+                      </button>
+                    </div>
+                    {/* <div
                   className={inactive ? "editLinkage unactive" : "editLinkage"}
                 >
                   {/* <EditLinkageComp
@@ -197,11 +213,11 @@ const Linkage = () => {
                     id={item._id}
                   /> 
                 </div> */}
-                </div>
-              </section>
-            </Link>
-          );
-        })}
+                  </div>
+                </section>
+              </Link>
+            );
+          })}
       </div>
 
       {/* create linkage */}
