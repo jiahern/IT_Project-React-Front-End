@@ -218,6 +218,7 @@ export default function ShowCalendar() {
                 </div>
             </div> */}
         {/* </div> */}
+        <div>{JSON.stringify(calendarContents)}</div>
         <div class = "py-16">
             <div className="font-bold text-4xl ml-20">Schedule</div>
             {/* https://www.youtube.com/watch?v=iNkryf_TtZw */}
@@ -227,6 +228,7 @@ export default function ShowCalendar() {
                 // height="1000px"
                 currentView="Week"
                 eventSettings={ { dataSource: calendarContents} }
+                
                 >
                     <ResourcesDirective>
                         <ResourceDirective field="ResourceID" title="Resource Name" name ="Resources"

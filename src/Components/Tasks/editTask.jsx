@@ -10,6 +10,7 @@ const EditTask = (props) => {
       const [statusBox,setStatusBox] = useState(false);
       const {taskID} = props.match.params;
       const {taskLoading,taskContent,taskError} = GetOneTask(taskID);
+      const [isRead,setIsRead] = useState(true);
       console.log("past task = "+taskContent);
 
       const [endTime,setEndTime] = useState(null);
@@ -117,14 +118,18 @@ const EditTask = (props) => {
                   <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
                 </svg>
               </Link>
-              <div class = "font-bold w-2 text-2xl ml-20">Name: </div>
+              
+            </div>
+            <div class="flex mt-8">
+            <div class = "font-bold w-2 text-2xl ml-20">Name: </div>
               <input
+                readOnly = {isRead}
                 className="font-bold text-3xl ml-20"
                 defaultValue={taskContent.name}
                 placeholder="Name"
                 onChange = {(event)=>{taskContent.name = event.target.value;}}
               />
-              <div class = "ml-2 mt-2">
+              <div class = "ml-4 mt-3">
               <svg
                   width="15"
                   height="13"
@@ -139,43 +144,40 @@ const EditTask = (props) => {
                   </svg>
                   </div>
       
-              <div className="flex space-x-10 mr-4 ml-96">
+              <div className="flex mr-4 ml-4">
                 <Link to={{ pathname: `/task` }}>
                   <button
                     onClick={()=>{onDelete()}}
                     className="deleteUnion font-bold rounded mr-10"
-                    id="createTask"
+                    
                   >
                     Delete
                   </button>
                 </Link>
                 
+                  
                   <button
-                    onClick={onEdit}
-                    className="saveUnion font-bold rounded mr-10"
-                    id="createTask"
+                    onClick={()=>setIsRead(!isRead)}
+                    className={isRead?"editTaskButton font-bold rounded mr-10":"editTaskButton unactive"}
                   >
-                    Save
+                    Edit
                   </button>
                 
               </div>
             </div>
             <div>
-            <div className="EditTasks w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-4 grid-rows-1 gap-x-24">
-              <div className="TaskTitle font-bold text-2xl">Edit Task</div>
-            </div>
             
             <div class = "flex space-x-24  mt-4 ml-4">
               <div class = "flex flex-col space-y-4">
                 <div class = "font-bold">Start Time</div>
                 <div class = "w-60">
-                <DateTimePickerComponent divat = "yyyy/MM/dd HH:mm" id="datetimepicker" placeholder = "Start Time" value = {taskContent.StartTime} onChange = {(date) => {taskContent.StartTime = date.target.value;}} ></DateTimePickerComponent>
+                <DateTimePickerComponent readonly={isRead} divat = "yyyy/MM/dd HH:mm" id="datetimepicker" placeholder = "Start Time" value = {taskContent.StartTime} onChange = {(date) => {taskContent.StartTime = date.target.value;}} ></DateTimePickerComponent>
                 </div>
               </div>
               <div class = "flex flex-col space-y-4">
                 <div class = "font-bold">End Time</div>
                   <div class = "w-60">
-                  <DateTimePickerComponent divat = "yyyy/MM/dd HH:mm" id="datetimepicker" placeholder = "End Time" value = {taskContent.EndTime} onChange = {(date)=>{taskContent.EndTime = date.target.value;}}></DateTimePickerComponent>
+                  <DateTimePickerComponent readonly={isRead} divat = "yyyy/MM/dd HH:mm" id="datetimepicker" placeholder = "End Time" value = {taskContent.EndTime} onChange = {(date)=>{taskContent.EndTime = date.target.value;}}></DateTimePickerComponent>
                 </div>
               </div>
               <div class = "flex flex-col">
@@ -183,9 +185,11 @@ const EditTask = (props) => {
                   <div>Status: </div>
                   <div class = "mt-2">{showStatus(taskContent.status)}</div>
                   <div class = "flex flex-col space-y-4">
-                    <button onClick = {()=>{setStatusBox(!statusBox);}} class = "">
-                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-                    </button>
+                    <div class = {isRead?"statusRead unactive":"statusRead"}>
+                      <button onClick = {()=>{setStatusBox(!statusBox);}} class = "">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
+                      </button>
+                    </div>
                     <div class = {statusBox ? "status-box space-y-2" : "status-box inactive"}>
                       <button onClick ={()=>{taskContent.status = "pending";setStatusBox(!statusBox);}} class="process w-5 h-5">
                         <svg
@@ -238,19 +242,42 @@ const EditTask = (props) => {
                         </svg>
                       </button>
                     </div>
+                    
                   </div>
                 </div>
                 
               </div>
             </div>
-            <div class="recurring mt-6 ml-4">
+            {(()=>{
+              if(isRead){
+                return;
+              }
+              return (<div class={"recurring mt-6 ml-4"}>
               <RecurrenceEditorComponent id='RecurrenceEditor' value = {taskContent.recurring} change = {(args)=>{taskContent.recurring = args.value;}}></RecurrenceEditorComponent>
-            </div>
+            </div>);
+            })()}
+            
             <div class = "flex flex-col space-y-4 mt-4 ml-4 font-bold">
               <div>Notes: </div>
-              <input class = "border-2 border-black w-96 rounded" type = "text" defaultValue = {taskContent.note} onChange ={(event)=>{taskContent.note = event.target.value;}}/>
+              <input readOnly = {isRead} class = "border-2 border-black w-96 rounded" type = "text" defaultValue = {taskContent.note} onChange ={(event)=>{taskContent.note = event.target.value;}}/>
             </div>
             
+            </div>
+            <div class = "ml-20 mt-20">
+              <button
+                onClick={onEdit}
+                className={isRead?"saveTaskButton unactive":"saveTaskButton font-bold rounded mr-10"}
+                
+              >
+                Save
+              </button>
+              <button
+                onClick={()=>setIsRead(!isRead)}
+                className={isRead?"cancelTaskButton unactive":"cancelTaskButton font-bold rounded mr-10"}
+                
+              >
+                Cancel
+              </button>
             </div>
            
           </div>

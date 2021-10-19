@@ -1,5 +1,6 @@
 .groupUnion {
   background-color: var(--color-white-grey);
+  text-decoration: none;
 }
 .createUnion {
   position: fixed;
@@ -39,9 +40,29 @@
   height: 540px;
   overflow: hidden;
   overflow-y: scroll;
+  
 }
+
+.unionScroll a{
+  text-decoration: none;
+}
+
 
 .unionTitle {
   background-color: var(--color-dark-grey);
   color: white;
+}
+
+.bin{
+  transition: transform 0.3s;
+}
+.bin:hover{
+  transform: scale(1.5);
+}
+
+.email{
+  transition: transform 0.3s;
+}
+.email:hover{
+  transform: scale(1.5);
 }

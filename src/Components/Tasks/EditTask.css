@@ -13,3 +13,35 @@
 .recurring{
         width: 50%;
 }
+.editTaskButton{
+        background-color: var(--color-orange);
+        color: white;
+        font-size: large;
+        padding: 4px 22px;
+}
+.editTaskButton.unactive{
+        visibility: hidden;
+}
+.cancelTaskButton{
+        background-color: var(--color-light-grey);
+        font-size: large;
+        padding: 4px 20px;
+}
+.cancelTaskButton.unactive{
+        visibility: hidden;
+}
+.saveTaskButton{
+        background-color: green;
+        color: white;
+        font-size: large;
+        padding: 4px 20px;
+}
+.saveTaskButton.unactive{
+        visibility: hidden;
+}
+.statusRead.unactive{
+        visibility: hidden;
+}
+.recurring.unactive{
+        visibility: hidden;
+}
