@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import "./HomePage.css";
-import { GetUnion, UseLinkages } from "../../api";
+import { GetUnion, UseLinkages, UseEvents, GetAllPendingTask } from "../../api";
 import Loading from '../Loading/Loading';
 
 const HomePage = () => {
   const { loading, linkages, error } = UseLinkages();
   const { load, unionContents, err } = GetUnion();
+  const { loads, events, errs } = UseEvents();
+  const { loadings, pendingTask, errors } = GetAllPendingTask();
 
-  if (loading || load) {
+  if (loading || load || loads || loadings) {
     return (
         <Loading/>
       );
@@ -18,107 +20,83 @@ if (error) {
 if (err) {
   return <p>Something went wrong: {err.message}</p>;
 }
+if (errs) {
+  return <p>Something went wrong: {errs.message}</p>;
+}
+if (errors) {
+  return <p>Something went wrong: {errors.message}</p>;
+}
+
+function calculate_remaining(time, item){
+  
+  var Difference_In_Time = new Date(time).getTime() - new Date().getTime();
+  var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
+  var Difference_In_Hours = ((Difference_In_Time / (1000 * 3600 * 24) - Math.floor(Difference_In_Time / (1000 * 3600 * 24)))*24).toFixed(0);
+  return (<div className="font-bold ml-2">{Difference_In_Days} days {Difference_In_Hours} hours</div>)
+  
+}
 
 
   return (
     <React.Fragment children>
-      <div class="row">
-        <div className="flex justify-between w-full h-16 mr-4 py-3">
-          <div className="font-bold text-4xl  ml-20">Home</div>
-        </div>
+      <div className="flex justify-between w-full h-18 mr-4 py-3">
+        <div className="LinkageTitleText font-bold text-4xl ml-20">Home</div>
+          
       </div>
-      <div className="groupRow">
-        <div class="row">
-          <div className="Count w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-3 grid-rows-1 gap-x-24">
-            <div className="LinkageCount font-bold">Total Linkages</div>
-            <div className="UnionCount font-bold">Total Unions</div>
-            <div className="EventCount font-bold">Upcoming Events</div>
+      <div className="LinkageTitle text-1xl w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-3 grid-rows-1 gap-x-24">
+ 
+        <div className="TaskTitle">Total Linkages</div>
+        <div className="CreateTitle ">Total Unions</div>
+        <div className="ActionTitle ">Upcoming Events</div>
+        
+      </div>
+      <div className="Number w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-3 gap-x-4 gap-y-4">
+        <div className="LinkageCount font-bold py-6 px-12">{linkages.length}</div>
+        <div className="UnionCount font-bold py-6 px-16">{unionContents.length}</div>
+        <div className="EventCount font-bold py-6 px-20">{events.length}</div>
+      </div>
+
+      <div className="flex w-full space-x-8">
+        <div className="w-full">
+          <div className="LinkageTitle text-1xl w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-2 grid-rows-1 gap-x-24">
+            <div className="TaskTitle">Upcoming Events</div>
           </div>
-
-          {/* {foods.map((item, index) => {
-          return (
-            <section>
-              <div className="Linkage w-full h-full mr-4 px-20 py-6 flex flex-col grid grid-cols-5 gap-x-4 gap-y-4">
-                <img className="w-20 h-20" src={linkage} />
-                <span className="py-6">
-                  {item.firstName + " " + item.middleName + " " + item.lastName}
-                </span>
-
-                <div className="FrindSince h-5 ml-2 py-6 px-6">
-                  {item.linkedSince}
-                </div>
-                <div className="LastInTouch h-5 ml-4 py-6 px-6">
-                  {item.lastConnection}
-                </div>
-                
+          <div className="scrollEvent">
+            {events.map((event, index) => {
+              return(
+              <div className="Number w-full mr-4 px-20 py-6 flex flex-col grid grid-cols-4 gap-x-4 gap-y-4">
+                <div className="TaskName font-bold ">Event: {event.name}</div>
+                <div className="TaskTime font-bold ">Date: {new Date(event.StartTime).toLocaleDateString()}</div>
+                <div className="TaskTime font-bold flex"> Starts in: {calculate_remaining(event.StartTime, event)}</div>
+                <div className="TaskDate font-bold flex">Due in: {calculate_remaining(event.EndTime, event)}</div>
               </div>
-            </section>
-          );
-        })} */}
-
-          {/* {unionContents.map((item, index) => {
-          return (
-            <div
-              key={index}
-              class=" PendingTasks w-full h-full mr-4 px-20 py-6 flex flex-col grid grid-cols-4 gap-x-4 gap-y-4"
-            >
-              <img
-                class="w-20 h-20"
-                src={BASE_URL + item.profilePic}
-                alt="Union Profile Pic"
-              />
-              <span class="py-6">{item.name}</span>
-              <div class="Category h-5 ml-4 py-6 px-6">
-                {item.linkages.length}
-              </div>
-            </div>
-          );
-        })} */}
-
-          <div className="Number w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-3 grid-rows-1 gap-x-24">
-            <div className="LinkageCount font-bold">{linkages.length}</div>
-            <div className="UnionCount font-bold">{unionContents.length}</div>
-            <div className="EventCount font-bold">0</div>
+            )})}
           </div>
         </div>
 
-        <div class="row">
-          <div class="List w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-1 grid-rows-1 gap-x-24">
-            <div className="PendingTask font-bold">Pending Tasks</div>
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th class="col-md-1">-----</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="col-md-1">-----</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div className="w-full"> 
+          <div className="LinkageTitle text-1xl w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-2 grid-rows-1 gap-x-24">
+            <div className="TaskTitle">Pending Tasks</div>
           </div>
-          <div class="List w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-1 grid-rows-1 gap-x-24">
-            <div className="ComingEvent font-bold">Upcoming events</div>
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th class="col-md-2">-----</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="col-md-1">-----</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div className="scrollTask">
+            {pendingTask.map((task, index) => {
+              return(
+              <div className="Number w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-4 gap-x-4 gap-y-4">
+                <div className="TaskName font-bold ">Task: {task.name}</div>
+                <div className="TaskTime font-bold ">Date: {new Date(task.StartTime).toLocaleDateString()}</div>
+                <div className="TaskTime font-bold flex">Starts in: {calculate_remaining(task.StartTime, task)}</div>
+                <div className="TaskDate font-bold flex">Due in: {calculate_remaining(task.EndTime, task)}</div>
+              </div>
+            )})}
           </div>
         </div>
       </div>
+      
+
+
+
+
+    
     </React.Fragment>
   );
 };
