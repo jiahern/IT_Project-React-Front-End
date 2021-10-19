@@ -8,6 +8,7 @@ import EditLinkageComp from "./EditLinkageComp";
 import * as BsIcons from "react-icons/bs";
 import * as GrIcons from "react-icons/gr";
 import * as HiIcons from "react-icons/hi";
+import Loading from '../Loading/Loading';
 
 const BASE_URL = "http://localhost:5000/";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
@@ -70,6 +71,12 @@ const Linkage = () => {
   function editLinkagePage() {
     setEditActive(!editActive);
   }
+  if (loading) {
+    return (
+        <Loading/>
+      );
+}
+
   return (
     <React.Fragment children>
       <div className="flex justify-between w-full h-18 mr-4 py-3">
