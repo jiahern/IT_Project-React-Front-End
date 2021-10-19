@@ -152,12 +152,12 @@ export function UseLinkages() {
         setLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+        
         setError(e);
         setLoading(false);
       });
   }, []);
-  console.log(linkages);
+  
   return {
     loading,
     linkages,
@@ -482,7 +482,7 @@ export function GetUnion() {
         setLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+        
         setError(e);
         setLoading(false);
       });
@@ -504,7 +504,7 @@ export function GetOneUnion(unionID) {
       unionContent = item;
     }
   });
-  console.log(unionContents);
+
   return {
     unionLoading,
     unionContent,
@@ -552,24 +552,44 @@ export async function createUnion(newUser) {
 
 export async function editUnion(newUser) {
   // unpack user details, email and password
-  const { unionID, name, linkages } = newUser;
+  const { unionID, name, linkages,unionImage } = newUser;
   const endpoint = BASE_URL + "/union/" + unionID + "/change";
+  // if (!profilePic.name.match(/.(jpg|jpeg|png|)$/i)) {
+  //   alert("please upload only image to Union Image");
+  //   return;
+  // }
+  if(!unionImage){
+
+  }else if (!unionImage.name.match(/.(jpg|jpeg|png|)$/i)) {
+    alert("please upload only image to Union Image");
+    return;
+  }
   try {
-    let data = await axios({
-      url: endpoint,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify(
-        {
-          _id: unionID,
-          name: name,
-          linkages: linkages,
-        },
-        { withCredentials: true } // IMPORTANT
-      ),
-    }).then((res) => res.data);
+    const fd = new FormData();
+    fd.append("_id",unionID);
+    fd.append("unionImage", unionImage);
+    fd.append("name", name);
+    fd.append("linkages", linkages);
+    await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
+      
+      return res.data;
+    });
+    // let data = await axios({
+    //   url: endpoint,
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   data: JSON.stringify(
+    //     {
+    //       _id: unionID,
+    //       name: name,
+    //       linkages: linkages,
+    //       unionImage:profilePic,
+    //     },
+    //     { withCredentials: true } // IMPORTANT
+    //   ),
+    // }).then((res) => res.data);
     window.location.href = "/union";
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
@@ -625,7 +645,7 @@ export function GetUserProfile() {
         setLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+        
         setError(e);
         setLoading(false);
       });
@@ -753,7 +773,7 @@ export function GetCalendar() {
         setLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+        
         setError(e);
         setLoading(false);
       });
@@ -783,7 +803,7 @@ export function GetAllPendingTask() {
         setLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+      
         setError(e);
         setLoading(false);
       });
@@ -812,7 +832,7 @@ export function GetAllPastTask() {
         setLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+        
         setError(e);
         setLoading(false);
       });
@@ -841,7 +861,7 @@ export function GetAllTask() {
         setLoading(false);
       })
       .catch((e) => {
-        console.log(e);
+       
         setError(e);
         setLoading(false);
       });
@@ -863,7 +883,6 @@ export function GetOneTask(taskID) {
       taskContent = item;
     }
   });
-  console.log("!!!!!" + taskContent);
   return {
     taskLoading,
     taskContent,

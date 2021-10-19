@@ -90,13 +90,15 @@ export default function Union() {
           <div class="ActionTitle font-bold">Action</div>
         </div>
 
-        <div className="unionScroll">
+        <div className="unionScroll ">
           {/* reading Union from database here */}
           {unionContents.map((item, index) => {
             return (
+              <Link to={{ pathname: `/union/${item._id}` }}  >
               <div
                 key={index}
                 class=" PendingTasks w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-4 gap-x-4 gap-y-4"
+                
               >
                 <img
                   class="w-20 h-20"
@@ -108,8 +110,8 @@ export default function Union() {
                   {item.linkages.length}
                 </div>
                 <div class="flex space-x-5 px-10 py-6  h-5">
-                  <Link to={{ pathname: `/union/${item._id}` }}>
-                    <button class="edit h-5">
+                  
+                    {/* <button class="edit h-5">
                       <svg
                         width="15"
                         height="13"
@@ -122,17 +124,17 @@ export default function Union() {
                           fill="black"
                         />
                       </svg>
-                    </button>
-                  </Link>
+                    </button> */}
+                  
                   <button
-                    onClick={() => setEmail(item.linkages_info)}
+                    onClick={(e) => {setEmail(item.linkages_info);e.preventDefault();}}
                     className="email h-5"
                   >
                     <GrIcons.GrMail />
                   </button>
 
                   <button
-                    onClick={() => onDelete(item._id, item.profilePic)}
+                    onClick={(e) => {onDelete(item._id, item.profilePic); e.preventDefault();}}
                     class="bin h-5"
                   >
                     <svg
@@ -154,6 +156,7 @@ export default function Union() {
                   </button>
                 </div>
               </div>
+              </Link>
             );
           })}
         </div>
