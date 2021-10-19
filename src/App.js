@@ -81,7 +81,11 @@ function App() {
                 <ProtectedRoute path="/task" exact component={Task} />
                 <ProtectedRoute path="/task/past" exact component={pastTask} />
                 <Route path="/task/:taskID" exact component={editTask} />
-                <ProtectedRoute path="/calendar" exact component={ShowCalendar} />
+                <ProtectedRoute
+                  path="/calendar"
+                  exact
+                  component={ShowCalendar}
+                />
                 <ProtectedRoute path="*" component={() => "404 NOT FOUND"} />
                 {/* <Route exact path="/" /> */}
               </Switch>

@@ -1,4 +1,4 @@
-import { UseState,useState, useEffect, Redirect } from "react";
+import { UseState, useState, useEffect, Redirect } from "react";
 // get are using Axios to communicate with the Server API for authentication only
 // for other purposes, this app using Fetch API -- you should switch others to Axios
 // if you want to try as an exercise
@@ -168,18 +168,24 @@ export function UseLinkages() {
 //Create New Linkage
 export async function createLinkage(newUser) {
   // unpack user details, email and password
-  const { firstName, middleName, lastName, address, email, phoneNumber, note, linkageImage} =
-    newUser;
+  const {
+    firstName,
+    middleName,
+    lastName,
+    address,
+    email,
+    phoneNumber,
+    note,
+    linkageImage,
+  } = newUser;
 
   // if the user did not enter an email or password
   if (!firstName || !lastName) {
     alert("The information is not complete");
     return;
   }
-  if (!linkageImage){
-
-  }
-  else if (!linkageImage.name.match(/.(jpg|jpeg|png|)$/i)) {
+  if (!linkageImage) {
+  } else if (!linkageImage.name.match(/.(jpg|jpeg|png|)$/i)) {
     alert("please upload only image to Linkage Image");
     return;
   }
@@ -207,12 +213,12 @@ export async function createLinkage(newUser) {
       // console.log(res);
       return res.data;
     });
-    window.location.href = "/";
+    window.location.href = "/linkage";
     // redirect to homepage -- another way to redirect
   } catch (error) {
     alert(error.message);
   }
-} 
+}
 
 //Get One Linkage
 export function GetOneLinkage(linkageID) {
@@ -265,8 +271,7 @@ export async function editLinkage(newUser) {
       // console.log(res);
       return res.data;
     });
-  
-    window.location.href = "/linkage";
+
     // redirect to homepage -- another way to redirect
   } catch (error) {
     alert(error.message);
@@ -286,7 +291,119 @@ export async function removeLinkage(newUser) {
       data: JSON.stringify(
         {
           _id: linkageID,
-          profilePic: profilePic
+          profilePic: profilePic,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+    window.location.href = "/linkage/" + linkageID;
+  } catch (error) {
+    alert("Invalid Information");
+  }
+}
+
+//Event
+
+export async function createLinkageEvents(newUser) {
+  // unpack user details, email and password
+  const { linkages, name, StartTime, EndTime, recurring, status } = newUser;
+
+  // if the user did not enter an email or password
+  if (!name || !StartTime || !EndTime) {
+    alert("The information is not complete");
+    return;
+  }
+
+  // console.log("unionImage.mimetype = ", unionImage.mimetype);
+  const endpoint = BASE_URL + `/linkage/` + linkages + "/createEvent";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          linkages: linkages,
+          name: name,
+          StartTime: StartTime,
+          EndTime: EndTime,
+          recurring: recurring,
+          status: status,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+
+    window.location.href = "/linkage/" + linkages;
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert("Invalid Information");
+    console.log(error);
+  }
+}
+
+export async function editEvent(newUser) {
+  // unpack user details, email and password
+  const { name, StartTime, EndTime, recurring, linkages, eventId } = newUser;
+
+  const endpoint = BASE_URL + `/linkage/` + linkages + "/changeEvent";
+
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          _id: eventId,
+          linkages: linkages,
+          name: name,
+          StartTime: StartTime,
+          EndTime: EndTime,
+          recurring: recurring,
+        },
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
+    // put token ourselves in the local storage, we will
+    // send the token in the request header to the API server
+    // console.log(data);
+
+    // window.location.href = "/linkage/" + linkages;
+    // redirect to homepage -- another way to redirect
+  } catch (error) {
+    alert("Invalid Information");
+    console.log(error);
+  }
+}
+
+export async function removeEvent(newUser) {
+  // unpack user details, email and password
+  const { linkageID } = newUser;
+  const endpoint = BASE_URL + "/linkage/" + linkageID + "/removeEvent";
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          linkages: linkageID,
         },
         { withCredentials: true } // IMPORTANT
       ),
@@ -298,6 +415,54 @@ export async function removeLinkage(newUser) {
   } catch (error) {
     alert("Invalid Information");
   }
+}
+
+function getEvents() {
+  const endpoint = BASE_URL + "/linkage/event/pending";
+  return axios.get(endpoint, { withCredentials: true }).then((res) => res.data);
+}
+
+export function UseEvents() {
+  const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getEvents()
+      .then((events) => {
+        setEvents(events);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(e);
+        setLoading(false);
+      });
+  }, []);
+  console.log(events);
+  return {
+    loading,
+    events,
+    error,
+  };
+}
+
+//Get One Event
+export function GetOneEvent(linkageID) {
+  var eventContent = useState([]);
+  const { loading, events, error } = UseEvents();
+
+  events.map((item) => {
+    if (item.linkages === linkageID) {
+      eventContent = item;
+    }
+  });
+  // console.log(linkageContent);
+  return {
+    loading,
+    eventContent,
+    error,
+  };
 }
 
 //From here is Union function--------------------------------------------------------------------
@@ -356,10 +521,8 @@ export async function createUnion(newUser) {
     alert("The information is not complete");
     return;
   }
-  if (!unionImage){
-
-  }
-  else if (!unionImage.name.match(/.(jpg|jpeg|png|)$/i)) {
+  if (!unionImage) {
+  } else if (!unionImage.name.match(/.(jpg|jpeg|png|)$/i)) {
     alert("please upload only image to Union Image");
     return;
   }
@@ -384,7 +547,6 @@ export async function createUnion(newUser) {
   } catch (error) {
     alert("Invalid Information");
     console.log(error);
-    
   }
 }
 
@@ -415,7 +577,6 @@ export async function editUnion(newUser) {
   } catch (error) {
     alert("Invalid Information");
   }
-
 }
 
 export async function removeUnion(newUser) {
@@ -482,11 +643,9 @@ export function GetOneUser() {
   const { loading, profile, error } = GetUserProfile();
 
   profile.map((item) => {
-
     profileContent = item;
-
   });
-  
+
   return {
     loading,
     profileContent,
@@ -496,30 +655,23 @@ export function GetOneUser() {
 
 export async function editProfile(newUser) {
   // unpack user details, email and password
-  const {
-    _id,
-    firstName,
-    lastName,
-    address,
-    email,
-    phoneNo,
-    profilePic,
-  } = newUser;
+  const { _id, firstName, lastName, address, email, phoneNo, profilePic } =
+    newUser;
 
   const endpoint = BASE_URL + "/user/profile/change";
 
-    try {
-      const fd = new FormData();
-      fd.append("firstName", firstName);
-      fd.append("lastName", lastName);
-      fd.append("address", address);
-      fd.append("email", email);
-      fd.append("phoneNo", phoneNo);
-      fd.append("profilePic", profilePic);
-      await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
-        // console.log(res);
-        return res.data;
-      })
+  try {
+    const fd = new FormData();
+    fd.append("firstName", firstName);
+    fd.append("lastName", lastName);
+    fd.append("address", address);
+    fd.append("email", email);
+    fd.append("phoneNo", phoneNo);
+    fd.append("profilePic", profilePic);
+    await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
+      // console.log(res);
+      return res.data;
+    });
     window.location.href = "/Profile";
     // redirect to homepage -- another way to redirect
   } catch (error) {
@@ -529,27 +681,25 @@ export async function editProfile(newUser) {
 
 export async function editPassword(newUser) {
   // unpack user details, email and password
-  const {
-    password,
-  } = newUser;
+  const { password } = newUser;
 
   const endpoint = BASE_URL + "/user/password";
 
-    try {
-      let data = await axios({
-        url: endpoint,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+  try {
+    let data = await axios({
+      url: endpoint,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(
+        {
+          password: password,
         },
-        data: JSON.stringify(
-          {
-            password: password,
-          },
-          { withCredentials: true } // IMPORTANT
-        ),
-      }).then((res) => res.data);
-  
+        { withCredentials: true } // IMPORTANT
+      ),
+    }).then((res) => res.data);
+
     // window.location.href = "/profile";
     // redirect to homepage -- another way to redirect
   } catch (error) {
@@ -562,31 +712,35 @@ export async function editPassword(newUser) {
 function userCalendar() {
   const endpoint1 = BASE_URL + "/task/pending";
   const endpoint2 = BASE_URL + "/linkage/event/pending";
-  const requestTask = axios.get(endpoint1, { withCredentials: true })
-  const requestEvent = axios.get(endpoint2, { withCredentials: true })  
-  return axios.all([requestTask, requestEvent]).then(axios.spread((...responses) => {
-    const responseTask = responses[0].data;
-    const responseEvent = responses[1].data;
-    responseTask.forEach(element => {
-      element.type = "Task";
-      element.Subject = element.name;
-      element.ResourceID = 1;
-      element.RecurrenceRule = element.recurring;
-      element.IsReadonly = true;
-      element.IsAllDay = false;
-    });
-    responseEvent.forEach(element => {
-      element.type = "Event";
-      element.Subject = element.name;
-      element.ResourceID = 2;
-      element.RecurrenceRule = element.recurring;
-      element.IsAllDay = false;
-      element.IsReadonly = true;
-    });
-    const response_merge = responseEvent.concat(responseTask);
-    const sortedResponse = response_merge.sort((a, b) => new Date(a.StartTime) - new Date(b.StartTime))
-    return sortedResponse;
-  }))
+  const requestTask = axios.get(endpoint1, { withCredentials: true });
+  const requestEvent = axios.get(endpoint2, { withCredentials: true });
+  return axios.all([requestTask, requestEvent]).then(
+    axios.spread((...responses) => {
+      const responseTask = responses[0].data;
+      const responseEvent = responses[1].data;
+      responseTask.forEach((element) => {
+        element.type = "Task";
+        element.Subject = element.name;
+        element.ResourceID = 1;
+        element.RecurrenceRule = element.recurring;
+        element.IsReadonly = true;
+        element.IsAllDay = false;
+      });
+      responseEvent.forEach((element) => {
+        element.type = "Event";
+        element.Subject = element.name;
+        element.ResourceID = 2;
+        element.RecurrenceRule = element.recurring;
+        element.IsAllDay = false;
+        element.IsReadonly = true;
+      });
+      const response_merge = responseEvent.concat(responseTask);
+      const sortedResponse = response_merge.sort(
+        (a, b) => new Date(a.StartTime) - new Date(b.StartTime)
+      );
+      return sortedResponse;
+    })
+  );
 }
 export function GetCalendar() {
   const [loading, setLoading] = useState(true);
@@ -709,7 +863,7 @@ export function GetOneTask(taskID) {
       taskContent = item;
     }
   });
-  console.log("!!!!!"+taskContent);
+  console.log("!!!!!" + taskContent);
   return {
     taskLoading,
     taskContent,
@@ -719,14 +873,14 @@ export function GetOneTask(taskID) {
 
 export async function createTask(newUser) {
   // unpack user details, email and password
-  const { name,StartTime,EndTime,note,recurring,status} = newUser;
-  
+  const { name, StartTime, EndTime, note, recurring, status } = newUser;
+
   // if the user did not enter an email or password
   if (!name || !StartTime || !EndTime) {
     alert("The information is not complete");
     return;
   }
-  
+
   // console.log("unionImage.mimetype = ", unionImage.mimetype);
   const endpoint = BASE_URL + `/task`;
   try {
@@ -748,7 +902,6 @@ export async function createTask(newUser) {
         { withCredentials: true } // IMPORTANT
       ),
     }).then((res) => res.data);
-    
 
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
@@ -759,7 +912,6 @@ export async function createTask(newUser) {
   } catch (error) {
     alert("Invalid Information");
     console.log(error);
-    
   }
 }
 
@@ -794,7 +946,7 @@ export async function createTask(newUser) {
 //         setUnionLoading(false);
 //       });
 //   }, []);
- 
+
 //   return {
 //     linkageLoading,
 //     unionLoading,
@@ -805,8 +957,8 @@ export async function createTask(newUser) {
 //   };
 // }
 
-export async function taskEdit(newUser){
-  const { taskID,name,note,StartTime,EndTime,status,recurring } = newUser;
+export async function taskEdit(newUser) {
+  const { taskID, name, note, StartTime, EndTime, status, recurring } = newUser;
   const endpoint = BASE_URL + "/task/edit";
   try {
     let data = await axios({
@@ -823,7 +975,7 @@ export async function taskEdit(newUser){
           StartTime: StartTime,
           EndTime: EndTime,
           status: status,
-          recurring:recurring,
+          recurring: recurring,
         },
         { withCredentials: true } // IMPORTANT
       ),
@@ -855,7 +1007,7 @@ export async function RemoveTask(newUser) {
         { withCredentials: true } // IMPORTANT
       ),
     }).then((res) => res.data);
-    
+
     // put token ourselves in the local storage, we will
     // send the token in the request header to the API server
     // console.log(data);

@@ -1,12 +1,12 @@
 .topnavbar-box {
-  z-index: 98;
+  /* z-index: 98; */
   width: 100%;
   /* position: fixed; */
 }
 
 .topnavbar {
   /* margin-top: -80px; */
-  z-index: 10;
+  /* z-index: 10; */
   height: 80px;
   outline: solid lightgray 1px;
   background-color: white;
