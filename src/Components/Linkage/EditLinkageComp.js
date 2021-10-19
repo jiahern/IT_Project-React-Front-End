@@ -567,7 +567,7 @@ const EditLinkageComp = (props) => {
                   className="deleteEditButton btn btn-danger mt-4"
                   // ref = {register}
                   type="button"
-                  value="DELETE"
+                  value="DELETE LINKAGE"
                   onClick={onDelete}
                 />
               </div>
