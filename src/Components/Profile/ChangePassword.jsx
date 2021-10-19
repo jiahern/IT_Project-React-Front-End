@@ -43,7 +43,7 @@ const ChangePassword = () => {
   }
     return(
       <div>
-        <div className="editLinkage-top">
+        <div className="editLinkage-top ">
         <Link to={{ pathname: `/profile` }}>
           <button className="backButton">
             <svg
@@ -59,26 +59,26 @@ const ChangePassword = () => {
             </svg>
           </button>
         </Link>
-        <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8 h-20">
+        <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8 h-20 text-center">
           Change Password
         </div>
         </div>
         <div className="inputPage flex flex-col space-y-4 h-100">
         
         
-        <div className="inputPage h-120">
+        <div className="inputPage h-120 flex flex-col justify-center items-center">
           <form
             onSubmit={editSave}
             className="edit-linkage-form flex flex-col space-y-2"
             action="#"
           >
-            <label className="font-bold ml-20 text-xl" htmlFor="Name">
+            <label className="font-bold text-xl" htmlFor="Name">
               New Password:
             </label>
             <div className="flex space-x-4">
               
               <input
-                className="w-80 ml-20 h-8  text-l"
+                className="w-80 h-8  text-l"
                 
                 type="password"
                 id="password"
@@ -90,11 +90,11 @@ const ChangePassword = () => {
                 }}
               />
             </div>
-            <label className="font-bold ml-20 text-xl" htmlFor="Name">
+            <label className="font-bold text-xl" htmlFor="Name">
               Confirm Password:
             </label>
             <input
-              className="w-80 ml-20 h-8  text-l"
+              className="w-80 h-8  text-l"
               
               type="password"
               id="confirmPassword"
@@ -105,10 +105,10 @@ const ChangePassword = () => {
                 confirmPassword = event.target.value;
               }}
             />
-            <div className="deleteAndEdit h-20">
+            <div className="deleteAndEdit h-20 flex flex-col ">
               
               <input
-                className="saveCreateButton btn btn-success font-weight-bold"
+                className="saveCreateButton btn btn-success font-weight-bold text-center"
                 // ref = {register}
                 type="submit"
                 value="CONFIRM"

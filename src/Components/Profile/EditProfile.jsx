@@ -36,7 +36,7 @@ const EditProfile = (props) => {
   var firstName = profileContent.firstName;
   var lastName = profileContent.lastName;
   var email = profileContent.email;
-  var phoneNumber = profileContent.phoneNumber;
+  var phoneNo = profileContent.phoneNo;
   var address = profileContent.address;
   var profilePic = profileContent.profilePic;
   //const [linkageImage, setLinkageImage] = useState(null);
@@ -54,7 +54,7 @@ const EditProfile = (props) => {
       lastName: lastName,
       address: address,
       email: email,
-      phoneNumber: phoneNumber,
+      phoneNo: phoneNo,
       profilePic: linkageImage,
       
     });
@@ -63,6 +63,7 @@ const EditProfile = (props) => {
     // console.log(window.location);
   }
   return (
+    
     <div className="editLinkage-box">
       {/* Edit linkage */}
       <div className="editLinkage-top">
@@ -81,14 +82,14 @@ const EditProfile = (props) => {
             </svg>
           </button>
         </Link>
-        <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8">
+        <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8 text-center">
           Edit Profile
         </div>
       </div>
 
       
-      <div className="inputPage flex flex-col space-y-4 h-100">
-        <div className="ml-32 linkage-pic">
+      <div className="inputPage flex space-y-4 h-100 flex-col justify-center items-center">
+        <div className=" linkage-pic">
         {(() => {
           if (!profilePic || profilePic === "") {
               return (
@@ -111,11 +112,39 @@ const EditProfile = (props) => {
           })()}
           {/* <BsIcons.BsFillPersonFill className="w-20 h-20" />
           */}
-
+        
         </div>
+        <div calss="w-80 h-20 rounded-lg text-l">
+              {(() => {
+                // console.log("unionImage(union.jsx) ="+ unionImage);
+                if (linkageImage != null && linkageImage) {
+                  // console.log("unionImage(union.jsx) else ==" + linkageImage);
+                  return (
+                    <div className= "ml-20">
+                      <img
+                        class="mt-2"
+                        src={URL.createObjectURL(linkageImage)}
+                        style={{ width: "150px" }}
+                        alt="union upload pic"
+                      />
+                    </div>
+                  );
+                } else {
+                  // console.log("unionImage(union.jsx) =" + linkageImage);
+                  return <div class="flex"></div>;
+                }
+              })()}
+            </div>
+            <div class="h-8 ml-20 rounded-lg mt-4 mb-4">
+              <input
+                className="chooseFile"
+                type="file"
+                onChange={(event) => fileSelecterHandler(event.target.files)}
+              />
+            </div>
         {/* {profileContent.map((item, index) => { */}
           {/* return( */}
-        <div className="inputPage h-100">
+        <div className="inputPage h-100 ">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="edit-linkage-form flex flex-col space-y-2"
@@ -183,75 +212,18 @@ const EditProfile = (props) => {
             <label className="font-bold ml-20 text-xl" htmlFor="Name">
               Phone Number:
             </label>
-            <div calss="w-80 h-20 rounded-lg text-l">
-              {(() => {
-                // console.log("unionImage(union.jsx) ="+ unionImage);
-                if (linkageImage != null && linkageImage) {
-                  // console.log("unionImage(union.jsx) else ==" + linkageImage);
-                  return (
-                    <div className= "ml-20">
-                      <img
-                        class="mt-2"
-                        src={URL.createObjectURL(linkageImage)}
-                        style={{ width: "150px" }}
-                        alt="union upload pic"
-                      />
-                    </div>
-                  );
-                } else {
-                  // console.log("unionImage(union.jsx) =" + linkageImage);
-                  return <div class="flex"></div>;
-                }
-              })()}
-            </div>
-            <div class="h-8 ml-20 rounded-lg mt-4 mb-4">
-              <input
-                className="chooseFile"
-                type="file"
-                onChange={(event) => fileSelecterHandler(event.target.files)}
-              />
-            </div>
             <input
               className="w-80 ml-20 h-8  text-l"
               
               type="text"
-              id="phoneNumber"
-              name="phoneNumber"
-              defaultValue={profileContent.phoneNumber}
+              id="phoneNo"
+              name="phoneNo"
+              defaultValue={profileContent.phoneNo}
               placeholder="Phone Number"
               onChange={(event) => {
-                phoneNumber = event.target.value;
+                phoneNo = event.target.value;
               }}
             />
-            
-            
-            {/* <div calss="w-80 ml-20 h-20 rounded-lg text-l">
-                {(() => {
-                  // console.log("unionImage(union.jsx) ="+ unionImage);
-                  if (linkageImage != null && linkageImage) {
-                    // console.log("unionImage(union.jsx) else ==" + linkageImage);
-                    return (
-                      <div>
-                        <img class="ml-20"
-                          src={URL.createObjectURL(linkageImage)}
-                          style={{ width: "150px" }}
-                          alt="union upload pic"
-                        />
-                      </div>
-                    );
-                  } else {
-                    // console.log("unionImage(union.jsx) =" + linkageImage);
-                    return <div class="flex"></div>;
-                  }
-                })()}
-              </div> */}
-            {/* <p>Hello Wordls s</p> */}
-              {/* <div class="w-80 ml-20 h-20 rounded-lg text-l mt-4 flex-col">
-                <input
-                  type="file"
-                  onChange={(event) => fileSelecterHandler(event.target.files)}
-                />
-              </div> */}
 
             
             <div className="deleteAndEdit ml-20 py-6">
@@ -271,9 +243,6 @@ const EditProfile = (props) => {
         })} */}
       </div>
       
-
-
-      {/* Edit Linkage End Here */}
     </div>
   );
 };

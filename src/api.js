@@ -502,7 +502,7 @@ export async function editProfile(newUser) {
     lastName,
     address,
     email,
-    phoneNumber,
+    phoneNo,
     profilePic,
   } = newUser;
 
@@ -514,7 +514,7 @@ export async function editProfile(newUser) {
       fd.append("lastName", lastName);
       fd.append("address", address);
       fd.append("email", email);
-      fd.append("phoneNumber", phoneNumber);
+      fd.append("phoneNo", phoneNo);
       fd.append("profilePic", profilePic);
       await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
         // console.log(res);

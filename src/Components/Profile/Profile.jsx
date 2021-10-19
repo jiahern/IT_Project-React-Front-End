@@ -11,7 +11,7 @@ const Profile = () => {
     
     return (
         <React.Fragment children>
-            <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8 h-20">
+            <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8 h-20 text-center">
             Account Profile
             </div>
             {profile.map((item, index) => {
@@ -45,6 +45,7 @@ const Profile = () => {
                         <div className="font-bold text-xl h-20 text-center">Email: {item.email}</div>
                         <div className="font-bold text-xl h-20 text-center">FirstName: {item.firstName}</div>
                         <div className="font-bold text-xl h-20 text-center">LastName: {item.lastName}</div>
+                        <div className="font-bold text-xl h-20 text-center">Address: {item.address}</div>
                         <div className="font-bold text-xl h-20 text-center">PhoneNo: {item.phoneNo}</div>
                         
                     </div>
