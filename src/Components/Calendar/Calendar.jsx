@@ -238,27 +238,7 @@ export default function ShowCalendar() {
             );
           })}
         </div>
-
-        {/* <div class={active ? "view_calendar_page inactive" : "view_calendar_page rounded-2xl"}> 
-                <div >
-                    <button onClick={showsetActive} class="backButton">
-                        <svg
-                        class="h-20 w-20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 0 24 24"
-                        width="24px"
-                        fill="#000000"
-                        >
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                        </svg>
-                    </button>
-                    <Calendar  onChange={onChange} value={date1}/>
-                </div>
-            </div> */}
-        {/* </div> */}
-        <div>{JSON.stringify(calendarContents)}</div>
+        
         <div class="py-16">
           <div className="font-bold text-4xl ml-20">Schedule</div>
           {/* https://www.youtube.com/watch?v=iNkryf_TtZw */}
