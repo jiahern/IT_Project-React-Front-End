@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 :root {
-  
-  
   --color-orange: #ff7a59;
   --color-dark-grey: #33475b;
   --color-light-grey: #cbd6e2;
@@ -20,7 +18,7 @@
   margin: 0;
   padding: 0;
   font-family: "Roboto";
-  font-weight: 450;
+  /* font-weight: 450; */
 }
 
 ul {
@@ -34,7 +32,7 @@ li {
 body {
   background-color: #f9fbff;
   font-family: "Roboto";
-  font-weight: 450;
+  /* font-weight: 450; */
 }
 
 .contain {
@@ -63,7 +61,7 @@ input {
   border-color: #ccc;
   border-radius: 5px;
   font-family: "Roboto";
-  font-weight: 400;
+  /* font-weight: 400; */
 }
 
 input:focus {
