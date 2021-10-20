@@ -159,3 +159,8 @@
 #sectionCalendar:hover {
   background: var(--color-white-grey);
 }
+.fucknewsection{
+  height: 1200px;
+  overflow: hidden;
+  overflow-y: scroll;
+}

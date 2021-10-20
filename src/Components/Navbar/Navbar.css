@@ -7,6 +7,7 @@
 .topnavbar {
   /* margin-top: -80px; */
   /* z-index: 10; */
+  
   height: 80px;
   outline: solid lightgray 1px;
   background-color: white;
@@ -37,6 +38,7 @@
 }
 
 .topnavbar .profile {
+  z-index: 50;
   position: absolute;
   height: 80px;
   font-size: 40px;

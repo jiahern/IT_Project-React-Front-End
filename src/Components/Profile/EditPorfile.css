@@ -40,9 +40,12 @@
   align-content: center;
 }
 
-.editLinkage-box {
-  height: 670px;
+.editProfile-box {
+  height: 100%;
   overflow: hidden;
   overflow-y: scroll;
-  padding-bottom: 30px;
+  padding-bottom: 200px;
+}
+.inputProfile{
+  padding-bottom: 100px;
 }

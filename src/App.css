@@ -43,6 +43,9 @@ body {
   /* padding-bottom: 100px; */
   background-color: var(--color-white-grey);
   overflow: hidden;
+  /* position: fixed; */
+  height: 100%;
+  width: 85%;
 }
 
 .contain.inactive {
@@ -50,7 +53,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 input {

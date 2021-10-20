@@ -64,7 +64,7 @@ const EditProfile = (props) => {
   }
   return (
     
-    <div className="editLinkage-box">
+    <div className="editProfile-box">
       {/* Edit linkage */}
       <div className="editLinkage-top">
         <Link to={{ pathname: `/profile` }}>
@@ -157,7 +157,8 @@ const EditProfile = (props) => {
             </div>
         {/* {profileContent.map((item, index) => { */}
           {/* return( */}
-        <div className="inputPage h-100 ">
+        <div className="inputProfile inputPage ">
+
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="edit-linkage-form flex flex-col space-y-2"

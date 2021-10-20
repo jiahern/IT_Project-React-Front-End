@@ -18,7 +18,7 @@ const Profile = () => {
         return <p>Something went wrong: {error.message}</p>;
     }
     return (
-        <React.Fragment children>
+        <div class = "showingProfilePage">
             <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8 h-20 text-center">
             Account Profile
             </div>
@@ -87,7 +87,7 @@ const Profile = () => {
             })}    
 
 
-        </React.Fragment>
+        </div>
     )
 
 

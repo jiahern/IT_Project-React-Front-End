@@ -49,7 +49,7 @@
   text-decoration: none;
 }
 .taskScroll{
-  height: 1200px;
+  height: 800px;
   overflow: hidden;
   overflow-y: scroll;
 }

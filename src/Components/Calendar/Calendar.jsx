@@ -89,7 +89,7 @@ export default function ShowCalendar() {
   }
 
   return (
-    <React.Fragment children>
+    <div class="fucknewsection">
       <div className="flex justify-between w-full h-18 mr-4 py-3">
         <script src="https://cdn.jsdelivr.net/npm/react-json-to-csv"></script>
         <div className="font-bold text-4xl ml-20">Calendar</div>
@@ -121,7 +121,7 @@ export default function ShowCalendar() {
         <div className=""></div>
       </div>
 
-      <section>
+      <section >
         {/* the list and calendar */}
         {/* https://www.npmjs.com/package/react-calendar */}
         {/* <div class ="flex w-full justify-between mr-4 py-3"> */}
@@ -265,7 +265,7 @@ export default function ShowCalendar() {
           </div>
         </div>
       </section>
-    </React.Fragment>
+    </div>
   );
 }
 
