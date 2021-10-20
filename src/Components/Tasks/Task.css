@@ -35,6 +35,8 @@
   visibility: visible;
   background-color: var(--color-light-grey);
   transition: height 0.2s ease-in;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .createTask.inactive {
   height: 0%;
