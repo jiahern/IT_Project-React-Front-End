@@ -46,3 +46,8 @@
 .taskScroll a:hover {
   text-decoration: none;
 }
+.taskScroll{
+  height: 540px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
