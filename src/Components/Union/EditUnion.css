@@ -23,7 +23,7 @@
 }
 
 .scrollEditUnion {
-  height: 300px;
+  height: 450px;
   overflow: hidden;
   overflow-y: scroll;
   background-color: var(--color-white-grey);
