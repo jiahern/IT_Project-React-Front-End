@@ -934,47 +934,6 @@ export async function createTask(newUser) {
   }
 }
 
-// export function GetAll() {
-//   // const {unionLoading, unionContents, unionError} = GetUnion();
-//   // const {linakgeLoading, linkages, linkageError} = UseLinkages();
-//   const [linkageLoading, setLinkageLoading] = useState(true);
-//   const [unionLoading, setUnionLoading] = useState(true);
-//   const [outUnion, setOutUnion] = useState([]);
-//   const [outLinkage, setOutLinkage] = useState([]);
-//   const [unionError, setUnionError] = useState(null);
-//   const [linkageError, setLinkageError] = useState(null);
-//   useEffect(() => {
-//     getLinkages()
-//       .then((outLinkage) => {
-//         setOutLinkage(outLinkage);
-//         setLinkageLoading(false);
-//       })
-//       .catch((e) => {
-//         console.log(e);
-//         setLinkageError(e);
-//         setLinkageLoading(false);
-//       });
-//     userUnion()
-//       .then((outUnion) => {
-//         setOutUnion(outUnion);
-//         setUnionLoading(false);
-//       })
-//       .catch((e) => {
-//         console.log(e);
-//         setUnionError(e);
-//         setUnionLoading(false);
-//       });
-//   }, []);
-
-//   return {
-//     linkageLoading,
-//     unionLoading,
-//     outUnion,
-//     outLinkage,
-//     unionError,
-//     linkageError,
-//   };
-// }
 
 export async function taskEdit(newUser) {
   const { taskID, name, note, StartTime, EndTime, status, recurring } = newUser;
