@@ -127,13 +127,13 @@ const Linkage = (props) => {
         </div>
       </div>
 
-      <div className="LinkageTitle text-1xl w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-5 grid-rows-1 gap-x-24">
+      <div className="LinkageTitle text-1xl w-full h-16 mr-4 px-20 py-6 flex flex-col grid grid-cols-4 grid-rows-1 gap-x-24">
         <div className="font-bold  grid grid-cols-2 gap-x-4">
           <div className="TaskTitle">Name</div>
         </div>
         <div className="StatusTitle"></div>
         <div className="CreateTitle ">Friend Since</div>
-        <div className="ActionTitle ">Last In Touch</div>
+        <div className="ActionTitle ">Action</div>
         <div className=""></div>
       </div>
       {/* linkage content */}
@@ -152,21 +152,14 @@ const Linkage = (props) => {
           })
           .map((item, index) => {
             return (
-              <NavLink
+              <Link
                 className="menu-item-trigger"
                 to={{
                   pathname: `/linkage/${item._id}`,
                 }}
               >
                 <section className="sectionLinkage" key={index}>
-                  <div
-                    // onClick={() => {
-                    //   if (inactive) {
-                    //     setInactive(false);
-                    //   }
-                    // }}
-                    className="Linkage w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-5 gap-x-4 gap-y-4"
-                  >
+                  <div className="Linkage w-full mr-4 px-20 py-6 flex flex-col  grid grid-cols-4 gap-x-4 gap-y-4">
                     {/* <BsIcons.BsFillPersonFill className="w-20 h-20" /> */}
                     <div className="linkageProfilePic">
                       <img
@@ -182,13 +175,13 @@ const Linkage = (props) => {
                         " " +
                         item.lastName}
                     </span>
-                    <div className="FrindSince py-6 px-12">
+                    <div className="FrindSince py-6 px-14">
                       {new Date(item.linkedSince).toLocaleDateString()}
                     </div>
-                    <div className="LastInTouch py-6 px-16">
+                    {/* <div className="LastInTouch py-6 px-16">
                       {new Date(item.lastConnection).toLocaleDateString()}
-                    </div>
-                    <div className="emailAndBin flex space-x-5 px-5 py-6">
+                    </div> */}
+                    <div className="emailAndBin flex space-x-5 px-16 py-6">
                       <button
                         onClick={(e) => {
                           sendEmail(item.email);
@@ -222,7 +215,7 @@ const Linkage = (props) => {
                 </div> */}
                   </div>
                 </section>
-              </NavLink>
+              </Link>
             );
           })}
       </div>

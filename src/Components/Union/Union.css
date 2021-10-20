@@ -9,18 +9,18 @@
   width: 50%;
   height: 100%;
   visibility: visible;
-  background-color: var( --color-light-grey);
-  transition: height 0.3s ease-in;
+  background-color: var(--color-light-grey);
+  transition: height 0.2s ease-in;
 }
 
 .saveButton {
-  transition: transform 0.3s;
+  transition: transform 0.2s;
   padding: 4px 5px;
   position: relative;
   width: 15%;
   right: 10px;
 }
-.saveButton:hover{
+.saveButton:hover {
   transform: scale(1.1);
 }
 .createUnion.inactive {
@@ -32,44 +32,50 @@
   color: rgb(255, 255, 255);
   font-size: large;
   padding: 4px 25px;
-  transition: transform 0.3s;
+  transition: transform 0.2s;
 }
-.addUnion:hover{
+.addUnion:hover {
   transform: scale(1.1);
 }
-.UnionTitle{
+.UnionTitle {
   color: var(--color-dark-grey);
 }
-
 
 .unionScroll {
   height: 540px;
   overflow: hidden;
   overflow-y: scroll;
-  
 }
 
-.unionScroll a{
+.unionScroll a {
   text-decoration: none;
 }
 
+.unionScroll a:hover {
+  text-decoration: none;
+}
+
+.unionScroll a .PendingTask:hover {
+  text-decoration: none;
+  background-color: white;
+}
 
 .unionTitle {
   background-color: var(--color-dark-grey);
   color: white;
 }
 
-.bin{
-  transition: transform 0.3s;
+.bin {
+  transition: transform 0.2s;
 }
-.bin:hover{
+.bin:hover {
   transform: scale(1.1);
 }
 
-.email{
-  transition: transform 0.3s;
-  color:black;
+.email {
+  transition: transform 0.2s;
+  color: black;
 }
-.email:hover{
+.email:hover {
   transform: scale(1.1);
 }

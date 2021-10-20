@@ -1,44 +1,48 @@
-#viewPastTask{
-        background-color: var(--color-orange);
+#viewPastTask {
+  background-color: var(--color-orange);
 }
-#createTask{
-        background-color: var(--color-orange);
+#createTask {
+  background-color: var(--color-orange);
 }
 
 .addTask {
-        background-color: var(--color-light-grey);
-        color: white;
-        font-size: large;
-        padding: 4px 25px;
-        transition: transform 0.3s;
+  background-color: var(--color-light-grey);
+  color: white;
+  font-size: large;
+  padding: 4px 25px;
+  transition: transform 0.2s;
 }
-.addTask:hover{
-        transform: scale(1.1);
+.addTask:hover {
+  transform: scale(1.1);
 }
 
-.viewPast{
-        background-color: #3aafa9;
-        color: white;
-        font-size: large;
-        padding: 4px 25px;
-        transition: transform 0.3s;
+.viewPast {
+  background-color: #3aafa9;
+  color: white;
+  font-size: large;
+  padding: 4px 25px;
+  transition: transform 0.2s;
 }
-.viewPast:hover{
-        transform: scale(1.1);
+.viewPast:hover {
+  transform: scale(1.1);
 }
 .createTask {
-        position: fixed;
-        left: 50%;
-        bottom: 2px;
-        width: 50%;
-        height: 100%;
-        visibility: visible;
-        background-color: var(--color-light-grey);
-        transition: height 0.3s ease-in;
-      }
-.createTask.inactive {
-        height: 0%;
+  position: fixed;
+  left: 50%;
+  bottom: 2px;
+  width: 50%;
+  height: 100%;
+  visibility: visible;
+  background-color: var(--color-light-grey);
+  transition: height 0.2s ease-in;
 }
-.taskTitle{
-        color: var(--color-dark-grey);
+.createTask.inactive {
+  height: 0%;
+}
+.taskTitle {
+  color: var(--color-dark-grey);
+}
+
+.taskScroll a:hover {
+  text-decoration: none;
 }

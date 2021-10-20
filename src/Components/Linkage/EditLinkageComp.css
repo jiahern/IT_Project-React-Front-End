@@ -71,7 +71,8 @@
 #deleteEventButton {
   background-color: var(--color-orange);
   color: white;
-  transition: ease 0.1s;
+  transition: ease 0.2s;
+  border: none;
 }
 
 #deleteEventButton:hover {
@@ -123,10 +124,16 @@
 #deleteButton {
   font-weight: 550;
   cursor: pointer;
+  transition: ease 0.2s;
+}
+
+#deleteButton:hover {
+  transform: scale(1.1);
 }
 
 #saveButton {
   font-weight: 550;
+  transition: ease 0.2s;
 }
 
 /* Popup Create Event CSS */

@@ -9,7 +9,6 @@
   color: white;
   font-size: large;
   padding: 4px 20px;
-  
 }
 
 #buttons {
@@ -17,9 +16,9 @@
   color: white;
   font-size: large;
   padding: 4px 20px;
-  transition: transform 0.3s;
+  transition: transform 0.2s;
 }
-#buttons:hover{
+#buttons:hover {
   transform: scale(1.1);
 }
 
@@ -30,53 +29,53 @@
   background-color: var(--color-white-grey);
 }
 
-.editButton.unactive{
+.editButton.unactive {
   visibility: hidden;
 }
-.saveButton.unactive{
+.saveButton.unactive {
   visibility: hidden;
 }
-.saveButton{
+.saveButton {
   background-color: green;
   color: white;
   font-size: large;
   padding: 4px 20px;
 }
-.cancelButton.unactive{
+.cancelButton.unactive {
   visibility: hidden;
 }
-.cancelButton{
+.cancelButton {
   background-color: var(--color-light-grey);
   font-size: large;
   padding: 4px 20px;
-  transition: transform 0.3s;
+  transition: transform 0.2s;
 }
-.cancelButton:hover{
+.cancelButton:hover {
   transform: scale(1.1);
 }
-.addAndremove.unactive{
+.addAndremove.unactive {
   visibility: hidden;
 }
-.chooseImage.unactive{
+.chooseImage.unactive {
   visibility: hidden;
 }
-.addIcon{
+.addIcon {
   color: green;
-  transition: transform 0.3s;
+  transition: transform 0.2s;
 }
-.addIcon:hover{
+.addIcon:hover {
   transform: scale(1.1);
 }
-.removeIcon{
+.removeIcon {
   color: red;
-  transition: transform 0.3s;
+  transition: transform 0.2s;
 }
-.removeIcon:hover{
+.removeIcon:hover {
   transform: scale(1.1);
 }
-.backUnionButton{
-  transition: transform 0.3s;
+.backUnionButton {
+  transition: transform 0.2s;
 }
-.backUnionButton:hover{
+.backUnionButton:hover {
   transform: scale(1.1);
 }

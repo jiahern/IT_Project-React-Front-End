@@ -421,7 +421,7 @@ const EditLinkageComp = (props) => {
                       {!editLinkageTrigger ? (
                         <input
                           id="deleteEventButton"
-                          className="deleteEventButton btn btn-warning"
+                          className="deleteEventButton btn btn-success"
                           // ref = {register}
                           type="button"
                           value="DELETE EVENT"
@@ -547,7 +547,7 @@ const EditLinkageComp = (props) => {
                 <div className="deleteAndEdit">
                   <input
                     id="deleteButton"
-                    className="deleteEditButton bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ease-in"
+                    className="deleteEditButton bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
                     // ref = {register}
                     type="button"
                     value="CANCEL"
