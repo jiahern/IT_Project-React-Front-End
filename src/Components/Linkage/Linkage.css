@@ -26,7 +26,7 @@
 }
 
 .scrollLinkage {
-  height: 535px;
+  height: 1200px;
   overflow: hidden;
   overflow-y: scroll;
   background-color: var(--color-white-grey);
@@ -50,7 +50,7 @@
 }
 
 .sectionLinkage:hover {
-  background: white;
+  background: var(--color-light-grey);
 }
 
 .emailAndBin {

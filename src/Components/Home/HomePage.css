@@ -18,7 +18,7 @@
 .scrollHomePage {
   overflow: hidden;
   overflow-y: scroll;
-  height: 600px;
+  height: 1200px;
 }
 
 .scrollEvent a {
