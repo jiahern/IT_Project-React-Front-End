@@ -91,7 +91,20 @@ const EditProfile = (props) => {
       <div className="inputPage flex space-y-4 h-100 flex-col justify-center items-center">
         <div className=" linkage-pic">
         {(() => {
-          if (!profilePic || profilePic === "") {
+          if (linkageImage != null && linkageImage) {
+            // console.log("unionImage(union.jsx) else ==" + linkageImage);
+            return (
+              <div className= "ml-20">
+                <img
+                  class="mt-2"
+                  src={URL.createObjectURL(linkageImage)}
+                  style={{ width: "150px" }}
+                  alt="union upload pic"
+                />
+              </div>
+            );
+          }
+          else if (!profilePic || profilePic === "") {
               return (
               <div class="flex">
                 <BsIcons.BsPeopleCircle class="w-20 h-20"/>
@@ -115,7 +128,7 @@ const EditProfile = (props) => {
         
         </div>
         <div calss="w-80 h-20 rounded-lg text-l">
-              {(() => {
+              {/* {(() => {
                 // console.log("unionImage(union.jsx) ="+ unionImage);
                 if (linkageImage != null && linkageImage) {
                   // console.log("unionImage(union.jsx) else ==" + linkageImage);
@@ -133,7 +146,7 @@ const EditProfile = (props) => {
                   // console.log("unionImage(union.jsx) =" + linkageImage);
                   return <div class="flex"></div>;
                 }
-              })()}
+              })()} */}
             </div>
             <div class="h-8 ml-20 rounded-lg mt-4 mb-4">
               <input
