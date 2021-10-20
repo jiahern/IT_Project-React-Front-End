@@ -5,7 +5,7 @@ import React, {
   useReducer,
   useLocation,
 } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {
   editLinkage,
@@ -29,7 +29,7 @@ const EditLinkageComp = (props) => {
   // const { state = {} } = props;
   // const { modal } = state;
   // console.log("input = " + modal);
-  const { linkageID } = props.match.params;
+  const { linkageID } = useParams();
 
   var { linkageContent } = GetOneLinkage(linkageID);
 

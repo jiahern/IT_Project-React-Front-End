@@ -1,5 +1,5 @@
-import React, { Component, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { Component, useState, useEffect } from "react";
+import { Link, Redirect, NavLink } from "react-router-dom";
 import linkage from "./Linkage.png";
 import "./Linkage.css";
 import { FaTruckLoading } from "react-icons/fa";
@@ -15,7 +15,7 @@ import * as MdIcons from "react-icons/md";
 const BASE_URL = "http://localhost:5000/";
 //const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
 
-const Linkage = () => {
+const Linkage = (props) => {
   const [inactive, setInactive] = useState(false);
   // console.log("outside= " + inactive);
 
@@ -47,6 +47,12 @@ const Linkage = () => {
   const [note, setNote] = useState("");
   const [linkageImage, setLinkageImage] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+
+  // const [iconInactive, setIconInactive] = useState(false);
+
+  // useEffect(() => {
+  //   props.iconInactive(iconInactive);
+  // }, [iconInactive]);
 
   function createSave() {
     createLinkage({
@@ -146,7 +152,8 @@ const Linkage = () => {
           })
           .map((item, index) => {
             return (
-              <Link
+              <NavLink
+                className="menu-item-trigger"
                 to={{
                   pathname: `/linkage/${item._id}`,
                 }}
@@ -215,7 +222,7 @@ const Linkage = () => {
                 </div> */}
                   </div>
                 </section>
-              </Link>
+              </NavLink>
             );
           })}
       </div>

@@ -4,7 +4,7 @@ import * as FaIcons from "react-icons/fa";
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
 import { SidebarData } from "./SideBarData";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 // import "./Topmenubar.css";
 import GestioLogo from "./Logo.svg";
 import Dropdown from "./Dropdown";
@@ -16,6 +16,17 @@ const Navbar = (props) => {
   const [inactive, setInactive] = useState(false);
   const showsetInactive = () => setInactive(!inactive);
   const [dropdown, setDropdown] = useState(false);
+
+  //assign location variable
+  const location = useLocation();
+
+  //destructing pathname from location
+  const { pathname } = location;
+
+  //Javascript split method to get the name of the path in array
+  const splitLocation = pathname.split("/");
+
+  console.log("splitLocation is " + splitLocation[1]);
 
   useEffect(() => {
     props.onCollapse(inactive);
@@ -109,12 +120,22 @@ const Navbar = (props) => {
                       }
                     }}
                   >
-                    <NavLink exact to={item.path} className="menu-item-trigger">
+                    <Link
+                      exact
+                      to={"/" + item.path}
+                      // className={"menu-item-trigger " + item.title}
+                      className={
+                        splitLocation[1] == item.path
+                          ? "icon-active"
+                          : "icon-inactive"
+                      }
+                      // activeClassName="active"
+                    >
                       <a className="menu-item">
                         <div className="menu-icon">{item.icon}</div>
                         <span>{item.title}</span>
                       </a>
-                    </NavLink>
+                    </Link>
                   </li>
                 );
               })}

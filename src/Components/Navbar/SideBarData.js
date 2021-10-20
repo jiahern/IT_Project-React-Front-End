@@ -9,7 +9,7 @@ import unionLogo from "./UnionLogo.svg";
 export const SidebarData = [
   {
     title: "HomePage",
-    path: "/homepage",
+    path: "homepage",
     icon: <FaIcons.FaHome />,
     cName: "nav-text",
     exact: true,
@@ -23,7 +23,7 @@ export const SidebarData = [
   // },
   {
     title: "Union",
-    path: "/union",
+    path: "union",
     icon: (
       <img
         // className=""
@@ -37,21 +37,21 @@ export const SidebarData = [
   },
   {
     title: "Linkage",
-    path: "/linkage",
+    path: "linkage",
     icon: <BsIcons.BsFillPersonFill />,
     cName: "nav-text",
     exact: true,
   },
   {
     title: "Task",
-    path: "/task",
+    path: "task",
     icon: <FaIcons.FaTasks />,
     cName: "nav-text",
     exact: true,
   },
   {
     title: "Calendar",
-    path: "/calendar",
+    path: "calendar",
     icon: <BiIcons.BiCalendarAlt />,
     cName: "nav-text",
     exact: true,

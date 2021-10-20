@@ -31,6 +31,7 @@ import ShowCalendar from "./Components/Calendar/Calendar";
 
 function App() {
   const [inactive, setInactive] = useState(false);
+  const [iconActive, setIconActive] = useState(false);
   // const [auth, setAuth] = useState(false);
   // const readCookies = () => {
   //   const isLogIn = Cookies.get("token");
@@ -69,15 +70,17 @@ function App() {
                 <Route path="/loading" exact component={Loading} />
                 <ProtectedRoute path="/union" exact component={Union} />
                 <ProtectedRoute path="/profile" exact component={Profile} />
-                <ProtectedRoute path="/profile/:profileID" exact component={EditProfile} />
+                <ProtectedRoute
+                  path="/profile/:profileID"
+                  exact
+                  component={EditProfile}
+                />
                 <Route path="/password" exact component={ChangePassword} />
                 <Route path="/union/:unionID" exact component={EditUnion} />
                 <ProtectedRoute path="/linkage" exact component={Linkage} />
-                <Route
-                  path="/linkage/:linkageID"
-                  exact
-                  component={EditLinkageComp}
-                />
+                <Route path="/linkage/:linkageID" exact>
+                  <EditLinkageComp />
+                </Route>
                 <ProtectedRoute path="/task" exact component={Task} />
                 <ProtectedRoute path="/task/past" exact component={pastTask} />
                 <Route path="/task/:taskID" exact component={editTask} />

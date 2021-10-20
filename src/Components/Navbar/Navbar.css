@@ -100,13 +100,13 @@
   max-height: 250px;
 }
 
-.side-menu .main-menu ul li .menu-item-trigger {
+.side-menu .main-menu ul li .icon-inactive {
   display: block;
   box-sizing: border-box;
   border-radius: 5px;
 }
 
-.side-menu .main-menu ul li .menu-item-trigger:hover {
+.side-menu .main-menu ul li .icon-inactive:hover {
   background-color: var(--color-light-grey);
 }
 
@@ -147,7 +147,7 @@
   color: var(--color-dark-grey);
 }
 
-.side-menu .top-section .main-menu .menu-item-trigger.active {
+.side-menu .top-section .main-menu .icon-active {
   display: block;
   box-sizing: border-box;
   background-color: var(--color-light-grey);
