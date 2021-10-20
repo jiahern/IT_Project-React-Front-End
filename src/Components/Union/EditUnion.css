@@ -9,6 +9,7 @@
   color: white;
   font-size: large;
   padding: 4px 20px;
+  
 }
 
 #buttons {
@@ -16,6 +17,10 @@
   color: white;
   font-size: large;
   padding: 4px 20px;
+  transition: transform 0.3s;
+}
+#buttons:hover{
+  transform: scale(1.1);
 }
 
 .scrollEditUnion {
@@ -44,6 +49,10 @@
   background-color: var(--color-light-grey);
   font-size: large;
   padding: 4px 20px;
+  transition: transform 0.3s;
+}
+.cancelButton:hover{
+  transform: scale(1.1);
 }
 .addAndremove.unactive{
   visibility: hidden;
@@ -53,8 +62,21 @@
 }
 .addIcon{
   color: green;
+  transition: transform 0.3s;
+}
+.addIcon:hover{
+  transform: scale(1.1);
 }
 .removeIcon{
   color: red;
+  transition: transform 0.3s;
 }
-
+.removeIcon:hover{
+  transform: scale(1.1);
+}
+.backUnionButton{
+  transition: transform 0.3s;
+}
+.backUnionButton:hover{
+  transform: scale(1.1);
+}

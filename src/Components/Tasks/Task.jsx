@@ -86,7 +86,7 @@ export default function Task() {
           <div class="ActionTitle font-bold">Action</div>
         </div>
 
-        <div className="unionScroll">
+        <div className="taskScroll">
          
           
         {pendingTask.map((item, index) => {
@@ -96,7 +96,7 @@ export default function Task() {
         
         
           <div class = "flex space-x-4 py-6">
-                  <span class="">{item.name}</span>
+                  <span class="text-black">{item.name}</span>
                   <div>
                       <svg  xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="20px" viewBox="0 0 24 24" width="20px" fill="#000000">
                           <rect fill="none" height="24" width="24" />
@@ -106,8 +106,8 @@ export default function Task() {
                       </svg>
                   </div>
           </div>
-          <div class = "py-6">{new Date(item.EndTime).toLocaleDateString() +" "+ new Date(item.EndTime).toLocaleTimeString()}</div>
-          <div class="Category h-5 ml-4 py-6 px-6">{new Date(item.StartTime).toLocaleDateString() +" "+new Date(item.StartTime).toLocaleTimeString()}</div>
+          <div class = "py-6 text-black">{new Date(item.EndTime).toLocaleDateString() +" "+ new Date(item.EndTime).toLocaleTimeString()}</div>
+          <div class="Category h-5 ml-4 py-6 px-6 text-black">{new Date(item.StartTime).toLocaleDateString() +" "+new Date(item.StartTime).toLocaleTimeString()}</div>
           <div class="flex space-x-5 px-14 py-6  h-5">
           
             <button

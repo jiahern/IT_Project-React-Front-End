@@ -14,9 +14,13 @@
         font-size: large;
         padding: 4px 25px;
 }
-.viewPast{
-        /* background-color: #3aafa9; */
+.viewPending{
+        background-color: var(--color-orange);
         color: white;
         font-size: large;
         padding: 4px 25px;
+        transition: transform 0.3s;
+}
+.viewPending:hover{
+        transform: scale(1.1);
 }
