@@ -1,0 +1,31 @@
+#viewPastTask{
+        /* background-color: rgb(58,175,169); */
+}
+#createTask{
+        /* background-color: rgb(58,175,169); */
+}
+
+#pastTaskTitle{
+        color: var(--color-dark-grey);
+}
+.addTask {
+        /* background-color: #3aafa9; */
+        color: white;
+        font-size: large;
+        padding: 4px 25px;
+}
+.viewPending{
+        background-color: var(--color-orange);
+        color: white;
+        font-size: large;
+        padding: 4px 25px;
+        transition: transform 0.3s;
+}
+.viewPending:hover{
+        transform: scale(1.1);
+}
+.pastTaskScroll{
+        height: 800px;
+        overflow: hidden;
+        overflow-y: scroll;
+}

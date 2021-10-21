@@ -1,0 +1,42 @@
+.groupRow {
+  background-color: #def2f1;
+}
+
+.eachSectionHome {
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 1px #ccc;
+  width: 95%;
+}
+
+.upComingEventsubTitle {
+  background-color: var(--color-light-grey);
+  color: black;
+  font-weight: 500;
+}
+
+.scrollHomePage {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 800px;
+}
+
+.scrollEvent a {
+  text-decoration: none;
+  color: black;
+}
+
+.scrollTask a {
+  text-decoration: none;
+  color: black;
+}
+
+.scrollTask a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.scrollEvent a:hover {
+  text-decoration: none;
+  color: black;
+}
