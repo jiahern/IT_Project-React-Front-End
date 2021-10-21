@@ -138,29 +138,49 @@ Launches the test runner in the interactive watch mode.
 <br /><br /><br />
 <a name = "release_history"></a>
 ## 7.0 Release History
-v1.0  Feature development from user story ID 1.Finish navbar function, can acess all exist page.
+v1.0.0  Feature development from user story ID 1.Finish navbar function, can acess all exist page.
 
-v1.0  Feature development from user story ID 8.Finish login function, can login with right account name and password.
+v1.0.0  Feature development from user story ID 8.Finish login function, can login with right account name and password.
 
-v1.0  Feature development from user story ID 8.Finish navbar function, can regist with account name and password.
+v1.0.0  Feature development from user story ID 8.Finish navbar function, can regist with account name and password.
 
-v1.0  Feature development from user story ID 5.Finish union create function, can create new union.
+v1.0.0  Feature development from user story ID 5.Finish union create function, can create new union.
 
-v1.0  Feature development from user story ID 10.Finish union edit and delete function, can delete and edit union.
+v1.0.0  Feature development from user story ID 10.Finish union edit and delete function, can delete and edit union.
 
-v1.0  Bug fixed from user story ID 11. Solve the page relod issue.
+v1.0.0  Bug fixed from user story ID 11. Solve the page relod issue.
 
-v1.0  Feature development from user story ID 11.Able to send Email to all linkage in same union.
+v1.0.0  Feature development from user story ID 11.Able to send Email to all linkage in same union.
 
-v1.0  Feature development from user story ID 1.Adding the top bar on page.
+v1.0.0  Feature development from user story ID 1.Adding the top bar on page.
 
-v1.0  Feature development from user story ID 2.Finish linkage create function, can create new linkage.
+v1.0.0  Feature development from user story ID 2.Finish linkage create function, can create new linkage.
 
-v1.0  Feature development from user story ID 11.Able to send email to linkage.
+v1.0.0  Feature development from user story ID 11.Able to send email to linkage.
 
-v1.0  Feature development from user story ID 2. Finish the create and delete function for lnkage.
+v1.0.0  Feature development from user story ID 2. Finish the create and delete function for lnkage.
 
-v1.0  Feature development from user story ID 12. Able to showing information about linkage and union number on Homepage.
+v1.0.0  Feature development from user story ID 12. Able to showing information about linkage and union number on Homepage.
+
+v1.0.1  Feature development from user story ID 3. Add Picture on Linkage.
+
+v1.0.1  Feature development from user story ID 7. Able to show the task list.
+
+v1.0.1  Feature development from user story ID 6. Able to showing the calendar.
+
+v1.0.1  Feature development from user story ID 7. Finish all task functions.
+
+v1.0.1  Feature development from user story ID 13. Create a loading animation.
+
+v1.0.1  Feature development from user story ID 4. Able to add event on linkage.
+
+v1.0.1  Feature development from user story ID 9. Able to add or remove note on event.
+
+v1.0.1  Feature development from user story ID 6. Able to showing the recurring in calendar.
+
+v1.0.1  Feature development from user story ID 4. Add search function on linkage.
+
+v1.0.1  Fix all css styles.
 <br /><br /><br />
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
