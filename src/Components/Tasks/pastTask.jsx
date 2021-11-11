@@ -5,7 +5,7 @@ import * as GrIcons from "react-icons/gr";
 import "./pastTask.css";
 
 // const BASE_URL = "http://localhost:5000/";
-const BASE_URL = "https://gestioitproject.herokuapp.com/";
+const BASE_URL = "https://gestioitproject.herokuapp.com";
 
 export default function Task() {
   const { loading, pastTask, error } = GetAllPastTask();

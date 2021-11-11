@@ -13,7 +13,7 @@ import * as IoIcons from "react-icons/io5";
 import * as MdIcons from "react-icons/md";
 
 // const BASE_URL = "http://localhost:5000/";
-const BASE_URL = "https://gestioitproject.herokuapp.com/";
+const BASE_URL = "https://gestioitproject.herokuapp.com";
 
 const Linkage = (props) => {
   const [inactive, setInactive] = useState(false);

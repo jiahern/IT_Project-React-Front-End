@@ -121,7 +121,7 @@ export default function ShowCalendar() {
         <div className=""></div>
       </div>
 
-      <section >
+      <section>
         {/* the list and calendar */}
         {/* https://www.npmjs.com/package/react-calendar */}
         {/* <div class ="flex w-full justify-between mr-4 py-3"> */}
@@ -238,7 +238,7 @@ export default function ShowCalendar() {
             );
           })}
         </div>
-        
+
         <div class="py-16">
           <div className="font-bold text-4xl ml-20">Schedule</div>
           {/* https://www.youtube.com/watch?v=iNkryf_TtZw */}
