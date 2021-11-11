@@ -5,7 +5,7 @@ import { UseState, useState, useEffect, Redirect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 // const BASE_URL = "http://localhost:5000";
-const BASE_URL = "https://gestioitproject.herokuapp.com";
+const BASE_URL = "https://gestioitproject.herokuapp.com/";
 
 // Axios interceptors are functions that Axios calls for every request
 // We are simply adding out token to every request that we send to the

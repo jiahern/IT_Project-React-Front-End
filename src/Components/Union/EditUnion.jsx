@@ -9,7 +9,7 @@ import Loading from "../Loading/Loading";
 import { BiWindows } from "react-icons/bi";
 // const BASE_URL = "http://localhost:5000/";
 
-const BASE_URL = "https://gestioitproject.herokuapp.com";
+const BASE_URL = "https://gestioitproject.herokuapp.com/";
 
 const EditUnion = (props) => {
   const { unionID } = props.match.params;

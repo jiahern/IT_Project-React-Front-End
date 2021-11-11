@@ -11,7 +11,7 @@ import { editProfile, GetOneUser, GetUserProfile } from "../../api";
 //import "./EditProfile.css";
 import * as BsIcons from "react-icons/bs";
 // const BASE_URL = "http://localhost:5000/";
-const BASE_URL = "https://gestioitproject.herokuapp.com";
+const BASE_URL = "https://gestioitproject.herokuapp.com/";
 
 const EditProfile = (props) => {
   // const { state = {} } = props;

@@ -10,7 +10,7 @@ import GestioLogo from "./Logo.svg";
 import Dropdown from "./Dropdown";
 import { GetUserProfile } from "../../api";
 // const BASE_URL = "http://localhost:5000/";
-const BASE_URL = "https://gestioitproject.herokuapp.com";
+const BASE_URL = "https://gestioitproject.herokuapp.com/";
 
 const Navbar = (props) => {
   const [inactive, setInactive] = useState(false);

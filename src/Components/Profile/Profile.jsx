@@ -5,7 +5,7 @@ import "./Profile.css";
 import * as BsIcons from "react-icons/bs";
 import Loading from "../Loading/Loading";
 // const BASE_URL = "http://localhost:5000/";
-const BASE_URL = "https://gestioitproject.herokuapp.com";
+const BASE_URL = "https://gestioitproject.herokuapp.com/";
 
 const Profile = () => {
   const { loading, profile, error } = GetUserProfile();
