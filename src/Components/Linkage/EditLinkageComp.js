@@ -22,8 +22,8 @@ import * as IoIcons from "react-icons/io5";
 import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { RecurrenceEditorComponent } from "@syncfusion/ej2-react-schedule";
 import Popup from "reactjs-popup";
-const BASE_URL = "http://localhost:5000/";
-//const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
+// const BASE_URL = "http://localhost:5000/";
+const BASE_URL = "https://gestioitproject.herokuapp.com/";
 
 const EditLinkageComp = (props) => {
   // const { state = {} } = props;

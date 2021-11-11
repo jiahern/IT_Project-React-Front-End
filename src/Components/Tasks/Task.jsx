@@ -8,7 +8,8 @@ import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { RecurrenceEditorComponent } from "@syncfusion/ej2-react-schedule";
 import Loading from "../Loading/Loading";
 
-const BASE_URL = "http://localhost:5000/";
+// const BASE_URL = "http://localhost:5000/";
+const BASE_URL = "https://gestioitproject.herokuapp.com/";
 
 export default function Task() {
   const { loading, pendingTask, error } = GetAllPendingTask();

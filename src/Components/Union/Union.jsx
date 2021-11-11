@@ -6,10 +6,8 @@ import * as MdIcons from "react-icons/md";
 import Loading from "../Loading/Loading";
 import "./Union.css";
 import { GetUnion, createUnion, removeUnion } from "../../api";
-const BASE_URL = "http://localhost:5000/";
-
-
-//const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
+// const BASE_URL = "http://localhost:5000/";
+const BASE_URL = "https://gestioitproject.herokuapp.com/";
 
 export default function Union() {
   const [name, setName] = useState("");

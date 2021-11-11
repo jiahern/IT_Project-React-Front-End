@@ -1,19 +1,19 @@
 import React, {
-    Component,
-    useState,
-    useEffect,
-    useReducer,
-    useLocation,
-  } from "react";
+  Component,
+  useState,
+  useEffect,
+  useReducer,
+  useLocation,
+} from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { editProfile, GetOneUser, editPassword} from "../../api";
+import { editProfile, GetOneUser, editPassword } from "../../api";
 //import "./EditProfile.css";
 import * as BsIcons from "react-icons/bs";
-const BASE_URL = "http://localhost:5000/";
+// const BASE_URL = "http://localhost:5000/";
+const BASE_URL = "https://gestioitproject.herokuapp.com/";
 
 const ChangePassword = () => {
-
   var { loading, profileContent, error } = GetOneUser();
 
   const { register, handleSubmit } = useForm({});
@@ -23,27 +23,24 @@ const ChangePassword = () => {
   // };
   var password = profileContent.password;
   var confirmPassword = "";
-  
-
 
   function editSave() {
-    if (password !== confirmPassword){
+    if (password !== confirmPassword) {
       alert("passwords not match");
       return;
     }
     editPassword({
-      password: password
-      
+      password: password,
     });
     // redirect to homepage
-    
+
     const state = { redirect: "/" };
     return <Redirect to={state.redirect} />;
     // console.log(window.location);
   }
-    return(
-      <div>
-        <div className="editLinkage-top ">
+  return (
+    <div>
+      <div className="editLinkage-top ">
         <Link to={{ pathname: `/profile` }}>
           <button className="backButton">
             <svg
@@ -62,10 +59,8 @@ const ChangePassword = () => {
         <div className="edit-linkage-title font-bold text-4xl mt-8 mr-8 h-20 text-center">
           Change Password
         </div>
-        </div>
-        <div className="inputPage flex flex-col space-y-4 h-100">
-        
-        
+      </div>
+      <div className="inputPage flex flex-col space-y-4 h-100">
         <div className="inputPage h-120 flex flex-col justify-center items-center">
           <form
             onSubmit={editSave}
@@ -76,10 +71,8 @@ const ChangePassword = () => {
               New Password:
             </label>
             <div className="flex space-x-4">
-              
               <input
                 className="w-80 h-8  text-l"
-                
                 type="password"
                 id="password"
                 name="password"
@@ -95,7 +88,6 @@ const ChangePassword = () => {
             </label>
             <input
               className="w-80 h-8  text-l"
-              
               type="password"
               id="confirmPassword"
               name="confirmPassword"
@@ -106,7 +98,6 @@ const ChangePassword = () => {
               }}
             />
             <div className="deleteAndEdit h-20 flex flex-col ">
-              
               <input
                 className="saveCreateButton btn btn-success font-weight-bold text-center"
                 // ref = {register}
@@ -114,14 +105,11 @@ const ChangePassword = () => {
                 value="CONFIRM"
                 onClick={editSave}
               />
-             
             </div>
           </form>
-          
-        </div>
-        
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+};
 export default ChangePassword;
