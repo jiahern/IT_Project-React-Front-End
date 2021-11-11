@@ -4,8 +4,8 @@ import { UseState, useState, useEffect, Redirect } from "react";
 // if you want to try as an exercise
 import axios from "axios";
 import Cookies from "js-cookie";
-const BASE_URL = "http://localhost:5000";
-//const BASE_URL = "https://info30005foodbuddyapi.herokuapp.com";
+// const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://gestioitproject.herokuapp.com/";
 
 // Axios interceptors are functions that Axios calls for every request
 // We are simply adding out token to every request that we send to the
@@ -152,12 +152,11 @@ export function UseLinkages() {
         setLoading(false);
       })
       .catch((e) => {
-        
         setError(e);
         setLoading(false);
       });
   }, []);
-  
+
   return {
     loading,
     linkages,
@@ -482,7 +481,6 @@ export function GetUnion() {
         setLoading(false);
       })
       .catch((e) => {
-        
         setError(e);
         setLoading(false);
       });
@@ -552,26 +550,24 @@ export async function createUnion(newUser) {
 
 export async function editUnion(newUser) {
   // unpack user details, email and password
-  const { unionID, name, linkages,unionImage } = newUser;
+  const { unionID, name, linkages, unionImage } = newUser;
   const endpoint = BASE_URL + "/union/" + unionID + "/change";
   // if (!profilePic.name.match(/.(jpg|jpeg|png|)$/i)) {
   //   alert("please upload only image to Union Image");
   //   return;
   // }
-  if(!unionImage){
-
-  }else if (!unionImage.name.match(/.(jpg|jpeg|png|)$/i)) {
+  if (!unionImage) {
+  } else if (!unionImage.name.match(/.(jpg|jpeg|png|)$/i)) {
     alert("please upload only image to Union Image");
     return;
   }
   try {
     const fd = new FormData();
-    fd.append("_id",unionID);
+    fd.append("_id", unionID);
     fd.append("unionImage", unionImage);
     fd.append("name", name);
     fd.append("linkages", linkages);
     await axios.post(endpoint, fd, { withCredentials: true }).then((res) => {
-      
       return res.data;
     });
     // let data = await axios({
@@ -645,7 +641,6 @@ export function GetUserProfile() {
         setLoading(false);
       })
       .catch((e) => {
-        
         setError(e);
         setLoading(false);
       });
@@ -773,7 +768,6 @@ export function GetCalendar() {
         setLoading(false);
       })
       .catch((e) => {
-        
         setError(e);
         setLoading(false);
       });
@@ -803,7 +797,6 @@ export function GetAllPendingTask() {
         setLoading(false);
       })
       .catch((e) => {
-      
         setError(e);
         setLoading(false);
       });
@@ -832,7 +825,6 @@ export function GetAllPastTask() {
         setLoading(false);
       })
       .catch((e) => {
-        
         setError(e);
         setLoading(false);
       });
@@ -861,7 +853,6 @@ export function GetAllTask() {
         setLoading(false);
       })
       .catch((e) => {
-       
         setError(e);
         setLoading(false);
       });
@@ -933,7 +924,6 @@ export async function createTask(newUser) {
     console.log(error);
   }
 }
-
 
 export async function taskEdit(newUser) {
   const { taskID, name, note, StartTime, EndTime, status, recurring } = newUser;
