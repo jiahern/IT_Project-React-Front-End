@@ -170,10 +170,6 @@ v1.0.1  Feature development from user story ID 6. Able to showing the calendar.
 
 v1.0.1  Feature development from user story ID 7. Finish all task functions.
 
-v1.0.1  Feature development from user story ID 14. Get information and show it on profile page.
-
-v1.0.1  Feature development from user story ID 14. Able to edit account and profile picture.
-
 v1.0.1  Feature development from user story ID 13. Create a loading animation.
 
 v1.0.1  Feature development from user story ID 4. Able to add event on linkage.
@@ -181,8 +177,6 @@ v1.0.1  Feature development from user story ID 4. Able to add event on linkage.
 v1.0.1  Feature development from user story ID 9. Able to add or remove note on event.
 
 v1.0.1  Feature development from user story ID 6. Able to showing the recurring in calendar.
-
-v1.0.1  Bug fixed from user story ID 6. Fix bug in calendar redirect to editevent.
 
 v1.0.1  Feature development from user story ID 4. Add search function on linkage.
 
