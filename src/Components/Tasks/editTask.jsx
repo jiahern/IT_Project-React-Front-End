@@ -103,7 +103,7 @@ const EditTask = (props) => {
       
         
         return (
-          <div className="EditTaskSection">
+          <div className="ShowUnion">
             <div className="showUnionBelow flex w-full h-16 mr-4 py-3">
               <Link to={{ pathname: `/task` }}>
                 <svg

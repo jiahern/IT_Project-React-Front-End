@@ -38,7 +38,7 @@
 }
 
 .topnavbar .profile {
-  /* z-index: 50; */
+  z-index: 50;
   position: absolute;
   height: 80px;
   font-size: 40px;

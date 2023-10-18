@@ -44,7 +44,7 @@ body {
   background-color: var(--color-white-grey);
   overflow: hidden;
   /* position: fixed; */
-  height: 100vh;
+  height: 100%;
   width: 85%;
 }
 
