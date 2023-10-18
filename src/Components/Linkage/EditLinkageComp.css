@@ -1,0 +1,162 @@
+.editLinkage-top a {
+  color: black;
+  text-decoration: none;
+}
+
+.editLinkage-top a:hover {
+  color: black;
+}
+
+.backButton {
+  font-size: 50px;
+  transition: transform ease 0.2s;
+}
+
+.backButton:hover {
+  transform: scale(1.2);
+  color: black;
+}
+
+#editLinkageButton {
+  width: 10em;
+  text-indent: 0px;
+  padding: 6px 5px;
+  font-weight: 550;
+}
+
+#createEventButton {
+  width: 10em;
+  padding: 6px 5px;
+  font-weight: 550;
+}
+
+.deleteAndEdit {
+  display: flex;
+  justify-content: space-between;
+  width: 23em;
+  flex: 1 1 auto;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.saveCreateButton {
+  padding: 4px 5px;
+  text-align: center;
+  text-indent: 0px;
+
+  /* position: relative; */
+  width: 10em;
+  /* right: 10px; */
+}
+
+.deleteEditButton {
+  padding: 4px 5px;
+  /* text-align: center; */
+  /* position: relative; */
+  width: 10em;
+  text-indent: 0px;
+  /* right: 40px; */
+}
+.eventName {
+  margin-top: auto;
+}
+
+.deleteEventButton {
+  padding: 1px 2px;
+  height: min-content;
+  text-indent: 0px;
+  margin-left: 17em;
+}
+
+#deleteEventButton {
+  background-color: var(--color-orange);
+  color: white;
+  transition: ease 0.2s;
+  border: none;
+}
+
+#deleteEventButton:hover {
+  transform: scale(1.1);
+}
+
+.edit-linkage-title {
+  text-align: start;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.linkage-pic {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.linkage-pic img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  outline: solid 1px #ccc;
+  outline-offset: 15px;
+}
+
+.edit-linkage-form {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.editLinkage-box {
+  height: 670px;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-bottom: 30px;
+}
+
+.chooseFile {
+  border: none;
+  background-color: inherit;
+  text-indent: 2px;
+}
+
+#deleteButton {
+  font-weight: 550;
+  cursor: pointer;
+  transition: ease 0.2s;
+}
+
+#deleteButton:hover {
+  transform: scale(1.1);
+}
+
+#saveButton {
+  font-weight: 550;
+  transition: ease 0.2s;
+}
+
+/* Popup Create Event CSS */
+
+.createEventBox {
+  border: #ccc solid 1px;
+  background-color: white;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.popup-content {
+  margin: auto;
+  background: rgb(255, 255, 255);
+  width: 50%;
+  padding: 30px;
+}
+
+.popup-arrow {
+  color: rgb(255, 255, 255);
+}

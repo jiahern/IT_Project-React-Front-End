@@ -1,0 +1,100 @@
+@import url("http://cdn.@syncfusion/ej2/material.css");
+
+.status-box{
+        
+        
+        display: flex;
+        flex: 10;
+        flex-direction: column;
+}
+.status-box.inactive{
+        visibility: hidden;
+}
+.recurring{
+        width: 50%;
+}
+.editTaskButton{
+        background-color: var(--color-orange);
+        color: white;
+        font-size: large;
+        padding: 4px 22px;
+        transition: transform 0.3s;
+}
+.editTaskButton:hover{
+        transform: scale(1.1);
+}
+.editTaskButton.unactive{
+        visibility: hidden;
+}
+.cancelTaskButton{
+        background-color: var(--color-light-grey);
+        font-size: large;
+        padding: 4px 20px;
+        transition: transform 0.3s;
+}
+.cancelTaskButton:hover{
+        transform: scale(1.1);
+}
+.cancelTaskButton.unactive{
+        visibility: hidden;
+}
+.saveTaskButton{
+        background-color: green;
+        color: white;
+        font-size: large;
+        padding: 4px 20px;
+        transition: transform 0.3s;
+}
+.saveTaskButton:hover{
+        transform: scale(1.1);
+}
+.saveTaskButton.unactive{
+        visibility: hidden;
+}
+.deleteTaskButton{
+        background-color: var(--color-orange);
+        color: white;
+        font-size: large;
+        padding: 4px 22px;
+        transition: transform 0.3s;
+}
+.deleteTaskButton:hover{
+        transform: scale(1.1);
+}
+.taskBackButton{
+        transition: transform 0.3s;
+}
+.taskBackButton:hover{
+        transform: scale(1.1);
+}
+.statusRead{
+        transition: transform 0.3s;
+}
+.statusRead:hover{
+        transform: scale(1.1);
+}
+.statusRead.unactive{
+        visibility: hidden;
+}
+.recurring.unactive{
+        visibility: hidden;
+}
+
+.process{
+        transition: transform 0.3s;
+}
+.process:hover{
+        transform: scale(1.1);
+}
+.done{
+        transition: transform 0.3s;
+}
+.done:hover{
+        transform: scale(1.1);
+}
+.overdue{
+        transition: transform 0.3s;
+}
+.overdue:hover{
+        transform: scale(1.1);
+}

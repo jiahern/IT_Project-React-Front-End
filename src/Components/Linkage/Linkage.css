@@ -1,10 +1,128 @@
-#viewPastTask{
-        background-color: rgb(58,175,169);
+.newCreateLinkage {
+  position: fixed;
+  left: 50%;
+  bottom: 2px;
+  width: 50%;
+  height: 100%;
+  visibility: visible;
+  background-color: var(--color-light-grey);
+  transition: height 0.2s ease-in;
+  overflow: hidden;
+  overflow-y: scroll;
 }
-#createTask{
-        background-color: rgb(58,175,169);
-}
-.addLinkage{
-        background-color: rgb(58,175,169);
+.newCreateLinkage.unactive {
+  height: 0%;
 }
 
+.newUnion {
+  background-color: var(--color-orange);
+  color: white;
+  padding: 9px;
+  transition: ease 0.2s;
+}
+
+.newUnion:hover {
+  transform: scale(1.1);
+}
+
+.scrollLinkage {
+  height: 800px;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: var(--color-white-grey);
+}
+
+.scrollLinkage a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.scrollLinkage a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sectionLinkage {
+  transition: background 0.2s ease;
+  border-bottom: solid 1px #ccc;
+  padding: 10px;
+  z-index: 1;
+}
+
+.sectionLinkage:hover {
+  background: var(--color-light-grey);
+}
+
+.emailAndBin {
+}
+
+.email {
+}
+
+.email:hover {
+  transform: scale(1.2);
+}
+
+.bin {
+}
+
+.bin:hover {
+  transform: scale(1.2);
+}
+
+.LinkageTitle {
+  background-color: var(--color-dark-grey);
+  color: white;
+  font-size: large;
+  /* border-radius: 30px 30px 0 0; */
+}
+
+.LinkageTitleText {
+  color: var(--color-dark-grey);
+}
+
+.searchBox {
+  /* font-weight: 400px; */
+}
+
+.searchIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  width: 30px;
+  height: auto;
+  color: #0072c9;
+}
+
+.Linkage {
+  align-items: center;
+}
+
+.linkageProfilePic img {
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  outline: solid 1px #ccc;
+  outline-offset: 15px;
+}
+
+.saveCreateButton {
+  background-color: var(--color-orange);
+  text-align: center;
+  color: white;
+  padding: 0.8rem;
+  width: 15rem;
+  text-indent: 0px;
+  font-weight: 580;
+  transition: transform ease 0.2s;
+}
+
+.saveCreateButton:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

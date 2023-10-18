@@ -1,0 +1,81 @@
+.remove.unactive {
+  visibility: hidden;
+}
+.add.unactive {
+  visibility: hidden;
+}
+.deleteUnion {
+  background-color: var(--color-orange);
+  color: white;
+  font-size: large;
+  padding: 4px 20px;
+}
+
+#buttons {
+  background-color: var(--color-orange);
+  color: white;
+  font-size: large;
+  padding: 4px 20px;
+  transition: transform 0.2s;
+}
+#buttons:hover {
+  transform: scale(1.1);
+}
+
+.scrollEditUnion {
+  height: 300px;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: var(--color-white-grey);
+}
+
+.editButton.unactive {
+  visibility: hidden;
+}
+.saveButton.unactive {
+  visibility: hidden;
+}
+.saveButton {
+  background-color: green;
+  color: white;
+  font-size: large;
+  padding: 4px 20px;
+}
+.cancelButton.unactive {
+  visibility: hidden;
+}
+.cancelButton {
+  background-color: var(--color-light-grey);
+  font-size: large;
+  padding: 4px 20px;
+  transition: transform 0.2s;
+}
+.cancelButton:hover {
+  transform: scale(1.1);
+}
+.addAndremove.unactive {
+  visibility: hidden;
+}
+.chooseImage.unactive {
+  visibility: hidden;
+}
+.addIcon {
+  color: green;
+  transition: transform 0.2s;
+}
+.addIcon:hover {
+  transform: scale(1.1);
+}
+.removeIcon {
+  color: red;
+  transition: transform 0.2s;
+}
+.removeIcon:hover {
+  transform: scale(1.1);
+}
+.backUnionButton {
+  transition: transform 0.2s;
+}
+.backUnionButton:hover {
+  transform: scale(1.1);
+}

@@ -1,26 +1,128 @@
 import "./App.css";
 import "./tailwind.min.css";
+
+import ReactDOM from "react-dom";
 import Navbar from "./Components/Navbar/Navbar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "./Components/Header/header";
-import Linkage from "./Components/Linkage/Linkage";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import React, { useEffect, useState, View } from "react";
 import LoginForm, { Logout } from "./Components/Login/login";
-import RegisterForm, { Registerout } from "./Components/Register/register";
+
+import HomePage from "./Components/Home/HomePage";
+import Profile from "./Components/Profile/Profile";
+import EditProfile from "./Components/Profile/EditProfile";
+import ChangePassword from "./Components/Profile/ChangePassword";
+import Union from "./Components/Union/Union";
+import EditUnion from "./Components/Union/EditUnion";
+import Linkage from "./Components/Linkage/Linkage";
+import Task from "./Components/Tasks/Task";
+import editTask from "./Components/Tasks/editTask";
+import pastTask from "./Components/Tasks/pastTask";
+import Loading from "./Components/Loading/Loading";
+// import Calendar from "./Pages/Calendar";
+import RegisterForm from "./Components/Register/register";
+import Cookies from "js-cookie";
+import EditLinkageComp from "./Components/Linkage/EditLinkageComp";
+import ShowCalendar from "./Components/Calendar/Calendar";
 
 function App() {
+  const [inactive, setInactive] = useState(false);
+  const [iconActive, setIconActive] = useState(false);
+  // const [auth, setAuth] = useState(false);
+  // const readCookies = () => {
+  //   const isLogIn = Cookies.get("token");
+  //   if (isLogIn) {
+  //     setAuth(true);
+  //   }
+  // };
+  // React.useEffect(() => {
+  //   readCookies();
+  // }, []);
   return (
-    <div>
+    <div className="allpage">
       <Router>
-        <Navbar />
         <Switch>
-          <Route exact path="/" />
-          <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/Register" component={RegisterForm} />
+          <IsAuthenticatedRoute path="/login" exact component={LoginForm} />
+          <Route exact path="/logout" component={Logout} />
+          <IsAuthenticatedRoute
+            exact
+            path="/Register"
+            component={RegisterForm}
+          />
+
+          <div>
+            <Navbar
+              onCollapse={(inactive) => {
+                setInactive(inactive);
+              }}
+            />
+            <div className={inactive ? "contain inactive" : "contain"}>
+              <Switch>
+                <Route path="/" exact>
+                  {" "}
+                  <Redirect to="/homepage" />{" "}
+                </Route>
+                <ProtectedRoute path="/homepage" exact component={HomePage} />
+                <Route path="/loading" exact component={Loading} />
+                <ProtectedRoute path="/union" exact component={Union} />
+                <ProtectedRoute path="/profile" exact component={Profile} />
+                <ProtectedRoute
+                  path="/profile/:profileID"
+                  exact
+                  component={EditProfile}
+                />
+                <Route path="/password" exact component={ChangePassword} />
+                <Route path="/union/:unionID" exact component={EditUnion} />
+                <ProtectedRoute path="/linkage" exact component={Linkage} />
+                <Route path="/linkage/:linkageID" exact>
+                  <EditLinkageComp />
+                </Route>
+                <ProtectedRoute path="/task" exact component={Task} />
+                <ProtectedRoute path="/task/past" exact component={pastTask} />
+                <Route path="/task/:taskID" exact component={editTask} />
+                <ProtectedRoute
+                  path="/calendar"
+                  exact
+                  component={ShowCalendar}
+                />
+                <ProtectedRoute path="*" component={() => "404 NOT FOUND"} />
+                {/* <Route exact path="/" /> */}
+              </Switch>
+            </div>
+          </div>
         </Switch>
       </Router>
     </div>
   );
 }
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
+
+const IsAuthenticatedRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={() =>
+        !Cookies.get("token") ? <Component /> : <Redirect to="/homepage" />
+      }
+    />
+  );
+};
+
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={() =>
+        Cookies.get("token") ? <Component /> : <Redirect to="/login" />
+      }
+    />
+  );
+};
 
 export default App;
 // class App extends Component {
